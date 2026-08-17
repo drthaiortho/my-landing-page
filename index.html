@@ -137,12 +137,32 @@
         </a>
       </div>
 
-      <div class="space-y-2 pt-1">
+      <div class="space-y-2.5 pt-1">
         <!-- Nút Tra cứu trạng thái đăng ký -->
         <a href="https://script.google.com/macros/s/AKfycbx0bPlupA2_lWC_7-fICh_lJ-gvmXfRY9LF2OA8K2qbsSDCDBpuV6zo4RD9H3ZNkVhO/exec" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold text-xs transition duration-150 shadow-sm">
           <i class="fa-solid fa-id-card-clip"></i>
           <span>Tra cứu trạng thái đăng ký kỳ họp</span>
         </a>
+
+        <!-- Hộp Bảo Mật: Bản ghi Kỳ 01 (Chống người lạ xin quyền) -->
+        <details class="group bg-slate-900/90 border border-rose-500/40 rounded-xl overflow-hidden transition duration-150">
+          <summary class="flex justify-between items-center p-3 cursor-pointer select-none">
+            <div class="flex items-center gap-2 text-xs font-bold text-rose-300">
+              <i class="fa-solid fa-lock text-rose-400"></i>
+              <span>Bản ghi & Tài liệu Kỳ 01 (Hội viên)</span>
+            </div>
+            <i class="fa-solid fa-chevron-down text-xs text-rose-400 group-open:rotate-180 transition-transform duration-200"></i>
+          </summary>
+          <div class="p-3 bg-slate-950/80 border-t border-rose-500/30 text-xs space-y-2.5">
+            <div class="p-2 rounded-lg bg-rose-950/40 border border-rose-900/60 text-rose-200 text-[11px] leading-relaxed">
+              <strong class="text-rose-400"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Lưu ý bắt buộc:</strong> Chỉ mở bằng đúng <strong>Email Hội viên</strong> đã được cấp quyền trước đó. Vui lòng <u>không gửi yêu cầu truy cập</u> từ email khác tránh gây nghẽn duyệt.
+            </div>
+            <a href="https://drive.google.com/file/d/1feTWnuPDNbCOI8msUq4_CqdQgesWfWO5/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition shadow-md">
+              <i class="fa-brands fa-google-drive"></i>
+              <span>Mở Bản Ghi Kỳ 01 (Google Drive)</span>
+            </a>
+          </div>
+        </details>
 
         <!-- Nút Đặt câu hỏi trước cho buổi Zoom -->
         <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 font-semibold text-xs transition duration-150 shadow-sm">
