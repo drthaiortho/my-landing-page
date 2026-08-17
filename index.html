@@ -68,19 +68,33 @@
         <i class="fa-solid fa-chevron-right text-slate-500 text-sm group-hover:text-teal-300"></i>
       </a>
 
-      <!-- Nút 2: Zalo Hội Viên -->
-      <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 bg-slate-800 hover:bg-slate-700/80 border border-slate-700 hover:border-blue-400 rounded-2xl transition duration-200 shadow-md group">
-        <div class="flex items-center space-x-3.5">
-          <div class="w-11 h-11 rounded-xl bg-blue-950 text-blue-400 flex items-center justify-center text-xl border border-blue-800/60">
-            <i class="fa-solid fa-comments"></i>
+      <!-- Nút 2: Nhóm Zalo Hội Viên (Hộp sổ xuống bảo mật) -->
+      <details class="group bg-slate-800 border border-blue-500/40 hover:border-blue-400 rounded-2xl overflow-hidden transition duration-200 shadow-md">
+        <summary class="flex items-center justify-between p-4 cursor-pointer select-none">
+          <div class="flex items-center space-x-3.5">
+            <div class="w-11 h-11 rounded-xl bg-blue-950 text-blue-400 flex items-center justify-center text-xl border border-blue-800/60">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5 font-bold text-white group-hover:text-blue-300 transition-colors">
+                <span>Nhóm Zalo Hội Viên</span>
+                <i class="fa-solid fa-lock text-[10px] text-amber-400" title="Chỉ dành cho Hội viên"></i>
+              </div>
+              <div class="text-xs text-slate-400">Kênh thảo luận, thông báo và hỗ trợ nội bộ</div>
+            </div>
           </div>
-          <div>
-            <div class="font-bold text-white group-hover:text-blue-300 transition-colors">Nhóm Zalo Hội Viên</div>
-            <div class="text-xs text-slate-400">Kênh thảo luận, thông báo và hỗ trợ nội bộ</div>
+          <i class="fa-solid fa-chevron-down text-slate-400 text-sm group-open:rotate-180 transition-transform duration-200"></i>
+        </summary>
+        <div class="p-3.5 bg-slate-900/90 border-t border-slate-700/80 text-xs space-y-2.5">
+          <div class="p-2 rounded-lg bg-blue-950/40 border border-blue-800/60 text-slate-300 text-[11px] leading-relaxed">
+            <strong class="text-blue-300"><i class="fa-solid fa-shield-halved mr-1"></i> Lưu ý phê duyệt:</strong> Nhóm chỉ dành cho <strong>Hội viên chính thức</strong>. Bác sĩ chưa đăng ký hội viên vui lòng không gửi yêu cầu tham gia.
           </div>
+          <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-md">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Tham Gia Nhóm Zalo (Dành cho Hội Viên)</span>
+          </a>
         </div>
-        <i class="fa-solid fa-chevron-right text-slate-500 text-sm group-hover:text-blue-300"></i>
-      </a>
+      </details>
 
       <!-- Nút 3: Đăng ký Hội viên / Tư vấn bản ghi -->
       <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 bg-gradient-to-r from-teal-900/50 via-slate-800 to-slate-800 border border-teal-500/40 hover:border-teal-300 rounded-2xl transition duration-200 shadow-md group">
@@ -225,7 +239,7 @@
       </div>
     </div>
 
-    <!-- 5. FAQ (Đã cập nhật đúng quy trình Chrome Android & Safari iPhone) -->
+    <!-- 5. FAQ -->
     <div class="space-y-3 pt-1">
       <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-1">Câu Hỏi Thường Gặp</h3>
 
@@ -264,7 +278,7 @@
         </div>
       </details>
 
-      <!-- Mẹo mở nhanh như App (Đã cập nhật đúng thao tác chuẩn nhất) -->
+      <!-- Mẹo mở nhanh như App -->
       <details class="group bg-slate-800 border border-slate-700 hover:border-slate-600 rounded-xl overflow-hidden transition duration-150">
         <summary class="flex justify-between items-center p-3.5 cursor-pointer font-semibold text-xs sm:text-sm text-slate-200 select-none">
           <span>Làm sao để mở nhanh trang web này mỗi ngày?</span>
