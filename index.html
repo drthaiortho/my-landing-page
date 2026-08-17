@@ -2,8 +2,18 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Cộng Đồng Chỉnh Nha Dr.Thai Ortho</title>
+
+  <!-- Khai báo Web App PWA & Favicon chống đơ khi cài đặt ra màn hình chính -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./Logo.png">
+  <link rel="apple-touch-icon" href="./Logo.png">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Dr.Thai Ortho">
 
   <!-- Open Graph & Meta tags cho Zalo, Facebook, Messenger -->
   <meta name="title" content="Cộng Đồng Chỉnh Nha Dr.Thai Ortho">
@@ -160,7 +170,7 @@
           <span class="whitespace-nowrap">Tải mẫu Bệnh án Lâm sàng (Slides)</span>
         </a>
 
-        <!-- Nút 3: Gửi ca lâm sàng / Đặt câu hỏi (Đã rút gọn không bị rớt chữ Zoom) -->
+        <!-- Nút 3: Gửi ca lâm sàng / Đặt câu hỏi -->
         <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 font-semibold text-xs transition duration-150 shadow-sm text-center">
           <i class="fa-solid fa-file-circle-question"></i>
           <span class="whitespace-nowrap">Gửi ca lâm sàng / Đặt câu hỏi kỳ họp</span>
@@ -215,7 +225,7 @@
       </div>
     </div>
 
-    <!-- 5. Câu hỏi thường gặp (FAQ) -->
+    <!-- 5. FAQ -->
     <div class="space-y-3 pt-1">
       <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-1">Câu Hỏi Thường Gặp</h3>
 
@@ -260,28 +270,31 @@
           <span>Làm sao để mở nhanh trang web này mỗi ngày?</span>
           <i class="fa-solid fa-plus text-xs text-slate-400 group-open:rotate-45 transition-transform duration-200"></i>
         </summary>
-        <div class="px-3.5 pb-3.5 pt-1 text-xs text-slate-300 border-t border-slate-700/50 leading-relaxed">
-          Mở link trên điện thoại bằng <strong>Safari (iPhone)</strong> hoặc <strong>Chrome (Android)</strong> &rarr; Chọn nút <strong>Chia sẻ / Tùy chọn</strong> &rarr; Chọn <strong>"Thêm vào Màn hình chính" (Add to Home Screen)</strong> để sử dụng thuận tiện như một ứng dụng riêng.
+        <div class="px-3.5 pb-3.5 pt-1 text-xs text-slate-300 border-t border-slate-700/50 leading-relaxed space-y-2">
+          <div class="p-2 rounded bg-amber-500/10 border border-amber-500/30 text-amber-200 text-[11px]">
+            <strong>⚠️ Lưu ý:</strong> Nếu đang mở link từ Zalo/Facebook, hãy bấm dấu <strong>3 chấm (...)</strong> ở góc trên &rarr; Chọn <strong>"Mở bằng trình duyệt"</strong> trước khi thực hiện.
+          </div>
+          <div class="space-y-1">
+            <div>🍏 <strong>iPhone (Safari):</strong> Bấm nút <strong>Chia sẻ</strong> (ô vuông mũi tên lên) &rarr; Chọn <strong>"Thêm vào MH chính"</strong> &rarr; Bấm <strong>Thêm</strong>.</div>
+            <div>🤖 <strong>Android (Chrome):</strong> Bấm dấu <strong>3 chấm (⋮)</strong> &rarr; Chọn <strong>"Thêm vào màn hình chính"</strong> (hoặc Cài đặt) &rarr; Bấm <strong>Thêm</strong>.</div>
+          </div>
         </div>
       </details>
     </div>
 
-    <!-- 6. Chân trang (3 kênh chính thức: Zalo - YouTube - TikTok) -->
+    <!-- 6. Chân trang -->
     <div class="pt-6 pb-4 border-t border-slate-800 space-y-3 text-center">
       <div class="flex items-center justify-center gap-2.5 text-xs flex-wrap">
-        <!-- Zalo / Hotline -->
         <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-teal-400 border border-slate-700 transition">
           <i class="fa-solid fa-phone"></i>
           <span>Hotline/Zalo: <strong>0349622964</strong></span>
         </a>
 
-        <!-- YouTube -->
         <a href="https://www.youtube.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-red-400 hover:text-red-300 border border-slate-700 transition">
           <i class="fa-brands fa-youtube text-red-500"></i>
           <span>YouTube: <strong>Dr.Thai Ortho</strong></span>
         </a>
 
-        <!-- TikTok -->
         <a href="https://www.tiktok.com/@drthaiortho" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition">
           <i class="fa-brands fa-tiktok text-teal-400"></i>
           <span>TikTok: <strong>@drthaiortho</strong></span>
@@ -301,7 +314,6 @@
 
   <!-- Script: Đồng hồ đếm ngược & Sao chép Link -->
   <script>
-    // 1. Logic Countdown Timer đến 20:30 ngày 31/08/2026
     const targetDate = new Date('2026-08-31T20:30:00+07:00').getTime();
 
     function updateCountdown() {
@@ -328,7 +340,6 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 2. Logic Sao chép liên kết trang
     function copySiteLink() {
       const url = window.location.href;
       navigator.clipboard.writeText(url).then(() => {
