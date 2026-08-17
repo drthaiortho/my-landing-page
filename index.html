@@ -26,7 +26,6 @@
 
     <!-- 1. Header & Nút Copy Link -->
     <div class="text-center pt-2 relative">
-      <!-- Nút chia sẻ nhanh 1 chạm -->
       <button onclick="copySiteLink()" class="absolute top-0 right-0 p-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-teal-300 border border-slate-700 transition duration-150 shadow-sm" title="Sao chép link chia sẻ">
         <i class="fa-solid fa-share-nodes text-sm"></i>
       </button>
@@ -138,29 +137,38 @@
         </a>
       </div>
 
-      <!-- Nút gửi câu hỏi / ca lâm sàng trước buổi học -->
-      <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2.5 px-3 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 font-medium text-xs transition duration-150">
-        <i class="fa-solid fa-file-circle-question mr-1.5"></i> Gửi ca lâm sàng / Đặt câu hỏi trước cho buổi Zoom
+      <!-- Nút Đặt câu hỏi trước cho buổi Zoom -->
+      <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2.5 px-3 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 font-semibold text-xs transition duration-150 shadow-sm">
+        <i class="fa-solid fa-file-circle-question mr-1.5"></i> Đặt câu hỏi trước cho buổi họp Zoom
       </a>
     </div>
 
-    <!-- 4. Điểm tin Kho Dữ Liệu (Archive Snapshot) -->
-    <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+    <!-- 4. Top nội dung được các bác sĩ quan tâm -->
+    <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-4 space-y-3 shadow-md">
       <div class="flex items-center justify-between">
-        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-          <i class="fa-solid fa-folder-open text-teal-400"></i> Chủ đề tiêu biểu trong kho
+        <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-fire text-amber-400"></i> Top nội dung được bác sĩ quan tâm
         </h3>
-        <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:text-teal-300 font-semibold">Xem tất cả &rarr;</a>
+        <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:text-teal-300 font-semibold">Xem kho Notion &rarr;</a>
       </div>
-      <div class="grid grid-cols-1 gap-2 text-xs">
-        <div class="p-2.5 bg-slate-800 rounded-xl border border-slate-700 flex items-start gap-2.5">
-          <span class="px-1.5 py-0.5 rounded bg-teal-950 text-teal-400 text-[10px] font-bold mt-0.5">Kỳ 01</span>
-          <span class="text-slate-300">Tổng quan kỹ thuật kiểm soát neo chặn & ứng dụng Minivis thực chiến</span>
-        </div>
-        <div class="p-2.5 bg-slate-800 rounded-xl border border-slate-700 flex items-start gap-2.5">
-          <span class="px-1.5 py-0.5 rounded bg-blue-950 text-blue-400 text-[10px] font-bold mt-0.5">Lâm sàng</span>
-          <span class="text-slate-300">Tổng hợp ca lâm sàng dựng trục răng cối & đóng khoảng nhổ răng</span>
-        </div>
+      <div class="grid grid-cols-1 gap-2.5 text-xs">
+        <!-- Top 1 -->
+        <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-amber-500/40 rounded-xl flex items-start gap-2.5 transition group">
+          <span class="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-extrabold uppercase mt-0.5">Top 1</span>
+          <div>
+            <div class="font-semibold text-white group-hover:text-amber-200 transition-colors">Webinar: Điều trị cười hở lợi trên lâm sàng thực chiến</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">Phân tích chẩn đoán, lựa chọn khí cụ & cơ chế kéo lùi/đánh lún hiệu quả</div>
+          </div>
+        </a>
+
+        <!-- Top 2 -->
+        <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-blue-500/40 rounded-xl flex items-start gap-2.5 transition group">
+          <span class="px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] font-extrabold uppercase mt-0.5">Top 2</span>
+          <div>
+            <div class="font-semibold text-white group-hover:text-blue-200 transition-colors">Các sai lầm thường gặp trong nắn chỉnh răng</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">Nhận diện sớm các bẫy lực sinh học, mất kiểm soát neo chặn & cách phòng ngừa</div>
+          </div>
+        </a>
       </div>
     </div>
 
@@ -256,7 +264,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 2. Logic Sao chép liên kết trang (1-Click Copy)
+    // 2. Logic Sao chép liên kết trang
     function copySiteLink() {
       const url = window.location.href;
       navigator.clipboard.writeText(url).then(() => {
