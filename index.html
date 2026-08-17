@@ -67,19 +67,33 @@
         <i class="fa-solid fa-chevron-right text-slate-500 text-sm group-hover:text-blue-300"></i>
       </a>
 
-      <!-- Nút Đọc sách & Zoom định kỳ -->
-      <a href="https://daymai.vn/student/course/enrol/33142447" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 bg-gradient-to-r from-teal-900/60 via-slate-800 to-slate-800 border border-teal-500/50 hover:border-teal-300 rounded-2xl transition duration-200 shadow-md group">
-        <div class="flex items-center space-x-3.5">
-          <div class="w-11 h-11 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center text-xl border border-teal-500/30">
-            <i class="fa-solid fa-book-open-reader"></i>
+      <!-- Nút Đọc Sách & Zoom: Đã bọc bảo mật cho Hội viên chính thức -->
+      <details class="group bg-slate-800 border border-teal-500/50 hover:border-teal-400 rounded-2xl overflow-hidden transition duration-200 shadow-md">
+        <summary class="flex items-center justify-between p-4 cursor-pointer select-none">
+          <div class="flex items-center space-x-3.5">
+            <div class="w-11 h-11 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center text-xl border border-teal-500/30">
+              <i class="fa-solid fa-book-open-reader"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5 font-bold text-teal-200">
+                <span>Chương Trình Đọc Sách & Zoom</span>
+                <i class="fa-solid fa-lock text-[10px] text-amber-400" title="Chỉ dành cho Hội viên"></i>
+              </div>
+              <div class="text-xs text-slate-300">Dành riêng cho Hội viên chính thức định kỳ hàng tháng</div>
+            </div>
           </div>
-          <div>
-            <div class="font-bold text-teal-200 group-hover:text-teal-100 transition-colors">Chương Trình Đọc Sách & Zoom</div>
-            <div class="text-xs text-slate-300">Đăng ký & tham gia sinh hoạt định kỳ hàng tháng</div>
+          <i class="fa-solid fa-chevron-down text-slate-400 text-sm group-open:rotate-180 transition-transform duration-200"></i>
+        </summary>
+        <div class="p-3.5 bg-slate-900/90 border-t border-slate-700/80 text-xs space-y-2.5">
+          <div class="p-2 rounded-lg bg-teal-950/40 border border-teal-800/60 text-slate-300 text-[11px] leading-relaxed">
+            <strong class="text-teal-300"><i class="fa-solid fa-circle-exclamation mr-1"></i> Quyền truy cập:</strong> Link lớp học trên Daymai chỉ mở quyền cho Bác sĩ đã là Hội viên chính thức. Chưa là Hội viên vui lòng không đăng ký trực tiếp.
           </div>
+          <a href="https://daymai.vn/student/course/enrol/33142447" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs transition shadow-md">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>Vào Lớp Học Daymai (Dành cho Hội Viên)</span>
+          </a>
         </div>
-        <i class="fa-solid fa-arrow-up-right-from-square text-teal-400 text-xs"></i>
-      </a>
+      </details>
     </div>
 
     <!-- 3. Chương trình đang chạy & Đồng hồ đếm ngược -->
@@ -138,24 +152,28 @@
       </div>
 
       <div class="space-y-2.5 pt-1">
-        <!-- Nút Tra cứu trạng thái đăng ký -->
-        <a href="https://script.google.com/macros/s/AKfycbx0bPlupA2_lWC_7-fICh_lJ-gvmXfRY9LF2OA8K2qbsSDCDBpuV6zo4RD9H3ZNkVhO/exec" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold text-xs transition duration-150 shadow-sm">
+        <!-- 1. Nút Tra cứu trạng thái đăng ký -->
+        <a href="https://script.google.com/macros/s/AKfycbx0bPlupA2_lWC_7-fICh_lJ-gvmXfRY9LF2OA8K2qbsSDCDBpuV6zo4RD9H3ZNkVhO/exec" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold text-xs transition duration-150 shadow-sm text-center">
           <i class="fa-solid fa-id-card-clip"></i>
           <span>Tra cứu trạng thái đăng ký kỳ họp</span>
         </a>
 
-        <!-- Hộp Bảo Mật: Bản ghi Kỳ 01 (Chống người lạ xin quyền) -->
+        <!-- 2. Nút Đặt câu hỏi trước cho buổi Zoom -->
+        <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 font-semibold text-xs transition duration-150 shadow-sm text-center">
+          <i class="fa-solid fa-file-circle-question"></i>
+          <span>Đặt câu hỏi trước cho buổi họp Zoom</span>
+        </a>
+
+        <!-- 3. Hộp Bản Ghi Kỳ 01: Căn chính giữa chuẩn xác, nằm dưới nút Đặt câu hỏi -->
         <details class="group bg-slate-900/90 border border-rose-500/40 rounded-xl overflow-hidden transition duration-150">
-          <summary class="flex justify-between items-center p-3 cursor-pointer select-none">
-            <div class="flex items-center gap-2 text-xs font-bold text-rose-300">
-              <i class="fa-solid fa-lock text-rose-400"></i>
-              <span>Bản ghi & Tài liệu Kỳ 01 (Hội viên)</span>
-            </div>
-            <i class="fa-solid fa-chevron-down text-xs text-rose-400 group-open:rotate-180 transition-transform duration-200"></i>
+          <summary class="flex items-center justify-center gap-2 p-3 cursor-pointer select-none text-center relative">
+            <i class="fa-solid fa-lock text-rose-400 text-xs"></i>
+            <span class="text-xs font-bold text-rose-300">Bản ghi & Tài liệu Kỳ 01 (Hội viên)</span>
+            <i class="fa-solid fa-chevron-down text-xs text-rose-400 group-open:rotate-180 transition-transform duration-200 absolute right-3"></i>
           </summary>
           <div class="p-3 bg-slate-950/80 border-t border-rose-500/30 text-xs space-y-2.5">
-            <div class="p-2 rounded-lg bg-rose-950/40 border border-rose-900/60 text-rose-200 text-[11px] leading-relaxed">
-              <strong class="text-rose-400"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Lưu ý bắt buộc:</strong> Chỉ mở bằng đúng <strong>Email Hội viên</strong> đã được cấp quyền trước đó. Vui lòng <u>không gửi yêu cầu truy cập</u> từ email khác tránh gây nghẽn duyệt.
+            <div class="p-2 rounded-lg bg-rose-950/40 border border-rose-900/60 text-rose-200 text-[11px] leading-relaxed text-center">
+              <strong class="text-rose-400"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Lưu ý:</strong> Chỉ mở bằng <strong>Email Hội viên</strong> đã kích hoạt. Tránh gửi yêu cầu truy cập từ email khác gây nghẽn duyệt.
             </div>
             <a href="https://drive.google.com/file/d/1feTWnuPDNbCOI8msUq4_CqdQgesWfWO5/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition shadow-md">
               <i class="fa-brands fa-google-drive"></i>
@@ -163,12 +181,6 @@
             </a>
           </div>
         </details>
-
-        <!-- Nút Đặt câu hỏi trước cho buổi Zoom -->
-        <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 font-semibold text-xs transition duration-150 shadow-sm">
-          <i class="fa-solid fa-file-circle-question"></i>
-          <span>Đặt câu hỏi trước cho buổi họp Zoom</span>
-        </a>
       </div>
     </div>
 
