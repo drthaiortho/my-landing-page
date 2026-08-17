@@ -4,17 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cộng Đồng Chỉnh Nha Dr.Thai Ortho</title>
+
+  <!-- Open Graph & Meta tags cho Zalo, Facebook, Messenger -->
+  <meta name="title" content="Cộng Đồng Chỉnh Nha Dr.Thai Ortho">
+  <meta name="description" content="Cổng kết nối chia sẻ kiến thức lâm sàng, kho dữ liệu Notion & chương trình sinh hoạt định kỳ.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://drthaiortho.vercel.app/">
+  <meta property="og:title" content="Cộng Đồng Chỉnh Nha Dr.Thai Ortho">
+  <meta property="og:description" content="Cùng nhau học kiến thức chỉnh nha lâm sàng! Tra cứu kho dữ liệu ca lâm sàng & sinh hoạt chuyên môn hàng tháng.">
+  <meta property="og:image" content="https://drthaiortho.vercel.app/Logo.png">
+  <meta property="twitter:card" content="summary_large_image">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     details summary::-webkit-details-marker { display: none; }
   </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased p-4 sm:p-6">
-  <div class="max-w-md mx-auto space-y-6">
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased p-4 sm:p-6 selection:bg-teal-500 selection:text-white">
+  <div class="max-w-md mx-auto space-y-5">
 
-    <!-- 1. Header / Nhận diện thương hiệu -->
-    <div class="text-center pt-2">
+    <!-- 1. Header & Nút Copy Link -->
+    <div class="text-center pt-2 relative">
+      <!-- Nút chia sẻ nhanh 1 chạm -->
+      <button onclick="copySiteLink()" class="absolute top-0 right-0 p-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-teal-300 border border-slate-700 transition duration-150 shadow-sm" title="Sao chép link chia sẻ">
+        <i class="fa-solid fa-share-nodes text-sm"></i>
+      </button>
+
       <div class="w-28 h-28 mx-auto mb-4 rounded-full bg-white p-1 shadow-xl overflow-hidden flex items-center justify-center border-2 border-teal-500/50">
         <img src="./Logo.png" alt="Dr. Thai Ortho" class="w-full h-full object-contain rounded-full">
       </div>
@@ -67,8 +83,8 @@
       </a>
     </div>
 
-    <!-- 3. Chương trình đang chạy trong tháng -->
-    <div class="bg-gradient-to-b from-slate-800 to-slate-800/90 border border-slate-700 rounded-2xl p-5 space-y-3.5 shadow-lg">
+    <!-- 3. Chương trình đang chạy & Đồng hồ đếm ngược -->
+    <div class="bg-gradient-to-b from-slate-800 to-slate-800/90 border border-slate-700 rounded-2xl p-5 space-y-4 shadow-lg">
       <div class="flex items-center justify-between">
         <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
           <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> Đang diễn ra
@@ -77,28 +93,78 @@
       </div>
       
       <div>
-        <h2 class="text-base font-bold text-white uppercase tracking-wide">Kỳ họp đọc báo số 02</h2>
-        <p class="text-xs text-slate-400 italic mt-0.5 font-sans">Dành riêng cho Hội viên chính thức</p>
+        <h2 class="text-base font-bold text-white uppercase tracking-wide">KỲ HỌP ĐỌC BÁO SỐ 02</h2>
+        <p class="text-xs text-slate-400 italic mt-0.5">Dành riêng cho Hội viên chính thức</p>
       </div>
 
       <div class="p-3 bg-slate-900/70 rounded-xl border border-slate-700/60">
         <div class="text-xs font-semibold text-teal-300 mb-1 flex items-center gap-1.5">
           <i class="fa-solid fa-newspaper text-[11px]"></i> Bài đọc chủ đề:
         </div>
-        <p class="text-xs text-slate-200 leading-relaxed font-serif italic">
+        <p class="text-xs text-slate-200 leading-relaxed italic">
           "Mandibular molar uprighting using orthodontic miniscrew implants: a systematic review - Dựng trục răng cối lớn bằng Minivis"
         </p>
       </div>
 
+      <!-- Countdown Timer Box -->
+      <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-700/70 text-center">
+        <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-center gap-1.5">
+          <i class="fa-regular fa-clock text-amber-400"></i> Đếm ngược đến giờ sinh hoạt
+        </div>
+        <div class="grid grid-cols-4 gap-2 text-center">
+          <div class="bg-slate-800 rounded-lg p-1.5 border border-slate-700">
+            <span id="cd-days" class="font-bold text-base text-white block">00</span>
+            <span class="text-[10px] text-slate-400 uppercase">Ngày</span>
+          </div>
+          <div class="bg-slate-800 rounded-lg p-1.5 border border-slate-700">
+            <span id="cd-hours" class="font-bold text-base text-white block">00</span>
+            <span class="text-[10px] text-slate-400 uppercase">Giờ</span>
+          </div>
+          <div class="bg-slate-800 rounded-lg p-1.5 border border-slate-700">
+            <span id="cd-minutes" class="font-bold text-base text-white block">00</span>
+            <span class="text-[10px] text-slate-400 uppercase">Phút</span>
+          </div>
+          <div class="bg-slate-800 rounded-lg p-1.5 border border-slate-700">
+            <span id="cd-seconds" class="font-bold text-base text-teal-400 block">00</span>
+            <span class="text-[10px] text-slate-400 uppercase">Giây</span>
+          </div>
+        </div>
+      </div>
+
       <div class="pt-2 flex items-center justify-between border-t border-slate-700/60 text-xs">
-        <span class="text-slate-300 font-medium"><i class="fa-regular fa-clock text-teal-400 mr-1.5"></i> 20h30 • 31/08/2026</span>
+        <span class="text-slate-300 font-medium"><i class="fa-regular fa-calendar-check text-teal-400 mr-1.5"></i> 20h30 • 31/08/2026</span>
         <a href="https://daymai.vn/student/course/enrol/33142447" target="_blank" rel="noopener noreferrer" class="text-teal-400 hover:text-teal-300 font-bold flex items-center gap-1">
           Vào phòng học <i class="fa-solid fa-arrow-right text-[10px]"></i>
         </a>
       </div>
+
+      <!-- Nút gửi câu hỏi / ca lâm sàng trước buổi học -->
+      <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-2.5 px-3 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 font-medium text-xs transition duration-150">
+        <i class="fa-solid fa-file-circle-question mr-1.5"></i> Gửi ca lâm sàng / Đặt câu hỏi trước cho buổi Zoom
+      </a>
     </div>
 
-    <!-- 4. Câu hỏi thường gặp (FAQ) -->
+    <!-- 4. Điểm tin Kho Dữ Liệu (Archive Snapshot) -->
+    <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-folder-open text-teal-400"></i> Chủ đề tiêu biểu trong kho
+        </h3>
+        <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:text-teal-300 font-semibold">Xem tất cả &rarr;</a>
+      </div>
+      <div class="grid grid-cols-1 gap-2 text-xs">
+        <div class="p-2.5 bg-slate-800 rounded-xl border border-slate-700 flex items-start gap-2.5">
+          <span class="px-1.5 py-0.5 rounded bg-teal-950 text-teal-400 text-[10px] font-bold mt-0.5">Kỳ 01</span>
+          <span class="text-slate-300">Tổng quan kỹ thuật kiểm soát neo chặn & ứng dụng Minivis thực chiến</span>
+        </div>
+        <div class="p-2.5 bg-slate-800 rounded-xl border border-slate-700 flex items-start gap-2.5">
+          <span class="px-1.5 py-0.5 rounded bg-blue-950 text-blue-400 text-[10px] font-bold mt-0.5">Lâm sàng</span>
+          <span class="text-slate-300">Tổng hợp ca lâm sàng dựng trục răng cối & đóng khoảng nhổ răng</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Câu hỏi thường gặp (FAQ) -->
     <div class="space-y-3 pt-1">
       <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-1">Câu Hỏi Thường Gặp</h3>
 
@@ -137,9 +203,9 @@
       </details>
     </div>
 
-    <!-- 5. Chân trang & Thông tin liên hệ -->
+    <!-- 6. Chân trang & Thông tin liên hệ -->
     <div class="pt-6 pb-4 border-t border-slate-800 space-y-3 text-center">
-      <div class="flex items-center justify-center gap-4 text-xs">
+      <div class="flex items-center justify-center gap-3 text-xs flex-wrap">
         <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-teal-400 border border-slate-700 transition">
           <i class="fa-solid fa-phone"></i>
           <span>Hotline/Zalo: <strong>0349622964</strong></span>
@@ -155,5 +221,54 @@
     </div>
 
   </div>
+
+  <!-- Toast thông báo Copy thành công -->
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-teal-500 text-slate-950 font-bold px-4 py-2 rounded-full text-xs shadow-2xl transition duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-1.5">
+    <i class="fa-solid fa-check"></i> Đã sao chép link trang!
+  </div>
+
+  <!-- Script: Đồng hồ đếm ngược & Sao chép Link -->
+  <script>
+    // 1. Logic Countdown Timer đến 20:30 ngày 31/08/2026
+    const targetDate = new Date('2026-08-31T20:30:00+07:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+        document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
+      } else {
+        document.getElementById('cd-days').innerText = '00';
+        document.getElementById('cd-hours').innerText = '00';
+        document.getElementById('cd-minutes').innerText = '00';
+        document.getElementById('cd-seconds').innerText = '00';
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // 2. Logic Sao chép liên kết trang (1-Click Copy)
+    function copySiteLink() {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.remove('opacity-0');
+        toast.classList.add('opacity-100');
+        setTimeout(() => {
+          toast.classList.remove('opacity-100');
+          toast.classList.add('opacity-0');
+        }, 2200);
+      });
+    }
+  </script>
 </body>
 </html>
