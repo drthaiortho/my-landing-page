@@ -15,7 +15,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Dr.Thai Ortho">
 
-  <!-- Open Graph & Meta tags cho Zalo, Facebook, Messenger -->
+  <!-- Open Graph & Meta tags -->
   <meta name="title" content="Cộng Đồng Chỉnh Nha Dr.Thai Ortho">
   <meta name="description" content="Cổng kết nối chia sẻ kiến thức lâm sàng, kho dữ liệu Notion & chương trình sinh hoạt định kỳ.">
   <meta property="og:type" content="website">
@@ -44,7 +44,6 @@
         <img src="./Logo.png" alt="Dr. Thai Ortho" class="w-full h-full object-contain rounded-full">
       </div>
       
-      <!-- Tiêu đề chia 2 dòng chuẩn di động, khóa liền khối Dr.Thai Ortho -->
       <h1 class="text-lg sm:text-xl font-extrabold text-white tracking-tight uppercase leading-tight">
         CỘNG ĐỒNG CHỈNH NHA<br>
         <span class="whitespace-nowrap">DR.THAI ORTHO</span>
@@ -68,7 +67,7 @@
         <i class="fa-solid fa-chevron-right text-slate-500 text-sm group-hover:text-teal-300"></i>
       </a>
 
-      <!-- Nút 2: Nhóm Zalo Hội Viên (Hộp sổ xuống bảo mật) -->
+      <!-- Nút 2: Nhóm Zalo Hội Viên -->
       <details class="group bg-slate-800 border border-blue-500/40 hover:border-blue-400 rounded-2xl overflow-hidden transition duration-200 shadow-md">
         <summary class="flex items-center justify-between p-4 cursor-pointer select-none">
           <div class="flex items-center space-x-3.5">
@@ -190,27 +189,28 @@
           <span class="whitespace-nowrap">Gửi ca lâm sàng / Đặt câu hỏi kỳ họp</span>
         </a>
 
-        <!-- Hộp 4: Bản Ghi Kỳ 01 -->
+        <!-- Hộp 4: Bản Ghi Kỳ 01 (ĐÃ NÂNG CẤP XEM TRỰC TIẾP TRÊN WEB CÓ CHỐNG POP-OUT) -->
         <details class="group bg-slate-900/90 border border-rose-500/40 rounded-xl overflow-hidden transition duration-150">
           <summary class="flex items-center justify-center gap-2.5 p-3 cursor-pointer select-none text-center">
-            <i class="fa-solid fa-lock text-rose-400 text-xs"></i>
-            <span class="text-xs font-bold text-rose-300 whitespace-nowrap">Bản ghi & Tài liệu Kỳ 01 (Hội viên)</span>
+            <i class="fa-solid fa-play text-rose-400 text-xs"></i>
+            <span class="text-xs font-bold text-rose-300 whitespace-nowrap">Xem Bản Ghi & Tài Liệu Kỳ 01 (Hội viên)</span>
             <i class="fa-solid fa-chevron-down text-xs text-rose-400 group-open:rotate-180 transition-transform duration-200"></i>
           </summary>
-          <div class="p-3 bg-slate-950/80 border-t border-rose-500/30 text-xs space-y-2.5">
+          <div class="p-3 bg-slate-950/80 border-t border-rose-500/30 text-xs space-y-3">
             <div class="p-2 rounded-lg bg-rose-950/40 border border-rose-900/60 text-rose-200 text-[11px] leading-relaxed text-center">
-              <strong class="text-rose-400"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Lưu ý:</strong> Chỉ mở bằng <strong>Email Hội viên</strong> đã kích hoạt. Tránh gửi yêu cầu truy cập từ email khác gây nghẽn duyệt.
+              <strong class="text-rose-400"><i class="fa-solid fa-shield-halved mr-1"></i> Chế độ bảo mật:</strong> Đã kích hoạt Player nội bộ. Video chỉ hiển thị khi trình duyệt đăng nhập đúng Email Hội viên.
             </div>
-            <a href="https://drive.google.com/file/d/1feTWnuPDNbCOI8msUq4_CqdQgesWfWO5/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition shadow-md">
-              <i class="fa-brands fa-google-drive"></i>
-              <span>Mở Bản Ghi Kỳ 01 (Google Drive)</span>
-            </a>
+
+            <button onclick="openSecurePlayer('1feTWnuPDNbCOI8msUq4_CqdQgesWfWO5', 'Kỳ 01: Dựng trục răng cối lớn bằng Minivis')" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition shadow-md">
+              <i class="fa-solid fa-circle-play"></i>
+              <span>Xem Bản Ghi Ngay (Player Nội Bộ)</span>
+            </button>
           </div>
         </details>
       </div>
     </div>
 
-    <!-- 4. Top nội dung được các bác sĩ quan tâm (Đã gắn 3 link YouTube chuẩn xác) -->
+    <!-- 4. Top nội dung được các bác sĩ quan tâm -->
     <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-4 space-y-3 shadow-md">
       <div class="flex items-center justify-between">
         <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
@@ -219,7 +219,7 @@
         <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:text-teal-300 font-semibold">Xem kho Notion &rarr;</a>
       </div>
       <div class="grid grid-cols-1 gap-2.5 text-xs">
-        <!-- Top 1: Video Cười hở lợi -->
+        <!-- Top 1 -->
         <a href="https://www.youtube.com/watch?v=jPuLbqqYj_w" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-amber-500/50 rounded-xl flex items-start justify-between gap-2.5 transition group">
           <div class="flex items-start gap-2.5">
             <span class="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-extrabold uppercase mt-0.5">Top 1</span>
@@ -234,7 +234,7 @@
           <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-amber-300 text-[11px] mt-1 shrink-0"></i>
         </a>
 
-        <!-- Top 2: Danh sách Video Sai lầm thường gặp -->
+        <!-- Top 2 -->
         <a href="https://www.youtube.com/watch?v=iMqc6BDiK6g&list=PL7YzM7KyB5S6EXP9eTA2cbw0Gnj-rnjFy" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-blue-500/50 rounded-xl flex items-start justify-between gap-2.5 transition group">
           <div class="flex items-start gap-2.5">
             <span class="px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] font-extrabold uppercase mt-0.5">Top 2</span>
@@ -249,7 +249,7 @@
           <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-blue-300 text-[11px] mt-1 shrink-0"></i>
         </a>
 
-        <!-- Top 3: Tâm sự đêm khuya - Góc chỉnh nha số 01 -->
+        <!-- Top 3 -->
         <a href="https://www.youtube.com/watch?v=QKRo6Gci0Xk&list=PL7YzM7KyB5S6ALSSRrGzvOPdHTUGY0Blz" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-purple-500/50 rounded-xl flex items-start justify-between gap-2.5 transition group">
           <div class="flex items-start gap-2.5">
             <span class="px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-extrabold uppercase mt-0.5">Top 3</span>
@@ -270,7 +270,6 @@
     <div class="space-y-3 pt-1">
       <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-1">Câu Hỏi Thường Gặp</h3>
 
-      <!-- Người chưa tham gia -->
       <details class="group bg-slate-800 border border-slate-700 hover:border-slate-600 rounded-xl overflow-hidden transition duration-150">
         <summary class="flex justify-between items-center p-3.5 cursor-pointer font-semibold text-xs sm:text-sm text-slate-200 select-none">
           <span>Để trở thành Hội viên cần làm gì?</span>
@@ -282,7 +281,6 @@
         </div>
       </details>
 
-      <!-- Người mới tham gia -->
       <details class="group bg-slate-800 border border-slate-700 hover:border-slate-600 rounded-xl overflow-hidden transition duration-150">
         <summary class="flex justify-between items-center p-3.5 cursor-pointer font-semibold text-xs sm:text-sm text-slate-200 select-none">
           <span>Tôi được quyền lợi gì khi tham gia?</span>
@@ -294,7 +292,6 @@
         </div>
       </details>
 
-      <!-- Hội viên lâu năm -->
       <details class="group bg-slate-800 border border-slate-700 hover:border-slate-600 rounded-xl overflow-hidden transition duration-150">
         <summary class="flex justify-between items-center p-3.5 cursor-pointer font-semibold text-xs sm:text-sm text-slate-200 select-none">
           <span>Tôi đã đăng ký lẻ tẻ, muốn mua Full bản ghi để đủ bài giảng?</span>
@@ -305,7 +302,6 @@
         </div>
       </details>
 
-      <!-- Mẹo mở nhanh như App -->
       <details class="group bg-slate-800 border border-slate-700 hover:border-slate-600 rounded-xl overflow-hidden transition duration-150">
         <summary class="flex justify-between items-center p-3.5 cursor-pointer font-semibold text-xs sm:text-sm text-slate-200 select-none">
           <span>Làm sao để mở nhanh trang web này mỗi ngày?</span>
@@ -348,12 +344,49 @@
 
   </div>
 
+  <!-- MODAL SECURE PLAYER (XEM TRỰC TIẾP TRÊN WEB + CHẶN MỞ TAB NGOÀI) -->
+  <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-3 hidden opacity-0 transition-opacity duration-200">
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col">
+      <!-- Header Modal -->
+      <div class="p-3.5 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-teal-400 text-xs"></i>
+          <span id="videoTitle" class="text-xs font-bold text-white truncate max-w-[260px]">Bản ghi bài giảng</span>
+        </div>
+        <button onclick="closeSecurePlayer()" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Video Container -->
+      <div class="relative w-full pb-[56.25%] bg-black overflow-hidden select-none">
+        <!-- Iframe Google Drive -->
+        <iframe id="driveFrame" class="absolute inset-0 w-full h-full border-0" allow="autoplay"></iframe>
+
+        <!-- Lớp CSS Blocker chặn nút Pop-out góc trên phải của Drive -->
+        <div class="absolute top-0 right-0 w-16 h-14 z-20 bg-transparent cursor-default"></div>
+
+        <!-- Watermark chống quay màn hình -->
+        <div id="dynamicWatermark" class="absolute z-10 pointer-events-none text-white/30 text-[11px] font-bold tracking-wider select-none transition-all duration-700 drop-shadow" style="top: 20%; left: 20%;">
+          Dr.Thai Ortho • Hội viên
+        </div>
+      </div>
+
+      <!-- Footer Modal -->
+      <div class="p-2.5 bg-slate-900 text-center border-t border-slate-800">
+        <p class="text-[10px] text-slate-400 flex items-center justify-center gap-1">
+          <i class="fa-solid fa-lock text-amber-400"></i> Video bảo mật chống sao chép • Bản quyền Dr.Thai Ortho
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast thông báo Copy thành công -->
   <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-teal-500 text-slate-950 font-bold px-4 py-2 rounded-full text-xs shadow-2xl transition duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-1.5">
     <i class="fa-solid fa-check"></i> Đã sao chép link trang!
   </div>
 
-  <!-- Script: Đồng hồ đếm ngược & Sao chép Link -->
+  <!-- Script: Đồng hồ đếm ngược, Sao chép Link & Secure Player -->
   <script>
     const targetDate = new Date('2026-08-31T20:30:00+07:00').getTime();
 
@@ -392,6 +425,42 @@
           toast.classList.add('opacity-0');
         }, 2200);
       });
+    }
+
+    // Logic Modal Secure Player
+    let watermarkInterval;
+
+    function openSecurePlayer(driveId, title) {
+      const modal = document.getElementById('videoModal');
+      const frame = document.getElementById('driveFrame');
+      const titleEl = document.getElementById('videoTitle');
+      const wm = document.getElementById('dynamicWatermark');
+
+      titleEl.innerText = title;
+      frame.src = `https://drive.google.com/file/d/${driveId}/preview`;
+
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+
+      // Watermark nhảy vị trí ngẫu nhiên mỗi 6 giây
+      watermarkInterval = setInterval(() => {
+        if (wm) {
+          wm.style.top = Math.floor(Math.random() * 65 + 10) + '%';
+          wm.style.left = Math.floor(Math.random() * 60 + 10) + '%';
+        }
+      }, 6000);
+    }
+
+    function closeSecurePlayer() {
+      const modal = document.getElementById('videoModal');
+      const frame = document.getElementById('driveFrame');
+      
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        frame.src = ''; // Dừng phát video
+        clearInterval(watermarkInterval);
+      }, 200);
     }
   </script>
 </body>
