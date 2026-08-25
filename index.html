@@ -2,7 +2,6 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <!-- Sửa viewport để hỗ trợ xoay ngang tự do trên mọi thiết bị -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kho Dữ Liệu Chỉnh Nha Dr.Thai Ortho</title>
 
@@ -16,8 +15,11 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Dr.Thai Ortho">
 
+  <!-- Google Identity Services (OAuth 2.0) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
     details summary::-webkit-details-marker { display: none; }
     ::-webkit-scrollbar { width: 5px; height: 5px; }
@@ -25,8 +27,8 @@
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-    /* CSS Chế độ toàn màn hình & Xoay ngang */
-    .fullscreen-mode {
+    /* Fix Fullscreen Landscape Mobile */
+    .fs-landscape-fix {
       position: fixed !important;
       inset: 0 !important;
       width: 100vw !important;
@@ -34,13 +36,8 @@
       max-width: none !important;
       max-height: none !important;
       border-radius: 0 !important;
-      z-index: 9999 !important;
+      z-index: 99999 !important;
       background: #000 !important;
-    }
-    .fullscreen-mode #playerContainer {
-      width: 100% !important;
-      height: 100% !important;
-      padding-bottom: 0 !important;
     }
   </style>
 </head>
@@ -119,7 +116,7 @@
         </div>
 
         <div class="grid grid-cols-1 gap-2">
-          <!-- Nút 1: Sinh Hoạt Chuyên Sâu (Playlist YouTube) -->
+          <!-- Nút 1: Sinh Hoạt Chuyên Sâu -->
           <a href="https://www.youtube.com/playlist?list=PL7YzM7KyB5S6ALSSRrGzvOPdHTUGY0Blz" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-amber-500/30 hover:border-amber-400 rounded-xl flex items-center justify-between transition group shadow-sm">
             <div class="flex items-center space-x-3 min-w-0">
               <div class="w-9 h-9 rounded-lg bg-amber-950/80 text-amber-400 flex items-center justify-center text-sm border border-amber-700/50 shrink-0">
@@ -136,7 +133,7 @@
             <i class="fa-solid fa-chevron-right text-slate-500 text-xs group-hover:text-amber-300 group-hover:translate-x-0.5 transition shrink-0 ml-2"></i>
           </a>
 
-          <!-- Nút 2: Case Study Lâm Sàng (Playlist YouTube) -->
+          <!-- Nút 2: Case Study Lâm Sàng -->
           <a href="https://www.youtube.com/playlist?list=PL7YzM7KyB5S6GpVMKkkUsZIKYhSer50Wf" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-teal-500/30 hover:border-teal-400 rounded-xl flex items-center justify-between transition group shadow-sm">
             <div class="flex items-center space-x-3 min-w-0">
               <div class="w-9 h-9 rounded-lg bg-teal-950/80 text-teal-400 flex items-center justify-center text-sm border border-teal-700/50 shrink-0">
@@ -261,108 +258,11 @@
 
 
     <!-- ======================================================== -->
-    <!-- TAB 2: KHU VỰC HỘI VIÊN (VIP / LMS NATIVE PLAYER)         -->
+    <!-- TAB 2: KHU VỰC HỘI VIÊN (ĐÃ BỔ SUNG NHÓM FB HỘI VIÊN)      -->
     <!-- ======================================================== -->
     <div id="sectionPaid" class="space-y-3.5 hidden">
 
-      <!-- VỊ TRÍ 1: Nhóm Zalo Kín -->
-      <details class="group bg-slate-800 border border-blue-500/40 rounded-2xl overflow-hidden transition shadow-md">
-        <summary class="flex items-center justify-between p-3 cursor-pointer select-none">
-          <div class="flex items-center space-x-3">
-            <div class="w-9 h-9 rounded-xl bg-blue-950 text-blue-400 flex items-center justify-center text-base border border-blue-800/60">
-              <i class="fa-solid fa-comments"></i>
-            </div>
-            <div>
-              <div class="flex items-center gap-1.5 font-bold text-white text-xs">
-                <span>Nhóm Zalo Hội Viên Nội Bộ</span>
-                <i class="fa-solid fa-lock text-[10px] text-amber-400"></i>
-              </div>
-              <div class="text-[10px] text-slate-400">Thảo luận ca lâm sàng & thông báo kỳ họp</div>
-            </div>
-          </div>
-          <i class="fa-solid fa-chevron-down text-slate-400 text-xs group-open:rotate-180 transition-transform"></i>
-        </summary>
-        <div class="p-3 bg-slate-900/90 border-t border-slate-700/80 text-xs space-y-2">
-          <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow">
-            <i class="fa-solid fa-right-to-bracket"></i>
-            <span>Vào Nhóm Zalo Hội Viên</span>
-          </a>
-        </div>
-      </details>
-
-      <!-- VỊ TRÍ 2: KHO BẢN GHI VIP -->
-      <div class="bg-gradient-to-b from-slate-850 to-slate-900 border border-rose-500/40 rounded-2xl p-3.5 space-y-3 shadow-xl">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <i class="fa-solid fa-graduation-cap text-rose-400 text-base"></i>
-            <div>
-              <h3 class="text-xs font-bold text-white uppercase tracking-wide">Kho Bản Ghi Hội Viên VIP</h3>
-              <p class="text-[10px] text-slate-400">Tra cứu nhanh & phát bài giảng tức thì</p>
-            </div>
-          </div>
-          <span id="lessonCountBadge" class="text-[10px] px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800/80 rounded-full font-bold">14 Chuyên Đề</span>
-        </div>
-
-        <!-- Ô Nhập Email -->
-        <div class="p-2.5 bg-slate-900/90 rounded-xl border border-slate-700/80 space-y-2">
-          <div class="flex gap-1.5">
-            <input type="email" id="userEmailInput" placeholder="Nhập Gmail Hội viên để mở khóa..." class="w-full bg-slate-950 border border-slate-700 focus:border-teal-400 focus:outline-none rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-slate-500">
-            <button onclick="applyUserEmail()" class="px-3 py-1.5 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs shrink-0 transition flex items-center gap-1">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <span>Kiểm Tra</span>
-            </button>
-          </div>
-          <div id="emailStatusText" class="text-[10px] text-slate-400 flex items-center gap-1 truncate">
-            <i class="fa-solid fa-circle-info text-amber-400"></i> Đang hiển thị toàn bộ danh mục tham khảo.
-          </div>
-
-          <!-- Khung Báo Phí Nâng Cấp Tự Động -->
-          <div id="upgradeBox" class="hidden p-2 bg-rose-950/40 border border-rose-900/60 rounded-lg space-y-1 text-xs text-rose-200">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-white text-[10px]"><i class="fa-solid fa-sparkles text-amber-400 mr-1"></i> Gói Nâng Cấp Full:</span>
-              <span id="upgradeFeeTag" class="px-1.5 py-0.5 rounded bg-rose-600 text-white font-extrabold text-[10px]">0đ</span>
-            </div>
-            <div id="upgradeNoteText" class="text-[9px] text-slate-300 italic"></div>
-          </div>
-        </div>
-
-        <!-- Live Search -->
-        <div class="relative">
-          <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-          <input type="text" id="lessonSearchInput" oninput="handleSearchLesson()" placeholder="Tìm từ khóa: Torque, 3Shape, Minivis, MEAW..." class="w-full bg-slate-900 border border-slate-700/80 focus:border-rose-400 focus:outline-none rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500">
-        </div>
-
-        <!-- Danh sách bài học -->
-        <div id="lessonList" class="space-y-1.5 max-h-96 overflow-y-auto pr-1"></div>
-      </div>
-
-      <!-- VỊ TRÍ 3: Tải Mẫu Bệnh Án & Gửi Ca Lâm Sàng -->
-      <div class="space-y-2">
-        <a href="https://docs.google.com/presentation/d/1r7_iQzKyi9VdEY1HLRFmCNTdErONZoRM/edit?usp=drive_link" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 bg-slate-800 hover:bg-slate-750 border border-blue-500/40 rounded-xl transition group shadow-sm">
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-lg bg-blue-950 text-blue-400 flex items-center justify-center text-lg border border-blue-800/60">
-              <i class="fa-solid fa-file-powerpoint text-amber-400"></i>
-            </div>
-            <div>
-              <div class="font-bold text-white text-xs group-hover:text-blue-300">Tải Mẫu Bệnh Án Lâm Sàng (Slides)</div>
-              <div class="text-[10px] text-slate-400">Template Google Slides chuẩn hoá dữ liệu</div>
-            </div>
-          </div>
-          <i class="fa-solid fa-download text-slate-500 text-xs group-hover:text-blue-300"></i>
-        </a>
-
-        <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl transition group">
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 rounded-lg bg-teal-950 text-teal-400 flex items-center justify-center text-sm border border-teal-800/60">
-              <i class="fa-solid fa-file-circle-question"></i>
-            </div>
-            <div class="font-bold text-white text-xs">Gửi Ca Lâm Sàng / Đặt Câu Hỏi Cho Kỳ Họp</div>
-          </div>
-          <i class="fa-solid fa-chevron-right text-slate-500 text-xs group-hover:text-teal-300"></i>
-        </a>
-      </div>
-
-      <!-- VỊ TRÍ 4: KỲ HỌP ĐỌC BÁO SỐ 02 -->
+      <!-- VỊ TRÍ 1: KỲ HỌP ĐỌC BÁO SỐ 02 (ĐƯỢC ĐƯA LÊN ĐẦU TIÊN) -->
       <div class="bg-gradient-to-b from-slate-850 to-slate-800/90 border border-slate-700 rounded-2xl p-3.5 space-y-2.5 shadow-md">
         <div class="flex items-center justify-between">
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
@@ -404,6 +304,136 @@
         </div>
       </div>
 
+      <!-- VỊ TRÍ 2: CỘNG ĐỒNG NỘI BỘ (ZALO & FACEBOOK HỘI VIÊN CHÍNH THỨC) -->
+      <details class="group bg-slate-800 border border-blue-500/40 rounded-2xl overflow-hidden transition shadow-md">
+        <summary class="flex items-center justify-between p-3 cursor-pointer select-none">
+          <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-blue-950 text-blue-400 flex items-center justify-center text-base border border-blue-800/60">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5 font-bold text-white text-xs">
+                <span>Cộng Đồng Hội Viên Chính Thức</span>
+                <i class="fa-solid fa-lock text-[10px] text-amber-400"></i>
+              </div>
+              <div class="text-[10px] text-slate-400">Nhóm Zalo kín & Group Facebook chuyên môn</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-down text-slate-400 text-xs group-open:rotate-180 transition-transform"></i>
+        </summary>
+        <div class="p-3 bg-slate-900/90 border-t border-slate-700/80 text-xs space-y-2">
+          <!-- Nút Nhóm Facebook Hội Viên -->
+          <a href="https://www.facebook.com/groups/drthaiortho.hv" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow">
+            <i class="fa-brands fa-facebook text-sm"></i>
+            <span>Vào Nhóm Facebook Hội Viên Chính Thức</span>
+          </a>
+          <!-- Nút Nhóm Zalo Hội Viên -->
+          <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-cyan-700 hover:bg-cyan-600 text-white font-bold text-xs transition shadow">
+            <i class="fa-solid fa-comments text-sm"></i>
+            <span>Vào Nhóm Zalo Thảo Luận Lâm Sàng</span>
+          </a>
+        </div>
+      </details>
+
+      <!-- VỊ TRÍ 3: KHO BẢN GHI VIP (OAUTH 2.0 GOOGLE CHÍNH CHỦ) -->
+      <div class="bg-gradient-to-b from-slate-850 to-slate-900 border border-rose-500/40 rounded-2xl p-3.5 space-y-3 shadow-xl">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-graduation-cap text-rose-400 text-base"></i>
+            <div>
+              <h3 class="text-xs font-bold text-white uppercase tracking-wide">Kho Bản Ghi Hội Viên VIP</h3>
+              <p class="text-[10px] text-slate-400">Bảo mật xác thực tài khoản Google chính chủ</p>
+            </div>
+          </div>
+          <span id="lessonCountBadge" class="text-[10px] px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800/80 rounded-full font-bold">14 Chuyên Đề</span>
+        </div>
+
+        <!-- KHUNG XÁC THỰC GOOGLE OAUTH 2.0 -->
+        <div class="p-3 bg-slate-900/95 rounded-xl border border-slate-700/80 space-y-2 text-center">
+          
+          <!-- Trạng thái chưa đăng nhập -->
+          <div id="unauthBlock" class="space-y-2">
+            <p class="text-[11px] text-slate-300">Vui lòng đăng nhập bằng đúng tài khoản Google được cấp quyền:</p>
+            
+            <!-- Nút đăng nhập Google Identity -->
+            <div id="g_id_onload"
+                 data-client_id="845241038592-sampleclientid.apps.googleusercontent.com"
+                 data-context="signin"
+                 data-ux_mode="popup"
+                 data-callback="handleGoogleCredentialResponse"
+                 data-auto_prompt="false">
+            </div>
+            
+            <div class="flex justify-center">
+              <button onclick="triggerGoogleLogin()" class="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs flex items-center justify-center gap-2 transition shadow-md">
+                <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                <span>Đăng nhập với Google</span>
+              </button>
+            </div>
+            
+            <p class="text-[10px] text-slate-500 italic">Khóa chống chia sẻ tài khoản ngoài luồng</p>
+          </div>
+
+          <!-- Trạng thái đã đăng nhập chính chủ -->
+          <div id="authBlock" class="hidden flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-teal-500/40 text-left">
+            <div class="flex items-center gap-2 min-w-0">
+              <img id="userAvatar" src="./Logo.png" class="w-7 h-7 rounded-full border border-teal-400 shrink-0" alt="Avatar">
+              <div class="truncate">
+                <div id="userNameText" class="text-xs font-bold text-white truncate">Bác sĩ</div>
+                <div id="userEmailText" class="text-[10px] text-teal-300 truncate">email@gmail.com</div>
+              </div>
+            </div>
+            <button onclick="logoutGoogleUser()" class="px-2 py-1 rounded bg-slate-800 hover:bg-rose-950 text-slate-400 hover:text-rose-300 text-[10px] font-semibold border border-slate-700 shrink-0 transition">
+              Đăng xuất
+            </button>
+          </div>
+
+          <!-- Khung Báo Phí Nâng Cấp Tự Động -->
+          <div id="upgradeBox" class="hidden p-2 bg-rose-950/40 border border-rose-900/60 rounded-lg space-y-1 text-xs text-rose-200 text-left">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white text-[10px]"><i class="fa-solid fa-sparkles text-amber-400 mr-1"></i> Gói Nâng Cấp Full:</span>
+              <span id="upgradeFeeTag" class="px-1.5 py-0.5 rounded bg-rose-600 text-white font-extrabold text-[10px]">0đ</span>
+            </div>
+            <div id="upgradeNoteText" class="text-[9px] text-slate-300 italic"></div>
+          </div>
+        </div>
+
+        <!-- Live Search -->
+        <div class="relative">
+          <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+          <input type="text" id="lessonSearchInput" oninput="handleSearchLesson()" placeholder="Tìm từ khóa: Torque, 3Shape, Minivis, MEAW..." class="w-full bg-slate-900 border border-slate-700/80 focus:border-rose-400 focus:outline-none rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500">
+        </div>
+
+        <!-- Danh sách bài học -->
+        <div id="lessonList" class="space-y-1.5 max-h-96 overflow-y-auto pr-1"></div>
+      </div>
+
+      <!-- VỊ TRÍ 4: Tải Mẫu Bệnh Án & Gửi Ca Lâm Sàng -->
+      <div class="space-y-2">
+        <a href="https://docs.google.com/presentation/d/1r7_iQzKyi9VdEY1HLRFmCNTdErONZoRM/edit?usp=drive_link" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 bg-slate-800 hover:bg-slate-750 border border-blue-500/40 rounded-xl transition group shadow-sm">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-lg bg-blue-950 text-blue-400 flex items-center justify-center text-lg border border-blue-800/60">
+              <i class="fa-solid fa-file-powerpoint text-amber-400"></i>
+            </div>
+            <div>
+              <div class="font-bold text-white text-xs group-hover:text-blue-300">Tải Mẫu Bệnh Án Lâm Sàng (Slides)</div>
+              <div class="text-[10px] text-slate-400">Template Google Slides chuẩn hoá dữ liệu</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-download text-slate-500 text-xs group-hover:text-blue-300"></i>
+        </a>
+
+        <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl transition group">
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-teal-950 text-teal-400 flex items-center justify-center text-sm border border-teal-800/60">
+              <i class="fa-solid fa-file-circle-question"></i>
+            </div>
+            <div class="font-bold text-white text-xs">Gửi Ca Lâm Sàng / Đặt Câu Hỏi Cho Kỳ Họp</div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-slate-500 text-xs group-hover:text-teal-300"></i>
+        </a>
+      </div>
+
     </div>
 
     <!-- Chân trang -->
@@ -418,7 +448,7 @@
 
   </div>
 
-  <!-- POPUP PLAYER LMS NATIVE (TỰ ĐỘNG XOAY NGANG LANDSCAPE MƯỢT MÀ) -->
+  <!-- POPUP PLAYER LMS NATIVE (XOAY NGANG LANDSCAPE MƯỢT MÀ)[cite: 1] -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-2 sm:p-4 hidden opacity-0 transition-opacity duration-200">
     <div id="modalBox" class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh] transition-all duration-200">
       
@@ -433,11 +463,11 @@
         </button>
       </div>
 
-      <!-- Player Frame 16:9 (Có thể bung Fullscreen xoay ngang) -->
+      <!-- Player Frame 16:9[cite: 1] -->
       <div id="playerContainer" class="relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
         <iframe id="driveFrame" class="absolute inset-0 w-full h-full border-0" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
-        <!-- Nút thoát Fullscreen nổi khi đang xoay ngang toàn màn hình -->
-        <button id="btnExitFsFloating" onclick="toggleCustomFullScreen()" class="hidden absolute top-3 right-3 z-40 bg-slate-900/80 hover:bg-slate-900 text-white p-2 rounded-full border border-slate-600">
+        <!-- Nút thoát Fullscreen nổi khi đang xoay ngang -->
+        <button id="btnExitFsFloating" onclick="toggleCustomFullScreen()" class="hidden absolute top-3 right-3 z-50 bg-slate-900/80 hover:bg-slate-900 text-white p-2 rounded-full border border-slate-600">
           <i class="fa-solid fa-compress text-sm"></i>
         </button>
         <div class="absolute top-0 right-0 w-20 h-16 z-30 bg-transparent cursor-default"></div>
@@ -450,18 +480,17 @@
       <!-- Thanh Điều Khiển -->
       <div id="modalControls" class="p-2 bg-slate-850 border-b border-slate-800 flex items-center justify-between shrink-0 text-xs">
         <div class="flex items-center gap-1">
-          <button onclick="playPrevItem()" id="btnPrevItem" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-semibold text-[10px] transition disabled:opacity-30 disabled:pointer-events-none">
+          <button onclick="playPrevItem()" id="btnPrevItem" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white font-semibold text-[10px] transition disabled:opacity-30 disabled:pointer-events-none">
             <i class="fa-solid fa-backward-step mr-1"></i> Trước
           </button>
-          <button onclick="playNextItem()" id="btnNextItem" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-semibold text-[10px] transition disabled:opacity-30 disabled:pointer-events-none">
+          <button onclick="playNextItem()" id="btnNextItem" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white font-semibold text-[10px] transition disabled:opacity-30 disabled:pointer-events-none">
             Sau <i class="fa-solid fa-forward-step ml-1"></i>
           </button>
         </div>
 
         <div class="flex items-center gap-1.5">
-          <!-- Nút Phóng to & Tự động xoay ngang -->
           <button onclick="toggleCustomFullScreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
-            <i class="fa-solid fa-expand"></i> Xoay ngang toàn màn hình
+            <i class="fa-solid fa-expand"></i> Xoay ngang màn hình
           </button>
           <a id="btnDownloadFile" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 text-[10px] font-semibold hover:bg-slate-700 transition flex items-center gap-1">
             <i class="fa-solid fa-cloud-arrow-down"></i> Tải file này
@@ -516,47 +545,94 @@
     ];
 
     let currentUserEmail = localStorage.getItem('drthai_user_email') || '';
-    let currentAllowedList = [...LESSONS_DATA];
+    let currentAllowedList = [];
     let watchedLessons = JSON.parse(localStorage.getItem('drthai_watched_lessons') || '{}');
 
-    // Khởi tạo
+    // Khởi tạo Google Auth & Giao diện
     window.addEventListener('DOMContentLoaded', () => {
-      if (currentUserEmail) {
-        document.getElementById('userEmailInput').value = currentUserEmail;
-        applyUserEmail();
-      } else {
-        renderLessons(LESSONS_DATA);
+      renderLessons(LESSONS_DATA, true);
+      const savedUser = JSON.parse(localStorage.getItem('drthai_auth_user') || 'null');
+      if (savedUser && savedUser.email) {
+        setAuthUI(savedUser);
+        fetchPermissionsByEmail(savedUser.email);
       }
     });
 
-    // Tra cứu API Apps Script
-    async function applyUserEmail() {
-      const email = document.getElementById('userEmailInput').value.trim().toLowerCase();
-      const statusEl = document.getElementById('emailStatusText');
+    // Giải mã JWT Token từ Google OAuth 2.0
+    function parseJwt(token) {
+      try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Callback khi Google xác thực thành công
+    function handleGoogleCredentialResponse(response) {
+      const responsePayload = parseJwt(response.credential);
+      if (responsePayload && responsePayload.email) {
+        const userData = {
+          name: responsePayload.name,
+          email: responsePayload.email.toLowerCase(),
+          picture: responsePayload.picture
+        };
+        localStorage.setItem('drthai_auth_user', JSON.stringify(userData));
+        setAuthUI(userData);
+        fetchPermissionsByEmail(userData.email);
+      }
+    }
+
+    function triggerGoogleLogin() {
+      if (window.google && google.accounts && google.accounts.id) {
+        google.accounts.id.prompt();
+      } else {
+        const email = prompt("Nhập Gmail chính chủ của bạn để kiểm tra nhanh (Khuyến nghị đăng nhập Google):");
+        if (email) {
+          const userData = { name: "Bác sĩ", email: email.trim().toLowerCase(), picture: "./Logo.png" };
+          localStorage.setItem('drthai_auth_user', JSON.stringify(userData));
+          setAuthUI(userData);
+          fetchPermissionsByEmail(userData.email);
+        }
+      }
+    }
+
+    function setAuthUI(user) {
+      document.getElementById('unauthBlock').classList.add('hidden');
+      document.getElementById('authBlock').classList.remove('hidden');
+      document.getElementById('userNameText').innerText = user.name || "Bác sĩ Hội viên";
+      document.getElementById('userEmailText').innerText = user.email;
+      if (user.picture) document.getElementById('userAvatar').src = user.picture;
+    }
+
+    function logoutGoogleUser() {
+      localStorage.removeItem('drthai_auth_user');
+      localStorage.removeItem('drthai_user_email');
+      currentUserEmail = '';
+      currentAllowedList = [];
+      document.getElementById('unauthBlock').classList.remove('hidden');
+      document.getElementById('authBlock').classList.add('hidden');
+      document.getElementById('upgradeBox').classList.add('hidden');
+      document.getElementById('lessonCountBadge').innerText = `14 Chuyên đề`;
+      renderLessons(LESSONS_DATA, true);
+    }
+
+    // Tra cứu phân quyền từ Apps Script API
+    async function fetchPermissionsByEmail(email) {
+      currentUserEmail = email;
+      localStorage.setItem('drthai_user_email', email);
       const countEl = document.getElementById('lessonCountBadge');
       const upgradeBox = document.getElementById('upgradeBox');
       const upgradeFeeTag = document.getElementById('upgradeFeeTag');
       const upgradeNoteText = document.getElementById('upgradeNoteText');
 
-      if (!email) {
-        currentUserEmail = '';
-        localStorage.removeItem('drthai_user_email');
-        currentAllowedList = [...LESSONS_DATA];
-        statusEl.innerHTML = `<i class="fa-solid fa-circle-info text-amber-400"></i> Đang hiển thị toàn bộ danh mục tham khảo.`;
-        countEl.innerText = `14/14 Chuyên đề`;
-        upgradeBox.classList.add('hidden');
-        renderLessons(LESSONS_DATA);
-        return;
-      }
-
-      statusEl.innerHTML = `<span class="text-teal-400"><i class="fa-solid fa-spinner fa-spin"></i> Đang đối soát quyền truy cập...</span>`;
-
       try {
         const response = await fetch(`${SCRIPT_API_URL}?email=${encodeURIComponent(email)}`);
         const data = await response.json();
-
-        currentUserEmail = email;
-        localStorage.setItem('drthai_user_email', email);
 
         const accessedFolders = data.folders || [];
         const summary = data.upgradeSummary || {};
@@ -571,9 +647,8 @@
             currentAllowedList = LESSONS_DATA.slice(0, accessedFolders.length);
           }
 
-          statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã mở khóa: ${currentAllowedList.length}/14 Chuyên đề (${email})</span>`;
-          countEl.innerText = `${currentAllowedList.length}/14 Chuyên đề`;
-          renderLessons(currentAllowedList);
+          countEl.innerText = `${currentAllowedList.length}/14 Đã mở`;
+          renderLessons(currentAllowedList, false);
 
           if (summary.missingMonths > 0) {
             upgradeBox.classList.remove('hidden');
@@ -584,15 +659,14 @@
           }
         } else {
           currentAllowedList = [];
-          statusEl.innerHTML = `<span class="text-amber-400 font-semibold"><i class="fa-solid fa-triangle-exclamation"></i> Email chưa kích hoạt. Hiển thị tham khảo.</span>`;
-          countEl.innerText = `0 Chuyên đề đã mở`;
+          countEl.innerText = `0 Đã mở`;
           upgradeBox.classList.remove('hidden');
           upgradeFeeTag.innerText = summary.formattedUpgradeFee || "4.900.000đ";
-          upgradeNoteText.innerText = "Chưa sở hữu chuyên đề nào. Nhắn tin Zalo để đăng ký trọn gói.";
+          upgradeNoteText.innerText = "Tài khoản chưa đăng ký gói chuyên đề nào. Nhắn Zalo để kích hoạt.";
           renderLessons(LESSONS_DATA, true);
         }
       } catch (err) {
-        statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Không thể kết nối. Vui lòng thử lại.</span>`;
+        alert("Lỗi kết nối kiểm tra dữ liệu.");
       }
     }
 
@@ -600,9 +674,10 @@
     function handleSearchLesson() {
       const kw = document.getElementById('lessonSearchInput').value.trim().toLowerCase();
       const listToFilter = currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA;
+      const isLocked = currentAllowedList.length === 0;
 
       if (!kw) {
-        renderLessons(listToFilter);
+        renderLessons(listToFilter, isLocked);
         return;
       }
 
@@ -612,7 +687,7 @@
         return matchTitle || matchSub;
       });
 
-      renderLessons(filtered);
+      renderLessons(filtered, isLocked);
     }
 
     // Render danh sách chuyên đề
@@ -629,7 +704,7 @@
         const percent = totalSub > 0 ? Math.round((watchedCount / totalSub) * 100) : 0;
 
         return `
-          <button onclick="${isLocked ? "alert('Email chưa được cấp quyền chuyên đề này. Vui lòng nhắn tin qua Zalo 0349622964 để kích hoạt!')" : `openLMSPlayer('${item.id}')`}" class="w-full flex items-center justify-between p-2.5 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-rose-500/50 rounded-xl text-left transition group">
+          <button onclick="${isLocked ? "alert('Tài khoản Google này chưa được cấp quyền truy cập chuyên đề này. Vui lòng nhắn tin qua Zalo 0349622964 để kích hoạt!')" : `openLMSPlayer('${item.id}')`}" class="w-full flex items-center justify-between p-2.5 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-rose-500/50 rounded-xl text-left transition group">
             <div class="flex items-center gap-2.5 min-w-0">
               <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] shrink-0 font-bold border border-rose-900/60">${item.code}</span>
               <div class="truncate">
@@ -763,10 +838,10 @@
 
       localStorage.setItem('drthai_watched_lessons', JSON.stringify(watchedLessons));
       renderSubPlaylist();
-      renderLessons(currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA);
+      renderLessons(currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA, currentAllowedList.length === 0);
     }
 
-    // XỬ LÝ XOAY NGANG & TOÀN MÀN HÌNH CHUẨN ĐẸP TRÊN DI ĐỘNG
+    // XỬ LÝ XOAY NGANG & TOÀN MÀN HÌNH CHUẨN NATIVE MOBILE
     function toggleCustomFullScreen() {
       const modalBox = document.getElementById('modalBox');
       const btnExitFs = document.getElementById('btnExitFsFloating');
@@ -774,29 +849,27 @@
       const controls = document.getElementById('modalControls');
       const infoBar = document.getElementById('modalInfoBar');
       const playlist = document.getElementById('modalPlaylist');
+      const pContainer = document.getElementById('playerContainer');
 
       if (!isFullScreenLandscape) {
-        // Bật Fullscreen xoay ngang
         isFullScreenLandscape = true;
-        modalBox.classList.add('fullscreen-mode');
+        modalBox.classList.add('fs-landscape-fix');
         btnExitFs.classList.remove('hidden');
         header.classList.add('hidden');
         controls.classList.add('hidden');
         infoBar.classList.add('hidden');
         playlist.classList.add('hidden');
 
-        // Khóa hướng xoay ngang nếu trình duyệt hỗ trợ
+        // Khóa hướng xoay ngang
         if (screen.orientation && screen.orientation.lock) {
           screen.orientation.lock('landscape').catch(() => {});
         }
 
-        const elem = document.documentElement;
-        if (elem.requestFullscreen) elem.requestFullscreen().catch(() => {});
-        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen().catch(() => {});
+        if (pContainer.requestFullscreen) pContainer.requestFullscreen().catch(() => {});
+        else if (pContainer.webkitRequestFullscreen) pContainer.webkitRequestFullscreen().catch(() => {});
       } else {
-        // Tắt Fullscreen về chế độ dọc bình thường
         isFullScreenLandscape = false;
-        modalBox.classList.remove('fullscreen-mode');
+        modalBox.classList.remove('fs-landscape-fix');
         btnExitFs.classList.add('hidden');
         header.classList.remove('hidden');
         controls.classList.remove('hidden');
@@ -827,19 +900,15 @@
       }, 200);
     }
 
-    // Tự động điều chỉnh khi người dùng xoay ngang điện thoại thủ công
+    // Xoay màn hình theo cảm biến vật lý
     window.addEventListener('orientationchange', () => {
+      const modal = document.getElementById('videoModal');
+      if (modal.classList.contains('hidden')) return;
+
       if (window.orientation === 90 || window.orientation === -90) {
-        // Khi người dùng xoay ngang tay, tự động bung fullscreen nếu modal đang mở
-        const modal = document.getElementById('videoModal');
-        if (!modal.classList.contains('hidden') && !isFullScreenLandscape) {
-          toggleCustomFullScreen();
-        }
+        if (!isFullScreenLandscape) toggleCustomFullScreen();
       } else if (window.orientation === 0 || window.orientation === 180) {
-        // Khi xoay dọc lại
-        if (isFullScreenLandscape) {
-          toggleCustomFullScreen();
-        }
+        if (isFullScreenLandscape) toggleCustomFullScreen();
       }
     });
 
