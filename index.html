@@ -454,7 +454,7 @@
         </div>
       </div>
 
-      <!-- Thanh Điều Khiển -->
+      <!-- Thanh Điều Khiển (Đã khôi phục nút Phóng to / Xoay ngang chuẩn) -->
       <div id="modalControls" class="p-2 bg-slate-850 border-b border-slate-800 flex items-center justify-between shrink-0 text-xs">
         <div class="flex items-center gap-1">
           <button onclick="playPrevItem()" id="btnPrevItem" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white font-semibold text-[10px] transition disabled:opacity-30 disabled:pointer-events-none">
@@ -466,6 +466,9 @@
         </div>
 
         <div class="flex items-center gap-1.5">
+          <button onclick="triggerNativeFullscreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
+            <i class="fa-solid fa-expand"></i> Phóng to / Xoay ngang
+          </button>
           <a id="btnDownloadFile" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 text-[10px] font-semibold hover:bg-slate-700 transition flex items-center gap-1">
             <i class="fa-solid fa-cloud-arrow-down"></i> Tải file này
           </a>
@@ -1023,6 +1026,17 @@
     function playPrevItem() {
       if (currentLesson && currentSubIndex > 0) {
         playSubItemByIndex(currentSubIndex - 1);
+      }
+    }
+
+    function triggerNativeFullscreen() {
+      const container = document.getElementById('playerContainer');
+      if (container.requestFullscreen) {
+        container.requestFullscreen().catch(() => {});
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen().catch(() => {});
+      } else if (container.msRequestFullscreen) {
+        container.msRequestFullscreen().catch(() => {});
       }
     }
 
