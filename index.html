@@ -406,27 +406,27 @@
         </div>
       </div>
 
-      <!-- WIDGET 3: XEM THƯ MỤC BẢN GHI & SỔ XUỐNG (CHỈ HỘI VIÊN CHÍNH THỨC MỚI MỞ) -->
-      <div id="vipFolderBox" class="hidden card-elevated border-2 border-teal-600 rounded-2xl p-4 space-y-3 bg-gradient-to-r from-teal-50 via-white to-white">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2.5">
-            <div class="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center text-lg shadow-sm">
+      <!-- WIDGET 3: THẺ XỔ XUỐNG BẢN GHI CÁC KỲ HỌP ĐỌC SÁCH BÁO (CHỈ HỘI VIÊN CHÍNH THỨC MỚI MỞ) -->
+      <details id="vipFolderDropdown" class="group card-elevated border-2 border-teal-600 rounded-2xl overflow-hidden transition hidden">
+        <summary class="flex items-center justify-between p-3.5 cursor-pointer select-none bg-gradient-to-r from-teal-50 via-white to-white">
+          <div class="flex items-center space-x-3.5 min-w-0 pr-2">
+            <div class="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center text-lg shadow-sm shrink-0">
               <i class="fa-solid fa-folder-tree"></i>
             </div>
-            <div>
-              <h3 class="text-xs sm:text-sm font-black text-teal-950 uppercase tracking-wide">Thư Mục Bản Ghi & Sổ Xuống</h3>
-              <p class="text-[11px] text-teal-800 font-medium">Đã mở khóa toàn bộ cho Hội viên chính thức</p>
+            <div class="truncate">
+              <div class="font-black text-teal-950 text-xs sm:text-sm uppercase tracking-wide truncate">Bản ghi các Kỳ Họp Đọc Sách Báo</div>
+              <div class="text-[11px] text-teal-800 font-medium truncate">✓ Đã xác thực • Nhấn để xem đường dẫn</div>
             </div>
           </div>
-          <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black border border-emerald-300">✓ ĐÃ XÁC THỰC</span>
-        </div>
-        <div class="space-y-2">
+          <i class="fa-solid fa-chevron-down text-teal-700 text-sm group-open:rotate-180 transition-transform shrink-0"></i>
+        </summary>
+        <div class="p-3.5 bg-slate-50 border-t border-teal-100 space-y-2">
           <a href="https://drive.google.com/drive/folders/1pyel5r5CemQ2dgparFZjyXgii9oTKY1kQB7KK7IWwhU" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 px-3 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs sm:text-sm transition shadow-md">
             <i class="fa-brands fa-google-drive text-base"></i>
             <span>Mở Thư Mục Tổng Hợp Bản Ghi Google Drive</span>
           </a>
         </div>
-      </div>
+      </details>
 
       <details class="group card-elevated border-2 border-blue-300/80 rounded-2xl overflow-hidden transition">
         <summary class="flex items-center justify-between p-3.5 cursor-pointer select-none bg-gradient-to-r from-blue-50/50 to-white">
@@ -927,8 +927,8 @@
       document.getElementById('authenticatedEmailText').innerText = email;
       document.getElementById('authStatusMessage').innerHTML = `<span class="text-teal-800 font-bold"><i class="fa-solid fa-circle-check"></i> Đã mở khóa bảo mật thành công!</span>`;
 
-      // HIỂN THỊ NÚT XEM THƯ MỤC BẢN GHI & SỔ XUỐNG KHI ĐÃ LÀ HỘI VIÊN CHÍNH THỨC
-      document.getElementById('vipFolderBox').classList.remove('hidden');
+      // HIỂN THỊ THẺ XỔ XUỐNG KHI ĐÃ LÀ HỘI VIÊN CHÍNH THỨC
+      document.getElementById('vipFolderDropdown').classList.remove('hidden');
 
       const accessedFolders = data.folders || [];
       const countEl = document.getElementById('lessonCountBadge');
@@ -1046,7 +1046,7 @@
       document.getElementById('stepOtpBlock').classList.add('hidden');
       document.getElementById('stepEmailBlock').classList.remove('hidden');
       document.getElementById('upgradeBox').classList.add('hidden');
-      document.getElementById('vipFolderBox').classList.add('hidden');
+      document.getElementById('vipFolderDropdown').classList.add('hidden');
       document.getElementById('authStatusMessage').innerHTML = `<i class="fa-solid fa-shield-halved text-teal-700"></i> Mỗi thời điểm chỉ duy nhất 1 thiết bị hoạt động.`;
       document.getElementById('lessonCountBadge').innerText = `14 Chuyên đề`;
       const btnSend = document.getElementById('btnSendOtp');
