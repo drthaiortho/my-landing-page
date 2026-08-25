@@ -330,7 +330,7 @@
         </div>
       </details>
 
-      <!-- VỊ TRÍ 3: KHO BẢN GHI VIP (BẢO MẬT OTP GMAIL + PROGRESS BAR ĐỈNH CAO) -->
+      <!-- VỊ TRÍ 3: KHO BẢN GHI VIP (BẢO MẬT OTP GMAIL + PROGRESS BAR) -->
       <div class="bg-gradient-to-b from-slate-850 to-slate-900 border border-rose-500/40 rounded-2xl p-3.5 space-y-3 shadow-xl">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
@@ -457,16 +457,21 @@
 
   </div>
 
-  <!-- POPUP PLAYER LMS NATIVE -->
+  <!-- POPUP PLAYER LMS NATIVE (ĐÃ THÊM NÚT QUAY LẠI TRANG CHỦ) -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-2 sm:p-4 hidden opacity-0 transition-opacity duration-200">
     <div id="modalBox" class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh] transition-all duration-200">
       
-      <!-- Modal Header -->
+      <!-- Modal Header (Có nút Quay lại rõ ràng) -->
       <div id="modalHeader" class="p-2.5 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2 min-w-0 pr-2">
-          <i class="fa-solid fa-circle-play text-rose-400 text-sm shrink-0"></i>
+          <!-- Nút Back góc trái -->
+          <button onclick="closeSecurePlayer()" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-teal-300 text-[11px] font-bold flex items-center gap-1 shrink-0 transition border border-slate-700">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Quay lại</span>
+          </button>
           <span id="videoTitle" class="text-xs font-bold text-white truncate">Chuyên đề</span>
         </div>
+        <!-- Nút X góc phải -->
         <button onclick="closeSecurePlayer()" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-750 text-slate-400 hover:text-white flex items-center justify-center shrink-0">
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
@@ -528,6 +533,14 @@
         </div>
 
         <div id="subItemList" class="space-y-1"></div>
+
+        <!-- Nút Trở về trang chính lớn ở cuối danh sách phát -->
+        <div class="pt-2 pb-1">
+          <button onclick="closeSecurePlayer()" class="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 text-slate-300 hover:text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-sm">
+            <i class="fa-solid fa-house text-teal-400"></i>
+            <span>Trở Về Trang Chính</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -572,9 +585,7 @@
         try {
           const parsed = JSON.parse(cachedData);
           currentUserEmail = savedEmail;
-          // Hiển thị ngay lập tức 0.01 giây, không chờ mạng
           applyUnlockedData(parsed, savedEmail);
-          // Đồng bộ ngầm phía sau
           checkUserSessionBackground(savedEmail);
         } catch(e) {
           renderLessons(LESSONS_DATA, true);
@@ -677,7 +688,7 @@
       }
     }
 
-    // 3. Đồng bộ dữ liệu ngầm không gây đơ web
+    // 3. Đồng bộ dữ liệu ngầm
     async function checkUserSessionBackground(email) {
       try {
         const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}`);
@@ -689,7 +700,6 @@
       } catch (e) {}
     }
 
-    // Cập nhật giao diện mở khóa
     function applyUnlockedData(data, email) {
       document.getElementById('stepEmailBlock').classList.add('hidden');
       document.getElementById('stepOtpBlock').classList.add('hidden');
