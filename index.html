@@ -185,7 +185,7 @@
     <!-- ======================================================== -->
     <div id="sectionPaid" class="space-y-4 hidden">
 
-      <!-- 1. Nhóm Zalo Hội Viên Nội Bộ (Đặt Lên Trên Cùng) -->
+      <!-- 1. Nhóm Zalo Hội Viên Nội Bộ -->
       <details class="group bg-slate-800 border border-blue-500/40 rounded-2xl overflow-hidden transition shadow-md">
         <summary class="flex items-center justify-between p-3.5 cursor-pointer select-none">
           <div class="flex items-center space-x-3">
@@ -371,12 +371,12 @@
 
   </div>
 
-  <!-- POPUP PLAYER BẢO MẬT (CHỐNG MỞ TAB MỚI + WATERMARK) -->
+  <!-- POPUP PLAYER BẢO MẬT (CHUYÊN DỤNG CHO FOLDER DRIVE) -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-3 hidden opacity-0 transition-opacity duration-200">
     <div class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col">
       <div class="p-3 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <i class="fa-solid fa-circle-play text-rose-400 text-sm"></i>
+          <i class="fa-solid fa-folder-open text-rose-400 text-sm"></i>
           <span id="videoTitle" class="text-xs font-bold text-white truncate max-w-[260px]">Bản ghi bài giảng</span>
         </div>
         <button onclick="closeSecurePlayer()" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center">
@@ -384,8 +384,9 @@
         </button>
       </div>
 
-      <div class="relative w-full pb-[56.25%] bg-black overflow-hidden select-none">
-        <iframe id="driveFrame" class="absolute inset-0 w-full h-full border-0" allow="autoplay"></iframe>
+      <!-- Container chiều cao 520px hiển thị toàn bộ file trong thư mục -->
+      <div class="relative w-full h-[520px] bg-slate-950 overflow-hidden select-none">
+        <iframe id="driveFrame" class="w-full h-full border-0" allow="autoplay"></iframe>
         <!-- Che góc phải trên của Google Drive để chặn icon mở tab mới -->
         <div class="absolute top-0 right-0 w-16 h-14 z-20 bg-transparent cursor-default"></div>
         <!-- Watermark di động -->
@@ -396,7 +397,7 @@
 
       <div class="p-2 bg-slate-900 text-center border-t border-slate-800">
         <p class="text-[10px] text-slate-400 flex items-center justify-center gap-1">
-          <i class="fa-solid fa-shield-halved text-teal-400"></i> Video bảo mật chống sao chép • Bản quyền Dr.Thai Ortho
+          <i class="fa-solid fa-shield-halved text-teal-400"></i> Thư mục bảo mật chống sao chép • Bản quyền Dr.Thai Ortho
         </p>
       </div>
     </div>
@@ -406,37 +407,37 @@
     <i class="fa-solid fa-check"></i> Đã sao chép link trang!
   </div>
 
-  <!-- SCRIPT ĐIỀU KHIỂN & DATA PHÂN QUYỀN HỘI VIÊN -->
+  <!-- SCRIPT ĐIỀU KHIỂN & 14 FOLDER DRIVE IDs -->
   <script>
-    // 1. DANH SÁCH 14 BÀI HỌC VÀ DRIVE ID
+    // 1. DANH SÁCH 14 FOLDER DRIVE CHÍNH XÁC
     const LESSONS_DATA = [
-      { id: "2025-02", code: "[2025-02]", title: "Andrews 6 Keys, Mắc cài, 3Shape", driveId: "1feTWnuPDNbCOI8msUq4_CqdQgesWfWO5" },
-      { id: "2025-03", code: "[2025-03]", title: "Ceph, Occlusogram, PIP VTO, 3D Ceph", driveId: "ID_FILE_DRIVE" },
-      { id: "2025-05", code: "[2025-05]", title: "Neo gián tiếp, Lòi chân R, Hạng II góc cao", driveId: "ID_FILE_DRIVE" },
-      { id: "2025-06]", code: "[2025-06]", title: "Biomechanics, MP nhai, KS Torque", driveId: "ID_FILE_DRIVE" },
-      { id: "2025-07", code: "[2025-07]", title: "Class III, Đóng khoảng, Nhổ lệch", driveId: "ID_FILE_DRIVE" },
-      { id: "2025-09", code: "[2025-09]", title: "Điều trị sớm Class III", driveId: "ID_FILE_DRIVE" },
-      { id: "2025-11", code: "[2025-11]", title: "Di xa R3 biến chứng", driveId: "ID_FILE_DRIVE" },
-      { id: "2025-12", code: "[2025-12]", title: "Đóng khoảng Protocol tổng hợp", driveId: "ID_FILE_DRIVE" },
-      { id: "2026-01", code: "[2026-01]", title: "Nhổ răng hay không?", driveId: "ID_FILE_DRIVE" },
-      { id: "2026-02", code: "[2026-02]", title: "Di xa", driveId: "ID_FILE_DRIVE" },
-      { id: "2026-03", code: "[2026-03]", title: "Neo chặn lâm sàng", driveId: "ID_FILE_DRIVE" },
-      { id: "2026-04", code: "[2026-04]", title: "Deepbite - Khớp cắn sâu", driveId: "ID_FILE_DRIVE" },
-      { id: "2026-07", code: "[2026-07]", title: "Class II High Angle Openbite", driveId: "ID_FILE_DRIVE" },
-      { id: "2026-08", code: "[2026-08]", title: "Class II Division 2", driveId: "ID_FILE_DRIVE" }
+      { id: "2025-02", code: "[2025-02]", title: "Andrews 6 Keys, Mắc cài, 3Shape", driveId: "1Ae8PPXBmvn1hmsGfvA8igGSlBuspoJs-" },
+      { id: "2025-03", code: "[2025-03]", title: "Ceph, Occlusogram, PIP VTO, 3D Ceph", driveId: "1E2J6X0oNcoDjSQxk9VUF1Y3AUp5txJaW" },
+      { id: "2025-05", code: "[2025-05]", title: "Neo gián tiếp, Lòi chân R, Hạng II góc cao", driveId: "1eIfVQbzb0BYeYEnXAGvdYjPzXu51EDkk" },
+      { id: "2025-06", code: "[2025-06]", title: "Biomechanics, MP nhai, KS Torque", driveId: "10wm0j2oBNi16HCVpaPubou1iVP3i2WA3" },
+      { id: "2025-07", code: "[2025-07]", title: "Class III, Đóng khoảng, Nhổ lệch", driveId: "1QkWfl1Nq1Fs5UXYDfaVscb6WU_cStoxk" },
+      { id: "2025-09", code: "[2025-09]", title: "Điều trị sớm Class III", driveId: "16uyrr4BjVfTg4P3NH2X7qDOeA0pO3XJ5" },
+      { id: "2025-11", code: "[2025-11]", title: "Di xa R3 biến chứng", driveId: "17Q9-zMI8A-fslXHSB-Q5bKj6ltVNUINt" },
+      { id: "2025-12", code: "[2025-12]", title: "Đóng khoảng Protocol tổng hợp", driveId: "1TlLr664cY-YdtcOQp1h8G7Dy2bEuCe5G" },
+      { id: "2026-01", code: "[2026-01]", title: "Nhổ răng hay không?", driveId: "1tUV9mwTq11g2sgtJkGAT-QnYKYOUScIB" },
+      { id: "2026-02", code: "[2026-02]", title: "Di xa", driveId: "1uUGTGLPrfl6xf_0Y7-qkjN67jw5yWmL_" },
+      { id: "2026-03", code: "[2026-03]", title: "Neo chặn lâm sàng", driveId: "1kR9EH0cypN3TDdJdxni19IAm6IO6Liyg" },
+      { id: "2026-04", code: "[2026-04]", title: "Deepbite - Khớp cắn sâu", driveId: "1rl1KTgClMfMda0HnPVhUlGfOV7_pyFrF" },
+      { id: "2026-07", code: "[2026-07]", title: "Class II High Angle Openbite", driveId: "1l66W6vVWdK9p1Cl4QVtPYyOp_lrJ0hXN" },
+      { id: "2026-08", code: "[2026-08]", title: "Class II Division 2", driveId: "1QX6pIClCQLxco9csMCfl5PoZNoCzwr_4" }
     ];
 
-    // 2. BẢNG PHÂN QUYỀN EMAIL (Ví dụ: Email nào được xem những bài nào)
-    // Email có 'ALL' sẽ xem được đủ 14 bài.
+    // 2. BẢNG PHÂN QUYỀN EMAIL HỘI VIÊN
+    // Thêm email học viên và các id bài được xem vào đây (dùng 'ALL' nếu xem trọn bộ)
     const USER_PERMISSIONS = {
-      "drthai@gmail.com": "ALL",
-      "hocvien1@gmail.com": ["2025-02", "2025-03", "2025-05"], // Chỉ xem 3 bài
-      "hocvien2@gmail.com": ["2025-02", "2026-01", "2026-02", "2026-03", "2026-04"] // Xem 5 bài
+      "drthaiortho@gmail.com": "ALL",
+      "hocvien1@gmail.com": ["2025-02", "2025-03", "2025-05"],
+      "hocvien2@gmail.com": ["2026-01", "2026-02", "2026-03"]
     };
 
     let currentUserEmail = localStorage.getItem('drthai_user_email') || '';
 
-    // Khởi tạo giao diện
+    // Khởi tạo trang
     window.addEventListener('DOMContentLoaded', () => {
       if (currentUserEmail) {
         document.getElementById('userEmailInput').value = currentUserEmail;
@@ -446,7 +447,7 @@
       }
     });
 
-    // Hàm áp dụng Email để phân quyền & lọc bài học
+    // Phân quyền & lọc bài học theo Email
     function applyUserEmail() {
       const email = document.getElementById('userEmailInput').value.trim().toLowerCase();
       const statusEl = document.getElementById('emailStatusText');
@@ -476,9 +477,9 @@
         countEl.innerText = `${filtered.length}/14 Chuyên đề`;
         renderLessons(filtered);
       } else {
-        statusEl.innerHTML = `<span class="text-amber-400 font-semibold"><i class="fa-solid fa-triangle-exclamation"></i> Email chưa kích hoạt gói bài giảng. Hiển thị danh mục tham khảo.</span>`;
+        statusEl.innerHTML = `<span class="text-amber-400 font-semibold"><i class="fa-solid fa-triangle-exclamation"></i> Email chưa kích hoạt danh sách. Hiển thị danh mục tham khảo.</span>`;
         countEl.innerText = `0 Chuyên đề đã mở`;
-        renderLessons(LESSONS_DATA, true); // Chế độ khóa
+        renderLessons(LESSONS_DATA, true); // Khóa
       }
     }
 
@@ -490,17 +491,17 @@
         return;
       }
       container.innerHTML = list.map((item) => `
-        <button onclick="${isLocked ? "alert('Email này chưa được cấp quyền xem bài giảng này. Vui lòng liên hệ Dr.Thai Ortho để kích hoạt!')" : `openSecurePlayer('${item.driveId}', '${item.code} ${item.title}')`}" class="w-full flex items-center justify-between p-2.5 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-rose-500/50 rounded-lg text-left transition group">
+        <button onclick="${isLocked ? "alert('Email này chưa được cấp quyền truy cập chuyên đề này. Vui lòng liên hệ Dr.Thai Ortho để kích hoạt!')" : `openSecurePlayer('${item.driveId}', '${item.code} ${item.title}')`}" class="w-full flex items-center justify-between p-2.5 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-rose-500/50 rounded-lg text-left transition group">
           <div class="flex items-center gap-2 min-w-0">
             <span class="px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] shrink-0 font-semibold border border-rose-900/60">${item.code}</span>
             <span class="text-xs text-slate-200 group-hover:text-white font-medium truncate">${item.title}</span>
           </div>
-          <i class="fa-solid ${isLocked ? 'fa-lock text-slate-600' : 'fa-play text-slate-500 group-hover:text-rose-400'} text-[10px] shrink-0 ml-2"></i>
+          <i class="fa-solid ${isLocked ? 'fa-lock text-slate-600' : 'fa-folder-open text-slate-500 group-hover:text-rose-400'} text-xs shrink-0 ml-2"></i>
         </button>
       `).join('');
     }
 
-    // Chuyển Tab Miễn Phí / Hội Viên
+    // Chuyển Tab
     function switchTab(tab) {
       const freeSec = document.getElementById('sectionFree');
       const paidSec = document.getElementById('sectionPaid');
@@ -520,7 +521,7 @@
       }
     }
 
-    // Countdown Timer
+    // Đếm ngược
     const targetDate = new Date('2026-08-31T20:30:00+07:00').getTime();
     function updateCountdown() {
       const now = new Date().getTime();
@@ -546,7 +547,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Copy Site Link
+    // Copy Link
     function copySiteLink() {
       navigator.clipboard.writeText(window.location.href).then(() => {
         const toast = document.getElementById('toast');
@@ -559,22 +560,19 @@
       });
     }
 
-    // Modal Player Logic
+    // Modal Player Logic (Embedded Folder View)
     let watermarkInterval;
     function openSecurePlayer(driveId, title) {
-      if (!driveId || driveId === 'ID_FILE_DRIVE') {
-        alert('Chuyên đề này đang được cập nhật file video!');
-        return;
-      }
       const modal = document.getElementById('videoModal');
       const frame = document.getElementById('driveFrame');
       const titleEl = document.getElementById('videoTitle');
       const wm = document.getElementById('dynamicWatermark');
 
       titleEl.innerText = title;
-      // Gán Watermark chính là Email của học viên đang xem
       wm.innerText = currentUserEmail ? `${currentUserEmail} • Dr.Thai Ortho` : 'Dr.Thai Ortho • Hội viên';
-      frame.src = `https://drive.google.com/file/d/${driveId}/preview`;
+      
+      // Nhúng toàn bộ danh sách file trong Folder Drive
+      frame.src = `https://drive.google.com/embeddedfolderview?id=${driveId}#list`;
 
       modal.classList.remove('hidden');
       setTimeout(() => modal.classList.remove('opacity-0'), 10);
