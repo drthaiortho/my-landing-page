@@ -73,15 +73,15 @@
         <h3 class="text-base sm:text-lg font-black text-slate-900 mt-1">NÂNG CẤP COMBO FULL</h3>
       </div>
 
-      <!-- Khung Mã QR VietQR Tự Động Theo Tài Khoản MB Mới -->
+      <!-- Khung Mã QR VietQR Tự Động Theo Tài Khoản MB -->
       <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-center space-y-2">
         <div class="w-44 h-44 mx-auto bg-white p-1 rounded-xl shadow-xs border border-slate-200 flex items-center justify-center">
           <img id="qrPaymentImg" src="" alt="Mã QR Chuyển Khoản" class="w-full h-full object-contain rounded-lg">
         </div>
-        <p class="text-[11px] text-slate-500 font-medium">Mở App Ngân Hàng bất kỳ $\rightarrow$ Quét mã QR để tự điền số tiền & nội dung</p>
+        <p class="text-[11px] text-slate-600 font-medium">Mở App Ngân hàng &rarr; Quét mã QR <br><span class="text-teal-700 font-bold">(Số tiền & Nội dung đã được tự động điền sẵn)</span></p>
       </div>
 
-      <!-- Chi tiết tài khoản nhận theo thông tin mới -->
+      <!-- Chi tiết tài khoản nhận gọn gàng -->
       <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 text-xs">
         <div class="flex justify-between items-center pb-1.5 border-b border-slate-200">
           <span class="text-slate-500 font-medium">Số tiền nâng cấp:</span>
@@ -100,18 +100,9 @@
           <span class="text-slate-500 font-medium">Ngân hàng:</span>
           <span class="font-bold text-slate-900">MBBank (Ngân hàng Quân Đội)</span>
         </div>
-        <div class="flex justify-between items-center pb-1.5 border-b border-slate-200">
+        <div class="flex justify-between items-center">
           <span class="text-slate-500 font-medium">Chủ tài khoản:</span>
           <span class="font-bold text-slate-900 uppercase">HKD DR.THAI ORTHO</span>
-        </div>
-        <div class="flex justify-between items-center">
-          <span class="text-slate-500 font-medium">Cú pháp CK:</span>
-          <div class="flex items-center gap-1.5 font-mono font-bold text-teal-800 text-[11px]">
-            <span id="modalTransferContent">Ho ten BS + SDT</span>
-            <button onclick="copyTransferContent()" class="text-teal-700 hover:text-teal-900 p-0.5" title="Sao chép nội dung">
-              <i class="fa-regular fa-copy"></i>
-            </button>
-          </div>
         </div>
       </div>
 
@@ -121,7 +112,7 @@
           <div class="font-bold flex items-center gap-1">
             <i class="fa-solid fa-camera text-amber-600"></i> Hướng dẫn kích hoạt:
           </div>
-          <div>1. Chuyển khoản theo thông tin / Quét mã QR ở trên.</div>
+          <div>1. Quét mã QR ở trên để chuyển khoản tự động.</div>
           <div>2. <b>Chụp ảnh màn hình</b> giao dịch thành công.</div>
           <div>3. Bấm nút màu đỏ bên dưới để <b>gửi ảnh bill qua Zalo</b> duyệt kích hoạt ngay.</div>
         </div>
@@ -917,15 +908,14 @@
       }
     }
 
-    // MỞ POPUP THANH TOÁN THEO TÀI KHOẢN MBBANK VÀ CHỦ TK MỚI
+    // MỞ POPUP THANH TOÁN TỰ ĐỘNG KHÓA NỘI DUNG VÀ TIỀN TRÊN QR
     function openPaymentModal() {
       const amount = currentUpgradeFeeRaw || 500000;
       const email = currentUserEmail || "bacsi";
       const shortUser = email.split('@')[0].toUpperCase();
-      const content = `NC ${shortUser}`; // Cú pháp mặc định ngắn gọn tạo QR
+      const content = `NC ${shortUser}`;
 
       document.getElementById('modalUpgradeAmount').innerText = amount.toLocaleString('vi-VN') + "đ";
-      document.getElementById('modalTransferContent').innerText = "Họ và tên BS + SĐT";
 
       // Tạo mã VietQR chuẩn MBBank - STK 4247666888 - HKD DR.THAI ORTHO
       const qrUrl = `https://img.vietqr.io/image/MB-4247666888-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(content)}&accountName=HKD%20DR.THAI%20ORTHO`;
@@ -936,13 +926,6 @@
 
     function closePaymentModal() {
       document.getElementById('paymentModal').classList.add('hidden');
-    }
-
-    function copyTransferContent() {
-      const email = currentUserEmail || "bacsi";
-      const shortUser = email.split('@')[0].toUpperCase();
-      const content = `NC ${shortUser}`;
-      copyText(content, 'Đã sao chép cú pháp chuyển khoản!');
     }
 
     function copyText(text, msg) {
