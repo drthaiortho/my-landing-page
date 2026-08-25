@@ -372,7 +372,7 @@
             </div>
             <div class="flex justify-between items-center text-[10px] text-slate-400 pt-0.5">
               <button onclick="resetOtpStep()" class="text-slate-400 hover:underline">Đổi Email khác</button>
-              <button onclick="requestEmailOtp()" class="text-teal-400 hover:underline">Gửi lại mã OTP</button>
+              <button onclick="requestEmailOtp()" id="btnResendOtp" class="text-teal-400 hover:underline">Gửi lại mã OTP</button>
             </div>
           </div>
 
@@ -457,7 +457,7 @@
 
   </div>
 
-  <!-- POPUP PLAYER LMS NATIVE (HỖ TRỢ FULLSCREEN LANDSCAPE & PROGRESS BAR ĐỘNG) -->
+  <!-- POPUP PLAYER LMS NATIVE -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-2 sm:p-4 hidden opacity-0 transition-opacity duration-200">
     <div id="modalBox" class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh] transition-all duration-200">
       
@@ -505,7 +505,7 @@
         </div>
       </div>
 
-      <!-- Tên bài đang phát & Đánh dấu hoàn thành -->
+      <!-- Tên bài đang phát & Đánh dấu đã học -->
       <div id="modalInfoBar" class="px-3 py-1.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
         <span id="currentPlayingName" class="font-semibold text-teal-300 text-[11px] truncate max-w-[220px]">Chưa chọn file</span>
         <button onclick="toggleWatchedCurrent()" id="btnToggleWatchedActive" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-750 border border-slate-700 text-slate-300 text-[10px] font-bold transition flex items-center gap-1.5">
@@ -514,10 +514,8 @@
         </button>
       </div>
 
-      <!-- Sub-Playlist với Thanh tiến trình trực quan -->
+      <!-- Sub-Playlist -->
       <div id="modalPlaylist" class="p-2.5 overflow-y-auto space-y-2 flex-1 bg-slate-900/90">
-        
-        <!-- Thanh tiến trình chuyên đề trong Modal -->
         <div class="p-2 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1.5">
           <div class="flex items-center justify-between text-[10px] font-bold">
             <span class="text-slate-400 uppercase tracking-wider">Tiến trình chuyên đề:</span>
@@ -560,25 +558,39 @@
       {"id":"2026-08","code":"[2026-08]","title":"Class II Division 2","items":[{"name":"01. Bản ghi Recording HVT8-2026","fileId":"1XkTDyUZhI6LTte1DPAEHnP2Q100z93je","type":"video"},{"name":"02. Tài liệu Mediafire HVT8-2026","fileId":"1OZIUHPaNcPqth_n2ZI5y69V2_4flCw0S","type":"doc"}]}
     ];
 
-    let currentUserEmail = localStorage.getItem('drthai_user_email') || '';
+    let currentUserEmail = '';
     let currentAllowedList = [];
     let watchedLessons = JSON.parse(localStorage.getItem('drthai_watched_lessons') || '{}');
+    let resendCountdownInterval = null;
 
-    // Khởi tạo
+    // KHỞI TẠO TỨC THÌ (INSTANT CACHE - 0 GIÂY)
     window.addEventListener('DOMContentLoaded', () => {
-      renderLessons(LESSONS_DATA, true);
       const savedEmail = localStorage.getItem('drthai_authenticated_email');
-      if (savedEmail) {
-        checkUserSession(savedEmail);
+      const cachedData = localStorage.getItem('drthai_user_cached_data');
+
+      if (savedEmail && cachedData) {
+        try {
+          const parsed = JSON.parse(cachedData);
+          currentUserEmail = savedEmail;
+          // Hiển thị ngay lập tức 0.01 giây, không chờ mạng
+          applyUnlockedData(parsed, savedEmail);
+          // Đồng bộ ngầm phía sau
+          checkUserSessionBackground(savedEmail);
+        } catch(e) {
+          renderLessons(LESSONS_DATA, true);
+        }
+      } else {
+        renderLessons(LESSONS_DATA, true);
       }
     });
 
-    // 1. Gửi OTP qua Gmail
+    // 1. Gửi OTP qua Gmail (Có khóa chống bấm spam)
     async function requestEmailOtp() {
       const emailInput = document.getElementById('inputUserEmail');
-      const email = emailInput.value.trim().toLowerCase();
+      const email = (currentUserEmail || emailInput.value).trim().toLowerCase();
       const statusEl = document.getElementById('authStatusMessage');
       const btnSend = document.getElementById('btnSendOtp');
+      const btnResend = document.getElementById('btnResendOtp');
 
       if (!email || !email.includes('@')) {
         statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đúng địa chỉ Gmail.</span>`;
@@ -598,15 +610,38 @@
           document.getElementById('stepEmailBlock').classList.add('hidden');
           document.getElementById('stepOtpBlock').classList.remove('hidden');
           statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã gửi mã OTP 6 số đến ${email}. Vui lòng kiểm tra hộp thư!</span>`;
+          startResendCountdown();
         } else {
           statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> ${data.message || "Email chưa được phân quyền."}</span>`;
+          btnSend.disabled = false;
+          btnSend.innerText = "Gửi Mã";
         }
       } catch (err) {
         statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Lỗi kết nối máy chủ.</span>`;
-      } finally {
         btnSend.disabled = false;
         btnSend.innerText = "Gửi Mã";
       }
+    }
+
+    // Đếm ngược 60 giây chống bấm gửi OTP liên tục
+    function startResendCountdown() {
+      let seconds = 60;
+      const btnResend = document.getElementById('btnResendOtp');
+      btnResend.disabled = true;
+      btnResend.classList.add('opacity-50', 'cursor-not-allowed');
+
+      if (resendCountdownInterval) clearInterval(resendCountdownInterval);
+      resendCountdownInterval = setInterval(() => {
+        seconds--;
+        if (seconds > 0) {
+          btnResend.innerText = `Gửi lại mã (${seconds}s)`;
+        } else {
+          clearInterval(resendCountdownInterval);
+          btnResend.disabled = false;
+          btnResend.innerText = "Gửi lại mã OTP";
+          btnResend.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+      }, 1000);
     }
 
     // 2. Xác thực OTP
@@ -621,7 +656,7 @@
       }
 
       btnVerify.disabled = true;
-      btnVerify.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Kiểm tra...`;
+      btnVerify.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mở khóa...`;
 
       try {
         const res = await fetch(`${SCRIPT_API_URL}?action=verify_otp&email=${encodeURIComponent(currentUserEmail)}&otp=${encodeURIComponent(otp)}`);
@@ -629,6 +664,7 @@
 
         if (data.success) {
           localStorage.setItem('drthai_authenticated_email', currentUserEmail);
+          localStorage.setItem('drthai_user_cached_data', JSON.stringify(data));
           applyUnlockedData(data, currentUserEmail);
         } else {
           statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> ${data.message || "Mã OTP không đúng."}</span>`;
@@ -641,18 +677,19 @@
       }
     }
 
-    // 3. Tải Session
-    async function checkUserSession(email) {
+    // 3. Đồng bộ dữ liệu ngầm không gây đơ web
+    async function checkUserSessionBackground(email) {
       try {
         const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}`);
         const data = await res.json();
         if (data.success) {
-          currentUserEmail = email;
+          localStorage.setItem('drthai_user_cached_data', JSON.stringify(data));
           applyUnlockedData(data, email);
         }
       } catch (e) {}
     }
 
+    // Cập nhật giao diện mở khóa
     function applyUnlockedData(data, email) {
       document.getElementById('stepEmailBlock').classList.add('hidden');
       document.getElementById('stepOtpBlock').classList.add('hidden');
@@ -694,17 +731,27 @@
       document.getElementById('stepOtpBlock').classList.add('hidden');
       document.getElementById('stepEmailBlock').classList.remove('hidden');
       document.getElementById('inputUserOtp').value = '';
+      const btnSend = document.getElementById('btnSendOtp');
+      btnSend.disabled = false;
+      btnSend.innerText = "Gửi Mã";
+      if (resendCountdownInterval) clearInterval(resendCountdownInterval);
     }
 
     function logoutOtpSession() {
       localStorage.removeItem('drthai_authenticated_email');
+      localStorage.removeItem('drthai_user_cached_data');
       currentUserEmail = '';
       currentAllowedList = [];
       document.getElementById('authSuccessBlock').classList.add('hidden');
+      document.getElementById('stepOtpBlock').classList.add('hidden');
       document.getElementById('stepEmailBlock').classList.remove('hidden');
       document.getElementById('upgradeBox').classList.add('hidden');
       document.getElementById('authStatusMessage').innerHTML = `<i class="fa-solid fa-shield-halved text-teal-400"></i> Xác thực bảo mật chống lộ video ra ngoài.`;
       document.getElementById('lessonCountBadge').innerText = `14 Chuyên đề`;
+      const btnSend = document.getElementById('btnSendOtp');
+      btnSend.disabled = false;
+      btnSend.innerText = "Gửi Mã";
+      if (resendCountdownInterval) clearInterval(resendCountdownInterval);
       renderLessons(LESSONS_DATA, true);
     }
 
@@ -728,7 +775,7 @@
       renderLessons(filtered, isLocked);
     }
 
-    // RENDER DANH SÁCH CHUYÊN ĐỀ VỚI THANH TIẾN TRÌNH RÕ RÀNG
+    // Render danh sách chuyên đề & thanh tiến trình
     function renderLessons(list, isLocked = false) {
       const container = document.getElementById('lessonList');
       if (list.length === 0) {
@@ -744,7 +791,6 @@
 
         return `
           <div class="p-3 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-rose-500/50 rounded-2xl transition duration-150 space-y-2 shadow-sm">
-            
             <button onclick="${isLocked ? "alert('Tài khoản này chưa xác thực mã OTP hoặc chưa được cấp quyền. Vui lòng nhận mã OTP để mở khóa!')" : `openLMSPlayer('${item.id}')`}" class="w-full flex items-center justify-between text-left group">
               <div class="flex items-center gap-2.5 min-w-0 pr-2">
                 <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] shrink-0 font-bold border border-rose-900/60">${item.code}</span>
@@ -767,7 +813,6 @@
                 <div class="h-full rounded-full transition-all duration-300 ${isCompletedAll ? 'bg-emerald-400' : 'bg-gradient-to-r from-teal-500 to-cyan-400'}" style="width: ${percent}%;"></div>
               </div>
             </div>
-
           </div>
         `;
       }).join('');
@@ -810,7 +855,7 @@
       }, 6000);
     }
 
-    // RENDER SUB-PLAYLIST VỚI THANH TIẾN TRÌNH & CHECKBOX NHANH
+    // Render Sub-Playlist trong Player
     function renderSubPlaylist() {
       const subListEl = document.getElementById('subItemList');
       const progressPercent = document.getElementById('lessonProgressPercent');
@@ -845,7 +890,6 @@
             
             <div class="flex items-center gap-2 shrink-0">
               <span class="text-[9px] px-1.5 py-0.5 rounded ${badge} font-mono uppercase">${it.type}</span>
-              <!-- Nút Checkbox nhanh -->
               <button onclick="toggleWatchedItem('${it.fileId}')" class="p-1 text-slate-500 hover:text-teal-400 transition" title="Đánh dấu đã học">
                 <i class="${isWatched ? 'fa-solid fa-circle-check text-teal-400 text-sm' : 'fa-regular fa-circle text-slate-600 text-sm'}"></i>
               </button>
