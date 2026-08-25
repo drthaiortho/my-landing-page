@@ -313,7 +313,7 @@
             <i class="fa-solid fa-graduation-cap text-rose-400 text-base"></i>
             <div>
               <h3 class="text-xs font-bold text-white uppercase tracking-wide">Kho Bản Ghi Hội Viên VIP</h3>
-              <p class="text-[10px] text-slate-400">Lưu tiến trình học tập chuẩn xác</p>
+              <p class="text-[10px] text-slate-400">Độc lập phiên đăng nhập • An toàn bảo mật</p>
             </div>
           </div>
           <span id="lessonCountBadge" class="text-[10px] px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800/80 rounded-full font-bold">14 Chuyên Đề</span>
@@ -366,7 +366,7 @@
           </div>
 
           <div id="authStatusMessage" class="text-[10px] text-slate-400 flex items-center gap-1">
-            <i class="fa-solid fa-shield-halved text-teal-400"></i> Xác thực tài khoản chính chủ an toàn.
+            <i class="fa-solid fa-shield-halved text-teal-400"></i> Mỗi thời điểm chỉ duy nhất 1 thiết bị hoạt động.
           </div>
 
           <div id="upgradeBox" class="hidden p-2.5 bg-rose-950/40 border border-rose-900/60 rounded-xl space-y-1 text-xs text-rose-200 text-left">
@@ -378,6 +378,7 @@
           </div>
         </div>
 
+        <!-- Live Search -->
         <div class="relative">
           <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
           <input type="text" id="lessonSearchInput" oninput="handleSearchLesson()" placeholder="Tìm từ khóa: Torque, 3Shape, Minivis, MEAW..." class="w-full bg-slate-900 border border-slate-700/80 focus:border-rose-400 focus:outline-none rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500">
@@ -419,30 +420,27 @@
       <div class="flex items-center justify-center gap-2 text-[11px]">
         <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="text-teal-400 hover:underline">Zalo: 0349622964</a> •
         <a href="https://www.youtube.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="text-red-400 hover:underline">YouTube</a> •
-        <a href="https://www.tiktok.com/@drthaiortho" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:underline">TikTok</a>
+        <a href="https://www.tiktok.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:underline">TikTok</a>
       </div>
       <div class="text-[10px] text-slate-500">&copy; 2026 Dr.Thai Ortho • All rights reserved.</div>
     </div>
 
   </div>
 
-  <!-- POPUP PLAYER LMS NATIVE (ĐÃ SỬA TRIỆT ĐỂ LỖI MÀN HÌNH ĐEN THUI & ĐẾM GIỜ ẢO) -->
+  <!-- POPUP PLAYER LMS NATIVE -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 hidden">
     
-    <!-- NÚT QUAY LẠI NỔI -->
     <button id="btnFloatingBack" onclick="handleCustomBackAction()" class="fixed top-3 left-3 z-[999999] px-3.5 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white hover:text-teal-300 text-xs font-extrabold flex items-center gap-1.5 border border-slate-600 shadow-2xl transition duration-150">
       <i class="fa-solid fa-arrow-left"></i>
       <span>Quay lại</span>
     </button>
 
-    <!-- Nút thu nhỏ Fullscreen -->
     <button id="btnExitFsFloating" onclick="toggleCustomFullScreen()" class="hidden fixed top-3 right-3 z-[999999] bg-slate-900/90 hover:bg-slate-900 text-white p-2.5 rounded-full border border-slate-600 shadow-2xl">
       <i class="fa-solid fa-compress text-sm"></i>
     </button>
 
     <div id="modalBox" class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh]">
       
-      <!-- Modal Header -->
       <div id="modalHeader" class="p-2.5 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between shrink-0 pl-28">
         <div class="flex items-center gap-2 min-w-0 pr-2">
           <span id="videoTitle" class="text-xs font-bold text-white truncate">Chuyên đề</span>
@@ -452,9 +450,8 @@
         </button>
       </div>
 
-      <!-- Player Frame (Có hiệu ứng Loading sáng sủa, không bị màn hình đen thui) -->
+      <!-- Player Frame -->
       <div id="playerContainer" class="relative w-full pb-[56.25%] bg-slate-900 overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
-        <!-- Khung Loading hiển thị tức thì -->
         <div id="videoLoadingOverlay" class="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center gap-2 z-10 text-slate-300">
           <i class="fa-solid fa-spinner fa-spin text-teal-400 text-2xl"></i>
           <span class="text-xs font-bold">Đang tải bài giảng...</span>
@@ -488,12 +485,12 @@
         </div>
       </div>
 
-      <!-- Tên bài đang phát & Đếm giờ chỉ chạy khi video phát -->
+      <!-- Tên bài đang phát & Đồng hồ học chuẩn -->
       <div id="modalInfoBar" class="px-3 py-1.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
         <div class="min-w-0 pr-2">
           <div id="currentPlayingName" class="font-semibold text-teal-300 text-[11px] truncate max-w-[200px]">Chưa chọn file</div>
           <div id="currentWatchDurationText" class="text-[9px] text-slate-400 font-mono flex items-center gap-1">
-            <i class="fa-solid fa-circle-play text-amber-400"></i> Bấm Play để bắt đầu tính giờ học
+            <i class="fa-solid fa-stopwatch text-teal-400"></i> Đang tính giờ thực tế...
           </div>
         </div>
         <div id="currentWatchBadge" class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px] font-mono shrink-0 border border-slate-700">
@@ -585,7 +582,7 @@
       }
     });
 
-    // BẮT SỰ KIỆN NÚT BACK CỦA ĐIỆN THOẠI
+    // BẮT NÚT BACK VẬT LÝ / CỬ CHỈ VUỐT
     window.addEventListener('popstate', (e) => {
       const modal = document.getElementById('videoModal');
       if (!modal.classList.contains('hidden')) {
@@ -597,7 +594,6 @@
       }
     });
 
-    // HIDE LOADER KHI IFRAME LOAD XONG
     function hideVideoLoader() {
       const loader = document.getElementById('videoLoadingOverlay');
       if (loader) loader.style.display = 'none';
@@ -633,7 +629,7 @@
           currentUserEmail = email;
           document.getElementById('stepEmailBlock').classList.add('hidden');
           document.getElementById('stepOtpBlock').classList.remove('hidden');
-          statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã gửi mã OTP 6 số đến ${email}. Vui lòng kiểm tra hộp thư!</span>`;
+          statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã gửi mã OTP 6 số đến ${email}. Bác sĩ vui lòng kiểm tra hộp thư!</span>`;
           startResendCountdown();
         } else {
           statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> ${data.message || "Email chưa được phân quyền."}</span>`;
@@ -667,7 +663,7 @@
       }, 1000);
     }
 
-    // 2. XÁC THỰC OTP
+    // 2. XÁC THỰC OTP (ĐỒNG THỜI KÍCH HOẠT CHẶN TRÙNG THIẾT BỊ)
     async function verifyEmailOtp() {
       const otp = document.getElementById('inputUserOtp').value.trim();
       const statusEl = document.getElementById('authStatusMessage');
@@ -686,9 +682,14 @@
         const data = await res.json();
 
         if (data.success) {
+          // Tạo mã định danh phiên đăng nhập duy nhất cho thiết bị này
+          const currentDeviceSessionId = 'SESSION_' + Math.random().toString(36).substring(2) + Date.now();
+          localStorage.setItem('drthai_device_session', currentDeviceSessionId);
           localStorage.setItem('drthai_authenticated_email', currentUserEmail);
           localStorage.setItem('drthai_user_cached_data', JSON.stringify(data));
+
           applyUnlockedData(data, currentUserEmail);
+          startActiveSessionHeartbeat(currentUserEmail, currentDeviceSessionId);
         } else {
           statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> ${data.message || "Mã OTP không đúng."}</span>`;
         }
@@ -700,7 +701,7 @@
       }
     }
 
-    // 3. ĐỒNG BỘ SESSION NGẦM
+    // 3. ĐỒNG BỘ SESSION NGẦM & KIỂM TRA CHẶN TRÙNG THIẾT BỊ
     async function checkUserSessionBackground(email) {
       try {
         const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}`);
@@ -708,8 +709,30 @@
         if (data.success) {
           localStorage.setItem('drthai_user_cached_data', JSON.stringify(data));
           applyUnlockedData(data, email);
+
+          let mySession = localStorage.getItem('drthai_device_session');
+          if (!mySession) {
+            mySession = 'SESSION_' + Math.random().toString(36).substring(2) + Date.now();
+            localStorage.setItem('drthai_device_session', mySession);
+          }
+          startActiveSessionHeartbeat(email, mySession);
         }
       } catch (e) {}
+    }
+
+    // Cơ chế kiểm tra độc quyền thiết bị mỗi 10 giây
+    function startActiveSessionHeartbeat(email, sessionId) {
+      setInterval(async () => {
+        try {
+          const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}`);
+          const data = await res.json();
+          // Nếu server ghi nhận session đã bị đè bởi thiết bị khác thì tự động đăng xuất
+          if (data.activeSession && data.activeSession !== sessionId) {
+            alert("Tài khoản này vừa được đăng nhập ở một thiết bị khác. Phiên làm việc trên thiết bị này đã kết thúc.");
+            logoutOtpSession();
+          }
+        } catch(e) {}
+      }, 10000);
     }
 
     function applyUnlockedData(data, email) {
@@ -762,13 +785,14 @@
     function logoutOtpSession() {
       localStorage.removeItem('drthai_authenticated_email');
       localStorage.removeItem('drthai_user_cached_data');
+      localStorage.removeItem('drthai_device_session');
       currentUserEmail = '';
       currentAllowedList = [];
       document.getElementById('authSuccessBlock').classList.add('hidden');
       document.getElementById('stepOtpBlock').classList.add('hidden');
       document.getElementById('stepEmailBlock').classList.remove('hidden');
       document.getElementById('upgradeBox').classList.add('hidden');
-      document.getElementById('authStatusMessage').innerHTML = `<i class="fa-solid fa-shield-halved text-teal-400"></i> Xác thực tài khoản chính chủ an toàn.`;
+      document.getElementById('authStatusMessage').innerHTML = `<i class="fa-solid fa-shield-halved text-teal-400"></i> Mỗi thời điểm chỉ duy nhất 1 thiết bị hoạt động.`;
       document.getElementById('lessonCountBadge').innerText = `14 Chuyên đề`;
       const btnSend = document.getElementById('btnSendOtp');
       btnSend.disabled = false;
@@ -896,7 +920,7 @@
       }, 6000);
     }
 
-    // ĐỒNG HỒ ĐẾM GIỜ CHỈ CHẠY KHI TAB ACTIVE (KHÔNG ĐẾM ẢO)
+    // BỘ ĐẾM GIỜ CHUẨN XÁC (CHỈ CHẠY KHI ĐANG ACTIVE & KHÔNG BỊ ĐẾM ẢO)
     function startRealTimeWatchTracker() {
       if (watchTimerInterval) clearInterval(watchTimerInterval);
 
@@ -988,7 +1012,6 @@
       currentSubIndex = index;
       const item = currentLesson.items[index];
 
-      // Hiện lại loader vòng quay trong lúc chờ iframe tải video mới
       const loader = document.getElementById('videoLoadingOverlay');
       if (loader) loader.style.display = 'flex';
 
@@ -1015,8 +1038,6 @@
       updateCurrentWatchUI(item, curSec, stdDuration);
 
       renderSubPlaylist();
-
-      // Kích hoạt đồng hồ đếm giờ học thực tế
       startRealTimeWatchTracker();
     }
 
