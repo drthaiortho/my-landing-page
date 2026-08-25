@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Kho Dữ Liệu Chỉnh Nha Dr.Thai Ortho</title>
 
-  <!-- Tối ưu kết nối trước máy chủ Google Drive -->
+  <!-- Preconnect tăng tốc kết nối Google CDN -->
   <link rel="preconnect" href="https://drive.google.com" crossorigin>
   <link rel="preconnect" href="https://docs.google.com" crossorigin>
   <link rel="preconnect" href="https://video.googleusercontent.com" crossorigin>
   <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
   <link rel="dns-prefetch" href="https://drive.google.com">
   <link rel="dns-prefetch" href="https://docs.google.com">
-  <link rel="dns-prefetch" href="https://video.googleusercontent.com">
 
   <!-- PWA & Favicon -->
   <link rel="manifest" href="./manifest.json">
@@ -32,35 +31,41 @@
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-    /* CHẾ ĐỘ PHÓNG TO / XOAY NGANG TRÀN VIỀN KHÔNG MẤT NÚT THOÁT */
-    body.is-fullscreen-player #videoModal {
-      padding: 0 !important;
-      background: #000000 !important;
+    /* GPU Acceleration */
+    .gpu-layer {
+      transform: translate3d(0,0,0);
+      -webkit-transform: translate3d(0,0,0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      perspective: 1000;
+      -webkit-perspective: 1000;
     }
-    body.is-fullscreen-player #modalBox {
-      max-width: 100vw !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      max-height: 100vh !important;
-      border-radius: 0 !important;
-      border: none !important;
-    }
-    body.is-fullscreen-player #playerContainer {
-      width: 100vw !important;
-      height: 100vh !important;
-      padding-bottom: 0 !important;
-      flex: 1 !important;
-    }
-    body.is-fullscreen-player #modalHeader,
-    body.is-fullscreen-player #modalControls,
-    body.is-fullscreen-player #modalInfoBar,
-    body.is-fullscreen-player #modalPlaylist {
-      display: none !important;
-    }
-    body.is-fullscreen-player #fullscreenExitBar {
-      display: flex !important;
+
+    /* Màn hình ngang tự động bung toàn bộ video không làm giật kích thước */
+    @media (orientation: landscape) and (max-height: 550px) {
+      #videoModal {
+        padding: 0 !important;
+        background: #000000 !important;
+      }
+      #modalBox {
+        max-width: 100vw !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+        border: none !important;
+      }
+      #playerContainer {
+        height: 100vh !important;
+        padding-bottom: 0 !important;
+      }
+      #modalHeader, #modalControls, #modalInfoBar, #modalPlaylist {
+        display: none !important;
+      }
+      #landscapeHeaderNav {
+        display: flex !important;
+      }
     }
   </style>
 </head>
@@ -98,7 +103,7 @@
 
     <!-- TAB 1: TÀI NGUYÊN MỞ -->
     <div id="sectionFree" class="space-y-3.5">
-      <!-- Lộ trình 3 bước -->
+      <!-- 3 Bước -->
       <div class="p-3.5 bg-gradient-to-br from-teal-950/60 via-slate-800 to-slate-800 border border-teal-500/30 rounded-2xl space-y-2.5">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2 text-teal-300 font-bold text-xs">
@@ -127,7 +132,7 @@
         </div>
       </div>
 
-      <!-- Danh mục chuyên đề mở -->
+      <!-- Chuyên đề mở -->
       <div class="space-y-2">
         <div class="flex items-center justify-between px-1">
           <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
@@ -426,16 +431,11 @@
   <!-- POPUP PLAYER LMS NATIVE -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 hidden">
     
-    <!-- THANH ĐIỀU HƯỚNG NỔI TRÊN MÀN HÌNH XOAY NGANG -->
-    <div id="fullscreenExitBar" class="fixed top-2.5 left-2.5 right-2.5 z-[9999999] justify-between items-center hidden pointer-events-auto">
-      <button onclick="exitViewportFullscreen()" class="px-3.5 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white hover:text-teal-300 text-xs font-extrabold flex items-center gap-1.5 border border-slate-600 shadow-2xl transition duration-150 backdrop-blur-sm">
-        <i class="fa-solid fa-compress text-amber-400"></i>
-        <span>Thu nhỏ màn hình</span>
-      </button>
-
-      <button onclick="handleCustomBackAction()" class="px-3 py-1.5 rounded-full bg-rose-950/90 hover:bg-rose-900 text-rose-200 text-xs font-bold flex items-center gap-1.5 border border-rose-700 shadow-2xl transition duration-150 backdrop-blur-sm">
-        <i class="fa-solid fa-xmark"></i>
-        <span>Đóng bài học</span>
+    <!-- THANH THOÁT KHI Ở MÀN HÌNH NGANG -->
+    <div id="landscapeHeaderNav" class="fixed top-2 left-2 right-2 z-[9999999] justify-between items-center hidden pointer-events-auto">
+      <button onclick="handleCustomBackAction()" class="px-3.5 py-1.5 rounded-full bg-slate-900/90 text-white hover:text-teal-300 text-xs font-bold flex items-center gap-1.5 border border-slate-600 shadow-2xl backdrop-blur-sm">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Trở lại danh sách</span>
       </button>
     </div>
 
@@ -458,13 +458,13 @@
       </div>
 
       <!-- Player Frame -->
-      <div id="playerContainer" class="gpu-accelerated relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
+      <div id="playerContainer" class="gpu-layer relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
         <div id="videoLoadingOverlay" class="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center gap-2 z-10 text-slate-300">
           <i class="fa-solid fa-spinner fa-spin text-teal-400 text-2xl"></i>
           <span class="text-xs font-bold">Đang kết nối bài giảng...</span>
         </div>
 
-        <iframe id="driveFrame" onload="hideVideoLoader()" class="gpu-accelerated absolute inset-0 w-full h-full border-0 pointer-events-auto z-20" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope" allowfullscreen webkitallowfullscreen mozallowfullscreen referrerpolicy="no-referrer-when-downgrade" loading="eager"></iframe>
+        <iframe id="driveFrame" onload="hideVideoLoader()" class="gpu-layer absolute inset-0 w-full h-full border-0 pointer-events-auto z-20" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope" allowfullscreen webkitallowfullscreen mozallowfullscreen referrerpolicy="no-referrer-when-downgrade" loading="eager"></iframe>
 
         <div id="dynamicWatermark" class="absolute z-30 pointer-events-none text-white/30 text-[11px] font-bold tracking-wider select-none transition-all duration-700 drop-shadow" style="top: 20%; left: 20%;">
           Dr.Thai Ortho • Hội viên
@@ -483,9 +483,7 @@
         </div>
 
         <div class="flex items-center gap-1.5">
-          <button onclick="toggleViewportFullscreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
-            <i class="fa-solid fa-expand"></i> Phóng to / Xoay ngang
-          </button>
+          <span class="text-[10px] text-slate-400 italic"><i class="fa-solid fa-rotate mr-1 text-teal-400"></i> Xoay ngang máy để xem lớn</span>
           <a id="btnDownloadFile" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 text-[10px] font-semibold hover:bg-slate-700 transition flex items-center gap-1">
             <i class="fa-solid fa-cloud-arrow-down"></i> Tải file này
           </a>
@@ -590,11 +588,7 @@
     window.addEventListener('popstate', (e) => {
       const modal = document.getElementById('videoModal');
       if (!modal.classList.contains('hidden')) {
-        if (document.body.classList.contains('is-fullscreen-player')) {
-          exitViewportFullscreen();
-        } else {
-          closeSecurePlayer(false);
-        }
+        closeSecurePlayer(false);
       }
     });
 
@@ -1054,42 +1048,11 @@
       }
     }
 
-    // CHẾ ĐỘ PHÓNG TO XOAY NGANG THÔNG MINH (VIEWPORT CSS + ORIENTATION API)
-    function toggleViewportFullscreen() {
-      if (document.body.classList.contains('is-fullscreen-player')) {
-        exitViewportFullscreen();
-      } else {
-        enterViewportFullscreen();
-      }
-    }
-
-    function enterViewportFullscreen() {
-      document.body.classList.add('is-fullscreen-player');
-      try {
-        if (screen.orientation && screen.orientation.lock) {
-          screen.orientation.lock('landscape').catch(() => {});
-        }
-      } catch(e) {}
-    }
-
-    function exitViewportFullscreen() {
-      document.body.classList.remove('is-fullscreen-player');
-      try {
-        if (screen.orientation && screen.orientation.unlock) {
-          screen.orientation.unlock();
-        }
-      } catch(e) {}
-    }
-
     function handleCustomBackAction() {
-      if (document.body.classList.contains('is-fullscreen-player')) {
-        exitViewportFullscreen();
-      }
       closeSecurePlayer(true);
     }
 
     function closeSecurePlayer(triggerHistory = true) {
-      exitViewportFullscreen();
       const modal = document.getElementById('videoModal');
       const frame = document.getElementById('driveFrame');
       
