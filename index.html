@@ -24,41 +24,6 @@
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
-
-    /* Chế độ Toàn màn hình xoay ngang chuẩn không viền đen thừa */
-    .fs-active-mode {
-      position: fixed !important;
-      inset: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      max-width: none !important;
-      max-height: none !important;
-      border-radius: 0 !important;
-      z-index: 99999 !important;
-      background: #000000 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: 0 !important;
-    }
-
-    .fs-active-mode #playerContainer {
-      width: 100vw !important;
-      height: 100vh !important;
-      padding-bottom: 0 !important;
-      border: 0 !important;
-      background: #000000 !important;
-    }
-
-    .fs-active-mode #modalHeader,
-    .fs-active-mode #modalControls,
-    .fs-active-mode #modalInfoBar,
-    .fs-active-mode #modalPlaylist {
-      display: none !important;
-    }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased p-3.5 sm:p-6 selection:bg-teal-500 selection:text-white">
@@ -427,20 +392,18 @@
 
   </div>
 
-  <!-- POPUP PLAYER LMS NATIVE -->
+  <!-- POPUP PLAYER LMS NATIVE (TÍCH HỢP FULLSCREEN API CHUẨN ĐỂ XOAY NGANG) -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 hidden">
     
+    <!-- NÚT QUAY LẠI NỔI -->
     <button id="btnFloatingBack" onclick="handleCustomBackAction()" class="fixed top-3 left-3 z-[999999] px-3.5 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white hover:text-teal-300 text-xs font-extrabold flex items-center gap-1.5 border border-slate-600 shadow-2xl transition duration-150">
       <i class="fa-solid fa-arrow-left"></i>
       <span>Quay lại</span>
     </button>
 
-    <button id="btnExitFsFloating" onclick="toggleCustomFullScreen()" class="hidden fixed top-3 right-3 z-[999999] bg-slate-900/90 hover:bg-slate-900 text-white p-2.5 rounded-full border border-slate-600 shadow-2xl">
-      <i class="fa-solid fa-compress text-sm"></i>
-    </button>
-
     <div id="modalBox" class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh]">
       
+      <!-- Modal Header -->
       <div id="modalHeader" class="p-2.5 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between shrink-0 pl-28">
         <div class="flex items-center gap-2 min-w-0 pr-2">
           <span id="videoTitle" class="text-xs font-bold text-white truncate">Chuyên đề</span>
@@ -464,7 +427,7 @@
         </div>
       </div>
 
-      <!-- Thanh Điều Khiển -->
+      <!-- Thanh Điều Khiển (Đã tích hợp Fullscreen API chuẩn để xoay ngang màn hình) -->
       <div id="modalControls" class="p-2 bg-slate-850 border-b border-slate-800 flex items-center justify-between shrink-0 text-xs">
         <div class="flex items-center gap-1">
           <button onclick="playPrevItem()" id="btnPrevItem" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white font-semibold text-[10px] transition disabled:opacity-30 disabled:pointer-events-none">
@@ -476,7 +439,7 @@
         </div>
 
         <div class="flex items-center gap-1.5">
-          <button onclick="toggleCustomFullScreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
+          <button onclick="triggerNativeFullscreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
             <i class="fa-solid fa-expand"></i> Xoay ngang màn hình
           </button>
           <a id="btnDownloadFile" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 text-[10px] font-semibold hover:bg-slate-700 transition flex items-center gap-1">
@@ -485,7 +448,7 @@
         </div>
       </div>
 
-      <!-- Tên bài đang phát & Đồng hồ học chuẩn -->
+      <!-- Tên bài đang phát & Đếm giờ học chuẩn -->
       <div id="modalInfoBar" class="px-3 py-1.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
         <div class="min-w-0 pr-2">
           <div id="currentPlayingName" class="font-semibold text-teal-300 text-[11px] truncate max-w-[200px]">Chưa chọn file</div>
@@ -557,7 +520,6 @@
 
     let watchTimerInterval = null;
     let isUserActiveViewing = true;
-    let isFullScreenLandscape = false;
 
     document.addEventListener('visibilitychange', () => {
       isUserActiveViewing = !document.hidden;
@@ -582,15 +544,11 @@
       }
     });
 
-    // BẮT NÚT BACK VẬT LÝ / CỬ CHỈ VUỐT
+    // BẮT SỰ KIỆN NÚT BACK VẬT LÝ / CỬ CHỈ VUỐT
     window.addEventListener('popstate', (e) => {
       const modal = document.getElementById('videoModal');
       if (!modal.classList.contains('hidden')) {
-        if (isFullScreenLandscape) {
-          toggleCustomFullScreen();
-        } else {
-          closeSecurePlayer(false);
-        }
+        closeSecurePlayer(false);
       }
     });
 
@@ -663,7 +621,7 @@
       }, 1000);
     }
 
-    // 2. XÁC THỰC OTP (ĐỒNG THỜI KÍCH HOẠT CHẶN TRÙNG THIẾT BỊ)
+    // 2. XÁC THỰC OTP
     async function verifyEmailOtp() {
       const otp = document.getElementById('inputUserOtp').value.trim();
       const statusEl = document.getElementById('authStatusMessage');
@@ -682,7 +640,6 @@
         const data = await res.json();
 
         if (data.success) {
-          // Tạo mã định danh phiên đăng nhập duy nhất cho thiết bị này
           const currentDeviceSessionId = 'SESSION_' + Math.random().toString(36).substring(2) + Date.now();
           localStorage.setItem('drthai_device_session', currentDeviceSessionId);
           localStorage.setItem('drthai_authenticated_email', currentUserEmail);
@@ -701,7 +658,7 @@
       }
     }
 
-    // 3. ĐỒNG BỘ SESSION NGẦM & KIỂM TRA CHẶN TRÙNG THIẾT BỊ
+    // 3. ĐỒNG BỘ SESSION NGẦM & CHẶN TRÙNG THIẾT BỊ
     async function checkUserSessionBackground(email) {
       try {
         const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}`);
@@ -720,13 +677,11 @@
       } catch (e) {}
     }
 
-    // Cơ chế kiểm tra độc quyền thiết bị mỗi 10 giây
     function startActiveSessionHeartbeat(email, sessionId) {
       setInterval(async () => {
         try {
           const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}`);
           const data = await res.json();
-          // Nếu server ghi nhận session đã bị đè bởi thiết bị khác thì tự động đăng xuất
           if (data.activeSession && data.activeSession !== sessionId) {
             alert("Tài khoản này vừa được đăng nhập ở một thiết bị khác. Phiên làm việc trên thiết bị này đã kết thúc.");
             logoutOtpSession();
@@ -920,7 +875,7 @@
       }, 6000);
     }
 
-    // BỘ ĐẾM GIỜ CHUẨN XÁC (CHỈ CHẠY KHI ĐANG ACTIVE & KHÔNG BỊ ĐẾM ẢO)
+    // ĐỒNG HỒ ĐẾM GIỜ CHUẨN XÁC (CHỈ CHẠY KHI ĐANG ACTIVE & KHÔNG BỊ ĐẾM ẢO)
     function startRealTimeWatchTracker() {
       if (watchTimerInterval) clearInterval(watchTimerInterval);
 
@@ -1053,41 +1008,23 @@
       }
     }
 
-    function handleCustomBackAction() {
-      if (isFullScreenLandscape) {
-        toggleCustomFullScreen();
-      } else {
-        closeSecurePlayer(true);
+    // GỌI NATIVE FULLSCREEN API (GIÚP ĐIỆN THOẠI TỰ ĐỘNG XOAY NGANG)
+    function triggerNativeFullscreen() {
+      const container = document.getElementById('playerContainer');
+      if (container.requestFullscreen) {
+        container.requestFullscreen().catch(() => {});
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen().catch(() => {});
+      } else if (container.msRequestFullscreen) {
+        container.msRequestFullscreen().catch(() => {});
       }
     }
 
-    function toggleCustomFullScreen() {
-      const modalBox = document.getElementById('modalBox');
-      const btnExitFs = document.getElementById('btnExitFsFloating');
-
-      if (!isFullScreenLandscape) {
-        isFullScreenLandscape = true;
-        modalBox.classList.add('fs-active-mode');
-        btnExitFs.classList.remove('hidden');
-
-        if (screen.orientation && screen.orientation.lock) {
-          screen.orientation.lock('landscape').catch(() => {});
-        }
-      } else {
-        isFullScreenLandscape = false;
-        modalBox.classList.remove('fs-active-mode');
-        btnExitFs.classList.add('hidden');
-
-        if (screen.orientation && screen.orientation.unlock) {
-          screen.orientation.unlock();
-        }
-      }
+    function handleCustomBackAction() {
+      closeSecurePlayer(true);
     }
 
     function closeSecurePlayer(triggerHistory = true) {
-      if (isFullScreenLandscape) {
-        toggleCustomFullScreen();
-      }
       const modal = document.getElementById('videoModal');
       const frame = document.getElementById('driveFrame');
       
