@@ -56,6 +56,24 @@
 </head>
 <body class="bg-[#eef2f6] text-slate-800 min-h-screen font-sans antialiased p-3.5 sm:p-6 selection:bg-teal-700 selection:text-white">
 
+  <!-- MODAL THÔNG BÁO BỊ ĐĂNG XUẤT DO THIẾT BỊ KHÁC ĐĂNG NHẬP -->
+  <div id="sessionRevokedModal" class="hidden fixed inset-0 bg-slate-950/85 z-[9999999] p-4 flex items-center justify-center backdrop-blur-sm">
+    <div class="bg-white border-2 border-rose-500 rounded-3xl p-5 max-w-sm w-full text-center space-y-4 shadow-2xl animate-bounce-short">
+      <div class="w-16 h-16 mx-auto rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-3xl border-2 border-rose-300">
+        <i class="fa-solid fa-mobile-screen-button"></i>
+      </div>
+      <div class="space-y-1.5">
+        <h3 class="text-base sm:text-lg font-black text-rose-700 uppercase tracking-tight">TÀI KHOẢN ĐÃ BỊ ĐĂNG XUẤT</h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+          Tài khoản của Bác sĩ vừa được kích hoạt đăng nhập trên <b>một thiết bị khác</b>. Mỗi thời điểm hệ thống chỉ duy trì 1 thiết bị xem học liệu.
+        </p>
+      </div>
+      <button onclick="dismissSessionRevokedModal()" class="w-full py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-sm transition shadow-md">
+        Đã hiểu và Đóng
+      </button>
+    </div>
+  </div>
+
   <!-- OVERLAY HƯỚNG DẪN THOÁT ZALO TRÊN IPHONE -->
   <div id="iosInAppNotice" class="hidden fixed inset-0 bg-slate-900/90 z-[999999] p-6 flex flex-col justify-between text-center backdrop-blur-md text-white">
     <div class="flex justify-end pr-2 pt-1 animate-bounce">
@@ -572,6 +590,12 @@
         document.getElementById('iosInAppNotice').classList.remove('hidden');
       }
 
+      // Kiểm tra cờ thông báo bị đăng xuất trước đó nếu có
+      if (localStorage.getItem('drthai_show_revoked_modal') === 'true') {
+        localStorage.removeItem('drthai_show_revoked_modal');
+        document.getElementById('sessionRevokedModal').classList.remove('hidden');
+      }
+
       const savedEmail = localStorage.getItem('drthai_authenticated_email');
       const savedToken = localStorage.getItem('drthai_session_token');
       const cachedData = localStorage.getItem('drthai_user_cached_data');
@@ -582,6 +606,9 @@
           currentUserEmail = savedEmail;
           currentSessionToken = savedToken;
           applyUnlockedData(parsed, savedEmail);
+          
+          // Kiểm tra phiên ngay lập tức khi load lại trang
+          checkSessionImmediately(savedEmail, savedToken);
           startSessionHeartbeat(savedEmail, savedToken);
         } catch(e) {
           renderLessons(LESSONS_DATA, true);
@@ -590,6 +617,28 @@
         renderLessons(LESSONS_DATA, true);
       }
     });
+
+    async function checkSessionImmediately(email, token) {
+      try {
+        const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}&sessionToken=${encodeURIComponent(token)}`);
+        const data = await res.json();
+
+        if (data && data.sessionRevoked) {
+          triggerSessionRevokedAction();
+        }
+      } catch(e) {}
+    }
+
+    function triggerSessionRevokedAction() {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+      localStorage.setItem('drthai_show_revoked_modal', 'true');
+      logoutOtpSession(false);
+      document.getElementById('sessionRevokedModal').classList.remove('hidden');
+    }
+
+    function dismissSessionRevokedModal() {
+      document.getElementById('sessionRevokedModal').classList.add('hidden');
+    }
 
     async function requestEmailOtp() {
       const emailInput = document.getElementById('inputUserEmail');
@@ -693,7 +742,6 @@
       }
     }
 
-    // TIẾN TRÌNH ĐÁ THIẾT BỊ CŨ NẾU CÓ MÁY KHÁC ĐĂNG NHẬP
     function startSessionHeartbeat(email, token) {
       if (heartbeatInterval) clearInterval(heartbeatInterval);
       
@@ -703,12 +751,10 @@
           const data = await res.json();
 
           if (data && data.sessionRevoked) {
-            clearInterval(heartbeatInterval);
-            alert("Tài khoản của Bác sĩ vừa được đăng nhập trên một thiết bị khác. Phiên này đã kết thúc!");
-            logoutOtpSession();
+            triggerSessionRevokedAction();
           }
         } catch(e) {}
-      }, 10000); // 10 giây quét 1 lần
+      }, 5000); // Quét mỗi 5 giây
     }
 
     function applyUnlockedData(data, email) {
@@ -788,15 +834,17 @@
       if (resendCountdownInterval) clearInterval(resendCountdownInterval);
     }
 
-    function logoutOtpSession() {
+    function logoutOtpSession(clearAuthEmail = true) {
       if (heartbeatInterval) clearInterval(heartbeatInterval);
-      localStorage.removeItem('drthai_authenticated_email');
+      if (clearAuthEmail) {
+        localStorage.removeItem('drthai_authenticated_email');
+        currentUserEmail = '';
+        document.getElementById('inputUserEmail').value = '';
+      }
       localStorage.removeItem('drthai_session_token');
       localStorage.removeItem('drthai_user_cached_data');
-      currentUserEmail = '';
       currentSessionToken = '';
       currentAllowedList = [];
-      document.getElementById('inputUserEmail').value = '';
       document.getElementById('authSuccessBlock').classList.add('hidden');
       document.getElementById('stepOtpBlock').classList.add('hidden');
       document.getElementById('stepEmailBlock').classList.remove('hidden');
@@ -893,7 +941,7 @@
           badge = 'bg-red-100 text-red-800 border-red-300'; 
         } else if (it.type === 'doc') { 
           icon = 'fa-solid fa-file-word text-blue-600'; 
-          badge = 'bg-blue-100 text-blue-800 border-blue-300'; 
+          badge = 'bg-blue-100 text-blue-800 border-blue-200'; 
         }
 
         const driveDeepLink = `https://drive.google.com/file/d/${it.fileId}/view?usp=sharing`;
