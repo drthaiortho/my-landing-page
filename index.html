@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Cộng Đồng Chỉnh Nha Dr.Thai Ortho</title>
 
-  <!-- Khai báo Web App PWA & Favicon chống đơ khi cài đặt ra màn hình chính -->
+  <!-- PWA & Favicon -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./Logo.png">
   <link rel="apple-touch-icon" href="./Logo.png">
@@ -15,16 +15,6 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Dr.Thai Ortho">
 
-  <!-- Open Graph & Meta tags -->
-  <meta name="title" content="Cộng Đồng Chỉnh Nha Dr.Thai Ortho">
-  <meta name="description" content="Cổng kết nối chia sẻ kiến thức lâm sàng, kho dữ liệu Notion & chương trình sinh hoạt định kỳ.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://drthaiortho.vercel.app/">
-  <meta property="og:title" content="Cộng Đồng Chỉnh Nha Dr.Thai Ortho">
-  <meta property="og:description" content="Cùng nhau học kiến thức chỉnh nha lâm sàng! Tra cứu kho dữ liệu ca lâm sàng & sinh hoạt chuyên môn hàng tháng.">
-  <meta property="og:image" content="https://drthaiortho.vercel.app/Logo.png">
-  <meta property="twitter:card" content="summary_large_image">
-
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -32,391 +22,322 @@
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased p-4 sm:p-6 selection:bg-teal-500 selection:text-white">
-  <div class="max-w-md mx-auto space-y-5">
+  <div class="max-w-md mx-auto space-y-4">
 
-    <!-- 1. Header & Nút Copy Link -->
+    <!-- 1. Header Thương Hiệu -->
     <div class="text-center pt-2 relative">
       <button onclick="copySiteLink()" class="absolute top-0 right-0 p-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-teal-300 border border-slate-700 transition duration-150 shadow-sm" title="Sao chép link chia sẻ">
         <i class="fa-solid fa-share-nodes text-sm"></i>
       </button>
 
-      <div class="w-28 h-28 mx-auto mb-4 rounded-full bg-white p-1 shadow-xl overflow-hidden flex items-center justify-center border-2 border-teal-500/50">
+      <div class="w-24 h-24 mx-auto mb-3 rounded-full bg-white p-1 shadow-xl overflow-hidden flex items-center justify-center border-2 border-teal-500/50">
         <img src="./Logo.png" alt="Dr. Thai Ortho" class="w-full h-full object-contain rounded-full">
       </div>
       
-      <h1 class="text-lg sm:text-xl font-extrabold text-white tracking-tight uppercase leading-tight">
+      <h1 class="text-lg font-extrabold text-white tracking-tight uppercase leading-tight">
         CỘNG ĐỒNG CHỈNH NHA<br>
         <span class="whitespace-nowrap">DR.THAI ORTHO</span>
       </h1>
-      <p class="text-teal-400 font-medium text-sm mt-1.5">Cùng nhau học kiến thức chỉnh nha lâm sàng!</p>
+      <p class="text-teal-400 font-medium text-xs mt-1">Cùng nhau học kiến thức chỉnh nha lâm sàng!</p>
     </div>
 
-    <!-- 2. Nút điều hướng chính (Core Links) -->
-    <div class="space-y-3">
-      <!-- Nút 1: Notion -->
-      <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 bg-slate-800 hover:bg-slate-700/80 border border-slate-700 hover:border-teal-400 rounded-2xl transition duration-200 shadow-md group">
-        <div class="flex items-center space-x-3.5">
-          <div class="w-11 h-11 rounded-xl bg-teal-950 text-teal-400 flex items-center justify-center text-xl border border-teal-800/60">
-            <i class="fa-solid fa-book-bookmark"></i>
-          </div>
-          <div>
-            <div class="font-bold text-white group-hover:text-teal-300 transition-colors">Kho Dữ Liệu Notion</div>
-            <div class="text-xs text-slate-400">Tra cứu ca lâm sàng, tài liệu & bài giảng tổng hợp</div>
-          </div>
-        </div>
-        <i class="fa-solid fa-chevron-right text-slate-500 text-sm group-hover:text-teal-300"></i>
-      </a>
-
-      <!-- Nút 2: Nhóm Zalo Hội Viên -->
-      <details class="group bg-slate-800 border border-blue-500/40 hover:border-blue-400 rounded-2xl overflow-hidden transition duration-200 shadow-md">
-        <summary class="flex items-center justify-between p-4 cursor-pointer select-none">
-          <div class="flex items-center space-x-3.5">
-            <div class="w-11 h-11 rounded-xl bg-blue-950 text-blue-400 flex items-center justify-center text-xl border border-blue-800/60">
-              <i class="fa-solid fa-comments"></i>
-            </div>
-            <div>
-              <div class="flex items-center gap-1.5 font-bold text-white group-hover:text-blue-300 transition-colors">
-                <span>Nhóm Zalo Hội Viên</span>
-                <i class="fa-solid fa-lock text-[10px] text-amber-400" title="Chỉ dành cho Hội viên"></i>
-              </div>
-              <div class="text-xs text-slate-400">Kênh thảo luận, thông báo và hỗ trợ nội bộ</div>
-            </div>
-          </div>
-          <i class="fa-solid fa-chevron-down text-slate-400 text-sm group-open:rotate-180 transition-transform duration-200"></i>
-        </summary>
-        <div class="p-3.5 bg-slate-900/90 border-t border-slate-700/80 text-xs space-y-2.5">
-          <div class="p-2 rounded-lg bg-blue-950/40 border border-blue-800/60 text-slate-300 text-[11px] leading-relaxed">
-            <strong class="text-blue-300"><i class="fa-solid fa-shield-halved mr-1"></i> Lưu ý phê duyệt:</strong> Nhóm chỉ dành cho <strong>Hội viên chính thức</strong>. Bác sĩ chưa đăng ký hội viên vui lòng không gửi yêu cầu tham gia.
-          </div>
-          <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-md">
-            <i class="fa-solid fa-right-to-bracket"></i>
-            <span>Tham Gia Nhóm Zalo (Dành cho Hội Viên)</span>
-          </a>
-        </div>
-      </details>
-
-      <!-- Nút 3: Đăng ký Hội viên / Tư vấn bản ghi -->
-      <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 bg-gradient-to-r from-teal-900/50 via-slate-800 to-slate-800 border border-teal-500/40 hover:border-teal-300 rounded-2xl transition duration-200 shadow-md group">
-        <div class="flex items-center space-x-3.5">
-          <div class="w-11 h-11 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center text-xl border border-teal-500/30">
-            <i class="fa-solid fa-user-plus"></i>
-          </div>
-          <div>
-            <div class="font-bold text-teal-200 group-hover:text-teal-100 transition-colors">Đăng Ký Hội Viên / Bản Ghi</div>
-            <div class="text-xs text-slate-300">Tư vấn gia nhập & mua trọn bộ bài giảng chuyên sâu</div>
-          </div>
-        </div>
-        <i class="fa-solid fa-chevron-right text-teal-400 text-sm group-hover:translate-x-0.5 transition-transform"></i>
-      </a>
+    <!-- 2. NÚT CHUYỂN TAB (Miễn phí vs Hội viên) -->
+    <div class="grid grid-cols-2 p-1 bg-slate-800/90 rounded-xl border border-slate-700 gap-1 shadow-inner">
+      <button id="tabBtnFree" onclick="switchTab('free')" class="py-2 px-3 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 transition duration-200 bg-teal-500 text-slate-950 shadow">
+        <i class="fa-solid fa-gift"></i>
+        <span>Tài Nguyên Mở</span>
+      </button>
+      <button id="tabBtnPaid" onclick="switchTab('paid')" class="py-2 px-3 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 transition duration-200 text-slate-400 hover:text-rose-300">
+        <i class="fa-solid fa-crown text-amber-400"></i>
+        <span>Khu Vực Hội Viên</span>
+      </button>
     </div>
 
-    <!-- 3. Chương trình đang chạy & Đồng hồ đếm ngược -->
-    <div class="bg-gradient-to-b from-slate-800 to-slate-800/90 border border-slate-700 rounded-2xl p-5 space-y-4 shadow-lg">
-      <div class="flex items-center justify-between">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
-          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> Đang diễn ra
-        </span>
-        <span class="text-xs text-slate-400 font-medium">Zoom Daymai</span>
-      </div>
+    <!-- ======================================================== -->
+    <!-- TAB 1: NỘI DUNG MIỄN PHÍ (PHỄU THU HÚT BÁC SĨ MỚI)       -->
+    <!-- ======================================================== -->
+    <div id="sectionFree" class="space-y-4">
       
-      <div>
-        <div class="flex items-center justify-between flex-wrap gap-1">
-          <h2 class="text-base font-bold text-white uppercase tracking-wide">KỲ HỌP ĐỌC BÁO SỐ 02</h2>
-          <span class="px-2 py-0.5 rounded bg-teal-950/80 text-teal-300 border border-teal-800 text-[10px] font-semibold">
-            Người kể chuyện: Dr.Thai Ortho
-          </span>
+      <!-- Banner Chào Mừng & Quyền Lợi -->
+      <div class="p-4 bg-gradient-to-br from-teal-950/60 via-slate-800 to-slate-800 border border-teal-500/30 rounded-2xl space-y-2">
+        <div class="flex items-center gap-2 text-teal-300 font-bold text-xs">
+          <i class="fa-solid fa-handshake-angle text-sm"></i>
+          <span>Chào mừng Bác sĩ đồng nghiệp!</span>
         </div>
-        <p class="text-xs text-slate-400 italic mt-1">Dành riêng cho Hội viên chính thức</p>
-      </div>
-
-      <div class="p-3 bg-slate-900/70 rounded-xl border border-slate-700/60">
-        <div class="text-xs font-semibold text-teal-300 mb-1 flex items-center gap-1.5">
-          <i class="fa-solid fa-newspaper text-[11px]"></i> Bài đọc chủ đề:
-        </div>
-        <p class="text-xs text-slate-200 leading-relaxed italic">
-          "Mandibular molar uprighting using orthodontic miniscrew implants: a systematic review - Dựng trục răng cối lớn bằng Minivis"
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Nơi chia sẻ các tài liệu chỉnh nha thực chiến, case lâm sàng chi tiết và các buổi đọc báo chuyên môn hoàn toàn miễn phí.
         </p>
       </div>
 
-      <!-- Countdown Timer Box -->
-      <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-700/70 text-center">
-        <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-center gap-1.5">
-          <i class="fa-regular fa-clock text-amber-400"></i> Đếm ngược đến giờ sinh hoạt
-        </div>
-        <div class="grid grid-cols-4 gap-2 text-center">
-          <div class="bg-slate-800 rounded-lg p-1.5 border border-slate-700">
-            <span id="cd-days" class="font-bold text-base text-white block">00</span>
-            <span class="text-[10px] text-slate-400 uppercase">Ngày</span>
-          </div>
-          <div class="bg-slate-800 rounded-lg p-1.5 border border-slate-700">
-            <span id="cd-hours" class="font-bold text-base text-white block">00</span>
-            <span class="text-[10px] text-slate-400 uppercase">Giờ</span>
-          </div>
-          <div class="bg-slate-800 rounded-lg p-1.5 border border-slate-700">
-            <span id="cd-minutes" class="font-bold text-base text-white block">00</span>
-            <span class="text-[10px] text-slate-400 uppercase">Phút</span>
-          </div>
-          <div class="bg-slate-800 rounded-lg p-1.5 border border-slate-700">
-            <span id="cd-seconds" class="font-bold text-base text-teal-400 block">00</span>
-            <span class="text-[10px] text-slate-400 uppercase">Giây</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="pt-2 flex items-center justify-between border-t border-slate-700/60 text-xs">
-        <span class="text-slate-300 font-medium"><i class="fa-regular fa-calendar-check text-teal-400 mr-1.5"></i> 20h30 • 31/08/2026</span>
-        <a href="https://daymai.vn/student/course/enrol/33142447" target="_blank" rel="noopener noreferrer" class="text-teal-400 hover:text-teal-300 font-bold flex items-center gap-1">
-          Vào phòng học <i class="fa-solid fa-arrow-right text-[10px]"></i>
-        </a>
-      </div>
-
-      <div class="space-y-2.5 pt-1">
-        <!-- Nút 1: Tra cứu trạng thái đăng ký -->
-        <a href="https://script.google.com/macros/s/AKfycbx0bPlupA2_lWC_7-fICh_lJ-gvmXfRY9LF2OA8K2qbsSDCDBpuV6zo4RD9H3ZNkVhO/exec" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold text-xs transition duration-150 shadow-sm text-center">
-          <i class="fa-solid fa-id-card-clip"></i>
-          <span class="whitespace-nowrap">Tra cứu trạng thái đăng ký kỳ họp</span>
-        </a>
-
-        <!-- Nút 2: Tải Mẫu Bệnh Án Lâm Sàng (Google Slides) -->
-        <a href="https://docs.google.com/presentation/d/1r7_iQzKyi9VdEY1HLRFmCNTdErONZoRM/edit?usp=drive_link&ouid=112212735510373865547&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/40 text-blue-300 font-bold text-xs transition duration-150 shadow-sm text-center">
-          <i class="fa-solid fa-file-powerpoint text-amber-400"></i>
-          <span class="whitespace-nowrap">Tải mẫu Bệnh án Lâm sàng (Slides)</span>
-        </a>
-
-        <!-- Nút 3: Gửi ca lâm sàng / Đặt câu hỏi -->
-        <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 font-semibold text-xs transition duration-150 shadow-sm text-center">
-          <i class="fa-solid fa-file-circle-question"></i>
-          <span class="whitespace-nowrap">Gửi ca lâm sàng / Đặt câu hỏi kỳ họp</span>
-        </a>
-
-        <!-- Hộp 4: Bản Ghi Kỳ 01 (ĐÃ NÂNG CẤP XEM TRỰC TIẾP TRÊN WEB CÓ CHỐNG POP-OUT) -->
-        <details class="group bg-slate-900/90 border border-rose-500/40 rounded-xl overflow-hidden transition duration-150">
-          <summary class="flex items-center justify-center gap-2.5 p-3 cursor-pointer select-none text-center">
-            <i class="fa-solid fa-play text-rose-400 text-xs"></i>
-            <span class="text-xs font-bold text-rose-300 whitespace-nowrap">Xem Bản Ghi & Tài Liệu Kỳ 01 (Hội viên)</span>
-            <i class="fa-solid fa-chevron-down text-xs text-rose-400 group-open:rotate-180 transition-transform duration-200"></i>
-          </summary>
-          <div class="p-3 bg-slate-950/80 border-t border-rose-500/30 text-xs space-y-3">
-            <div class="p-2 rounded-lg bg-rose-950/40 border border-rose-900/60 text-rose-200 text-[11px] leading-relaxed text-center">
-              <strong class="text-rose-400"><i class="fa-solid fa-shield-halved mr-1"></i> Chế độ bảo mật:</strong> Đã kích hoạt Player nội bộ. Video chỉ hiển thị khi trình duyệt đăng nhập đúng Email Hội viên.
+      <!-- Core Links Miễn Phí -->
+      <div class="space-y-2.5">
+        <!-- 1. Kho Notion Miễn Phí -->
+        <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-teal-400 rounded-xl transition group">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-lg bg-teal-950 text-teal-400 flex items-center justify-center text-lg border border-teal-800/60">
+              <i class="fa-solid fa-book-bookmark"></i>
             </div>
-
-            <button onclick="openSecurePlayer('1feTWnuPDNbCOI8msUq4_CqdQgesWfWO5', 'Kỳ 01: Dựng trục răng cối lớn bằng Minivis')" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition shadow-md">
-              <i class="fa-solid fa-circle-play"></i>
-              <span>Xem Bản Ghi Ngay (Player Nội Bộ)</span>
-            </button>
+            <div>
+              <div class="font-bold text-white text-xs group-hover:text-teal-300">Kho Dữ Liệu Notion Tổng Hợp</div>
+              <div class="text-[11px] text-slate-400">Đọc ca lâm sàng & tài liệu tham khảo mở</div>
+            </div>
           </div>
-        </details>
-      </div>
-    </div>
+          <i class="fa-solid fa-chevron-right text-slate-500 text-xs group-hover:text-teal-300"></i>
+        </a>
 
-    <!-- 4. Top nội dung được các bác sĩ quan tâm -->
-    <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-4 space-y-3 shadow-md">
-      <div class="flex items-center justify-between">
+        <!-- 2. Tải Slide Bệnh Án -->
+        <a href="https://docs.google.com/presentation/d/1r7_iQzKyi9VdEY1HLRFmCNTdErONZoRM/edit?usp=drive_link&ouid=112212735510373865547&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-blue-400 rounded-xl transition group">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-lg bg-blue-950 text-blue-400 flex items-center justify-center text-lg border border-blue-800/60">
+              <i class="fa-solid fa-file-powerpoint text-amber-400"></i>
+            </div>
+            <div>
+              <div class="font-bold text-white text-xs group-hover:text-blue-300">Tải Mẫu Bệnh Án Lâm Sàng</div>
+              <div class="text-[11px] text-slate-400">Template Google Slides chuẩn hóa dữ liệu</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-download text-slate-500 text-xs group-hover:text-blue-300"></i>
+        </a>
+
+        <!-- 3. Đăng ký tham gia Kỳ Họp Mới -->
+        <div class="p-4 bg-slate-800/90 border border-slate-700 rounded-2xl space-y-3 shadow-md">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Sắp diễn ra
+            </span>
+            <span class="text-[11px] text-slate-400 font-medium">Zoom Daymai</span>
+          </div>
+          <div>
+            <h2 class="text-sm font-bold text-white uppercase tracking-wide">KỲ HỌP ĐỌC BÁO SỐ 02</h2>
+            <p class="text-[11px] text-slate-300 italic mt-0.5">Dựng trục răng cối lớn bằng Minivis</p>
+          </div>
+          <div class="flex items-center justify-between text-xs pt-1 border-t border-slate-700/60">
+            <span class="text-slate-400 text-[11px]"><i class="fa-regular fa-clock text-teal-400 mr-1"></i> 20h30 • 31/08/2026</span>
+            <a href="https://daymai.vn/student/course/enrol/33142447" target="_blank" rel="noopener noreferrer" class="text-teal-400 font-bold hover:underline text-xs">Đăng ký vào học &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top 3 Video Bài Giảng Nổi Bật -->
+      <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-4 space-y-2.5">
         <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-          <i class="fa-solid fa-fire text-amber-400"></i> Top nội dung được bác sĩ quan tâm
+          <i class="fa-solid fa-fire text-amber-400"></i> Video bài giảng nổi bật (Miễn phí)
         </h3>
-        <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:text-teal-300 font-semibold">Xem kho Notion &rarr;</a>
+        <div class="space-y-2 text-xs">
+          <a href="https://www.youtube.com/watch?v=jPuLbqqYj_w" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-center justify-between transition group">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold text-[10px]">Top 1</span>
+              <span class="font-medium text-slate-200 group-hover:text-amber-200 truncate max-w-[240px]">Webinar: Điều trị cười hở lợi thực chiến</span>
+            </div>
+            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+          </a>
+          <a href="https://www.youtube.com/watch?v=iMqc6BDiK6g&list=PL7YzM7KyB5S6EXP9eTA2cbw0Gnj-rnjFy" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-center justify-between transition group">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-bold text-[10px]">Top 2</span>
+              <span class="font-medium text-slate-200 group-hover:text-blue-200 truncate max-w-[240px]">Các sai lầm thường gặp trong nắn chỉnh răng</span>
+            </div>
+            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+          </a>
+          <a href="https://www.youtube.com/watch?v=QKRo6Gci0Xk&list=PL7YzM7KyB5S6ALSSRrGzvOPdHTUGY0Blz" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-center justify-between transition group">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold text-[10px]">Top 3</span>
+              <span class="font-medium text-slate-200 group-hover:text-purple-200 truncate max-w-[240px]">Tâm sự đêm khuya góc chỉnh nha số 01</span>
+            </div>
+            <i class="fa-brands fa-youtube text-red-500 text-sm"></i>
+          </a>
+        </div>
       </div>
-      <div class="grid grid-cols-1 gap-2.5 text-xs">
-        <!-- Top 1 -->
-        <a href="https://www.youtube.com/watch?v=jPuLbqqYj_w" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-amber-500/50 rounded-xl flex items-start justify-between gap-2.5 transition group">
-          <div class="flex items-start gap-2.5">
-            <span class="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-extrabold uppercase mt-0.5">Top 1</span>
-            <div>
-              <div class="font-semibold text-white group-hover:text-amber-200 transition-colors flex items-center gap-1.5">
-                <span>Webinar: Điều trị cười hở lợi trên lâm sàng thực chiến</span>
-                <i class="fa-brands fa-youtube text-red-500 text-xs"></i>
-              </div>
-              <div class="text-[11px] text-slate-400 mt-0.5">Phân tích chẩn đoán, lựa chọn khí cụ & cơ chế kéo lùi/đánh lún hiệu quả</div>
-            </div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-amber-300 text-[11px] mt-1 shrink-0"></i>
-        </a>
 
-        <!-- Top 2 -->
-        <a href="https://www.youtube.com/watch?v=iMqc6BDiK6g&list=PL7YzM7KyB5S6EXP9eTA2cbw0Gnj-rnjFy" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-blue-500/50 rounded-xl flex items-start justify-between gap-2.5 transition group">
-          <div class="flex items-start gap-2.5">
-            <span class="px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] font-extrabold uppercase mt-0.5">Top 2</span>
-            <div>
-              <div class="font-semibold text-white group-hover:text-blue-200 transition-colors flex items-center gap-1.5">
-                <span>Các sai lầm thường gặp trong nắn chỉnh răng (Playlist)</span>
-                <i class="fa-brands fa-youtube text-red-500 text-xs"></i>
-              </div>
-              <div class="text-[11px] text-slate-400 mt-0.5">Nhận diện sớm các bẫy lực sinh học, mất kiểm soát neo chặn & cách phòng ngừa</div>
-            </div>
+      <!-- Nút CTA Kêu gọi Đăng Ký Hội Viên -->
+      <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 bg-gradient-to-r from-rose-900/60 via-slate-800 to-slate-800 border border-rose-500/50 hover:border-rose-400 rounded-2xl transition shadow-lg group">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-300 flex items-center justify-center text-lg border border-rose-500/30">
+            <i class="fa-solid fa-crown text-amber-400"></i>
           </div>
-          <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-blue-300 text-[11px] mt-1 shrink-0"></i>
-        </a>
+          <div>
+            <div class="font-bold text-rose-200 group-hover:text-rose-100 text-xs">Đăng Ký Hội Viên Chính Thức</div>
+            <div class="text-[11px] text-slate-400">Mở khóa trọn bộ 14 bản ghi & nhóm Zalo kín</div>
+          </div>
+        </div>
+        <i class="fa-solid fa-arrow-right text-rose-400 text-xs group-hover:translate-x-1 transition-transform"></i>
+      </a>
 
-        <!-- Top 3 -->
-        <a href="https://www.youtube.com/watch?v=QKRo6Gci0Xk&list=PL7YzM7KyB5S6ALSSRrGzvOPdHTUGY0Blz" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-purple-500/50 rounded-xl flex items-start justify-between gap-2.5 transition group">
-          <div class="flex items-start gap-2.5">
-            <span class="px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-extrabold uppercase mt-0.5">Top 3</span>
-            <div>
-              <div class="font-semibold text-white group-hover:text-purple-200 transition-colors flex items-center gap-1.5">
-                <span>(Tâm sự đêm khuya góc chỉnh nha số 01)</span>
-                <i class="fa-brands fa-youtube text-red-500 text-xs"></i>
-              </div>
-              <div class="text-[11px] text-slate-400 mt-0.5">Và các bí quyết lâm sàng quý giá</div>
-            </div>
-          </div>
-          <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-purple-300 text-[11px] mt-1 shrink-0"></i>
-        </a>
-      </div>
     </div>
 
-    <!-- 5. FAQ -->
-    <div class="space-y-3 pt-1">
+
+    <!-- ======================================================== -->
+    <!-- TAB 2: NỘI DUNG HỘI VIÊN (TRẢ PHÍ / BẢO MẬT VIDEO)       -->
+    <!-- ======================================================== -->
+    <div id="sectionPaid" class="space-y-4 hidden">
+
+      <!-- Thông tin Hội Viên VIP -->
+      <div class="p-4 bg-gradient-to-br from-rose-950/50 via-slate-800 to-slate-800 border border-rose-500/40 rounded-2xl space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="flex items-center gap-1.5 text-xs font-bold text-rose-300">
+            <i class="fa-solid fa-shield-halved text-amber-400"></i> Khu vực Hội viên VIP
+          </span>
+          <span class="text-[10px] px-2 py-0.5 bg-rose-900/60 text-rose-200 border border-rose-700/60 rounded-full font-semibold">14 Chuyên Đề</span>
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Bác sĩ sử dụng tài khoản Gmail đã đăng ký để phát video trực tiếp. Video được tích hợp Player chống sao chép và watermark bản quyền.
+        </p>
+      </div>
+
+      <!-- Công cụ Hội Viên -->
+      <div class="grid grid-cols-2 gap-2 text-xs">
+        <a href="https://script.google.com/macros/s/AKfycbx0bPlupA2_lWC_7-fICh_lJ-gvmXfRY9LF2OA8K2qbsSDCDBpuV6zo4RD9H3ZNkVhO/exec" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl text-center space-y-1 transition">
+          <i class="fa-solid fa-id-card-clip text-amber-400 text-base"></i>
+          <div class="font-bold text-white text-[11px]">Tra Cứu Quyền Lợi</div>
+        </a>
+        <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl text-center space-y-1 transition">
+          <i class="fa-solid fa-comments text-blue-400 text-base"></i>
+          <div class="font-bold text-white text-[11px]">Nhóm Zalo Nội Bộ</div>
+        </a>
+      </div>
+
+      <!-- DANH MỤC TRÌNH PHÁT 14 CHUYÊN ĐỀ -->
+      <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-4 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-700/80 pb-2.5">
+          <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-play text-rose-400"></i> Danh mục Video Bài Giảng
+          </h3>
+          <span class="text-[10px] text-slate-400">Chọn để xem ngay</span>
+        </div>
+        
+        <!-- Danh sách 14 bài render tự động -->
+        <div id="lessonList" class="space-y-1.5 max-h-80 overflow-y-auto pr-1"></div>
+      </div>
+
+    </div>
+
+    <!-- FAQ Chung -->
+    <div class="space-y-2.5 pt-2">
       <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-1">Câu Hỏi Thường Gặp</h3>
 
-      <details class="group bg-slate-800 border border-slate-700 hover:border-slate-600 rounded-xl overflow-hidden transition duration-150">
-        <summary class="flex justify-between items-center p-3.5 cursor-pointer font-semibold text-xs sm:text-sm text-slate-200 select-none">
+      <details class="group bg-slate-800 border border-slate-700 rounded-xl overflow-hidden transition">
+        <summary class="flex justify-between items-center p-3 cursor-pointer font-semibold text-xs text-slate-200 select-none">
           <span>Để trở thành Hội viên cần làm gì?</span>
-          <i class="fa-solid fa-plus text-xs text-slate-400 group-open:rotate-45 transition-transform duration-200"></i>
+          <i class="fa-solid fa-plus text-xs text-slate-400 group-open:rotate-45 transition-transform"></i>
         </summary>
-        <div class="px-3.5 pb-3.5 pt-1 text-xs text-slate-300 border-t border-slate-700/50 leading-relaxed space-y-1">
-          <div>Bác sĩ cần tham gia ít nhất <strong>01 kỳ họp</strong> trực tiếp cùng Dr.Thai Ortho hoặc mua bản ghi ít nhất <strong>01 kỳ họp</strong> đã diễn ra.</div>
-          <div>Bác sĩ có nhu cầu vui lòng nhắn tin trực tiếp qua <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="text-teal-300 font-semibold underline underline-offset-2 hover:text-teal-200">Zalo Hotline: 0349622964</a> để được hỗ trợ nhanh nhất.</div>
+        <div class="px-3 pb-3 text-xs text-slate-300 border-t border-slate-700/50 leading-relaxed pt-2">
+          Bác sĩ cần tham gia ít nhất <strong>01 kỳ họp</strong> trực tiếp cùng Dr.Thai Ortho hoặc mua bản ghi ít nhất <strong>01 kỳ họp</strong>. Nhắn tin qua <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="text-teal-300 underline">Zalo 0349622964</a> để được duyệt.
         </div>
       </details>
 
-      <details class="group bg-slate-800 border border-slate-700 hover:border-slate-600 rounded-xl overflow-hidden transition duration-150">
-        <summary class="flex justify-between items-center p-3.5 cursor-pointer font-semibold text-xs sm:text-sm text-slate-200 select-none">
-          <span>Tôi được quyền lợi gì khi tham gia?</span>
-          <i class="fa-solid fa-plus text-xs text-slate-400 group-open:rotate-45 transition-transform duration-200"></i>
+      <details class="group bg-slate-800 border border-slate-700 rounded-xl overflow-hidden transition">
+        <summary class="flex justify-between items-center p-3 cursor-pointer font-semibold text-xs text-slate-200 select-none">
+          <span>Tôi không xem được video trên trang thì làm sao?</span>
+          <i class="fa-solid fa-plus text-xs text-slate-400 group-open:rotate-45 transition-transform"></i>
         </summary>
-        <div class="px-3.5 pb-3.5 pt-1 text-xs text-slate-300 border-t border-slate-700/50 leading-relaxed space-y-1.5">
-          <div><strong class="text-teal-300">(1)</strong> Được tham gia <strong>01 buổi đọc sách báo miễn phí</strong> hàng tháng cùng cộng đồng.</div>
-          <div><strong class="text-teal-300">(2)</strong> Được cung cấp thông tin và <strong>ưu tiên đăng ký</strong> khi có kỳ họp chuyên sâu mới diễn ra.</div>
-        </div>
-      </details>
-
-      <details class="group bg-slate-800 border border-slate-700 hover:border-slate-600 rounded-xl overflow-hidden transition duration-150">
-        <summary class="flex justify-between items-center p-3.5 cursor-pointer font-semibold text-xs sm:text-sm text-slate-200 select-none">
-          <span>Tôi đã đăng ký lẻ tẻ, muốn mua Full bản ghi để đủ bài giảng?</span>
-          <i class="fa-solid fa-plus text-xs text-slate-400 group-open:rotate-45 transition-transform duration-200"></i>
-        </summary>
-        <div class="px-3.5 pb-3.5 pt-1 text-xs text-slate-300 border-t border-slate-700/50 leading-relaxed">
-          Bác sĩ có thể tra cứu trên trang <strong class="text-teal-300">Notion của #drthaiortho</strong> (đường dẫn ở nút bấm bên trên) & nhập email để kiểm tra mức phí nâng cấp theo chính sách ưu đãi dành riêng cho Hội viên lâu năm.
-        </div>
-      </details>
-
-      <details class="group bg-slate-800 border border-slate-700 hover:border-slate-600 rounded-xl overflow-hidden transition duration-150">
-        <summary class="flex justify-between items-center p-3.5 cursor-pointer font-semibold text-xs sm:text-sm text-slate-200 select-none">
-          <span>Làm sao để mở nhanh trang web này mỗi ngày?</span>
-          <i class="fa-solid fa-plus text-xs text-slate-400 group-open:rotate-45 transition-transform duration-200"></i>
-        </summary>
-        <div class="px-3.5 pb-3.5 pt-1 text-xs text-slate-300 border-t border-slate-700/50 leading-relaxed space-y-2">
-          <div class="p-2 rounded bg-amber-500/10 border border-amber-500/30 text-amber-200 text-[11px]">
-            <strong>⚠️ Lưu ý quan trọng:</strong> Nếu đang mở link từ Zalo/Facebook, hãy bấm dấu <strong>3 chấm (...)</strong> ở góc trên &rarr; Chọn <strong>"Mở bằng trình duyệt"</strong> trước khi thao tác các bước dưới đây.
-          </div>
-          <div class="space-y-1.5">
-            <div>🤖 <strong>Android (Chrome):</strong> Bấm dấu <strong>3 chấm (⋮)</strong> góc trên phải &rarr; Chọn <strong>"Cài đặt và tạo lối tắt"</strong> &rarr; Chọn <strong>"Cài đặt"</strong> (hoặc "Thêm vào màn hình chính").</div>
-            <div>🍏 <strong>iPhone (Safari):</strong> Bấm nút <strong>Chia sẻ</strong> (ô vuông có mũi tên lên <i class="fa-solid fa-arrow-up-from-bracket"></i> ở đáy) &rarr; Cuộn xuống chọn <strong>"Thêm vào MH chính"</strong> &rarr; Bấm <strong>Thêm</strong>.</div>
-          </div>
+        <div class="px-3 pb-3 text-xs text-slate-300 border-t border-slate-700/50 leading-relaxed pt-2">
+          Hãy đảm bảo trình duyệt của bạn (Chrome/Safari) đang đăng nhập đúng tài khoản Gmail đã đăng ký Hội viên với Dr.Thai Ortho.
         </div>
       </details>
     </div>
 
-    <!-- 6. Chân trang -->
-    <div class="pt-6 pb-4 border-t border-slate-800 space-y-3 text-center">
-      <div class="flex items-center justify-center gap-2.5 text-xs flex-wrap">
-        <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-teal-400 border border-slate-700 transition">
-          <i class="fa-solid fa-phone"></i>
-          <span>Hotline/Zalo: <strong>0349622964</strong></span>
-        </a>
-
-        <a href="https://www.youtube.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-red-400 hover:text-red-300 border border-slate-700 transition">
-          <i class="fa-brands fa-youtube text-red-500"></i>
-          <span>YouTube: <strong>Dr.Thai Ortho</strong></span>
-        </a>
-
-        <a href="https://www.tiktok.com/@drthaiortho" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition">
-          <i class="fa-brands fa-tiktok text-teal-400"></i>
-          <span>TikTok: <strong>@drthaiortho</strong></span>
-        </a>
+    <!-- Chân trang -->
+    <div class="pt-4 pb-2 border-t border-slate-800 space-y-2 text-center text-xs">
+      <div class="flex items-center justify-center gap-2 flex-wrap text-[11px]">
+        <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="text-teal-400 hover:underline">Zalo: 0349622964</a> •
+        <a href="https://www.youtube.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="text-red-400 hover:underline">YouTube</a> •
+        <a href="https://www.tiktok.com/@drthaiortho" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:underline">TikTok</a>
       </div>
-      <div class="text-[11px] text-slate-500">
-        &copy; 2026 Dr.Thai Ortho • All rights reserved.
-      </div>
+      <div class="text-[10px] text-slate-500">&copy; 2026 Dr.Thai Ortho • All rights reserved.</div>
     </div>
 
   </div>
 
-  <!-- MODAL SECURE PLAYER (XEM TRỰC TIẾP TRÊN WEB + CHẶN MỞ TAB NGOÀI) -->
+  <!-- POPUP PLAYER SECURE -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-3 hidden opacity-0 transition-opacity duration-200">
     <div class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col">
-      <!-- Header Modal -->
-      <div class="p-3.5 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between">
+      <div class="p-3 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <i class="fa-solid fa-shield-halved text-teal-400 text-xs"></i>
+          <i class="fa-solid fa-circle-play text-rose-400 text-sm"></i>
           <span id="videoTitle" class="text-xs font-bold text-white truncate max-w-[260px]">Bản ghi bài giảng</span>
         </div>
-        <button onclick="closeSecurePlayer()" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition">
+        <button onclick="closeSecurePlayer()" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center">
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
 
-      <!-- Video Container -->
       <div class="relative w-full pb-[56.25%] bg-black overflow-hidden select-none">
-        <!-- Iframe Google Drive -->
         <iframe id="driveFrame" class="absolute inset-0 w-full h-full border-0" allow="autoplay"></iframe>
-
-        <!-- Lớp CSS Blocker chặn nút Pop-out góc trên phải của Drive -->
         <div class="absolute top-0 right-0 w-16 h-14 z-20 bg-transparent cursor-default"></div>
-
-        <!-- Watermark chống quay màn hình -->
         <div id="dynamicWatermark" class="absolute z-10 pointer-events-none text-white/30 text-[11px] font-bold tracking-wider select-none transition-all duration-700 drop-shadow" style="top: 20%; left: 20%;">
           Dr.Thai Ortho • Hội viên
         </div>
       </div>
 
-      <!-- Footer Modal -->
-      <div class="p-2.5 bg-slate-900 text-center border-t border-slate-800">
+      <div class="p-2 bg-slate-900 text-center border-t border-slate-800">
         <p class="text-[10px] text-slate-400 flex items-center justify-center gap-1">
-          <i class="fa-solid fa-lock text-amber-400"></i> Video bảo mật chống sao chép • Bản quyền Dr.Thai Ortho
+          <i class="fa-solid fa-shield-halved text-teal-400"></i> Video bảo mật chống sao chép • Bản quyền Dr.Thai Ortho
         </p>
       </div>
     </div>
   </div>
 
-  <!-- Toast thông báo Copy thành công -->
-  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-teal-500 text-slate-950 font-bold px-4 py-2 rounded-full text-xs shadow-2xl transition duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-1.5">
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-teal-500 text-slate-950 font-bold px-4 py-2 rounded-full text-xs shadow-2xl transition duration-300 opacity-0 pointer-events-none z-50">
     <i class="fa-solid fa-check"></i> Đã sao chép link trang!
   </div>
 
-  <!-- Script: Đồng hồ đếm ngược, Sao chép Link & Secure Player -->
+  <!-- SCRIPT ĐIỀU KHIỂN -->
   <script>
-    const targetDate = new Date('2026-08-31T20:30:00+07:00').getTime();
+    // 1. DANH SÁCH 14 BÀI HỌC (Điền ID file Google Drive vào driveId)
+    const LESSONS_DATA = [
+      { code: "[2025-02]", title: "Andrews 6 Keys, Mắc cài, 3Shape", driveId: "1feTWnuPDNbCOI8msUq4_CqdQgesWfWO5" },
+      { code: "[2025-03]", title: "Ceph, Occlusogram, PIP VTO, 3D Ceph", driveId: "ID_FILE_DRIVE" },
+      { code: "[2025-05]", title: "Neo gián tiếp, Lòi chân R, Hạng II góc cao", driveId: "ID_FILE_DRIVE" },
+      { code: "[2025-06]", title: "Biomechanics, MP nhai, KS Torque", driveId: "ID_FILE_DRIVE" },
+      { code: "[2025-07]", title: "Class III, Đóng khoảng, Nhổ lệch", driveId: "ID_FILE_DRIVE" },
+      { code: "[2025-09]", title: "Điều trị sớm Class III", driveId: "ID_FILE_DRIVE" },
+      { code: "[2025-11]", title: "Di xa R3 biến chứng", driveId: "ID_FILE_DRIVE" },
+      { code: "[2025-12]", title: "Đóng khoảng Protocol tổng hợp", driveId: "ID_FILE_DRIVE" },
+      { code: "[2026-01]", title: "Nhổ răng hay không?", driveId: "ID_FILE_DRIVE" },
+      { code: "[2026-02]", title: "Di xa", driveId: "ID_FILE_DRIVE" },
+      { code: "[2026-03]", title: "Neo chặn lâm sàng", driveId: "ID_FILE_DRIVE" },
+      { code: "[2026-04]", title: "Deepbite - Khớp cắn sâu", driveId: "ID_FILE_DRIVE" },
+      { code: "[2026-07]", title: "Class II High Angle Openbite", driveId: "ID_FILE_DRIVE" },
+      { code: "[2026-08]", title: "Class II Division 2", driveId: "ID_FILE_DRIVE" }
+    ];
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
+    // Chuyển đổi Tab Miễn Phí / Hội Viên
+    function switchTab(tab) {
+      const freeSec = document.getElementById('sectionFree');
+      const paidSec = document.getElementById('sectionPaid');
+      const btnFree = document.getElementById('tabBtnFree');
+      const btnPaid = document.getElementById('tabBtnPaid');
 
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
-        document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
-        document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
-        document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
+      if (tab === 'free') {
+        freeSec.classList.remove('hidden');
+        paidSec.classList.add('hidden');
+        btnFree.className = 'py-2 px-3 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 transition duration-200 bg-teal-500 text-slate-950 shadow';
+        btnPaid.className = 'py-2 px-3 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 transition duration-200 text-slate-400 hover:text-rose-300';
       } else {
-        document.getElementById('cd-days').innerText = '00';
-        document.getElementById('cd-hours').innerText = '00';
-        document.getElementById('cd-minutes').innerText = '00';
-        document.getElementById('cd-seconds').innerText = '00';
+        freeSec.classList.add('hidden');
+        paidSec.classList.remove('hidden');
+        btnPaid.className = 'py-2 px-3 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 transition duration-200 bg-rose-600 text-white shadow';
+        btnFree.className = 'py-2 px-3 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 transition duration-200 text-slate-400 hover:text-teal-300';
       }
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
 
+    // Render danh sách bài giảng
+    function renderLessons() {
+      const container = document.getElementById('lessonList');
+      container.innerHTML = LESSONS_DATA.map((item) => `
+        <button onclick="openSecurePlayer('${item.driveId}', '${item.code} ${item.title}')" class="w-full flex items-center justify-between p-2.5 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-rose-500/50 rounded-lg text-left transition group">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] shrink-0 font-semibold border border-rose-900/60">${item.code}</span>
+            <span class="text-xs text-slate-200 group-hover:text-white font-medium truncate">${item.title}</span>
+          </div>
+          <i class="fa-solid fa-play text-[10px] text-slate-500 group-hover:text-rose-400 shrink-0 ml-2"></i>
+        </button>
+      `).join('');
+    }
+    renderLessons();
+
+    // Copy Link
     function copySiteLink() {
-      const url = window.location.href;
-      navigator.clipboard.writeText(url).then(() => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
         const toast = document.getElementById('toast');
         toast.classList.remove('opacity-0');
         toast.classList.add('opacity-100');
@@ -427,10 +348,13 @@
       });
     }
 
-    // Logic Modal Secure Player
+    // Modal Player
     let watermarkInterval;
-
     function openSecurePlayer(driveId, title) {
+      if (!driveId || driveId === 'ID_FILE_DRIVE') {
+        alert('Chuyên đề này đang được cập nhật file video!');
+        return;
+      }
       const modal = document.getElementById('videoModal');
       const frame = document.getElementById('driveFrame');
       const titleEl = document.getElementById('videoTitle');
@@ -442,7 +366,6 @@
       modal.classList.remove('hidden');
       setTimeout(() => modal.classList.remove('opacity-0'), 10);
 
-      // Watermark nhảy vị trí ngẫu nhiên mỗi 6 giây
       watermarkInterval = setInterval(() => {
         if (wm) {
           wm.style.top = Math.floor(Math.random() * 65 + 10) + '%';
@@ -458,7 +381,7 @@
       modal.classList.add('opacity-0');
       setTimeout(() => {
         modal.classList.add('hidden');
-        frame.src = ''; // Dừng phát video
+        frame.src = '';
         clearInterval(watermarkInterval);
       }, 200);
     }
