@@ -128,7 +128,7 @@
 
   <!-- MODAL THÔNG BÁO BỊ ĐĂNG XUẤT DO THIẾT BỊ KHÁC ĐĂNG NHẬP -->
   <div id="sessionRevokedModal" class="hidden fixed inset-0 bg-slate-950/85 z-[9999999] p-4 flex items-center justify-center backdrop-blur-sm">
-    <div class="bg-white border-2 border-rose-500 rounded-3xl p-5 max-w-sm w-full text-center space-y-4 shadow-2xl animate-bounce-short">
+    <div class="bg-white border-2 border-rose-500 rounded-3xl p-5 max-w-sm w-full text-center space-y-4 shadow-2xl">
       <div class="w-16 h-16 mx-auto rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-3xl border-2 border-rose-300">
         <i class="fa-solid fa-mobile-screen-button"></i>
       </div>
@@ -146,13 +146,12 @@
 
   <!-- OVERLAY HƯỚNG DẪN THOÁT ZALO TRÊN IPHONE -->
   <div id="iosInAppNotice" class="hidden fixed inset-0 bg-slate-900/90 z-[999999] p-6 flex flex-col justify-between text-center backdrop-blur-md text-white">
-    <div class="flex justify-end pr-2 pt-1 animate-bounce">
+    <div class="flex justify-end pr-2 pt-1">
       <div class="text-amber-400 text-right space-y-1">
         <i class="fa-solid fa-arrow-up text-3xl"></i>
         <div class="text-xs font-bold uppercase tracking-wider">Bấm vào đây</div>
       </div>
     </div>
-
     <div class="space-y-4 max-w-sm mx-auto">
       <div class="w-14 h-14 mx-auto rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-2xl border border-teal-500/40">
         <i class="fa-brands fa-safari"></i>
@@ -163,7 +162,6 @@
           Bác sĩ đang mở trang qua trình duyệt phụ của <b>Zalo</b> nên không tự kết nối được với ứng dụng Google Drive.
         </p>
       </div>
-
       <div class="p-3 bg-slate-800 border border-slate-700 rounded-xl text-left space-y-2 text-xs text-slate-200">
         <div class="flex items-center gap-2">
           <span class="w-5 h-5 rounded-full bg-teal-400 text-slate-950 font-bold flex items-center justify-center text-[11px] shrink-0">1</span>
@@ -175,7 +173,6 @@
         </div>
       </div>
     </div>
-
     <div>
       <button onclick="document.getElementById('iosInAppNotice').classList.add('hidden')" class="w-full py-2.5 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold hover:text-white border border-slate-700">
         Tôi hiểu rồi, tiếp tục xem ở đây
@@ -286,7 +283,7 @@
         </div>
       </div>
 
-      <div id="featuredVideosAnchor" class="card-elevated border border-slate-300/80 rounded-2xl p-4 space-y-3">
+      <div class="card-elevated border border-slate-300/80 rounded-2xl p-4 space-y-3">
         <div class="flex items-center justify-between">
           <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
             <i class="fa-solid fa-fire text-amber-500 text-base"></i> Top bài giảng được xem nhiều nhất
@@ -347,6 +344,28 @@
     <!-- TAB 2: KHU VỰC HỘI VIÊN -->
     <div id="sectionPaid" class="space-y-4 hidden">
 
+      <!-- WIDGET 1: KIỂM TRA DUYỆT KỲ 02 -->
+      <div class="card-elevated border-2 border-teal-500/60 rounded-2xl p-4 space-y-3 bg-gradient-to-br from-teal-50/50 via-white to-white">
+        <div class="flex items-center justify-between">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-teal-700 text-white shadow-xs">
+            <i class="fa-solid fa-clipboard-check"></i> Tra cứu danh sách Kỳ 02
+          </span>
+          <span class="text-xs text-slate-500 font-bold">Zoom 31/08/2026</span>
+        </div>
+        <div>
+          <h3 class="text-xs sm:text-sm font-black text-slate-900">Kiểm tra Email tham gia Kỳ 02</h3>
+          <p class="text-[11px] text-slate-600 font-medium">Nhập email của Bác sĩ để kiểm tra trạng thái duyệt:</p>
+        </div>
+        <div class="flex gap-2">
+          <input type="email" id="inputCheckKy02" placeholder="Nhập email của bạn..." class="w-full bg-white border-2 border-slate-300 focus:border-teal-600 focus:outline-none rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-900 font-medium shadow-xs">
+          <button onclick="checkKy02Status()" id="btnCheckKy02" class="px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs shrink-0 transition shadow-md">
+            Kiểm Tra
+          </button>
+        </div>
+        <div id="resultKy02Box" class="hidden p-2.5 rounded-xl text-xs font-medium"></div>
+      </div>
+
+      <!-- WIDGET 2: ĐẾM NGƯỢC KỲ HỌP -->
       <div class="card-elevated border-2 border-amber-300/80 rounded-2xl p-4 space-y-3 bg-gradient-to-b from-amber-50/40 via-white to-white">
         <div class="flex items-center justify-between">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500 text-white shadow-xs">
@@ -383,6 +402,28 @@
           <span class="text-slate-800 font-bold"><i class="fa-regular fa-calendar-check text-teal-700 mr-1 text-sm"></i> 20h30 • 31/08/2026</span>
           <a href="https://daymai.vn/student/course/enrol/33142447" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-teal-900 font-black flex items-center gap-1">
             Phòng Zoom &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- WIDGET 3: XEM THƯ MỤC BẢN GHI & SỔ XUỐNG (CHỈ HỘI VIÊN CHÍNH THỨC MỚI MỞ) -->
+      <div id="vipFolderBox" class="hidden card-elevated border-2 border-teal-600 rounded-2xl p-4 space-y-3 bg-gradient-to-r from-teal-50 via-white to-white">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center text-lg shadow-sm">
+              <i class="fa-solid fa-folder-tree"></i>
+            </div>
+            <div>
+              <h3 class="text-xs sm:text-sm font-black text-teal-950 uppercase tracking-wide">Thư Mục Bản Ghi & Sổ Xuống</h3>
+              <p class="text-[11px] text-teal-800 font-medium">Đã mở khóa toàn bộ cho Hội viên chính thức</p>
+            </div>
+          </div>
+          <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black border border-emerald-300">✓ ĐÃ XÁC THỰC</span>
+        </div>
+        <div class="space-y-2">
+          <a href="https://drive.google.com/drive/folders/1pyel5r5CemQ2dgparFZjyXgii9oTKY1kQB7KK7IWwhU" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 px-3 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs sm:text-sm transition shadow-md">
+            <i class="fa-brands fa-google-drive text-base"></i>
+            <span>Mở Thư Mục Tổng Hợp Bản Ghi Google Drive</span>
           </a>
         </div>
       </div>
@@ -722,6 +763,45 @@
       document.getElementById('sessionRevokedModal').classList.add('hidden');
     }
 
+    // KIỂM TRA EMAIL DUYỆT KỲ 02
+    async function checkKy02Status() {
+      const emailInput = document.getElementById('inputCheckKy02');
+      const email = emailInput.value.trim().toLowerCase();
+      const resultBox = document.getElementById('resultKy02Box');
+      const btn = document.getElementById('btnCheckKy02');
+
+      if (!email || !email.includes('@')) {
+        resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đúng định dạng Gmail.`;
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
+      resultBox.classList.remove('hidden');
+      resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 block";
+      resultBox.innerHTML = `<i class="fa-solid fa-rotate fa-spin"></i> Đang tra cứu danh sách Kỳ 02...`;
+
+      try {
+        const res = await fetch(`${SCRIPT_API_URL}?action=check_ky02&email=${encodeURIComponent(email)}&_nocache=${Date.now()}`);
+        const data = await res.json();
+
+        if (data.success && data.approved) {
+          resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 block";
+          resultBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> ${data.message}`;
+        } else {
+          resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 block";
+          resultBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1"></i> ${data.message}`;
+        }
+      } catch (err) {
+        resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Không thể kết nối tới Google Sheet kiểm tra lúc này. Vui lòng thử lại!`;
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Kiểm Tra";
+      }
+    }
+
     async function requestEmailOtp() {
       const emailInput = document.getElementById('inputUserEmail');
       const email = (currentUserEmail || emailInput.value).trim().toLowerCase();
@@ -847,6 +927,9 @@
       document.getElementById('authenticatedEmailText').innerText = email;
       document.getElementById('authStatusMessage').innerHTML = `<span class="text-teal-800 font-bold"><i class="fa-solid fa-circle-check"></i> Đã mở khóa bảo mật thành công!</span>`;
 
+      // HIỂN THỊ NÚT XEM THƯ MỤC BẢN GHI & SỔ XUỐNG KHI ĐÃ LÀ HỘI VIÊN CHÍNH THỨC
+      document.getElementById('vipFolderBox').classList.remove('hidden');
+
       const accessedFolders = data.folders || [];
       const countEl = document.getElementById('lessonCountBadge');
       
@@ -908,7 +991,6 @@
       }
     }
 
-    // MỞ POPUP THANH TOÁN TỰ ĐỘNG KHÓA NỘI DUNG VÀ TIỀN TRÊN QR
     function openPaymentModal() {
       const amount = currentUpgradeFeeRaw || 500000;
       const email = currentUserEmail || "bacsi";
@@ -916,8 +998,6 @@
       const content = `NC ${shortUser}`;
 
       document.getElementById('modalUpgradeAmount').innerText = amount.toLocaleString('vi-VN') + "đ";
-
-      // Tạo mã VietQR chuẩn MBBank - STK 4247666888 - HKD DR.THAI ORTHO
       const qrUrl = `https://img.vietqr.io/image/MB-4247666888-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(content)}&accountName=HKD%20DR.THAI%20ORTHO`;
       document.getElementById('qrPaymentImg').src = qrUrl;
 
@@ -966,6 +1046,7 @@
       document.getElementById('stepOtpBlock').classList.add('hidden');
       document.getElementById('stepEmailBlock').classList.remove('hidden');
       document.getElementById('upgradeBox').classList.add('hidden');
+      document.getElementById('vipFolderBox').classList.add('hidden');
       document.getElementById('authStatusMessage').innerHTML = `<i class="fa-solid fa-shield-halved text-teal-700"></i> Mỗi thời điểm chỉ duy nhất 1 thiết bị hoạt động.`;
       document.getElementById('lessonCountBadge').innerText = `14 Chuyên đề`;
       const btnSend = document.getElementById('btnSendOtp');
