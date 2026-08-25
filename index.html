@@ -87,13 +87,12 @@
 
   <div class="max-w-md mx-auto space-y-4">
 
-    <!-- 1. Header Thương Hiệu (Logo nhỏ gọn chuẩn cũ, chữ to rõ) -->
+    <!-- 1. Header Thương Hiệu -->
     <div class="text-center pt-1 relative">
       <button onclick="copySiteLink()" class="absolute top-0 right-0 p-2.5 rounded-full bg-white hover:bg-slate-100 text-slate-500 hover:text-teal-700 border border-slate-300 transition shadow-xs" title="Sao chép link chia sẻ">
         <i class="fa-solid fa-share-nodes text-sm"></i>
       </button>
 
-      <!-- LOGO ĐÃ THU NHỎ LẠI NHƯ CŨ -->
       <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-2 rounded-full bg-white p-1 shadow-sm overflow-hidden flex items-center justify-center border-2 border-teal-600">
         <img src="./Logo.png" alt="Dr. Thai Ortho" class="w-full h-full object-contain rounded-full">
       </div>
@@ -117,11 +116,8 @@
       </button>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- TAB 1: TÀI NGUYÊN MỞ                                     -->
-    <!-- ======================================================== -->
+    <!-- TAB 1: TÀI NGUYÊN MỞ -->
     <div id="sectionFree" class="space-y-3.5">
-      
       <!-- 3 Bước -->
       <div class="p-3.5 bg-white border border-slate-200/90 rounded-2xl space-y-2.5 shadow-xs">
         <div class="flex items-center justify-between">
@@ -393,12 +389,45 @@
             <i class="fa-solid fa-shield-halved text-teal-700"></i> Mỗi thời điểm chỉ duy nhất 1 thiết bị hoạt động.
           </div>
 
-          <div id="upgradeBox" class="hidden p-2.5 bg-rose-50 border border-rose-200 rounded-xl space-y-1 text-xs sm:text-sm text-rose-900 text-left">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-slate-900"><i class="fa-solid fa-sparkles text-amber-500 mr-1"></i> Gói Nâng Cấp Full:</span>
-              <span id="upgradeFeeTag" class="px-2 py-0.5 rounded bg-rose-600 text-white font-extrabold text-xs sm:text-sm">0đ</span>
+          <!-- ======================================================== -->
+          <!-- BẢNG SO SÁNH GIÁ NÂNG CẤP FULL (TƯƠNG PHẢN RÕ RỆT)       -->
+          <!-- ======================================================== -->
+          <div id="upgradeBox" class="hidden p-3.5 bg-gradient-to-br from-rose-50/90 via-white to-amber-50/50 border-2 border-rose-300 rounded-2xl space-y-2.5 text-left shadow-xs">
+            
+            <!-- Hàng 1: Trạng thái sở hữu -->
+            <div class="flex items-center justify-between border-b border-rose-100 pb-2 text-xs">
+              <span class="font-bold text-slate-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-folder-open text-teal-600"></i> <span id="upgradeStatusText">Đã sở hữu: 6/14 Folder</span>
+              </span>
+              <span id="upgradeMissingBadge" class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 font-extrabold text-[11px] border border-amber-300">
+                Còn thiếu: 8 Folder
+              </span>
             </div>
-            <div id="upgradeNoteText" class="text-xs text-slate-700 leading-relaxed italic"></div>
+
+            <!-- Hàng 2: So sánh giá tương phản -->
+            <div class="grid grid-cols-2 gap-2 items-center bg-white p-2.5 rounded-xl border border-rose-100">
+              <div>
+                <div class="text-[10px] text-slate-500 font-semibold uppercase">Mua lẻ từng kỳ:</div>
+                <div id="retailPriceText" class="text-xs text-slate-400 line-through font-semibold">4.000.000đ</div>
+              </div>
+              <div class="text-right">
+                <div class="text-[10px] text-rose-600 font-bold uppercase flex items-center justify-end gap-1">
+                  <i class="fa-solid fa-sparkles text-amber-500"></i> Ưu đãi Combo Full:
+                </div>
+                <div id="upgradeFeeTag" class="text-base sm:text-lg font-black text-rose-600">2.000.000đ</div>
+              </div>
+            </div>
+
+            <!-- Hàng 3: Badge Tiết kiệm & CTA Zalo -->
+            <div class="flex items-center justify-between gap-2 pt-0.5">
+              <span id="savedAmountBadge" class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 text-xs font-extrabold border border-emerald-300 flex items-center gap-1">
+                <i class="fa-solid fa-circle-check text-emerald-600"></i> Tiết kiệm: 2.000.000đ (50%)
+              </span>
+              <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-xs transition flex items-center gap-1 shadow-xs shrink-0">
+                <span>Nâng cấp ngay</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+
           </div>
         </div>
 
@@ -714,9 +743,13 @@
       const accessedFolders = data.folders || [];
       const summary = data.upgradeSummary || {};
       const countEl = document.getElementById('lessonCountBadge');
+      
       const upgradeBox = document.getElementById('upgradeBox');
+      const upgradeStatusText = document.getElementById('upgradeStatusText');
+      const upgradeMissingBadge = document.getElementById('upgradeMissingBadge');
+      const retailPriceText = document.getElementById('retailPriceText');
       const upgradeFeeTag = document.getElementById('upgradeFeeTag');
-      const upgradeNoteText = document.getElementById('upgradeNoteText');
+      const savedAmountBadge = document.getElementById('savedAmountBadge');
 
       if (accessedFolders.length > 0) {
         const accessedIds = accessedFolders.map(f => f.folderId);
@@ -731,10 +764,14 @@
         countEl.innerText = `${currentAllowedList.length}/14 Đã mở`;
         renderLessons(currentAllowedList, false);
 
+        // HIỂN THỊ BẢNG SO SÁNH NÂNG CẤP NẾU CÒN THIẾU BÀI HỌC
         if (summary.missingMonths > 0) {
           upgradeBox.classList.remove('hidden');
+          upgradeStatusText.innerText = `Đã sở hữu: ${summary.purchasedMonths}/${summary.totalMonths} Folder`;
+          upgradeMissingBadge.innerText = `Còn thiếu: ${summary.missingMonths} Folder`;
+          retailPriceText.innerText = `${summary.formattedRetailMissingTotal} (${summary.missingMonths} kỳ × 500k)`;
           upgradeFeeTag.innerText = summary.formattedUpgradeFee;
-          upgradeNoteText.innerText = summary.policyNote;
+          savedAmountBadge.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600"></i> Tiết kiệm: ${summary.formattedSavedAmount} (${summary.savedPercent}%)`;
         } else {
           upgradeBox.classList.add('hidden');
         }
