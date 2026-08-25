@@ -291,20 +291,20 @@
         </a>
       </div>
 
-      <!-- 4. KHU VỰC BẢN GHI VIP & TRA CỨU QUYỀN HỘI VIÊN LIỀN MẠCH -->
+      <!-- 4. KHU VỰC BẢN GHI VIP & TỰ ĐỘNG TRA CỨU QUYỀN APPS SCRIPT -->
       <div class="bg-gradient-to-b from-slate-850 to-slate-900 border border-rose-500/40 rounded-2xl p-4 space-y-3.5 shadow-xl">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <i class="fa-solid fa-film text-rose-400 text-base"></i>
             <div>
               <h3 class="text-xs font-bold text-white uppercase tracking-wide">Kho Bản Ghi Hội Viên VIP</h3>
-              <p class="text-[10px] text-slate-400">Hệ thống phân quyền & hiển thị tự động theo Email</p>
+              <p class="text-[10px] text-slate-400">Rà soát phân quyền tự động từ Google Drive</p>
             </div>
           </div>
           <span class="text-[10px] px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800/80 rounded-full font-bold">14 Chuyên Đề</span>
         </div>
 
-        <!-- Ô Nhập Email Tra Cứu & Tự Động Lọc Bài Học -->
+        <!-- Ô Nhập Email Tra Cứu -->
         <div class="p-3 bg-slate-900/90 rounded-xl border border-slate-700/80 space-y-2">
           <label class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
             <i class="fa-solid fa-envelope text-teal-400"></i> Nhập Gmail Hội viên để mở khóa bài học:
@@ -312,19 +312,31 @@
           <div class="flex gap-1.5">
             <input type="email" id="userEmailInput" placeholder="bacsi@gmail.com" class="w-full bg-slate-950 border border-slate-700 focus:border-teal-400 focus:outline-none rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500">
             <button onclick="applyUserEmail()" class="px-3.5 py-2 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs shrink-0 transition flex items-center gap-1">
-              <i class="fa-solid fa-key"></i>
-              <span>Kích Hoạt</span>
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <span>Tra Cứu</span>
             </button>
           </div>
           <div id="emailStatusText" class="text-[10px] text-slate-400 flex items-center gap-1">
-            <i class="fa-solid fa-circle-info text-amber-400"></i> Chưa kích hoạt: Đang hiển thị toàn bộ danh mục tham khảo.
+            <i class="fa-solid fa-circle-info text-amber-400"></i> Đang hiển thị toàn bộ danh mục tham khảo.
+          </div>
+
+          <!-- Khung Báo Giá Nâng Cấp Tự Động (Ẩn khi chưa tra cứu) -->
+          <div id="upgradeBox" class="hidden p-2.5 bg-rose-950/40 border border-rose-900/60 rounded-lg space-y-1.5 text-xs text-rose-200">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-white text-[11px]"><i class="fa-solid fa-sparkles text-amber-400 mr-1"></i> Chính Sách Nâng Cấp Full Combo:</span>
+              <span id="upgradeFeeTag" class="px-2 py-0.5 rounded bg-rose-600 text-white font-extrabold text-[10px]">0đ</span>
+            </div>
+            <div id="upgradeNoteText" class="text-[10px] text-slate-300 italic"></div>
+            <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[11px] text-teal-300 font-bold hover:underline pt-0.5">
+              Nhắn tin Zalo để nâng cấp Full trọn bộ &rarr;
+            </a>
           </div>
         </div>
 
         <!-- Danh sách bài học render theo phân quyền -->
         <div class="space-y-1.5">
           <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between px-1">
-            <span>Danh sách chuyên đề được cấp</span>
+            <span>Danh sách chuyên đề</span>
             <span id="lessonCountBadge" class="text-rose-400 font-mono text-[10px]">14/14 Chuyên đề</span>
           </div>
           <div id="lessonList" class="space-y-1.5 max-h-80 overflow-y-auto pr-1"></div>
@@ -343,7 +355,7 @@
           <i class="fa-solid fa-plus text-xs text-slate-400 group-open:rotate-45 transition-transform"></i>
         </summary>
         <div class="px-3 pb-3 text-xs text-slate-300 border-t border-slate-700/50 leading-relaxed pt-2">
-          Bác sĩ có thể nhắn tin trực tiếp qua <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="text-teal-300 underline">Zalo Hotline: 0349622964</a> để nhận bảng giá ưu đãi nâng cấp Full trọn bộ dành riêng cho Hội viên.
+          Hệ thống sẽ tự động tính phí chênh lệch ưu đãi khi Bác sĩ tra cứu Email ở trên, hoặc nhắn tin trực tiếp qua <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="text-teal-300 underline">Zalo Hotline: 0349622964</a> để được hỗ trợ.
         </div>
       </details>
 
@@ -384,10 +396,10 @@
         </button>
       </div>
 
-      <!-- Container chiều cao 520px hiển thị toàn bộ file trong thư mục -->
+      <!-- Khung hiển thị danh sách file trong Folder Drive -->
       <div class="relative w-full h-[520px] bg-slate-950 overflow-hidden select-none">
         <iframe id="driveFrame" class="w-full h-full border-0" allow="autoplay"></iframe>
-        <!-- Che góc phải trên của Google Drive để chặn icon mở tab mới -->
+        <!-- Che góc phải trên chặn nút pop-out -->
         <div class="absolute top-0 right-0 w-16 h-14 z-20 bg-transparent cursor-default"></div>
         <!-- Watermark di động -->
         <div id="dynamicWatermark" class="absolute z-10 pointer-events-none text-white/30 text-[11px] font-bold tracking-wider select-none transition-all duration-700 drop-shadow" style="top: 20%; left: 20%;">
@@ -407,33 +419,28 @@
     <i class="fa-solid fa-check"></i> Đã sao chép link trang!
   </div>
 
-  <!-- SCRIPT ĐIỀU KHIỂN & 14 FOLDER DRIVE IDs -->
+  <!-- SCRIPT KẾT NỐI APPS SCRIPT API & DATA 14 FOLDERS -->
   <script>
-    // 1. DANH SÁCH 14 FOLDER DRIVE CHÍNH XÁC
-    const LESSONS_DATA = [
-      { id: "2025-02", code: "[2025-02]", title: "Andrews 6 Keys, Mắc cài, 3Shape", driveId: "1Ae8PPXBmvn1hmsGfvA8igGSlBuspoJs-" },
-      { id: "2025-03", code: "[2025-03]", title: "Ceph, Occlusogram, PIP VTO, 3D Ceph", driveId: "1E2J6X0oNcoDjSQxk9VUF1Y3AUp5txJaW" },
-      { id: "2025-05", code: "[2025-05]", title: "Neo gián tiếp, Lòi chân R, Hạng II góc cao", driveId: "1eIfVQbzb0BYeYEnXAGvdYjPzXu51EDkk" },
-      { id: "2025-06", code: "[2025-06]", title: "Biomechanics, MP nhai, KS Torque", driveId: "10wm0j2oBNi16HCVpaPubou1iVP3i2WA3" },
-      { id: "2025-07", code: "[2025-07]", title: "Class III, Đóng khoảng, Nhổ lệch", driveId: "1QkWfl1Nq1Fs5UXYDfaVscb6WU_cStoxk" },
-      { id: "2025-09", code: "[2025-09]", title: "Điều trị sớm Class III", driveId: "16uyrr4BjVfTg4P3NH2X7qDOeA0pO3XJ5" },
-      { id: "2025-11", code: "[2025-11]", title: "Di xa R3 biến chứng", driveId: "17Q9-zMI8A-fslXHSB-Q5bKj6ltVNUINt" },
-      { id: "2025-12", code: "[2025-12]", title: "Đóng khoảng Protocol tổng hợp", driveId: "1TlLr664cY-YdtcOQp1h8G7Dy2bEuCe5G" },
-      { id: "2026-01", code: "[2026-01]", title: "Nhổ răng hay không?", driveId: "1tUV9mwTq11g2sgtJkGAT-QnYKYOUScIB" },
-      { id: "2026-02", code: "[2026-02]", title: "Di xa", driveId: "1uUGTGLPrfl6xf_0Y7-qkjN67jw5yWmL_" },
-      { id: "2026-03", code: "[2026-03]", title: "Neo chặn lâm sàng", driveId: "1kR9EH0cypN3TDdJdxni19IAm6IO6Liyg" },
-      { id: "2026-04", code: "[2026-04]", title: "Deepbite - Khớp cắn sâu", driveId: "1rl1KTgClMfMda0HnPVhUlGfOV7_pyFrF" },
-      { id: "2026-07", code: "[2026-07]", title: "Class II High Angle Openbite", driveId: "1l66W6vVWdK9p1Cl4QVtPYyOp_lrJ0hXN" },
-      { id: "2026-08", code: "[2026-08]", title: "Class II Division 2", driveId: "1QX6pIClCQLxco9csMCfl5PoZNoCzwr_4" }
-    ];
+    // 1. LINK GOOGLE APPS SCRIPT WEB APP API (ĐÃ GẮN LINK CHÍNH XÁC)
+    const SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbx-J_8QG8CWIW-Y-kNc2eR5q888DKEDCVLkP6RxDD266_t1KwNGTxjSfoKMLy6F1CeiqQ/exec";
 
-    // 2. BẢNG PHÂN QUYỀN EMAIL HỘI VIÊN
-    // Thêm email học viên và các id bài được xem vào đây (dùng 'ALL' nếu xem trọn bộ)
-    const USER_PERMISSIONS = {
-      "drthaiortho@gmail.com": "ALL",
-      "hocvien1@gmail.com": ["2025-02", "2025-03", "2025-05"],
-      "hocvien2@gmail.com": ["2026-01", "2026-02", "2026-03"]
-    };
+    // 2. DANH SÁCH 14 FOLDER DRIVE
+    const LESSONS_DATA = [
+      { code: "[2025-02]", title: "Andrews 6 Keys, Mắc cài, 3Shape", driveId: "1Ae8PPXBmvn1hmsGfvA8igGSlBuspoJs-" },
+      { code: "[2025-03]", title: "Ceph, Occlusogram, PIP VTO, 3D Ceph", driveId: "1E2J6X0oNcoDjSQxk9VUF1Y3AUp5txJaW" },
+      { code: "[2025-05]", title: "Neo gián tiếp, Lòi chân R, Hạng II góc cao", driveId: "1eIfVQbzb0BYeYEnXAGvdYjPzXu51EDkk" },
+      { code: "[2025-06]", title: "Biomechanics, MP nhai, KS Torque", driveId: "10wm0j2oBNi16HCVpaPubou1iVP3i2WA3" },
+      { code: "[2025-07]", title: "Class III, Đóng khoảng, Nhổ lệch", driveId: "1QkWfl1Nq1Fs5UXYDfaVscb6WU_cStoxk" },
+      { code: "[2025-09]", title: "Điều trị sớm Class III", driveId: "16uyrr4BjVfTg4P3NH2X7qDOeA0pO3XJ5" },
+      { code: "[2025-11]", title: "Di xa R3 biến chứng", driveId: "17Q9-zMI8A-fslXHSB-Q5bKj6ltVNUINt" },
+      { code: "[2025-12]", title: "Đóng khoảng Protocol tổng hợp", driveId: "1TlLr664cY-YdtcOQp1h8G7Dy2bEuCe5G" },
+      { code: "[2026-01]", title: "Nhổ răng hay không?", driveId: "1tUV9mwTq11g2sgtJkGAT-QnYKYOUScIB" },
+      { code: "[2026-02]", title: "Di xa", driveId: "1uUGTGLPrfl6xf_0Y7-qkjN67jw5yWmL_" },
+      { code: "[2026-03]", title: "Neo chặn lâm sàng", driveId: "1kR9EH0cypN3TDdJdxni19IAm6IO6Liyg" },
+      { code: "[2026-04]", title: "Deepbite - Khớp cắn sâu", driveId: "1rl1KTgClMfMda0HnPVhUlGfOV7_pyFrF" },
+      { code: "[2026-07]", title: "Class II High Angle Openbite", driveId: "1l66W6vVWdK9p1Cl4QVtPYyOp_lrJ0hXN" },
+      { code: "[2026-08]", title: "Class II Division 2", driveId: "1QX6pIClCQLxco9csMCfl5PoZNoCzwr_4" }
+    ];
 
     let currentUserEmail = localStorage.getItem('drthai_user_email') || '';
 
@@ -447,39 +454,65 @@
       }
     });
 
-    // Phân quyền & lọc bài học theo Email
-    function applyUserEmail() {
+    // Hàm gọi Apps Script để tra cứu phân quyền & lọc folder
+    async function applyUserEmail() {
       const email = document.getElementById('userEmailInput').value.trim().toLowerCase();
       const statusEl = document.getElementById('emailStatusText');
       const countEl = document.getElementById('lessonCountBadge');
+      const upgradeBox = document.getElementById('upgradeBox');
+      const upgradeFeeTag = document.getElementById('upgradeFeeTag');
+      const upgradeNoteText = document.getElementById('upgradeNoteText');
 
       if (!email) {
         currentUserEmail = '';
         localStorage.removeItem('drthai_user_email');
         statusEl.innerHTML = `<i class="fa-solid fa-circle-info text-amber-400"></i> Đang hiển thị toàn bộ danh mục tham khảo.`;
         countEl.innerText = `14/14 Chuyên đề`;
+        upgradeBox.classList.add('hidden');
         renderLessons(LESSONS_DATA);
         return;
       }
 
-      currentUserEmail = email;
-      localStorage.setItem('drthai_user_email', email);
+      statusEl.innerHTML = `<span class="text-teal-400"><i class="fa-solid fa-spinner fa-spin"></i> Đang rà soát quyền trên Google Drive...</span>`;
 
-      const allowed = USER_PERMISSIONS[email];
+      try {
+        const response = await fetch(`${SCRIPT_API_URL}?email=${encodeURIComponent(email)}`);
+        const data = await response.json();
 
-      if (allowed === "ALL") {
-        statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã kích hoạt: Gói Full 14 Chuyên đề (${email})</span>`;
-        countEl.innerText = `14/14 Chuyên đề`;
-        renderLessons(LESSONS_DATA);
-      } else if (Array.isArray(allowed) && allowed.length > 0) {
-        const filtered = LESSONS_DATA.filter(item => allowed.includes(item.id));
-        statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã kích hoạt: ${filtered.length}/14 Chuyên đề (${email})</span>`;
-        countEl.innerText = `${filtered.length}/14 Chuyên đề`;
-        renderLessons(filtered);
-      } else {
-        statusEl.innerHTML = `<span class="text-amber-400 font-semibold"><i class="fa-solid fa-triangle-exclamation"></i> Email chưa kích hoạt danh sách. Hiển thị danh mục tham khảo.</span>`;
-        countEl.innerText = `0 Chuyên đề đã mở`;
-        renderLessons(LESSONS_DATA, true); // Khóa
+        currentUserEmail = email;
+        localStorage.setItem('drthai_user_email', email);
+
+        const accessedFolders = data.folders || [];
+        const summary = data.upgradeSummary || {};
+
+        if (accessedFolders.length > 0) {
+          const accessedUrls = accessedFolders.map(f => f.folderUrl);
+
+          const filtered = LESSONS_DATA.filter(item => {
+            return accessedUrls.some(url => url.includes(item.driveId));
+          });
+
+          statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã mở khóa: ${filtered.length}/14 Chuyên đề (${email})</span>`;
+          countEl.innerText = `${filtered.length}/14 Chuyên đề`;
+          renderLessons(filtered);
+
+          if (summary.missingMonths > 0) {
+            upgradeBox.classList.remove('hidden');
+            upgradeFeeTag.innerText = summary.formattedUpgradeFee;
+            upgradeNoteText.innerText = `Chính sách: ${summary.policyNote} • Thiếu ${summary.missingMonths} tháng.`;
+          } else {
+            upgradeBox.classList.add('hidden');
+          }
+        } else {
+          statusEl.innerHTML = `<span class="text-amber-400 font-semibold"><i class="fa-solid fa-triangle-exclamation"></i> Email chưa kích hoạt gói bài giảng. Hiển thị danh mục tham khảo.</span>`;
+          countEl.innerText = `0 Chuyên đề đã mở`;
+          upgradeBox.classList.remove('hidden');
+          upgradeFeeTag.innerText = summary.formattedUpgradeFee || "4.900.000đ";
+          upgradeNoteText.innerText = "Chưa sở hữu chuyên đề nào. Đăng ký trọn gói để mở khóa toàn bộ.";
+          renderLessons(LESSONS_DATA, true);
+        }
+      } catch (err) {
+        statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Không thể kết nối kiểm tra quyền. Vui lòng thử lại.</span>`;
       }
     }
 
@@ -501,7 +534,7 @@
       `).join('');
     }
 
-    // Chuyển Tab
+    // Chuyển Tab Miễn Phí / Hội Viên
     function switchTab(tab) {
       const freeSec = document.getElementById('sectionFree');
       const paidSec = document.getElementById('sectionPaid');
@@ -547,7 +580,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Copy Link
+    // Copy Site Link
     function copySiteLink() {
       navigator.clipboard.writeText(window.location.href).then(() => {
         const toast = document.getElementById('toast');
@@ -571,7 +604,6 @@
       titleEl.innerText = title;
       wm.innerText = currentUserEmail ? `${currentUserEmail} • Dr.Thai Ortho` : 'Dr.Thai Ortho • Hội viên';
       
-      // Nhúng toàn bộ danh sách file trong Folder Drive
       frame.src = `https://drive.google.com/embeddedfolderview?id=${driveId}#list`;
 
       modal.classList.remove('hidden');
