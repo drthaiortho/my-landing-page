@@ -58,7 +58,7 @@
     <!-- ======================================================== -->
     <div id="sectionFree" class="space-y-4">
       
-      <!-- Lời chào & Định vị -->
+      <!-- Lời chào -->
       <div class="p-4 bg-gradient-to-br from-teal-950/60 via-slate-800 to-slate-800 border border-teal-500/30 rounded-2xl space-y-1.5">
         <div class="flex items-center gap-2 text-teal-300 font-bold text-xs">
           <i class="fa-solid fa-handshake-angle text-sm"></i>
@@ -150,7 +150,7 @@
         <i class="fa-solid fa-arrow-right text-rose-400 text-xs group-hover:translate-x-1 transition-transform"></i>
       </a>
 
-      <!-- 4. FAQ Dành Riêng Cho Người Mới -->
+      <!-- 4. FAQ Cho Người Mới -->
       <div class="space-y-2 pt-1">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-1">Dành Cho Bác Sĩ Mới</h3>
 
@@ -185,21 +185,36 @@
     <!-- ======================================================== -->
     <div id="sectionPaid" class="space-y-4 hidden">
 
-      <!-- Thông Báo Quyền Truy Cập -->
-      <div class="p-3.5 bg-gradient-to-br from-rose-950/60 via-slate-800 to-slate-800 border border-rose-500/40 rounded-2xl space-y-1.5">
-        <div class="flex items-center justify-between">
-          <span class="flex items-center gap-1.5 text-xs font-bold text-rose-300">
-            <i class="fa-solid fa-shield-halved text-amber-400"></i> Khu vực Hội viên VIP
-          </span>
-          <span class="text-[10px] px-2 py-0.5 bg-rose-900/80 text-rose-200 border border-rose-700 rounded-full font-semibold">14 Chuyên Đề</span>
+      <!-- 1. Nhóm Zalo Hội Viên Nội Bộ (Đặt Lên Trên Cùng) -->
+      <details class="group bg-slate-800 border border-blue-500/40 rounded-2xl overflow-hidden transition shadow-md">
+        <summary class="flex items-center justify-between p-3.5 cursor-pointer select-none">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-950 text-blue-400 flex items-center justify-center text-lg border border-blue-800/60">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5 font-bold text-white text-xs sm:text-sm">
+                <span>Nhóm Zalo Hội Viên Nội Bộ</span>
+                <i class="fa-solid fa-lock text-[10px] text-amber-400"></i>
+              </div>
+              <div class="text-[11px] text-slate-400">Thảo luận chuyên môn & thông báo nội bộ</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-down text-slate-400 text-xs group-open:rotate-180 transition-transform"></i>
+        </summary>
+        <div class="p-3.5 bg-slate-900/90 border-t border-slate-700/80 text-xs space-y-2.5">
+          <div class="p-2 rounded-lg bg-blue-950/40 border border-blue-800/60 text-slate-300 text-[11px] leading-relaxed">
+            <strong class="text-blue-300"><i class="fa-solid fa-shield-halved mr-1"></i> Lưu ý:</strong> Nhóm chỉ dành cho Hội viên chính thức đã kích hoạt danh sách.
+          </div>
+          <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Tham Gia Nhóm Zalo Hội Viên</span>
+          </a>
         </div>
-        <p class="text-xs text-slate-300 leading-relaxed">
-          Tài nguyên dành riêng cho Hội viên chính thức. Sử dụng Gmail đã đăng ký để phát video trực tiếp.
-        </p>
-      </div>
+      </details>
 
-      <!-- 1. Kỳ Họp Đang Chạy & Đếm Ngược (Chỉ Hội Viên) -->
-      <div class="bg-gradient-to-b from-slate-800 to-slate-800/90 border border-slate-700 rounded-2xl p-4 space-y-3.5 shadow-lg">
+      <!-- 2. Kỳ Họp Đọc Báo Số 02 -->
+      <div class="bg-gradient-to-b from-slate-800 to-slate-800/90 border border-slate-700 rounded-2xl p-4 space-y-3 shadow-md">
         <div class="flex items-center justify-between">
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
             <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Sinh hoạt định kỳ
@@ -250,9 +265,8 @@
         </div>
       </div>
 
-      <!-- 2. Tiện Ích Hội Viên (Slides Bệnh Án, Zalo, Tra Cứu, Gửi Ca) -->
+      <!-- 3. Tải Mẫu Bệnh Án & Gửi Ca Lâm Sàng -->
       <div class="space-y-2">
-        <!-- Nút Tải Mẫu Bệnh Án Lâm Sàng -->
         <a href="https://docs.google.com/presentation/d/1r7_iQzKyi9VdEY1HLRFmCNTdErONZoRM/edit?usp=drive_link&ouid=112212735510373865547&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 bg-slate-800 hover:bg-slate-750 border border-blue-500/40 rounded-xl transition group shadow-sm">
           <div class="flex items-center space-x-3">
             <div class="w-10 h-10 rounded-lg bg-blue-950 text-blue-400 flex items-center justify-center text-lg border border-blue-800/60">
@@ -260,60 +274,92 @@
             </div>
             <div>
               <div class="font-bold text-white text-xs group-hover:text-blue-300">Tải Mẫu Bệnh Án Lâm Sàng (Slides)</div>
-              <div class="text-[11px] text-slate-400">Template Google Slides chuẩn hoá báo cáo ca</div>
+              <div class="text-[11px] text-slate-400">Template Google Slides chuẩn hoá dữ liệu</div>
             </div>
           </div>
           <i class="fa-solid fa-download text-slate-500 text-xs group-hover:text-blue-300"></i>
         </a>
 
-        <!-- Nhóm Zalo Hội Viên -->
-        <details class="group bg-slate-800 border border-blue-500/40 rounded-xl overflow-hidden transition shadow-sm">
-          <summary class="flex items-center justify-between p-3 cursor-pointer select-none">
-            <div class="flex items-center space-x-3">
-              <div class="w-8 h-8 rounded-lg bg-blue-950 text-blue-400 flex items-center justify-center text-sm border border-blue-800/60">
-                <i class="fa-solid fa-comments"></i>
-              </div>
-              <div class="font-bold text-white text-xs">Nhóm Zalo Hội Viên Nội Bộ</div>
+        <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl transition group">
+          <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-teal-950 text-teal-400 flex items-center justify-center text-sm border border-teal-800/60">
+              <i class="fa-solid fa-file-circle-question"></i>
             </div>
-            <i class="fa-solid fa-chevron-down text-slate-400 text-xs group-open:rotate-180 transition-transform"></i>
-          </summary>
-          <div class="p-3 bg-slate-900/90 border-t border-slate-700/80 text-xs space-y-2">
-            <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow">
-              <i class="fa-solid fa-right-to-bracket"></i>
-              <span>Mở Nhóm Zalo Hội Viên</span>
-            </a>
+            <div class="font-bold text-white text-xs">Gửi Ca Lâm Sàng / Đặt Câu Hỏi Cho Kỳ Họp</div>
           </div>
-        </details>
-
-        <!-- 2 Nút Tra Cứu & Gửi Ca -->
-        <div class="grid grid-cols-2 gap-2 text-xs">
-          <a href="https://script.google.com/macros/s/AKfycbx0bPlupA2_lWC_7-fICh_lJ-gvmXfRY9LF2OA8K2qbsSDCDBpuV6zo4RD9H3ZNkVhO/exec" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl text-center space-y-1 transition">
-            <i class="fa-solid fa-id-card-clip text-amber-400 text-sm"></i>
-            <div class="font-bold text-white text-[11px]">Tra Cứu Quyền Lợi</div>
-          </a>
-          <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl text-center space-y-1 transition">
-            <i class="fa-solid fa-file-circle-question text-teal-400 text-sm"></i>
-            <div class="font-bold text-white text-[11px]">Gửi Ca Lâm Sàng</div>
-          </a>
-        </div>
+          <i class="fa-solid fa-chevron-right text-slate-500 text-xs group-hover:text-teal-300"></i>
+        </a>
       </div>
 
-      <!-- 3. DANH MỤC 14 BẢN GHI VIDEO PLAYER NỘI BỘ -->
-      <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-4 space-y-3 shadow-md">
-        <div class="flex items-center justify-between border-b border-slate-700/80 pb-2">
-          <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-play text-rose-400"></i> Kho Bản Ghi (14 Chuyên Đề)
-          </h3>
-          <span class="text-[10px] text-slate-400">Chọn để phát ngay</span>
+      <!-- 4. KHU VỰC BẢN GHI VIP & TRA CỨU QUYỀN HỘI VIÊN LIỀN MẠCH -->
+      <div class="bg-gradient-to-b from-slate-850 to-slate-900 border border-rose-500/40 rounded-2xl p-4 space-y-3.5 shadow-xl">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-film text-rose-400 text-base"></i>
+            <div>
+              <h3 class="text-xs font-bold text-white uppercase tracking-wide">Kho Bản Ghi Hội Viên VIP</h3>
+              <p class="text-[10px] text-slate-400">Hệ thống phân quyền & hiển thị tự động theo Email</p>
+            </div>
+          </div>
+          <span class="text-[10px] px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800/80 rounded-full font-bold">14 Chuyên Đề</span>
         </div>
-        
-        <!-- Danh sách 14 bài render tự động -->
-        <div id="lessonList" class="space-y-1.5 max-h-80 overflow-y-auto pr-1"></div>
+
+        <!-- Ô Nhập Email Tra Cứu & Tự Động Lọc Bài Học -->
+        <div class="p-3 bg-slate-900/90 rounded-xl border border-slate-700/80 space-y-2">
+          <label class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+            <i class="fa-solid fa-envelope text-teal-400"></i> Nhập Gmail Hội viên để mở khóa bài học:
+          </label>
+          <div class="flex gap-1.5">
+            <input type="email" id="userEmailInput" placeholder="bacsi@gmail.com" class="w-full bg-slate-950 border border-slate-700 focus:border-teal-400 focus:outline-none rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500">
+            <button onclick="applyUserEmail()" class="px-3.5 py-2 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs shrink-0 transition flex items-center gap-1">
+              <i class="fa-solid fa-key"></i>
+              <span>Kích Hoạt</span>
+            </button>
+          </div>
+          <div id="emailStatusText" class="text-[10px] text-slate-400 flex items-center gap-1">
+            <i class="fa-solid fa-circle-info text-amber-400"></i> Chưa kích hoạt: Đang hiển thị toàn bộ danh mục tham khảo.
+          </div>
+        </div>
+
+        <!-- Danh sách bài học render theo phân quyền -->
+        <div class="space-y-1.5">
+          <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between px-1">
+            <span>Danh sách chuyên đề được cấp</span>
+            <span id="lessonCountBadge" class="text-rose-400 font-mono text-[10px]">14/14 Chuyên đề</span>
+          </div>
+          <div id="lessonList" class="space-y-1.5 max-h-80 overflow-y-auto pr-1"></div>
+        </div>
       </div>
 
     </div>
 
-    <!-- Chân Trang Chung -->
+    <!-- FAQ Chung -->
+    <div class="space-y-2.5 pt-2">
+      <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-1">Câu Hỏi Thường Gặp</h3>
+
+      <details class="group bg-slate-800 border border-slate-700 rounded-xl overflow-hidden transition">
+        <summary class="flex justify-between items-center p-3 cursor-pointer font-semibold text-xs text-slate-200 select-none">
+          <span>Tôi đã đăng ký lẻ tẻ, muốn mua trọn bộ bản ghi?</span>
+          <i class="fa-solid fa-plus text-xs text-slate-400 group-open:rotate-45 transition-transform"></i>
+        </summary>
+        <div class="px-3 pb-3 text-xs text-slate-300 border-t border-slate-700/50 leading-relaxed pt-2">
+          Bác sĩ có thể nhắn tin trực tiếp qua <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="text-teal-300 underline">Zalo Hotline: 0349622964</a> để nhận bảng giá ưu đãi nâng cấp Full trọn bộ dành riêng cho Hội viên.
+        </div>
+      </details>
+
+      <details class="group bg-slate-800 border border-slate-700 rounded-xl overflow-hidden transition">
+        <summary class="flex justify-between items-center p-3 cursor-pointer font-semibold text-xs text-slate-200 select-none">
+          <span>Làm sao để mở nhanh trang web này mỗi ngày?</span>
+          <i class="fa-solid fa-plus text-xs text-slate-400 group-open:rotate-45 transition-transform"></i>
+        </summary>
+        <div class="px-3 pb-3 text-xs text-slate-300 border-t border-slate-700/50 leading-relaxed pt-2 space-y-1.5">
+          <div>🤖 <strong>Android:</strong> Bấm <strong>3 chấm (⋮)</strong> &rarr; Chọn <strong>"Cài đặt / Thêm vào MH chính"</strong>.</div>
+          <div>🍏 <strong>iPhone:</strong> Bấm <strong>Chia sẻ (<i class="fa-solid fa-arrow-up-from-bracket"></i>)</strong> &rarr; Chọn <strong>"Thêm vào MH chính"</strong>.</div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Chân trang -->
     <div class="pt-4 pb-2 border-t border-slate-800 space-y-2 text-center text-xs">
       <div class="flex items-center justify-center gap-2 flex-wrap text-[11px]">
         <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="text-teal-400 hover:underline">Zalo: 0349622964</a> •
@@ -360,25 +406,99 @@
     <i class="fa-solid fa-check"></i> Đã sao chép link trang!
   </div>
 
-  <!-- SCRIPT ĐIỀU KHIỂN & DATA 14 BÀI HỌC -->
+  <!-- SCRIPT ĐIỀU KHIỂN & DATA PHÂN QUYỀN HỘI VIÊN -->
   <script>
-    // 1. DANH SÁCH 14 BÀI HỌC TRÊN GOOGLE DRIVE
+    // 1. DANH SÁCH 14 BÀI HỌC VÀ DRIVE ID
     const LESSONS_DATA = [
-      { code: "[2025-02]", title: "Andrews 6 Keys, Mắc cài, 3Shape", driveId: "1feTWnuPDNbCOI8msUq4_CqdQgesWfWO5" },
-      { code: "[2025-03]", title: "Ceph, Occlusogram, PIP VTO, 3D Ceph", driveId: "ID_FILE_DRIVE" },
-      { code: "[2025-05]", title: "Neo gián tiếp, Lòi chân R, Hạng II góc cao", driveId: "ID_FILE_DRIVE" },
-      { code: "[2025-06]", title: "Biomechanics, MP nhai, KS Torque", driveId: "ID_FILE_DRIVE" },
-      { code: "[2025-07]", title: "Class III, Đóng khoảng, Nhổ lệch", driveId: "ID_FILE_DRIVE" },
-      { code: "[2025-09]", title: "Điều trị sớm Class III", driveId: "ID_FILE_DRIVE" },
-      { code: "[2025-11]", title: "Di xa R3 biến chứng", driveId: "ID_FILE_DRIVE" },
-      { code: "[2025-12]", title: "Đóng khoảng Protocol tổng hợp", driveId: "ID_FILE_DRIVE" },
-      { code: "[2026-01]", title: "Nhổ răng hay không?", driveId: "ID_FILE_DRIVE" },
-      { code: "[2026-02]", title: "Di xa", driveId: "ID_FILE_DRIVE" },
-      { code: "[2026-03]", title: "Neo chặn lâm sàng", driveId: "ID_FILE_DRIVE" },
-      { code: "[2026-04]", title: "Deepbite - Khớp cắn sâu", driveId: "ID_FILE_DRIVE" },
-      { code: "[2026-07]", title: "Class II High Angle Openbite", driveId: "ID_FILE_DRIVE" },
-      { code: "[2026-08]", title: "Class II Division 2", driveId: "ID_FILE_DRIVE" }
+      { id: "2025-02", code: "[2025-02]", title: "Andrews 6 Keys, Mắc cài, 3Shape", driveId: "1feTWnuPDNbCOI8msUq4_CqdQgesWfWO5" },
+      { id: "2025-03", code: "[2025-03]", title: "Ceph, Occlusogram, PIP VTO, 3D Ceph", driveId: "ID_FILE_DRIVE" },
+      { id: "2025-05", code: "[2025-05]", title: "Neo gián tiếp, Lòi chân R, Hạng II góc cao", driveId: "ID_FILE_DRIVE" },
+      { id: "2025-06]", code: "[2025-06]", title: "Biomechanics, MP nhai, KS Torque", driveId: "ID_FILE_DRIVE" },
+      { id: "2025-07", code: "[2025-07]", title: "Class III, Đóng khoảng, Nhổ lệch", driveId: "ID_FILE_DRIVE" },
+      { id: "2025-09", code: "[2025-09]", title: "Điều trị sớm Class III", driveId: "ID_FILE_DRIVE" },
+      { id: "2025-11", code: "[2025-11]", title: "Di xa R3 biến chứng", driveId: "ID_FILE_DRIVE" },
+      { id: "2025-12", code: "[2025-12]", title: "Đóng khoảng Protocol tổng hợp", driveId: "ID_FILE_DRIVE" },
+      { id: "2026-01", code: "[2026-01]", title: "Nhổ răng hay không?", driveId: "ID_FILE_DRIVE" },
+      { id: "2026-02", code: "[2026-02]", title: "Di xa", driveId: "ID_FILE_DRIVE" },
+      { id: "2026-03", code: "[2026-03]", title: "Neo chặn lâm sàng", driveId: "ID_FILE_DRIVE" },
+      { id: "2026-04", code: "[2026-04]", title: "Deepbite - Khớp cắn sâu", driveId: "ID_FILE_DRIVE" },
+      { id: "2026-07", code: "[2026-07]", title: "Class II High Angle Openbite", driveId: "ID_FILE_DRIVE" },
+      { id: "2026-08", code: "[2026-08]", title: "Class II Division 2", driveId: "ID_FILE_DRIVE" }
     ];
+
+    // 2. BẢNG PHÂN QUYỀN EMAIL (Ví dụ: Email nào được xem những bài nào)
+    // Email có 'ALL' sẽ xem được đủ 14 bài.
+    const USER_PERMISSIONS = {
+      "drthai@gmail.com": "ALL",
+      "hocvien1@gmail.com": ["2025-02", "2025-03", "2025-05"], // Chỉ xem 3 bài
+      "hocvien2@gmail.com": ["2025-02", "2026-01", "2026-02", "2026-03", "2026-04"] // Xem 5 bài
+    };
+
+    let currentUserEmail = localStorage.getItem('drthai_user_email') || '';
+
+    // Khởi tạo giao diện
+    window.addEventListener('DOMContentLoaded', () => {
+      if (currentUserEmail) {
+        document.getElementById('userEmailInput').value = currentUserEmail;
+        applyUserEmail();
+      } else {
+        renderLessons(LESSONS_DATA);
+      }
+    });
+
+    // Hàm áp dụng Email để phân quyền & lọc bài học
+    function applyUserEmail() {
+      const email = document.getElementById('userEmailInput').value.trim().toLowerCase();
+      const statusEl = document.getElementById('emailStatusText');
+      const countEl = document.getElementById('lessonCountBadge');
+
+      if (!email) {
+        currentUserEmail = '';
+        localStorage.removeItem('drthai_user_email');
+        statusEl.innerHTML = `<i class="fa-solid fa-circle-info text-amber-400"></i> Đang hiển thị toàn bộ danh mục tham khảo.`;
+        countEl.innerText = `14/14 Chuyên đề`;
+        renderLessons(LESSONS_DATA);
+        return;
+      }
+
+      currentUserEmail = email;
+      localStorage.setItem('drthai_user_email', email);
+
+      const allowed = USER_PERMISSIONS[email];
+
+      if (allowed === "ALL") {
+        statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã kích hoạt: Gói Full 14 Chuyên đề (${email})</span>`;
+        countEl.innerText = `14/14 Chuyên đề`;
+        renderLessons(LESSONS_DATA);
+      } else if (Array.isArray(allowed) && allowed.length > 0) {
+        const filtered = LESSONS_DATA.filter(item => allowed.includes(item.id));
+        statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã kích hoạt: ${filtered.length}/14 Chuyên đề (${email})</span>`;
+        countEl.innerText = `${filtered.length}/14 Chuyên đề`;
+        renderLessons(filtered);
+      } else {
+        statusEl.innerHTML = `<span class="text-amber-400 font-semibold"><i class="fa-solid fa-triangle-exclamation"></i> Email chưa kích hoạt gói bài giảng. Hiển thị danh mục tham khảo.</span>`;
+        countEl.innerText = `0 Chuyên đề đã mở`;
+        renderLessons(LESSONS_DATA, true); // Chế độ khóa
+      }
+    }
+
+    // Render danh sách chuyên đề
+    function renderLessons(list, isLocked = false) {
+      const container = document.getElementById('lessonList');
+      if (list.length === 0) {
+        container.innerHTML = `<div class="p-3 text-center text-xs text-slate-500 bg-slate-900 rounded-lg">Không có bài học nào được cấp quyền.</div>`;
+        return;
+      }
+      container.innerHTML = list.map((item) => `
+        <button onclick="${isLocked ? "alert('Email này chưa được cấp quyền xem bài giảng này. Vui lòng liên hệ Dr.Thai Ortho để kích hoạt!')" : `openSecurePlayer('${item.driveId}', '${item.code} ${item.title}')`}" class="w-full flex items-center justify-between p-2.5 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-rose-500/50 rounded-lg text-left transition group">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] shrink-0 font-semibold border border-rose-900/60">${item.code}</span>
+            <span class="text-xs text-slate-200 group-hover:text-white font-medium truncate">${item.title}</span>
+          </div>
+          <i class="fa-solid ${isLocked ? 'fa-lock text-slate-600' : 'fa-play text-slate-500 group-hover:text-rose-400'} text-[10px] shrink-0 ml-2"></i>
+        </button>
+      `).join('');
+    }
 
     // Chuyển Tab Miễn Phí / Hội Viên
     function switchTab(tab) {
@@ -399,21 +519,6 @@
         btnFree.className = 'py-2 px-3 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 transition duration-200 text-slate-400 hover:text-teal-300';
       }
     }
-
-    // Render danh sách 14 bài học vào Tab Hội Viên
-    function renderLessons() {
-      const container = document.getElementById('lessonList');
-      container.innerHTML = LESSONS_DATA.map((item) => `
-        <button onclick="openSecurePlayer('${item.driveId}', '${item.code} ${item.title}')" class="w-full flex items-center justify-between p-2.5 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-rose-500/50 rounded-lg text-left transition group">
-          <div class="flex items-center gap-2 min-w-0">
-            <span class="px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] shrink-0 font-semibold border border-rose-900/60">${item.code}</span>
-            <span class="text-xs text-slate-200 group-hover:text-white font-medium truncate">${item.title}</span>
-          </div>
-          <i class="fa-solid fa-play text-[10px] text-slate-500 group-hover:text-rose-400 shrink-0 ml-2"></i>
-        </button>
-      `).join('');
-    }
-    renderLessons();
 
     // Countdown Timer
     const targetDate = new Date('2026-08-31T20:30:00+07:00').getTime();
@@ -467,6 +572,8 @@
       const wm = document.getElementById('dynamicWatermark');
 
       titleEl.innerText = title;
+      // Gán Watermark chính là Email của học viên đang xem
+      wm.innerText = currentUserEmail ? `${currentUserEmail} • Dr.Thai Ortho` : 'Dr.Thai Ortho • Hội viên';
       frame.src = `https://drive.google.com/file/d/${driveId}/preview`;
 
       modal.classList.remove('hidden');
@@ -475,7 +582,7 @@
       watermarkInterval = setInterval(() => {
         if (wm) {
           wm.style.top = Math.floor(Math.random() * 65 + 10) + '%';
-          wm.style.left = Math.floor(Math.random() * 60 + 10) + '%';
+          wm.style.left = Math.floor(Math.random() * 55 + 10) + '%';
         }
       }, 6000);
     }
