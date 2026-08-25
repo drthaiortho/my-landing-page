@@ -24,41 +24,6 @@
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
-
-    /* Chế độ Phóng to / Xoay ngang màn hình Full Screen tối ưu */
-    .fs-active-mode {
-      position: fixed !important;
-      inset: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      max-width: none !important;
-      max-height: none !important;
-      border-radius: 0 !important;
-      z-index: 99999 !important;
-      background: #000000 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: 0 !important;
-    }
-
-    .fs-active-mode #playerContainer {
-      width: 100vw !important;
-      height: 100vh !important;
-      padding-bottom: 0 !important;
-      border: 0 !important;
-      background: #000000 !important;
-    }
-
-    .fs-active-mode #modalHeader,
-    .fs-active-mode #modalControls,
-    .fs-active-mode #modalInfoBar,
-    .fs-active-mode #modalPlaylist {
-      display: none !important;
-    }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased p-3.5 sm:p-6 selection:bg-teal-500 selection:text-white">
@@ -114,7 +79,6 @@
             <span class="font-bold text-slate-200 block">1. Tải Template</span>
             <span class="text-[9px] text-slate-400">Bệnh án chuẩn</span>
           </a>
-          <!-- Đã cập nhật link danh sách bài giảng nổi bật -->
           <a href="https://www.youtube.com/playlist?list=PL7YzM7KyB5S5gJYlMcjABbS4fs0LvSkHl" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-teal-400/60 transition group">
             <i class="fa-solid fa-circle-play text-red-400 text-base mb-1 block group-hover:scale-110 transition-transform"></i>
             <span class="font-bold text-slate-200 block">2. Xem Bài Giảng</span>
@@ -171,27 +135,74 @@
         </div>
       </div>
 
-      <!-- Top Playlist Free -->
-      <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-3.5 space-y-2.5 shadow-md">
+      <!-- Top Những Bài Giảng Được Xem Nhiều Nhất -->
+      <div id="featuredVideosAnchor" class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-3.5 space-y-2.5 shadow-md">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-            <i class="fa-solid fa-fire text-amber-400"></i> Danh sách bài giảng nổi bật (Miễn phí)
+            <i class="fa-solid fa-fire text-amber-400"></i> Top những bài giảng được xem nhiều nhất, được quan tâm bởi bác sĩ nhiều nhất
           </h3>
-          <a href="https://www.youtube.com/playlist?list=PL7YzM7KyB5S5gJYlMcjABbS4fs0LvSkHl" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:underline">Xem tất cả &rarr;</a>
+          <a href="https://www.youtube.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:underline">YouTube &rarr;</a>
         </div>
         
         <div class="space-y-2 text-xs">
-          <a href="https://www.youtube.com/playlist?list=PL7YzM7KyB5S5gJYlMcjABbS4fs0LvSkHl" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-center justify-between gap-2 transition group">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <div class="w-8 h-8 rounded-lg bg-red-950 text-red-400 flex items-center justify-center text-sm shrink-0 border border-red-800/50">
-                <i class="fa-brands fa-youtube"></i>
-              </div>
+          <!-- Top 1 -->
+          <a href="https://www.youtube.com/watch?v=jPuLbqqYj_w" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
+            <div class="flex items-start gap-2 min-w-0">
+              <span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 1</span>
               <div class="truncate">
-                <div class="font-semibold text-white group-hover:text-teal-200 transition-colors truncate">Playlist Tổng Hợp Bài Giảng Dr.Thai Ortho</div>
-                <div class="text-[10px] text-slate-400 truncate">Trọn bộ video kiến thức chỉnh nha thực chiến</div>
+                <div class="font-semibold text-white group-hover:text-amber-200 transition-colors truncate">Webinar: Điều trị cười hở lợi thực chiến</div>
+                <div class="text-[10px] text-slate-400 truncate">Chẩn đoán, chọn khí cụ & cơ chế kéo lùi/đánh lún hiệu quả</div>
               </div>
             </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] shrink-0"></i>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
+          </a>
+
+          <!-- Top 2 -->
+          <a href="https://youtu.be/yUPIvt3xS30" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
+            <div class="flex items-start gap-2 min-w-0">
+              <span class="px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 2</span>
+              <div class="truncate">
+                <div class="font-semibold text-white group-hover:text-teal-200 transition-colors truncate">TÂM SỰ ĐÊM KHUYA #04 – Class II Venugopal</div>
+                <div class="text-[10px] text-slate-400 truncate">Class II Correction theo triết lý Venugopal thực chiến</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
+          </a>
+
+          <!-- Top 3 -->
+          <a href="https://youtu.be/Qlo-nEa3ZsA" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
+            <div class="flex items-start gap-2 min-w-0">
+              <span class="px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 3</span>
+              <div class="truncate">
+                <div class="font-semibold text-white group-hover:text-rose-200 transition-colors truncate">TÂM SỰ ĐÊM KHUYA #05 – Chỉnh nha lại</div>
+                <div class="text-[10px] text-slate-400 truncate">Kinh nghiệm quý giá & xử lý các ca điều trị thất bại</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
+          </a>
+
+          <!-- Top 4 -->
+          <a href="https://www.youtube.com/watch?v=QKRo6Gci0Xk&list=PL7YzM7KyB5S6ALSSRrGzvOPdHTUGY0Blz" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
+            <div class="flex items-start gap-2 min-w-0">
+              <span class="px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 4</span>
+              <div class="truncate">
+                <div class="font-semibold text-white group-hover:text-purple-200 transition-colors truncate">Tâm sự đêm khuya góc chỉnh nha số 01</div>
+                <div class="text-[10px] text-slate-400 truncate">Bí quyết & kinh nghiệm lâm sàng cho người mới</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
+          </a>
+
+          <!-- Top 5 -->
+          <a href="https://www.youtube.com/watch?v=iMqc6BDiK6g&list=PL7YzM7KyB5S6EXP9eTA2cbw0Gnj-rnjFy" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
+            <div class="flex items-start gap-2 min-w-0">
+              <span class="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 5</span>
+              <div class="truncate">
+                <div class="font-semibold text-white group-hover:text-blue-200 transition-colors truncate">Các sai lầm thường gặp trong nắn chỉnh răng</div>
+                <div class="text-[10px] text-slate-400 truncate">Nhận diện sớm bẫy lực & mất kiểm soát neo chặn</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
           </a>
         </div>
       </div>
@@ -411,16 +422,16 @@
   <!-- POPUP PLAYER LMS NATIVE -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 hidden">
     
-    <!-- NÚT QUAY LẠI NỔI (LUÔN HIỂN THỊ ĐỂ THOÁT RA XEM BÀI KHÁC) -->
+    <!-- NÚT TRỞ LẠI AN TOÀN -->
     <button id="btnFloatingBack" onclick="handleCustomBackAction()" class="fixed top-3 left-3 z-[999999] px-3.5 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white hover:text-teal-300 text-xs font-extrabold flex items-center gap-1.5 border border-slate-600 shadow-2xl transition duration-150">
       <i class="fa-solid fa-arrow-left"></i>
-      <span>Trở lại</span>
+      <span>Trở lại / Thoát</span>
     </button>
 
     <div id="modalBox" class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh]">
       
       <!-- Modal Header -->
-      <div id="modalHeader" class="p-2.5 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between shrink-0 pl-28">
+      <div id="modalHeader" class="p-2.5 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between shrink-0 pl-32">
         <div class="flex items-center gap-2 min-w-0 pr-2">
           <span id="videoTitle" class="text-xs font-bold text-white truncate">Chuyên đề</span>
         </div>
@@ -455,17 +466,13 @@
         </div>
 
         <div class="flex items-center gap-1.5">
-          <!-- Bật chế độ Phóng to trực tiếp -->
-          <button onclick="openNativeFullscreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
-            <i class="fa-solid fa-expand"></i> Phóng to / Xoay ngang
-          </button>
           <a id="btnDownloadFile" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 text-[10px] font-semibold hover:bg-slate-700 transition flex items-center gap-1">
             <i class="fa-solid fa-cloud-arrow-down"></i> Tải file này
           </a>
         </div>
       </div>
 
-      <!-- Tên bài đang phát & Đếm giờ học chuẩn -->
+      <!-- Tên bài đang phát & Đếm giờ chuẩn -->
       <div id="modalInfoBar" class="px-3 py-1.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
         <div class="min-w-0 pr-2">
           <div id="currentPlayingName" class="font-semibold text-teal-300 text-[11px] truncate max-w-[200px]">Chưa chọn file</div>
@@ -542,7 +549,6 @@
       isUserActiveViewing = !document.hidden;
     });
 
-    // KHỞI TẠO TỨC THÌ
     window.addEventListener('DOMContentLoaded', () => {
       const savedEmail = localStorage.getItem('drthai_authenticated_email');
       const cachedData = localStorage.getItem('drthai_user_cached_data');
@@ -561,7 +567,6 @@
       }
     });
 
-    // BẮT SỰ KIỆN NÚT BACK VẬT LÝ / CỬ CHỈ VUỐT
     window.addEventListener('popstate', (e) => {
       const modal = document.getElementById('videoModal');
       if (!modal.classList.contains('hidden')) {
@@ -574,7 +579,6 @@
       if (loader) loader.style.display = 'none';
     }
 
-    // 1. GỬI MÃ OTP SIÊU NHANH
     async function requestEmailOtp() {
       const emailInput = document.getElementById('inputUserEmail');
       const email = (currentUserEmail || emailInput.value).trim().toLowerCase();
@@ -638,7 +642,6 @@
       }, 1000);
     }
 
-    // 2. XÁC THỰC OTP
     async function verifyEmailOtp() {
       const otp = document.getElementById('inputUserOtp').value.trim();
       const statusEl = document.getElementById('authStatusMessage');
@@ -675,7 +678,6 @@
       }
     }
 
-    // 3. ĐỒNG BỘ SESSION NGẦM & CHẶN TRÙNG THIẾT BỊ
     async function checkUserSessionBackground(email) {
       try {
         const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}`);
@@ -892,7 +894,6 @@
       }, 6000);
     }
 
-    // ĐỒNG HỒ ĐẾM GIỜ CHUẨN XÁC
     function startRealTimeWatchTracker() {
       if (watchTimerInterval) clearInterval(watchTimerInterval);
 
