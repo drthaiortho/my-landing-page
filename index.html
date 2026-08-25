@@ -24,42 +24,6 @@
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
-
-    /* Chế độ Phóng to / Xoay ngang màn hình tràn viền hoàn hảo */
-    .fs-active-mode {
-      position: fixed !important;
-      inset: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      max-width: none !important;
-      max-height: none !important;
-      border-radius: 0 !important;
-      z-index: 999999 !important;
-      background: #000000 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: 0 !important;
-    }
-
-    .fs-active-mode #playerContainer {
-      width: 100vw !important;
-      height: 100vh !important;
-      padding-bottom: 0 !important;
-      border: 0 !important;
-      background: #000000 !important;
-      flex: 1 !important;
-    }
-
-    .fs-active-mode #modalHeader,
-    .fs-active-mode #modalControls,
-    .fs-active-mode #modalInfoBar,
-    .fs-active-mode #modalPlaylist {
-      display: none !important;
-    }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased p-3.5 sm:p-6 selection:bg-teal-500 selection:text-white">
@@ -502,7 +466,6 @@
         </div>
 
         <div class="flex items-center gap-1.5">
-          <!-- Sử dụng chế độ Phóng to / Xoay ngang màn hình chuẩn gốc (Vừa tự động xoay ngang vừa mở nút Fullscreen gốc của Drive) -->
           <button onclick="triggerNativeFullscreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
             <i class="fa-solid fa-expand"></i> Phóng to / Xoay ngang
           </button>
@@ -802,7 +765,7 @@
       localStorage.removeItem('drthai_device_session');
       currentUserEmail = '';
       currentAllowedList = [];
-      document.getElementById('inputUserEmail').value = ''; // Làm sạch ô email để đăng nhập tài khoản khác
+      document.getElementById('inputUserEmail').value = '';
       document.getElementById('authSuccessBlock').classList.add('hidden');
       document.getElementById('stepOtpBlock').classList.add('hidden');
       document.getElementById('stepEmailBlock').classList.remove('hidden');
@@ -1067,15 +1030,19 @@
       }
     }
 
-    // GỌI NATIVE FULLSCREEN API GỐC TRÊN CHÍNH CONTAINER VIDEO ĐỂ DI ĐỘNG TỰ ĐỘNG XOAY NGANG & MỞ FULLSCREEN NGUYÊN BẢN
+    // KÍCH HOẠT FULLSCREEN VÀ FOCUS IFRAME LẬP TỨC ĐỂ XÓA MÀN HÌNH ĐEN NGAY CÚ CHẠM ĐẦU TIÊN
     function triggerNativeFullscreen() {
       const container = document.getElementById('playerContainer');
+      const frame = document.getElementById('driveFrame');
+
       if (container.requestFullscreen) {
-        container.requestFullscreen().catch(() => {});
+        container.requestFullscreen().then(() => { if(frame) frame.focus(); }).catch(() => {});
       } else if (container.webkitRequestFullscreen) {
-        container.webkitRequestFullscreen().catch(() => {});
+        container.webkitRequestFullscreen();
+        if(frame) frame.focus();
       } else if (container.msRequestFullscreen) {
-        container.msRequestFullscreen().catch(() => {});
+        container.msRequestFullscreen();
+        if(frame) frame.focus();
       }
     }
 
