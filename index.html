@@ -24,6 +24,14 @@
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    /* HIỆU ỨNG PHÁT SÁNG NEON CHO Ô TÌM KIẾM */
+    .search-glow-box {
+      box-shadow: 0 0 20px -3px rgba(45, 212, 191, 0.35), 0 0 10px -2px rgba(244, 63, 94, 0.25);
+    }
+    .search-glow-box:focus-within {
+      box-shadow: 0 0 30px 2px rgba(45, 212, 191, 0.6), 0 0 20px 0px rgba(244, 63, 94, 0.4);
+    }
   </style>
 
   <!-- KỸ THUẬT AUTO-ESCAPE ZALO CHO ANDROID -->
@@ -35,7 +43,6 @@
       var isAndroid = /android/i.test(ua);
 
       if ((isZalo || isFB) && isAndroid) {
-        // Tự động bung Chrome trên Android không cần thao tác
         var currentUrl = window.location.href.replace(/https?:\/\//, "");
         window.location.href = "intent://" + currentUrl + "#Intent;scheme=https;package=com.android.chrome;end";
       }
@@ -44,7 +51,7 @@
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased p-3.5 sm:p-6 selection:bg-teal-500 selection:text-white">
 
-  <!-- OVERLAY HƯỚNG DẪN THOÁT ZALO TRÊN IPHONE (CHỈ HIỆN KHI MỞ BẰNG ZALO/FB TRÊN IOS) -->
+  <!-- OVERLAY HƯỚNG DẪN THOÁT ZALO TRÊN IPHONE -->
   <div id="iosInAppNotice" class="hidden fixed inset-0 bg-slate-950/95 z-[999999] p-6 flex flex-col justify-between text-center backdrop-blur-md">
     <div class="flex justify-end pr-2 pt-1 animate-bounce">
       <div class="text-amber-400 text-right space-y-1">
@@ -392,10 +399,36 @@
           </div>
         </div>
 
-        <!-- Live Search -->
-        <div class="relative">
-          <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-          <input type="text" id="lessonSearchInput" oninput="handleSearchLesson()" placeholder="Tìm từ khóa: Torque, 3Shape, Minivis, MEAW..." class="w-full bg-slate-900 border border-slate-700/80 focus:border-rose-400 focus:outline-none rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500">
+        <!-- ======================================================== -->
+        <!-- KHU VỰC TÌM KIẾM NỔI BẬT CAO CẤP (HIGH-IMPACT SEARCH)     -->
+        <!-- ======================================================== -->
+        <div class="space-y-2 pt-1">
+          <!-- Hộp tìm kiếm Neon Viền Gradient -->
+          <div class="search-glow-box p-0.5 rounded-2xl bg-gradient-to-r from-teal-400 via-emerald-400 to-rose-500 transition-all duration-300">
+            <div class="bg-slate-950 rounded-[14px] p-2 flex items-center gap-2.5 border border-slate-800">
+              <div class="w-8 h-8 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center shrink-0 border border-teal-500/30">
+                <i class="fa-solid fa-magnifying-glass text-sm animate-pulse"></i>
+              </div>
+              <input type="text" id="lessonSearchInput" oninput="handleSearchLesson()" placeholder="Tìm nhanh: Torque, 3Shape, Minivis, MEAW..." class="w-full bg-transparent text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none font-medium">
+              <button onclick="clearSearchInput()" id="btnClearSearch" class="hidden text-slate-400 hover:text-white p-1 rounded-full text-xs">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Gợi ý từ khóa 1 chạm (Quick Keyword Tags) -->
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-[10px]">
+            <span class="text-slate-400 font-bold uppercase tracking-wider shrink-0 flex items-center gap-1 text-[9px]">
+              <i class="fa-solid fa-bolt text-amber-400"></i> Gợi ý:
+            </span>
+            <button onclick="quickFilterTag('Torque')" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-teal-950 hover:text-teal-300 border border-slate-700/80 shrink-0 text-slate-300 font-medium transition">Torque</button>
+            <button onclick="quickFilterTag('3Shape')" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-teal-950 hover:text-teal-300 border border-slate-700/80 shrink-0 text-slate-300 font-medium transition">3Shape</button>
+            <button onclick="quickFilterTag('Vis')" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-teal-950 hover:text-teal-300 border border-slate-700/80 shrink-0 text-slate-300 font-medium transition">Cắm vis</button>
+            <button onclick="quickFilterTag('MEAW')" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-teal-950 hover:text-teal-300 border border-slate-700/80 shrink-0 text-slate-300 font-medium transition">MEAW</button>
+            <button onclick="quickFilterTag('Class III')" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-teal-950 hover:text-teal-300 border border-slate-700/80 shrink-0 text-slate-300 font-medium transition">Class III</button>
+            <button onclick="quickFilterTag('Deepbite')" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-teal-950 hover:text-teal-300 border border-slate-700/80 shrink-0 text-slate-300 font-medium transition">Deepbite</button>
+            <button onclick="quickFilterTag('Di xa')" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-teal-950 hover:text-teal-300 border border-slate-700/80 shrink-0 text-slate-300 font-medium transition">Di xa</button>
+          </div>
         </div>
 
         <div id="lessonList" class="space-y-2 max-h-[26rem] overflow-y-auto pr-1"></div>
@@ -510,7 +543,6 @@
     let resendCountdownInterval = null;
 
     window.addEventListener('DOMContentLoaded', () => {
-      // Kiểm tra xem có đang mở bằng Zalo trên iPhone không để nhắc nhở
       var ua = navigator.userAgent || navigator.vendor || window.opera;
       var isZalo = (ua.indexOf("Zalo") > -1) || (ua.indexOf("ZaloTheme") > -1);
       var isFB = (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Messenger") > -1);
@@ -737,12 +769,29 @@
       renderLessons(LESSONS_DATA, true);
     }
 
+    function quickFilterTag(keyword) {
+      const input = document.getElementById('lessonSearchInput');
+      input.value = keyword;
+      handleSearchLesson();
+    }
+
+    function clearSearchInput() {
+      const input = document.getElementById('lessonSearchInput');
+      input.value = '';
+      handleSearchLesson();
+    }
+
     function handleSearchLesson() {
-      const kw = document.getElementById('lessonSearchInput').value.trim().toLowerCase();
+      const input = document.getElementById('lessonSearchInput');
+      const kw = input.value.trim().toLowerCase();
+      const clearBtn = document.getElementById('btnClearSearch');
       const listToFilter = currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA;
       const isLocked = currentAllowedList.length === 0;
 
-      if (!kw) {
+      if (kw) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
         renderLessons(listToFilter, isLocked);
         return;
       }
@@ -759,13 +808,16 @@
     function renderLessons(list, isLocked = false) {
       const container = document.getElementById('lessonList');
       if (list.length === 0) {
-        container.innerHTML = `<div class="p-3 text-center text-xs text-slate-500 bg-slate-900 rounded-lg">Không tìm thấy bài giảng phù hợp.</div>`;
+        container.innerHTML = `<div class="p-4 text-center text-xs text-slate-400 bg-slate-950/80 rounded-xl border border-slate-800">
+          <i class="fa-solid fa-folder-open text-slate-600 text-lg mb-1 block"></i>
+          Không tìm thấy bài giảng chứa từ khóa này.
+        </div>`;
         return;
       }
 
       container.innerHTML = list.map((item) => {
         return `
-          <div class="p-3 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-rose-500/50 rounded-2xl transition duration-150 space-y-1.5 shadow-sm">
+          <div class="p-3 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-teal-500/50 rounded-2xl transition duration-150 space-y-1.5 shadow-sm">
             <button onclick="${isLocked ? "alert('Tài khoản này chưa xác thực mã OTP hoặc chưa được cấp quyền. Vui lòng nhận mã OTP để mở khóa!')" : `openLessonModal('${item.id}')`}" class="w-full flex items-center justify-between text-left group">
               <div class="flex items-center gap-2.5 min-w-0 pr-2">
                 <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] shrink-0 font-bold border border-rose-900/60">${item.code}</span>
