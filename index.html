@@ -24,7 +24,6 @@
     ::-webkit-scrollbar-track { background: #e2e8f0; }
     ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
 
-    /* HIỆU ỨNG NỔI KHỐI 3D THẬT CHO TỪNG CARD */
     .card-elevated {
       background: #ffffff;
       box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
@@ -104,7 +103,6 @@
         <i class="fa-solid fa-share-nodes text-sm"></i>
       </button>
 
-      <!-- Logo chuẩn gọn đẹp nổi khối -->
       <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-2 rounded-full bg-white p-1 shadow-md overflow-hidden flex items-center justify-center border-2 border-teal-600">
         <img src="./Logo.png" alt="Dr. Thai Ortho" class="w-full h-full object-contain rounded-full">
       </div>
@@ -116,7 +114,7 @@
       <p class="text-slate-600 font-semibold text-xs sm:text-sm mt-0.5">Cùng nhau học kiến thức chỉnh nha lâm sàng thực chiến</p>
     </div>
 
-    <!-- 2. Nút Chuyển Tab Nổi Rõ -->
+    <!-- 2. Nút Chuyển Tab -->
     <div class="grid grid-cols-2 p-1.5 bg-slate-300/80 rounded-2xl border border-slate-300 gap-1.5 shadow-inner">
       <button id="tabBtnFree" onclick="switchTab('free')" class="py-2.5 px-3 rounded-xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition bg-teal-700 text-white shadow-md">
         <i class="fa-solid fa-gift"></i>
@@ -128,12 +126,8 @@
       </button>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- TAB 1: TÀI NGUYÊN MỞ                                     -->
-    <!-- ======================================================== -->
+    <!-- TAB 1: TÀI NGUYÊN MỞ -->
     <div id="sectionFree" class="space-y-4">
-      
-      <!-- 3 Bước (Nổi Khối Gradient Nhẹ) -->
       <div class="card-elevated p-4 rounded-2xl border-2 border-teal-500/40 bg-gradient-to-br from-teal-50/80 via-white to-white space-y-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2 text-teal-950 font-extrabold text-sm sm:text-base">
@@ -162,7 +156,6 @@
         </div>
       </div>
 
-      <!-- Danh mục chuyên đề mở (Tương Phản Màu Nổi Bật) -->
       <div class="space-y-2.5">
         <div class="flex items-center justify-between px-1">
           <span class="text-xs sm:text-sm font-bold text-slate-600 uppercase tracking-wider flex items-center gap-1.5">
@@ -205,7 +198,6 @@
         </div>
       </div>
 
-      <!-- Top bài giảng xem nhiều -->
       <div id="featuredVideosAnchor" class="card-elevated border border-slate-300/80 rounded-2xl p-4 space-y-3">
         <div class="flex items-center justify-between">
           <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
@@ -250,7 +242,6 @@
         </div>
       </div>
 
-      <!-- CTA VIP (Nổi Bật Đậm Sắc) -->
       <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 bg-gradient-to-r from-rose-600 via-rose-700 to-rose-800 text-white rounded-2xl transition duration-200 shadow-lg hover:shadow-xl group border border-rose-500">
         <div class="flex items-center space-x-3.5">
           <div class="w-12 h-12 rounded-xl bg-white/20 text-white flex items-center justify-center text-xl border border-white/30 shrink-0 shadow-inner">
@@ -265,12 +256,9 @@
       </a>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- TAB 2: KHU VỰC HỘI VIÊN                                   -->
-    <!-- ======================================================== -->
+    <!-- TAB 2: KHU VỰC HỘI VIÊN -->
     <div id="sectionPaid" class="space-y-4 hidden">
 
-      <!-- VỊ TRÍ 1: KỲ HỌP ĐỌC BÁO -->
       <div class="card-elevated border-2 border-amber-300/80 rounded-2xl p-4 space-y-3 bg-gradient-to-b from-amber-50/40 via-white to-white">
         <div class="flex items-center justify-between">
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500 text-white shadow-xs">
@@ -311,7 +299,6 @@
         </div>
       </div>
 
-      <!-- VỊ TRÍ 2: CỘNG ĐỒNG NỘI BỘ -->
       <details class="group card-elevated border-2 border-blue-300/80 rounded-2xl overflow-hidden transition">
         <summary class="flex items-center justify-between p-3.5 cursor-pointer select-none bg-gradient-to-r from-blue-50/50 to-white">
           <div class="flex items-center space-x-3.5">
@@ -333,14 +320,13 @@
             <i class="fa-brands fa-facebook text-lg"></i>
             <span>Vào Nhóm Facebook Hội Viên</span>
           </a>
-          <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 px-3 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white font-bold text-xs sm:text-sm transition shadow-sm">
+          <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white font-bold text-xs sm:text-sm transition shadow-sm">
             <i class="fa-solid fa-comments text-lg"></i>
             <span>Vào Nhóm Zalo Thảo Luận Lâm Sàng</span>
           </a>
         </div>
       </details>
 
-      <!-- VỊ TRÍ 3: KHO BẢN GHI VIP -->
       <div class="card-elevated border-2 border-rose-300 rounded-2xl p-4 space-y-3.5 bg-white">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2.5">
@@ -355,7 +341,7 @@
           <span id="lessonCountBadge" class="text-xs px-3 py-1 bg-rose-100 text-rose-800 border border-rose-300 rounded-full font-black shadow-xs">14 Chuyên Đề</span>
         </div>
 
-        <!-- Khung xác thực OTP Nổi Khối -->
+        <!-- Khung OTP -->
         <div class="p-3.5 bg-slate-100/90 rounded-2xl border border-slate-200 space-y-2.5 shadow-inner">
           <div id="stepEmailBlock" class="space-y-2">
             <label class="text-xs sm:text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
@@ -404,9 +390,8 @@
             <i class="fa-solid fa-shield-halved text-teal-700"></i> Mỗi thời điểm chỉ duy nhất 1 thiết bị hoạt động.
           </div>
 
-          <!-- BẢNG SO SÁNH GIÁ NÂNG CẤP FULL (TƯƠNG PHẢN ĐẬM NÉT) -->
+          <!-- BẢNG SO SÁNH GIÁ -->
           <div id="upgradeBox" class="hidden p-3.5 bg-gradient-to-br from-rose-50 via-white to-amber-50 border-2 border-rose-400 rounded-2xl space-y-2.5 text-left shadow-sm">
-            
             <div class="flex items-center justify-between border-b border-rose-200 pb-2 text-xs sm:text-sm">
               <span class="font-black text-slate-800 flex items-center gap-1.5">
                 <i class="fa-solid fa-folder-open text-teal-700"></i> <span id="upgradeStatusText">Đã sở hữu: 6/14 Folder</span>
@@ -437,11 +422,10 @@
                 <span>Nâng cấp ngay</span> <i class="fa-solid fa-arrow-right text-xs"></i>
               </a>
             </div>
-
           </div>
         </div>
 
-        <!-- KHU VỰC TÌM KIẾM NỔI BẬT NỀN TRẮNG ĐẬM VIỀN -->
+        <!-- Ô TÌM KIẾM -->
         <div class="space-y-2 pt-0.5">
           <div class="search-glow-contrast p-1 rounded-2xl bg-white border-2 border-teal-600 transition-all">
             <div class="bg-slate-50 rounded-[12px] p-2 flex items-center gap-2.5">
@@ -455,7 +439,6 @@
             </div>
           </div>
 
-          <!-- Gợi ý từ khóa 1 chạm Nổi Khối -->
           <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs">
             <span class="text-slate-600 font-black uppercase tracking-wider shrink-0 flex items-center gap-1 text-[11px]">
               <i class="fa-solid fa-bolt text-amber-500"></i> Gợi ý:
@@ -517,7 +500,6 @@
   <div id="lessonModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-3.5 sm:p-4 hidden">
     <div class="bg-white border-2 border-slate-300 w-full max-w-md rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]">
       
-      <!-- Modal Header -->
       <div class="p-4 bg-slate-100 border-b border-slate-200 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2.5 min-w-0 pr-2">
           <div class="w-9 h-9 rounded-xl bg-teal-700 text-white flex items-center justify-center text-base shadow-sm shrink-0">
@@ -533,16 +515,13 @@
         </button>
       </div>
 
-      <!-- Hướng dẫn trải nghiệm mượt -->
       <div class="px-4 py-2.5 bg-teal-50 border-b border-teal-200 text-xs sm:text-sm text-teal-950 font-medium flex items-center gap-2 shrink-0">
         <i class="fa-brands fa-google-drive text-teal-700 text-lg shrink-0"></i>
         <span>Bấm vào bài học để mở trực tiếp bằng <b>App Google Drive</b> (tự xoay ngang & tua bài siêu mượt).</span>
       </div>
 
-      <!-- Danh sách bài học chi tiết -->
       <div id="modalSubItemList" class="p-3.5 overflow-y-auto space-y-2.5 flex-1 bg-slate-50"></div>
 
-      <!-- Modal Footer -->
       <div class="p-3.5 bg-slate-100 border-t border-slate-200 shrink-0">
         <button onclick="closeLessonModal()" class="w-full py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-extrabold text-xs sm:text-sm transition border border-slate-300 shadow-sm">
           Đóng cửa sổ
@@ -579,7 +558,9 @@
 
     let currentUserEmail = '';
     let currentAllowedList = [];
+    let currentSessionToken = '';
     let resendCountdownInterval = null;
+    let heartbeatInterval = null;
 
     window.addEventListener('DOMContentLoaded', () => {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -592,14 +573,16 @@
       }
 
       const savedEmail = localStorage.getItem('drthai_authenticated_email');
+      const savedToken = localStorage.getItem('drthai_session_token');
       const cachedData = localStorage.getItem('drthai_user_cached_data');
 
-      if (savedEmail && cachedData) {
+      if (savedEmail && savedToken && cachedData) {
         try {
           const parsed = JSON.parse(cachedData);
           currentUserEmail = savedEmail;
+          currentSessionToken = savedToken;
           applyUnlockedData(parsed, savedEmail);
-          checkUserSessionBackground(savedEmail);
+          startSessionHeartbeat(savedEmail, savedToken);
         } catch(e) {
           renderLessons(LESSONS_DATA, true);
         }
@@ -692,13 +675,13 @@
         const data = await res.json();
 
         if (data.success) {
-          const currentDeviceSessionId = 'SESSION_' + Math.random().toString(36).substring(2) + Date.now();
-          localStorage.setItem('drthai_device_session', currentDeviceSessionId);
+          currentSessionToken = data.sessionToken;
           localStorage.setItem('drthai_authenticated_email', currentUserEmail);
+          localStorage.setItem('drthai_session_token', data.sessionToken);
           localStorage.setItem('drthai_user_cached_data', JSON.stringify(data));
 
           applyUnlockedData(data, currentUserEmail);
-          startActiveSessionHeartbeat(currentUserEmail, currentDeviceSessionId);
+          startSessionHeartbeat(currentUserEmail, data.sessionToken);
         } else {
           statusEl.innerHTML = `<span class="text-rose-700 font-bold"><i class="fa-solid fa-circle-xmark"></i> ${data.message || "Mã OTP không đúng."}</span>`;
         }
@@ -710,35 +693,22 @@
       }
     }
 
-    async function checkUserSessionBackground(email) {
-      try {
-        const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}`);
-        const data = await res.json();
-        if (data.success) {
-          localStorage.setItem('drthai_user_cached_data', JSON.stringify(data));
-          applyUnlockedData(data, email);
-
-          let mySession = localStorage.getItem('drthai_device_session');
-          if (!mySession) {
-            mySession = 'SESSION_' + Math.random().toString(36).substring(2) + Date.now();
-            localStorage.setItem('drthai_device_session', mySession);
-          }
-          startActiveSessionHeartbeat(email, mySession);
-        }
-      } catch (e) {}
-    }
-
-    function startActiveSessionHeartbeat(email, sessionId) {
-      setInterval(async () => {
+    // TIẾN TRÌNH ĐÁ THIẾT BỊ CŨ NẾU CÓ MÁY KHÁC ĐĂNG NHẬP
+    function startSessionHeartbeat(email, token) {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+      
+      heartbeatInterval = setInterval(async () => {
         try {
-          const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}`);
+          const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}&sessionToken=${encodeURIComponent(token)}`);
           const data = await res.json();
-          if (data.activeSession && data.activeSession !== sessionId) {
-            alert("Tài khoản này vừa được đăng nhập ở một thiết bị khác. Phiên làm việc trên thiết bị này đã kết thúc.");
+
+          if (data && data.sessionRevoked) {
+            clearInterval(heartbeatInterval);
+            alert("Tài khoản của Bác sĩ vừa được đăng nhập trên một thiết bị khác. Phiên này đã kết thúc!");
             logoutOtpSession();
           }
         } catch(e) {}
-      }, 10000);
+      }, 10000); // 10 giây quét 1 lần
     }
 
     function applyUnlockedData(data, email) {
@@ -771,7 +741,6 @@
         countEl.innerText = `${currentAllowedList.length}/14 Đã mở`;
         renderLessons(currentAllowedList, false);
 
-        // TÍNH TOÁN ĐỐI CHIẾU BIỂU PHÍ
         const totalMonths = 14;
         const purchased = currentAllowedList.length;
         const missing = Math.max(0, totalMonths - purchased);
@@ -796,7 +765,6 @@
         const savedAmount = Math.max(0, retailTotal - upgradeFee);
         const savedPercent = retailTotal > 0 ? Math.round((savedAmount / retailTotal) * 100) : 0;
 
-        // HIỂN THỊ SO SÁNH NẾU CHƯA FULL
         if (missing > 0) {
           upgradeBox.classList.remove('hidden');
           upgradeStatusText.innerText = `Đã sở hữu: ${purchased}/${totalMonths} Folder`;
@@ -821,10 +789,12 @@
     }
 
     function logoutOtpSession() {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
       localStorage.removeItem('drthai_authenticated_email');
+      localStorage.removeItem('drthai_session_token');
       localStorage.removeItem('drthai_user_cached_data');
-      localStorage.removeItem('drthai_device_session');
       currentUserEmail = '';
+      currentSessionToken = '';
       currentAllowedList = [];
       document.getElementById('inputUserEmail').value = '';
       document.getElementById('authSuccessBlock').classList.add('hidden');
@@ -969,7 +939,7 @@
         freeSec.classList.add('hidden');
         paidSec.classList.remove('hidden');
         btnPaid.className = 'py-2.5 px-3 rounded-xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition bg-rose-600 text-white shadow-md';
-        btnFree.className = 'py-2.5 px-3 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition text-slate-700 hover:text-teal-700';
+        btnFree.className = 'py-2.5 px-3 rounded-lg font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition text-slate-700 hover:text-teal-700';
       }
     }
 
