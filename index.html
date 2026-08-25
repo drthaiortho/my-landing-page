@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Kho Dữ Liệu Chỉnh Nha Dr.Thai Ortho</title>
 
+  <!-- TỐI ƯU HÓA KẾT NỐI MÁY CHỦ GOOGLE STREAMING (GIẢM ĐỘ TRỄ) -->
+  <link rel="preconnect" href="https://drive.google.com" crossorigin>
+  <link rel="preconnect" href="https://docs.google.com" crossorigin>
+  <link rel="preconnect" href="https://video.googleusercontent.com" crossorigin>
+  <link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
+  <link rel="dns-prefetch" href="https://drive.google.com">
+  <link rel="dns-prefetch" href="https://docs.google.com">
+  <link rel="dns-prefetch" href="https://video.googleusercontent.com">
+
   <!-- PWA & Favicon -->
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" href="./Logo.png">
@@ -24,6 +33,20 @@
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    /* ÉP XUNG GPU TĂNG TỐC PHẦN CỨNG MÀN HÌNH */
+    .gpu-accelerated {
+      -webkit-transform: translateZ(0);
+      -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      -o-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-perspective: 1000;
+      perspective: 1000;
+      will-change: transform, opacity;
+    }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased p-3.5 sm:p-6 selection:bg-teal-500 selection:text-white">
@@ -440,14 +463,14 @@
         </button>
       </div>
 
-      <!-- Player Frame -->
-      <div id="playerContainer" class="relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
+      <!-- Player Frame (Đã kích hoạt GPU Hardware Acceleration) -->
+      <div id="playerContainer" class="gpu-accelerated relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
         <div id="videoLoadingOverlay" class="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center gap-2 z-10 text-slate-300">
           <i class="fa-solid fa-spinner fa-spin text-teal-400 text-2xl"></i>
-          <span class="text-xs font-bold">Đang tải bài giảng...</span>
+          <span class="text-xs font-bold">Đang kết nối bài giảng...</span>
         </div>
 
-        <iframe id="driveFrame" onload="hideVideoLoader()" class="absolute inset-0 w-full h-full border-0 pointer-events-auto z-20" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+        <iframe id="driveFrame" onload="hideVideoLoader()" class="gpu-accelerated absolute inset-0 w-full h-full border-0 pointer-events-auto z-20" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope" allowfullscreen webkitallowfullscreen mozallowfullscreen referrerpolicy="no-referrer-when-downgrade" loading="eager"></iframe>
 
         <div id="dynamicWatermark" class="absolute z-30 pointer-events-none text-white/30 text-[11px] font-bold tracking-wider select-none transition-all duration-700 drop-shadow" style="top: 20%; left: 20%;">
           Dr.Thai Ortho • Hội viên
@@ -595,7 +618,7 @@
 
       btnSend.disabled = true;
       btnSend.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Gửi...`;
-      statusEl.innerHTML = `<span class="text-teal-400"><i class="fa-solid fa-paper-plane"></i> Đang gửi mã OTP đến ${email}...</span>`;
+      statusEl.innerHTML = `<span class="text-teal-400"><i class="fa-solid fa-paper-plane"></i> Đang kiểm tra quyền & gửi mã OTP...</span>`;
 
       try {
         const controller = new AbortController();
@@ -1030,19 +1053,14 @@
       }
     }
 
-    // KÍCH HOẠT FULLSCREEN VÀ FOCUS IFRAME LẬP TỨC ĐỂ XÓA MÀN HÌNH ĐEN NGAY CÚ CHẠM ĐẦU TIÊN
     function triggerNativeFullscreen() {
       const container = document.getElementById('playerContainer');
-      const frame = document.getElementById('driveFrame');
-
       if (container.requestFullscreen) {
-        container.requestFullscreen().then(() => { if(frame) frame.focus(); }).catch(() => {});
+        container.requestFullscreen().catch(() => {});
       } else if (container.webkitRequestFullscreen) {
-        container.webkitRequestFullscreen();
-        if(frame) frame.focus();
+        container.webkitRequestFullscreen().catch(() => {});
       } else if (container.msRequestFullscreen) {
-        container.msRequestFullscreen();
-        if(frame) frame.focus();
+        container.msRequestFullscreen().catch(() => {});
       }
     }
 
