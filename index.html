@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Cộng Đồng Chỉnh Nha Dr.Thai Ortho</title>
+  <title>Kho Dữ Liệu Chỉnh Nha Dr.Thai Ortho</title>
 
   <!-- PWA & Favicon -->
   <link rel="manifest" href="./manifest.json">
@@ -62,7 +62,7 @@
     <!-- ======================================================== -->
     <div id="sectionFree" class="space-y-3.5">
       
-      <!-- Lộ trình 3 bước dành cho Bác sĩ mới -->
+      <!-- Lộ trình 3 bước chuẩn cho Bác sĩ mới -->
       <div class="p-3.5 bg-gradient-to-br from-teal-950/60 via-slate-800 to-slate-800 border border-teal-500/30 rounded-2xl space-y-2.5">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2 text-teal-300 font-bold text-xs">
@@ -78,81 +78,112 @@
             <span class="font-bold text-slate-200 block">1. Tải Template</span>
             <span class="text-[9px] text-slate-400">Bệnh án chuẩn</span>
           </a>
-          <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-teal-400/60 transition group">
-            <i class="fa-solid fa-book-open-reader text-teal-400 text-base mb-1 block group-hover:scale-110 transition-transform"></i>
-            <span class="font-bold text-slate-200 block">2. Đọc Case</span>
-            <span class="text-[9px] text-slate-400">Notion mở</span>
+          <a href="#featuredVideosAnchor" onclick="document.getElementById('featuredVideosAnchor').scrollIntoView({behavior: 'smooth'})" class="p-2 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-teal-400/60 transition group">
+            <i class="fa-solid fa-circle-play text-red-400 text-base mb-1 block group-hover:scale-110 transition-transform"></i>
+            <span class="font-bold text-slate-200 block">2. Xem Bài Giảng</span>
+            <span class="text-[9px] text-slate-400">Top video free</span>
           </a>
-          <a href="https://daymai.vn/student/course/enrol/33142447" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-teal-400/60 transition group">
-            <i class="fa-solid fa-video text-rose-400 text-base mb-1 block group-hover:scale-110 transition-transform"></i>
-            <span class="font-bold text-slate-200 block">3. Zoom Free</span>
-            <span class="text-[9px] text-slate-400">Họp đọc báo</span>
+          <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-teal-400/60 transition group">
+            <i class="fa-solid fa-book-bookmark text-teal-400 text-base mb-1 block group-hover:scale-110 transition-transform"></i>
+            <span class="font-bold text-slate-200 block">3. Kho Notion</span>
+            <span class="text-[9px] text-slate-400">Dữ liệu tổng hợp</span>
           </a>
         </div>
       </div>
 
-      <!-- Kho Notion Mở Phân Loại Thẻ Tag -->
-      <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="block p-4 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-teal-400 rounded-2xl transition duration-200 shadow-md group">
-        <div class="flex items-center justify-between mb-2">
+      <!-- Kho Notion Mở Tổng Hợp -->
+      <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="block p-3.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 hover:border-teal-400 rounded-2xl transition duration-200 shadow-md group">
+        <div class="flex items-center justify-between">
           <div class="flex items-center space-x-3">
             <div class="w-10 h-10 rounded-xl bg-teal-950 text-teal-400 flex items-center justify-center text-lg border border-teal-800/60">
               <i class="fa-solid fa-book-bookmark"></i>
             </div>
             <div>
               <div class="font-bold text-white text-xs sm:text-sm group-hover:text-teal-300 transition-colors">Kho Dữ Liệu Notion Tổng Hợp</div>
-              <div class="text-[10px] text-slate-400">Tra cứu ca lâm sàng, bài báo & protocol</div>
+              <div class="text-[10px] text-slate-400">Tra cứu ca lâm sàng, tài liệu & sách tham khảo</div>
             </div>
           </div>
           <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-xs group-hover:text-teal-300"></i>
         </div>
-        <!-- Thẻ phân loại nhanh -->
-        <div class="flex flex-wrap gap-1.5 pt-1">
-          <span class="px-2 py-0.5 rounded bg-slate-900 text-[10px] text-teal-300 border border-slate-700"># Class III</span>
-          <span class="px-2 py-0.5 rounded bg-slate-900 text-[10px] text-amber-300 border border-slate-700"># Cắn Sâu</span>
-          <span class="px-2 py-0.5 rounded bg-slate-900 text-[10px] text-blue-300 border border-slate-700"># Minivis</span>
-          <span class="px-2 py-0.5 rounded bg-slate-900 text-[10px] text-rose-300 border border-slate-700"># Nhổ Lệch</span>
-          <span class="px-2 py-0.5 rounded bg-slate-900 text-[10px] text-purple-300 border border-slate-700"># Torque</span>
-        </div>
       </a>
 
-      <!-- Top Video Bài Giảng Nổi Bật -->
-      <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-3.5 space-y-2.5 shadow-md">
+      <!-- Bộ Lọc Từ Khóa Nhanh (Filter Chips) -->
+      <div class="space-y-1.5">
+        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-1">Khám phá theo chủ đề lâm sàng:</div>
+        <div class="flex flex-wrap gap-1.5">
+          <button onclick="filterFreeVideos('all')" class="chip-btn active px-2.5 py-1 rounded-lg bg-teal-500 text-slate-950 font-bold text-[10px] transition">Tất cả</button>
+          <button onclick="filterFreeVideos('gummy')" class="chip-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] border border-slate-700 transition"># Cười hở lợi</button>
+          <button onclick="filterFreeVideos('class2')" class="chip-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] border border-slate-700 transition"># Venugopal Class II</button>
+          <button onclick="filterFreeVideos('reortho')" class="chip-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] border border-slate-700 transition"># Chỉnh nha lại</button>
+          <button onclick="filterFreeVideos('mistakes')" class="chip-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] border border-slate-700 transition"># Sai lầm nắn chỉnh</button>
+        </div>
+      </div>
+
+      <!-- Top 5 Video Bài Giảng Nổi Bật -->
+      <div id="featuredVideosAnchor" class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-3.5 space-y-2.5 shadow-md">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-            <i class="fa-solid fa-fire text-amber-400"></i> Video bài giảng nổi bật
+            <i class="fa-solid fa-fire text-amber-400"></i> Video bài giảng nổi bật (Miễn phí)
           </h3>
-          <a href="https://www.youtube.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:underline">YouTube &rarr;</a>
+          <a href="https://www.youtube.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:underline">Kênh YouTube &rarr;</a>
         </div>
         
-        <div class="space-y-2 text-xs">
-          <a href="https://www.youtube.com/watch?v=jPuLbqqYj_w" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
+        <div id="freeVideoContainer" class="space-y-2 text-xs">
+          <!-- Top 1: Webinar Cười hở lợi -->
+          <a href="https://www.youtube.com/watch?v=jPuLbqqYj_w" target="_blank" rel="noopener noreferrer" data-category="gummy" class="free-video-item p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
             <div class="flex items-start gap-2 min-w-0">
               <span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 1</span>
               <div class="truncate">
                 <div class="font-semibold text-white group-hover:text-amber-200 transition-colors truncate">Webinar: Điều trị cười hở lợi thực chiến</div>
-                <div class="text-[10px] text-slate-400 truncate">Chọn khí cụ & cơ chế kéo lùi/đánh lún hiệu quả</div>
+                <div class="text-[10px] text-slate-400 truncate">Chẩn đoán, chọn khí cụ & cơ chế kéo lùi/đánh lún hiệu quả</div>
               </div>
             </div>
             <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
           </a>
 
-          <a href="https://www.youtube.com/watch?v=iMqc6BDiK6g&list=PL7YzM7KyB5S6EXP9eTA2cbw0Gnj-rnjFy" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
+          <!-- Top 2: Venugopal Class II -->
+          <a href="https://youtu.be/yUPIvt3xS30" target="_blank" rel="noopener noreferrer" data-category="class2" class="free-video-item p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
             <div class="flex items-start gap-2 min-w-0">
-              <span class="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 2</span>
+              <span class="px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 2</span>
+              <div class="truncate">
+                <div class="font-semibold text-white group-hover:text-teal-200 transition-colors truncate">TÂM SỰ ĐÊM KHUYA #04 – Class II Venugopal</div>
+                <div class="text-[10px] text-slate-400 truncate">Class II Correction theo triết lý Venugopal thực chiến</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
+          </a>
+
+          <!-- Top 3: Chỉnh nha lại -->
+          <a href="https://youtu.be/Qlo-nEa3ZsA" target="_blank" rel="noopener noreferrer" data-category="reortho" class="free-video-item p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
+            <div class="flex items-start gap-2 min-w-0">
+              <span class="px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 3</span>
+              <div class="truncate">
+                <div class="font-semibold text-white group-hover:text-rose-200 transition-colors truncate">TÂM SỰ ĐÊM KHUYA #05 – Chỉnh nha lại</div>
+                <div class="text-[10px] text-slate-400 truncate">Kinh nghiệm quý giá & xử lý các ca điều trị thất bại</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
+          </a>
+
+          <!-- Top 4: Tâm sự số 01 -->
+          <a href="https://www.youtube.com/watch?v=QKRo6Gci0Xk&list=PL7YzM7KyB5S6ALSSRrGzvOPdHTUGY0Blz" target="_blank" rel="noopener noreferrer" data-category="all" class="free-video-item p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
+            <div class="flex items-start gap-2 min-w-0">
+              <span class="px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 4</span>
+              <div class="truncate">
+                <div class="font-semibold text-white group-hover:text-purple-200 transition-colors truncate">Tâm sự đêm khuya góc chỉnh nha số 01</div>
+                <div class="text-[10px] text-slate-400 truncate">Bí quyết & kinh nghiệm lâm sàng cho người mới</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
+          </a>
+
+          <!-- Top 5: Sai lầm nắn chỉnh răng -->
+          <a href="https://www.youtube.com/watch?v=iMqc6BDiK6g&list=PL7YzM7KyB5S6EXP9eTA2cbw0Gnj-rnjFy" target="_blank" rel="noopener noreferrer" data-category="mistakes" class="free-video-item p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
+            <div class="flex items-start gap-2 min-w-0">
+              <span class="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 5</span>
               <div class="truncate">
                 <div class="font-semibold text-white group-hover:text-blue-200 transition-colors truncate">Các sai lầm thường gặp trong nắn chỉnh răng</div>
                 <div class="text-[10px] text-slate-400 truncate">Nhận diện sớm bẫy lực & mất kiểm soát neo chặn</div>
-              </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
-          </a>
-
-          <a href="https://www.youtube.com/watch?v=QKRo6Gci0Xk&list=PL7YzM7KyB5S6ALSSRrGzvOPdHTUGY0Blz" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
-            <div class="flex items-start gap-2 min-w-0">
-              <span class="px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 3</span>
-              <div class="truncate">
-                <div class="font-semibold text-white group-hover:text-purple-200 transition-colors truncate">Tâm sự đêm khuya góc chỉnh nha số 01</div>
-                <div class="text-[10px] text-slate-400 truncate">Bí quyết & trải nghiệm lâm sàng từ Dr.Thai Ortho</div>
               </div>
             </div>
             <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
@@ -223,11 +254,11 @@
         </div>
       </details>
 
-      <!-- Kỳ Họp Đọc Báo Đếm Ngược -->
+      <!-- Kỳ Họp Đọc Báo Số 02 Đếm Ngược -->
       <div class="bg-gradient-to-b from-slate-800 to-slate-800/90 border border-slate-700 rounded-2xl p-3.5 space-y-2.5 shadow-md">
         <div class="flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
-            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Sinh hoạt định kỳ
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Quyền lợi Hội viên
           </span>
           <span class="text-[10px] text-slate-400">Zoom Daymai</span>
         </div>
@@ -326,7 +357,7 @@
 
   </div>
 
-  <!-- POPUP PLAYER LMS NATIVE CHUẨN ĐẸP (PLAYER 16:9 + SUB-PLAYLIST + NEXT/PREV + PROGRESS) -->
+  <!-- POPUP PLAYER LMS NATIVE CHUẨN ĐẸP -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-2.5 hidden opacity-0 transition-opacity duration-200">
     <div class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh]">
       
@@ -396,7 +427,7 @@
   <script>
     const SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbx-J_8QG8CWIW-Y-kNc2eR5q888DKEDCVLkP6RxDD266_t1KwNGTxjSfoKMLy6F1CeiqQ/exec";
 
-    // DATABASE ĐẦY ĐỦ 14 CHUYÊN ĐỀ
+    // DATABASE 14 CHUYÊN ĐỀ
     const LESSONS_DATA = [
       {"id":"2025-02","code":"[2025-02]","title":"Andrews 6 Keys, Mắc cài, 3Shape","items":[{"name":"01. Bản ghi B1 - Andrews 6 Keys Part I","fileId":"1Ddv1VrAglf1fboqYj5OdUZDvE-I3qGR4","type":"video"},{"name":"02. GS Nanda chữa CII Div 2 (Tài liệu)","fileId":"1sKZQOskWIJsvYdcYboJsWTjtVXsieGNK","type":"pdf"},{"name":"03. Bản ghi B2 - Andrews 6 Keys Part II","fileId":"1JRAVvmtTaCbkzVkMigjzfOJvLoRQHrtw","type":"video"},{"name":"04. Bản ghi B3 - Thông số mắc cài","fileId":"1-aQUVX3rOyE_utQPDwmS7dKbEnn_RUgn","type":"video"},{"name":"05. Bending đóng khe thưa","fileId":"1GaQfM5wrJIJGw_m6tSePgmbH8O-9blOg","type":"video"},{"name":"06. Bẻ Torque","fileId":"1FWq0al8X4Z7YD32_DZAmt3XFSo3gfnt1","type":"video"},{"name":"07. Đường hướng dẫn dây cung","fileId":"1LAYcUI2R9o1TGcBNqzDRBI2Ias5AzFSB","type":"video"},{"name":"08. KT bẻ torque 4 R cửa GIÁN TIẾP","fileId":"1w1HuJrmxaGbNRgRtFOgesoGdjILLH-vm","type":"video"},{"name":"09. Torque loop","fileId":"1WIXCFvCQv1SaDxVsoZFWkLJBry1WaEDG","type":"video"},{"name":"10. Bản ghi B4 - 3Shape Ortho Part I","fileId":"1w4pGqtgO7PrfUVtaYd8LZU8fvEPbN7dh","type":"video"},{"name":"11. Bản ghi Buổi 5 - 3Shape Part II","fileId":"1p8Uh6tf9-goCGQo1-8cWnYH54-I0-Z3k","type":"video"},{"name":"12. Bản ghi B6 - 3Shape Part III","fileId":"1ufm0KJtp-prvXPdE6LQhAjtfhfCV4nWN","type":"video"},{"name":"13. Transverse Diagnosis CBCT","fileId":"1b_ehDlGChRtNH6w_eFQGNe-QvS02j3cL","type":"video"},{"name":"14. TPA biến đổi / Sáng tạo khí cụ","fileId":"13j1UHg6IS6ImIrNGpPVfNw4rYDpBeDix","type":"video"},{"name":"15. Hướng dẫn cắm vis","fileId":"1XdBRdNEouzrOya9nD6OEnZ3FBNA3h-l9","type":"video"},{"name":"16. Sách & Tài liệu Mediafire HVT2","fileId":"12V0SYri_GweoZ8f1LIp8qCpo7NTyawjF","type":"doc"}]},
       {"id":"2025-03","code":"[2025-03]","title":"Ceph, Occlusogram, PIP VTO, 3D Ceph","items":[{"name":"01. Bản ghi Buổi 1 - Sassouni Plus + Ricketts Superimposition","fileId":"1JoX9HFwRcgYx6frmZ_TTFiVggI-XE0IN","type":"video"},{"name":"02. HDSD Vistadent (Video)","fileId":"1IegauAlvJy_B0WIdRcpSS2zNzQYNoEqr","type":"video"},{"name":"03. Bản ghi B2 - Chữa bài B1 + 2D Occlusogram","fileId":"1EQMbN3cor8_tfOdRcfm8XrNrUWkxxf_x","type":"video"},{"name":"04. Tracing bằng giấy vẽ","fileId":"1NjHKPbDugyz_rDdj5P59hnSOtmRl2K2P","type":"video"},{"name":"05. Bản ghi Buổi 03 - PIP-VTO","fileId":"1b5yOPq6O5awkShsMgqrCybBBGNzof75O","type":"video"},{"name":"06. Sách: Clinical Applications of Mini-implants","fileId":"12tPaOz2R2cf8leMH14a_OkPlvVy6xTTc","type":"pdf"},{"name":"07. Bản ghi Buổi 4 - TMJ, Airways & 3D Ceph","fileId":"1uw_I8AT05mY2xx-LQt6TsvsDy7lMo98L","type":"video"},{"name":"08. Video 1 - Airways & TMJ","fileId":"1CTseUAfvPdjcW7IJEreO8MC7Ion_00nE","type":"video"},{"name":"09. Video 2 - Orthodontics & Airways","fileId":"1969bEpsd8Hg6hvRLGRseTMsxqVk4pgds","type":"video"},{"name":"10. Phân tích phim Sassouni bằng Audax Ceph","fileId":"103_WP8bCs8zGzwl4hN89QQKq_C-TigqUu9lcUBi8Jm8","type":"doc"}]},
@@ -427,6 +458,25 @@
         renderLessons(LESSONS_DATA);
       }
     });
+
+    // Lọc Top Video Mở theo Chips
+    function filterFreeVideos(cat) {
+      const allChips = document.querySelectorAll('.chip-btn');
+      allChips.forEach(b => {
+        b.className = 'chip-btn px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] border border-slate-700 transition';
+      });
+      event.target.className = 'chip-btn active px-2.5 py-1 rounded-lg bg-teal-500 text-slate-950 font-bold text-[10px] transition';
+
+      const items = document.querySelectorAll('.free-video-item');
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        if (cat === 'all' || itemCat === cat) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
 
     // Tra cứu API Apps Script
     async function applyUserEmail() {
@@ -495,7 +545,7 @@
       }
     }
 
-    // LIVE SEARCH TÌM BÀI HỌC
+    // Live Search
     function handleSearchLesson() {
       const kw = document.getElementById('lessonSearchInput').value.trim().toLowerCase();
       const listToFilter = currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA;
@@ -523,7 +573,6 @@
       }
 
       container.innerHTML = list.map((item) => {
-        // Tính % hoàn thành của chuyên đề này
         const totalSub = item.items.length;
         const watchedCount = item.items.filter(it => watchedLessons[it.fileId]).length;
         const percent = totalSub > 0 ? Math.round((watchedCount / totalSub) * 100) : 0;
@@ -546,7 +595,7 @@
       }).join('');
     }
 
-    // Modal Player Logic
+    // Modal Player
     let currentLesson = null;
     let currentSubIndex = 0;
     let watermarkInterval;
@@ -567,7 +616,6 @@
 
       renderSubPlaylist();
 
-      // Phát bài đầu tiên
       if (lesson.items && lesson.items.length > 0) {
         playSubItemByIndex(0);
       }
@@ -629,7 +677,6 @@
 
       chkWatched.checked = !!watchedLessons[item.fileId];
 
-      // Update button Next/Prev
       document.getElementById('btnPrevItem').disabled = (currentSubIndex === 0);
       document.getElementById('btnNextItem').disabled = (currentSubIndex === currentLesson.items.length - 1);
 
@@ -693,7 +740,7 @@
       }
     }
 
-    // Đếm ngược sinh hoạt
+    // Đếm ngược
     const targetDate = new Date('2026-08-31T20:30:00+07:00').getTime();
     function updateCountdown() {
       const now = new Date().getTime();
@@ -719,7 +766,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Copy Site Link
+    // Copy Link
     function copySiteLink() {
       navigator.clipboard.writeText(window.location.href).then(() => {
         const toast = document.getElementById('toast');
