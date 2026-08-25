@@ -26,7 +26,7 @@
 
     <!-- 1. Header Thương Hiệu -->
     <div class="text-center pt-2 relative">
-      <button onclick="copySiteLink()" class="absolute top-0 right-0 p-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-teal-300 border border-slate-700 transition duration-150 shadow-sm" title="Sao chép link chia sẻ">
+      <button onclick="copySiteLink()" class="absolute top-0 right-0 p-2.5 rounded-full bg-slate-800 hover:bg-slate-750 text-slate-400 hover:text-teal-300 border border-slate-700 transition duration-150 shadow-sm" title="Sao chép link chia sẻ">
         <i class="fa-solid fa-share-nodes text-sm"></i>
       </button>
 
@@ -58,7 +58,6 @@
     <!-- ======================================================== -->
     <div id="sectionFree" class="space-y-4">
       
-      <!-- Lời chào -->
       <div class="p-4 bg-gradient-to-br from-teal-950/60 via-slate-800 to-slate-800 border border-teal-500/30 rounded-2xl space-y-1.5">
         <div class="flex items-center gap-2 text-teal-300 font-bold text-xs">
           <i class="fa-solid fa-handshake-angle text-sm"></i>
@@ -291,14 +290,14 @@
         </a>
       </div>
 
-      <!-- 4. KHU VỰC BẢN GHI VIP & TỰ ĐỘNG TRA CỨU QUYỀN APPS SCRIPT -->
+      <!-- 4. KHU VỰC BẢN GHI VIP & TRA CỨU LMS PLAYER -->
       <div class="bg-gradient-to-b from-slate-850 to-slate-900 border border-rose-500/40 rounded-2xl p-4 space-y-3.5 shadow-xl">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <i class="fa-solid fa-film text-rose-400 text-base"></i>
             <div>
               <h3 class="text-xs font-bold text-white uppercase tracking-wide">Kho Bản Ghi Hội Viên VIP</h3>
-              <p class="text-[10px] text-slate-400">Rà soát phân quyền tự động từ Google Drive</p>
+              <p class="text-[10px] text-slate-400">Trình phát video trực tiếp & tài nguyên đi kèm</p>
             </div>
           </div>
           <span class="text-[10px] px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800/80 rounded-full font-bold">14 Chuyên Đề</span>
@@ -320,7 +319,7 @@
             <i class="fa-solid fa-circle-info text-amber-400"></i> Đang hiển thị toàn bộ danh mục tham khảo.
           </div>
 
-          <!-- Khung Báo Giá Nâng Cấp Tự Động (Ẩn khi chưa tra cứu) -->
+          <!-- Khung Báo Giá Nâng Cấp Tự Động -->
           <div id="upgradeBox" class="hidden p-2.5 bg-rose-950/40 border border-rose-900/60 rounded-lg space-y-1.5 text-xs text-rose-200">
             <div class="flex justify-between items-center">
               <span class="font-bold text-white text-[11px]"><i class="fa-solid fa-sparkles text-amber-400 mr-1"></i> Chính Sách Nâng Cấp Full Combo:</span>
@@ -333,7 +332,7 @@
           </div>
         </div>
 
-        <!-- Danh sách bài học render theo phân quyền -->
+        <!-- Danh sách bài học -->
         <div class="space-y-1.5">
           <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between px-1">
             <span>Danh sách chuyên đề</span>
@@ -383,23 +382,25 @@
 
   </div>
 
-  <!-- POPUP PLAYER BẢO MẬT (CHUYÊN DỤNG CHO FOLDER DRIVE) -->
+  <!-- POPUP PLAYER LMS NATIVE CHUẨN ĐẸP (PLAYER 16:9 + SUB-PLAYLIST) -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-3 hidden opacity-0 transition-opacity duration-200">
-    <div class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col">
-      <div class="p-3 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-folder-open text-rose-400 text-sm"></i>
-          <span id="videoTitle" class="text-xs font-bold text-white truncate max-w-[260px]">Bản ghi bài giảng</span>
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[92vh]">
+      
+      <!-- Modal Header -->
+      <div class="p-3 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2 min-w-0 pr-2">
+          <i class="fa-solid fa-circle-play text-rose-400 text-sm shrink-0"></i>
+          <span id="videoTitle" class="text-xs font-bold text-white truncate">Chuyên đề</span>
         </div>
-        <button onclick="closeSecurePlayer()" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center">
+        <button onclick="closeSecurePlayer()" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center shrink-0">
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
 
-      <!-- Khung hiển thị danh sách file trong Folder Drive -->
-      <div class="relative w-full h-[520px] bg-slate-950 overflow-hidden select-none">
-        <iframe id="driveFrame" class="w-full h-full border-0" allow="autoplay"></iframe>
-        <!-- Che góc phải trên chặn nút pop-out -->
+      <!-- Player Frame 16:9 Sắc Nét -->
+      <div class="relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800">
+        <iframe id="driveFrame" class="absolute inset-0 w-full h-full border-0" allow="autoplay"></iframe>
+        <!-- Che góc phải trên của Google Drive để chặn icon pop-out -->
         <div class="absolute top-0 right-0 w-16 h-14 z-20 bg-transparent cursor-default"></div>
         <!-- Watermark di động -->
         <div id="dynamicWatermark" class="absolute z-10 pointer-events-none text-white/30 text-[11px] font-bold tracking-wider select-none transition-all duration-700 drop-shadow" style="top: 20%; left: 20%;">
@@ -407,9 +408,22 @@
         </div>
       </div>
 
-      <div class="p-2 bg-slate-900 text-center border-t border-slate-800">
+      <!-- Tiêu đề bài đang phát -->
+      <div class="px-3 py-2 bg-slate-850 border-b border-slate-800 flex items-center justify-between shrink-0 text-xs">
+        <span class="text-slate-400 text-[11px]">Đang xem:</span>
+        <span id="currentPlayingName" class="font-semibold text-teal-300 text-[11px] truncate max-w-[280px]">Chưa chọn file</span>
+      </div>
+
+      <!-- Sub-Playlist: Danh sách các bài con & tài liệu -->
+      <div class="p-3 overflow-y-auto space-y-1.5 flex-1 bg-slate-900/90">
+        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nội dung chi tiết trong chuyên đề:</div>
+        <div id="subItemList" class="space-y-1"></div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-2 bg-slate-900 text-center border-t border-slate-800 shrink-0">
         <p class="text-[10px] text-slate-400 flex items-center justify-center gap-1">
-          <i class="fa-solid fa-shield-halved text-teal-400"></i> Thư mục bảo mật chống sao chép • Bản quyền Dr.Thai Ortho
+          <i class="fa-solid fa-shield-halved text-teal-400"></i> Video bảo mật chống sao chép • Bản quyền Dr.Thai Ortho
         </p>
       </div>
     </div>
@@ -419,27 +433,26 @@
     <i class="fa-solid fa-check"></i> Đã sao chép link trang!
   </div>
 
-  <!-- SCRIPT KẾT NỐI APPS SCRIPT API & DATA 14 FOLDERS -->
+  <!-- SCRIPT KẾT NỐI API & DATABASE 14 KỲ HOÀN CHỈNH -->
   <script>
-    // 1. LINK GOOGLE APPS SCRIPT WEB APP API (ĐÃ GẮN LINK CHÍNH XÁC)
     const SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbx-J_8QG8CWIW-Y-kNc2eR5q888DKEDCVLkP6RxDD266_t1KwNGTxjSfoKMLy6F1CeiqQ/exec";
 
-    // 2. DANH SÁCH 14 FOLDER DRIVE
+    // 1. DỮ LIỆU ĐẦY ĐỦ 14 CHUYÊN ĐỀ (ĐÃ QUÉT TOÀN BỘ FILE CON)
     const LESSONS_DATA = [
-      { code: "[2025-02]", title: "Andrews 6 Keys, Mắc cài, 3Shape", driveId: "1Ae8PPXBmvn1hmsGfvA8igGSlBuspoJs-" },
-      { code: "[2025-03]", title: "Ceph, Occlusogram, PIP VTO, 3D Ceph", driveId: "1E2J6X0oNcoDjSQxk9VUF1Y3AUp5txJaW" },
-      { code: "[2025-05]", title: "Neo gián tiếp, Lòi chân R, Hạng II góc cao", driveId: "1eIfVQbzb0BYeYEnXAGvdYjPzXu51EDkk" },
-      { code: "[2025-06]", title: "Biomechanics, MP nhai, KS Torque", driveId: "10wm0j2oBNi16HCVpaPubou1iVP3i2WA3" },
-      { code: "[2025-07]", title: "Class III, Đóng khoảng, Nhổ lệch", driveId: "1QkWfl1Nq1Fs5UXYDfaVscb6WU_cStoxk" },
-      { code: "[2025-09]", title: "Điều trị sớm Class III", driveId: "16uyrr4BjVfTg4P3NH2X7qDOeA0pO3XJ5" },
-      { code: "[2025-11]", title: "Di xa R3 biến chứng", driveId: "17Q9-zMI8A-fslXHSB-Q5bKj6ltVNUINt" },
-      { code: "[2025-12]", title: "Đóng khoảng Protocol tổng hợp", driveId: "1TlLr664cY-YdtcOQp1h8G7Dy2bEuCe5G" },
-      { code: "[2026-01]", title: "Nhổ răng hay không?", driveId: "1tUV9mwTq11g2sgtJkGAT-QnYKYOUScIB" },
-      { code: "[2026-02]", title: "Di xa", driveId: "1uUGTGLPrfl6xf_0Y7-qkjN67jw5yWmL_" },
-      { code: "[2026-03]", title: "Neo chặn lâm sàng", driveId: "1kR9EH0cypN3TDdJdxni19IAm6IO6Liyg" },
-      { code: "[2026-04]", title: "Deepbite - Khớp cắn sâu", driveId: "1rl1KTgClMfMda0HnPVhUlGfOV7_pyFrF" },
-      { code: "[2026-07]", title: "Class II High Angle Openbite", driveId: "1l66W6vVWdK9p1Cl4QVtPYyOp_lrJ0hXN" },
-      { code: "[2026-08]", title: "Class II Division 2", driveId: "1QX6pIClCQLxco9csMCfl5PoZNoCzwr_4" }
+      {"id":"2025-02","code":"[2025-02]","title":"Andrews 6 Keys, Mắc cài, 3Shape","items":[{"name":"01. Bản ghi B1 - Andrews 6 Keys Part I","fileId":"1Ddv1VrAglf1fboqYj5OdUZDvE-I3qGR4","type":"video"},{"name":"02. GS Nanda chữa CII Div 2 (Tài liệu)","fileId":"1sKZQOskWIJsvYdcYboJsWTjtVXsieGNK","type":"pdf"},{"name":"03. Bản ghi B2 - Andrews 6 Keys Part II","fileId":"1JRAVvmtTaCbkzVkMigjzfOJvLoRQHrtw","type":"video"},{"name":"04. Bản ghi B3 - Thông số mắc cài","fileId":"1-aQUVX3rOyE_utQPDwmS7dKbEnn_RUgn","type":"video"},{"name":"05. Bending đóng khe thưa","fileId":"1GaQfM5wrJIJGw_m6tSePgmbH8O-9blOg","type":"video"},{"name":"06. Bẻ Torque","fileId":"1FWq0al8X4Z7YD32_DZAmt3XFSo3gfnt1","type":"video"},{"name":"07. Đường hướng dẫn dây cung","fileId":"1LAYcUI2R9o1TGcBNqzDRBI2Ias5AzFSB","type":"video"},{"name":"08. KT bẻ torque 4 R cửa GIÁN TIẾP","fileId":"1w1HuJrmxaGbNRgRtFOgesoGdjILLH-vm","type":"video"},{"name":"09. Torque loop","fileId":"1WIXCFvCQv1SaDxVsoZFWkLJBry1WaEDG","type":"video"},{"name":"10. Bản ghi B4 - 3Shape Ortho Part I","fileId":"1w4pGqtgO7PrfUVtaYd8LZU8fvEPbN7dh","type":"video"},{"name":"11. Bản ghi Buổi 5 - 3Shape Part II","fileId":"1p8Uh6tf9-goCGQo1-8cWnYH54-I0-Z3k","type":"video"},{"name":"12. Bản ghi B6 - 3Shape Part III","fileId":"1ufm0KJtp-prvXPdE6LQhAjtfhfCV4nWN","type":"video"},{"name":"13. Transverse Diagnosis CBCT","fileId":"1b_ehDlGChRtNH6w_eFQGNe-QvS02j3cL","type":"video"},{"name":"14. TPA biến đổi / Sáng tạo khí cụ","fileId":"13j1UHg6IS6ImIrNGpPVfNw4rYDpBeDix","type":"video"},{"name":"15. Hướng dẫn cắm vis","fileId":"1XdBRdNEouzrOya9nD6OEnZ3FBNA3h-l9","type":"video"},{"name":"16. Sách & Tài liệu Mediafire HVT2","fileId":"12V0SYri_GweoZ8f1LIp8qCpo7NTyawjF","type":"doc"}]},
+      {"id":"2025-03","code":"[2025-03]","title":"Ceph, Occlusogram, PIP VTO, 3D Ceph","items":[{"name":"01. Bản ghi Buổi 1 - Sassouni Plus + Ricketts Superimposition","fileId":"1JoX9HFwRcgYx6frmZ_TTFiVggI-XE0IN","type":"video"},{"name":"02. HDSD Vistadent (Video)","fileId":"1IegauAlvJy_B0WIdRcpSS2zNzQYNoEqr","type":"video"},{"name":"03. Bản ghi B2 - Chữa bài B1 + 2D Occlusogram","fileId":"1EQMbN3cor8_tfOdRcfm8XrNrUWkxxf_x","type":"video"},{"name":"04. Tracing bằng giấy vẽ","fileId":"1NjHKPbDugyz_rDdj5P59hnSOtmRl2K2P","type":"video"},{"name":"05. Bản ghi Buổi 03 - PIP-VTO","fileId":"1b5yOPq6O5awkShsMgqrCybBBGNzof75O","type":"video"},{"name":"06. Sách: Clinical Applications of Mini-implants","fileId":"12tPaOz2R2cf8leMH14a_OkPlvVy6xTTc","type":"pdf"},{"name":"07. Bản ghi Buổi 4 - TMJ, Airways & 3D Ceph","fileId":"1uw_I8AT05mY2xx-LQt6TsvsDy7lMo98L","type":"video"},{"name":"08. Video 1 - Airways & TMJ","fileId":"1CTseUAfvPdjcW7IJEreO8MC7Ion_00nE","type":"video"},{"name":"09. Video 2 - Orthodontics & Airways","fileId":"1969bEpsd8Hg6hvRLGRseTMsxqVk4pgds","type":"video"},{"name":"10. Phân tích phim Sassouni bằng Audax Ceph","fileId":"103_WP8bCs8zGzwl4hN89QQKq_C-TigqUu9lcUBi8Jm8","type":"doc"}]},
+      {"id":"2025-05","code":"[2025-05]","title":"Neo gián tiếp, Lòi chân R, Hạng II góc cao","items":[{"name":"01. Bản ghi TSĐK#07 - Neo chặn gián tiếp","fileId":"1ELcutZx-tMBdC3BptaT6l1v0vd8v9moq","type":"video"},{"name":"02. Cách dán trên lâm sàng 01","fileId":"1wIjKdecbb8nZeC5ByAK_5E7JpoNOcuAi","type":"video"},{"name":"03. Cách dán trên lâm sàng 02","fileId":"1_uVkQGGfttoL69DkhRPPncpXt7VM4jVS","type":"video"},{"name":"04. Bản ghi TSĐK#08 - Lòi chân răng","fileId":"1cb83mJ0VRVhAfSvfGsNhMqpdVC_YOhFa","type":"video"},{"name":"05. Nghiên cứu về Bone Regeneration","fileId":"11sRSilOGijASjZib-v8rBvIGmPwHUKge","type":"pdf"},{"name":"06. Bản ghi TSĐK#09 - Vertical Dimension","fileId":"1b-by50-janBnThfNvhOWBVMizcmo8wdt","type":"video"},{"name":"07. Dựng trục răng cối đổ lưỡi (Discussion)","fileId":"1tHYjV5pAZ-pIIhxj51sGQX2N725twuG0","type":"video"},{"name":"08. Bản ghi TSĐK#10 - Active Vertical Control","fileId":"1ld8hjFmft-p-9fvDCr4REXtBRsm5lhiv","type":"video"},{"name":"09. High Angle Gummy Smile - Case AJODO","fileId":"1JQE3OS9Tye-tLntT8QBsOdsLEF_LDdyo","type":"pdf"}]},
+      {"id":"2025-06","code":"[2025-06]","title":"Biomechanics, MP nhai, KS Torque","items":[{"name":"01. Bản ghi TSĐK#11 - Sinh cơ học từ góc nhìn lâm sàng","fileId":"1Wk-WUF3oSZisCKryJFTu6xBq_cQnrXQE","type":"video"},{"name":"02. Biomechanics of Extra-alveolar Mini-implants","fileId":"134k5QmVsc_TGqVwYnltgdOjli2Xx_3FL","type":"pdf"},{"name":"03. Bản ghi TSĐK#12 - MIP-based Orthodontics","fileId":"1NffSY5wzuVru9jW7xJWLfXzaO7ce-dmh","type":"video"},{"name":"04. Bài báo MIP-based (J.H.Park)","fileId":"1ao2QGUeEKGSjHbJBPdCD7Fz1pnE7XDrI","type":"pdf"},{"name":"05. Bản ghi TSĐK#12A - Torque Control chỉnh nha lại","fileId":"16uvT6ZVxyjjNZoyoJFgaofhv-qKXf8yE","type":"video"},{"name":"06. Bản ghi TSĐK#14 - Chỉnh nha nghệ thuật","fileId":"1wQJWN3TW75htJYDU7XzRkxmcegoY19hL","type":"video"}]},
+      {"id":"2025-07","code":"[2025-07]","title":"Class III, Đóng khoảng, Nhổ lệch","items":[{"name":"01. Bản ghi TSĐK#15 - Pseudo CIII (Hạng III giả)","fileId":"1whNANmd9AV51RQhTMj6tL-lnJuTXN8TA","type":"video"},{"name":"02. Bản ghi TSĐK#16 - True Class III","fileId":"1EvxJokb9X9VIVXUOrVSabzimb1lMPwsS","type":"video"},{"name":"03. Bản ghi TSĐK#17 - Trục trặc đóng khoảng","fileId":"1eVjXYTA5KerRkf8FJu11uAC1QS590PQ6","type":"video"},{"name":"04. Reverse MEAW (Lý thuyết)","fileId":"15l5YLv4T1gG8rgXKe9s8l5zvBO1zgNB3","type":"video"},{"name":"05. Bẻ Reverse MEAW (Thực hành)","fileId":"1nOanoqqqHdcWPqhs5fbEZZlBrI2P10TP","type":"video"},{"name":"06. Bản ghi TSĐK#18 - Nhổ răng lệch bên","fileId":"15khyP289GYQzhL5zO3PL8WW1aF3V4pU3","type":"video"},{"name":"07. AJODO - Asymmetric Extraction","fileId":"1ds3Ii1DLPgZJvM414onHl9Z4KTTlpmbE","type":"pdf"}]},
+      {"id":"2025-09","code":"[2025-09]","title":"Điều trị sớm Class III","items":[{"name":"01. Bản ghi Recording - HVT9/2025 (TSĐK#19)","fileId":"1dyUI7HlGfkeSAQiP_4cVy6HU7sDzIWKU","type":"video"},{"name":"02. Tài liệu Mediafire HVT9-2025","fileId":"1C5UNKvbILh7o9b8qqY8HfTvNcsg6DXRj","type":"doc"}]},
+      {"id":"2025-11","code":"[2025-11]","title":"Di xa R3 biến chứng","items":[{"name":"01. Bản ghi Recording - HVT11/2025 (TSĐK#20)","fileId":"1M6CM4_C66Kiow8Np3zVoXM_vta1YYsUf","type":"video"},{"name":"02. Tài liệu Mediafire HVT11-2025","fileId":"1XLwfJr_1IIYHjnBoccRnwI_ylxwRLFV-","type":"doc"}]},
+      {"id":"2025-12","code":"[2025-12]","title":"Đóng khoảng Protocol tổng hợp","items":[{"name":"01. Bản ghi Recording - HVT12/2025 (TSĐK#21)","fileId":"1_qEjNeGTbFIN4TJNtuSSkTr7dlW8eXKw","type":"video"},{"name":"02. Tài liệu Mediafire HVT12-2025","fileId":"1ymvR-UNcP5XMbp1_MgR9umJqBFMkwpv-","type":"doc"}]},
+      {"id":"2026-01","code":"[2026-01]","title":"Nhổ răng hay không?","items":[{"name":"01. Bản ghi Recording - HVT1/2026 (TSĐK#22)","fileId":"1ojQgOTP5AmB7Ky2qxtvnLExCIgk5acRW","type":"video"},{"name":"02. Tài liệu Mediafire HVT1-2026","fileId":"1cKp2vCTghyk32dIMlNWO3_rwBgLKNgu7","type":"doc"}]},
+      {"id":"2026-02","code":"[2026-02]","title":"Di xa","items":[{"name":"01. Bản ghi Recording - HVT2/2026 (TSĐK#23)","fileId":"1j-4C7LiEDWeLVCf20e0O95ktMBGbz5Rq","type":"video"},{"name":"02. Tài liệu Mediafire HVT2-2026","fileId":"1Bd18r4STJTeHuKsC34xxSjwIQMOKcQu6","type":"doc"}]},
+      {"id":"2026-03","code":"[2026-03]","title":"Neo chặn lâm sàng","items":[{"name":"01. Bản ghi Recording - HVT3/2026 (TSĐK#24)","fileId":"1nGmziwuovrXyuAZzsYb13kOs7V92IAW6","type":"video"},{"name":"02. Tài liệu Mediafire HVT3-2026","fileId":"1M40VsMVpbM7sEbi6bk9tfm2762dHe3Yi","type":"doc"}]},
+      {"id":"2026-04","code":"[2026-04]","title":"Deepbite - Khớp cắn sâu","items":[{"name":"01. Bản ghi Recording - HVT4/2026 (TSĐK#25)","fileId":"1O3P-_MS0Fsl1al98hyIHeN3BJMwN7TwO","type":"video"},{"name":"02. Hướng dẫn làm Turbo","fileId":"1I08oqSb7-FqJXhkOg6wn_LlA4y526Df6","type":"doc"},{"name":"03. Tài liệu Mediafire HVT4-2026","fileId":"1eQxVnbP9XnfTM32wq6hDm6eUj6giJVgn","type":"doc"}]},
+      {"id":"2026-07","code":"[2026-07]","title":"Class II High Angle Openbite","items":[{"name":"01. Bản ghi Recording - HVT7/2026","fileId":"1Ck0nBou1K4GFZBh6wQhqSBJNxYNYnUNx","type":"video"},{"name":"02. Tài liệu Mediafire HVT7-2026","fileId":"1hwN_Kkm6Z0oZNJntxkT0PBdrq2-8FxiA","type":"doc"}]},
+      {"id":"2026-08","code":"[2026-08]","title":"Class II Division 2","items":[{"name":"01. Bản ghi Recording - HVT8/2026","fileId":"1XkTDyUZhI6LTte1DPAEHnP2Q100z93je","type":"video"},{"name":"02. Tài liệu Mediafire HVT8-2026","fileId":"1OZIUHPaNcPqth_n2ZI5y69V2_4flCw0S","type":"doc"}]}
     ];
 
     let currentUserEmail = localStorage.getItem('drthai_user_email') || '';
@@ -454,7 +467,7 @@
       }
     });
 
-    // Hàm gọi Apps Script để tra cứu phân quyền & lọc folder
+    // Gọi API Apps Script để tra cứu phân quyền
     async function applyUserEmail() {
       const email = document.getElementById('userEmailInput').value.trim().toLowerCase();
       const statusEl = document.getElementById('emailStatusText');
@@ -486,15 +499,17 @@
         const summary = data.upgradeSummary || {};
 
         if (accessedFolders.length > 0) {
-          const accessedUrls = accessedFolders.map(f => f.folderUrl);
+          const accessedIds = accessedFolders.map(f => f.folderId);
 
           const filtered = LESSONS_DATA.filter(item => {
-            return accessedUrls.some(url => url.includes(item.driveId));
+            return accessedFolders.some(f => f.folderName.includes(item.code) || accessedIds.includes(item.folderId));
           });
 
-          statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã mở khóa: ${filtered.length}/14 Chuyên đề (${email})</span>`;
-          countEl.innerText = `${filtered.length}/14 Chuyên đề`;
-          renderLessons(filtered);
+          const finalList = filtered.length > 0 ? filtered : LESSONS_DATA.slice(0, accessedFolders.length);
+
+          statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã mở khóa: ${finalList.length}/14 Chuyên đề (${email})</span>`;
+          countEl.innerText = `${finalList.length}/14 Chuyên đề`;
+          renderLessons(finalList);
 
           if (summary.missingMonths > 0) {
             upgradeBox.classList.remove('hidden');
@@ -516,7 +531,7 @@
       }
     }
 
-    // Render danh sách chuyên đề
+    // Render danh sách 14 chuyên đề
     function renderLessons(list, isLocked = false) {
       const container = document.getElementById('lessonList');
       if (list.length === 0) {
@@ -524,14 +539,99 @@
         return;
       }
       container.innerHTML = list.map((item) => `
-        <button onclick="${isLocked ? "alert('Email này chưa được cấp quyền truy cập chuyên đề này. Vui lòng liên hệ Dr.Thai Ortho để kích hoạt!')" : `openSecurePlayer('${item.driveId}', '${item.code} ${item.title}')`}" class="w-full flex items-center justify-between p-2.5 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-rose-500/50 rounded-lg text-left transition group">
-          <div class="flex items-center gap-2 min-w-0">
-            <span class="px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] shrink-0 font-semibold border border-rose-900/60">${item.code}</span>
-            <span class="text-xs text-slate-200 group-hover:text-white font-medium truncate">${item.title}</span>
+        <button onclick="${isLocked ? "alert('Email này chưa được cấp quyền truy cập chuyên đề này. Vui lòng liên hệ Dr.Thai Ortho để kích hoạt!')" : `openLMSPlayer('${item.id}')`}" class="w-full flex items-center justify-between p-3 bg-slate-900 hover:bg-slate-750 border border-slate-700/80 hover:border-rose-500/50 rounded-xl text-left transition group">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <span class="px-2 py-0.5 rounded bg-rose-950 text-rose-300 font-mono text-[10px] shrink-0 font-bold border border-rose-900/60">${item.code}</span>
+            <div class="truncate">
+              <div class="text-xs text-slate-200 group-hover:text-white font-semibold truncate">${item.title}</div>
+              <div class="text-[10px] text-slate-500">${item.items ? item.items.length : 0} bài học & tài liệu</div>
+            </div>
           </div>
-          <i class="fa-solid ${isLocked ? 'fa-lock text-slate-600' : 'fa-folder-open text-slate-500 group-hover:text-rose-400'} text-xs shrink-0 ml-2"></i>
+          <i class="fa-solid ${isLocked ? 'fa-lock text-slate-600' : 'fa-play text-slate-500 group-hover:text-rose-400'} text-xs shrink-0 ml-2"></i>
         </button>
       `).join('');
+    }
+
+    // Modal Player LMS Native (Phát trực tiếp từng file + Playlist)
+    let currentLesson = null;
+    let watermarkInterval;
+
+    function openLMSPlayer(lessonId) {
+      const lesson = LESSONS_DATA.find(l => l.id === lessonId);
+      if (!lesson) return;
+
+      currentLesson = lesson;
+      const modal = document.getElementById('videoModal');
+      const titleEl = document.getElementById('videoTitle');
+      const wm = document.getElementById('dynamicWatermark');
+
+      titleEl.innerText = `${lesson.code} ${lesson.title}`;
+      wm.innerText = currentUserEmail ? `${currentUserEmail} • Dr.Thai Ortho` : 'Dr.Thai Ortho • Hội viên';
+
+      // Render Sub-playlist
+      const subListEl = document.getElementById('subItemList');
+      subListEl.innerHTML = lesson.items.map((it, idx) => {
+        let icon = 'fa-solid fa-play text-rose-400';
+        let badge = 'bg-rose-950 text-rose-300';
+        if (it.type === 'pdf') { icon = 'fa-solid fa-file-pdf text-red-400'; badge = 'bg-red-950 text-red-300'; }
+        else if (it.type === 'doc') { icon = 'fa-solid fa-file-word text-blue-400'; badge = 'bg-blue-950 text-blue-300'; }
+        else if (it.type === 'slide') { icon = 'fa-solid fa-file-powerpoint text-amber-400'; badge = 'bg-amber-950 text-amber-300'; }
+
+        return `
+          <div onclick="playSingleFile('${it.fileId}', '${it.name.replace(/'/g, "\\'")}', this)" class="sub-item p-2 rounded-lg bg-slate-800 hover:bg-slate-750 border border-slate-700 cursor-pointer flex items-center justify-between text-xs transition">
+            <div class="flex items-center gap-2 min-w-0">
+              <i class="${icon} text-xs shrink-0"></i>
+              <span class="text-slate-300 truncate text-[11px] font-medium">${it.name}</span>
+            </div>
+            <span class="text-[9px] px-1.5 py-0.5 rounded ${badge} font-mono shrink-0 uppercase ml-2">${it.type}</span>
+          </div>
+        `;
+      }).join('');
+
+      // Tự động phát bài đầu tiên
+      if (lesson.items && lesson.items.length > 0) {
+        const firstItem = lesson.items.find(it => it.type === 'video') || lesson.items[0];
+        const firstEl = subListEl.querySelector('.sub-item');
+        playSingleFile(firstItem.fileId, firstItem.name, firstEl);
+      }
+
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+
+      watermarkInterval = setInterval(() => {
+        if (wm) {
+          wm.style.top = Math.floor(Math.random() * 65 + 10) + '%';
+          wm.style.left = Math.floor(Math.random() * 55 + 10) + '%';
+        }
+      }, 6000);
+    }
+
+    // Chuyển bài phát ngay trên web
+    function playSingleFile(fileId, fileName, element) {
+      const frame = document.getElementById('driveFrame');
+      const playingNameEl = document.getElementById('currentPlayingName');
+
+      playingNameEl.innerText = fileName;
+      frame.src = `https://drive.google.com/file/d/${fileId}/preview`;
+
+      // Highlight bài đang chọn trong danh sách
+      const allSub = document.querySelectorAll('.sub-item');
+      allSub.forEach(el => el.classList.remove('bg-rose-950/60', 'border-rose-500/80'));
+      if (element) {
+        element.classList.add('bg-rose-950/60', 'border-rose-500/80');
+      }
+    }
+
+    function closeSecurePlayer() {
+      const modal = document.getElementById('videoModal');
+      const frame = document.getElementById('driveFrame');
+      
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        frame.src = '';
+        clearInterval(watermarkInterval);
+      }, 200);
     }
 
     // Chuyển Tab Miễn Phí / Hội Viên
@@ -580,7 +680,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Copy Site Link
+    // Copy Link Trang
     function copySiteLink() {
       navigator.clipboard.writeText(window.location.href).then(() => {
         const toast = document.getElementById('toast');
@@ -591,42 +691,6 @@
           toast.classList.add('opacity-0');
         }, 2200);
       });
-    }
-
-    // Modal Player Logic (Embedded Folder View)
-    let watermarkInterval;
-    function openSecurePlayer(driveId, title) {
-      const modal = document.getElementById('videoModal');
-      const frame = document.getElementById('driveFrame');
-      const titleEl = document.getElementById('videoTitle');
-      const wm = document.getElementById('dynamicWatermark');
-
-      titleEl.innerText = title;
-      wm.innerText = currentUserEmail ? `${currentUserEmail} • Dr.Thai Ortho` : 'Dr.Thai Ortho • Hội viên';
-      
-      frame.src = `https://drive.google.com/embeddedfolderview?id=${driveId}#list`;
-
-      modal.classList.remove('hidden');
-      setTimeout(() => modal.classList.remove('opacity-0'), 10);
-
-      watermarkInterval = setInterval(() => {
-        if (wm) {
-          wm.style.top = Math.floor(Math.random() * 65 + 10) + '%';
-          wm.style.left = Math.floor(Math.random() * 55 + 10) + '%';
-        }
-      }, 6000);
-    }
-
-    function closeSecurePlayer() {
-      const modal = document.getElementById('videoModal');
-      const frame = document.getElementById('driveFrame');
-      
-      modal.classList.add('opacity-0');
-      setTimeout(() => {
-        modal.classList.add('hidden');
-        frame.src = '';
-        clearInterval(watermarkInterval);
-      }, 200);
     }
   </script>
 </body>
