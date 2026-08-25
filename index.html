@@ -24,6 +24,41 @@
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    /* Chế độ Phóng to / Xoay ngang màn hình Full Screen tối ưu */
+    .fs-active-mode {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: none !important;
+      max-height: none !important;
+      border-radius: 0 !important;
+      z-index: 99999 !important;
+      background: #000000 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 0 !important;
+    }
+
+    .fs-active-mode #playerContainer {
+      width: 100vw !important;
+      height: 100vh !important;
+      padding-bottom: 0 !important;
+      border: 0 !important;
+      background: #000000 !important;
+    }
+
+    .fs-active-mode #modalHeader,
+    .fs-active-mode #modalControls,
+    .fs-active-mode #modalInfoBar,
+    .fs-active-mode #modalPlaylist {
+      display: none !important;
+    }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased p-3.5 sm:p-6 selection:bg-teal-500 selection:text-white">
@@ -79,10 +114,11 @@
             <span class="font-bold text-slate-200 block">1. Tải Template</span>
             <span class="text-[9px] text-slate-400">Bệnh án chuẩn</span>
           </a>
-          <a href="https://www.youtube.com/watch?v=gov1MlHTEvE&list=PL7YzM7KyB5S5gJYlMcjABbS4fs0LvSkHl" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-teal-400/60 transition group">
+          <!-- Đã cập nhật link danh sách bài giảng nổi bật -->
+          <a href="https://www.youtube.com/playlist?list=PL7YzM7KyB5S5gJYlMcjABbS4fs0LvSkHl" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-teal-400/60 transition group">
             <i class="fa-solid fa-circle-play text-red-400 text-base mb-1 block group-hover:scale-110 transition-transform"></i>
             <span class="font-bold text-slate-200 block">2. Xem Bài Giảng</span>
-            <span class="text-[9px] text-slate-400">Top video free</span>
+            <span class="text-[9px] text-slate-400">Danh sách phát</span>
           </a>
           <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-teal-400/60 transition group">
             <i class="fa-solid fa-book-bookmark text-teal-400 text-base mb-1 block group-hover:scale-110 transition-transform"></i>
@@ -135,47 +171,27 @@
         </div>
       </div>
 
-      <!-- Top 5 Video Free -->
+      <!-- Top Playlist Free -->
       <div class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-3.5 space-y-2.5 shadow-md">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-            <i class="fa-solid fa-fire text-amber-400"></i> Video bài giảng nổi bật (Miễn phí)
+            <i class="fa-solid fa-fire text-amber-400"></i> Danh sách bài giảng nổi bật (Miễn phí)
           </h3>
-          <a href="https://www.youtube.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:underline">Kênh YouTube &rarr;</a>
+          <a href="https://www.youtube.com/playlist?list=PL7YzM7KyB5S5gJYlMcjABbS4fs0LvSkHl" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:underline">Xem tất cả &rarr;</a>
         </div>
         
         <div class="space-y-2 text-xs">
-          <a href="https://www.youtube.com/watch?v=jPuLbqqYj_w" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
-            <div class="flex items-start gap-2 min-w-0">
-              <span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 1</span>
+          <a href="https://www.youtube.com/playlist?list=PL7YzM7KyB5S5gJYlMcjABbS4fs0LvSkHl" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-center justify-between gap-2 transition group">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-8 h-8 rounded-lg bg-red-950 text-red-400 flex items-center justify-center text-sm shrink-0 border border-red-800/50">
+                <i class="fa-brands fa-youtube"></i>
+              </div>
               <div class="truncate">
-                <div class="font-semibold text-white group-hover:text-amber-200 transition-colors truncate">Webinar: Điều trị cười hở lợi thực chiến</div>
-                <div class="text-[10px] text-slate-400 truncate">Chẩn đoán, chọn khí cụ & cơ chế kéo lùi/đánh lún hiệu quả</div>
+                <div class="font-semibold text-white group-hover:text-teal-200 transition-colors truncate">Playlist Tổng Hợp Bài Giảng Dr.Thai Ortho</div>
+                <div class="text-[10px] text-slate-400 truncate">Trọn bộ video kiến thức chỉnh nha thực chiến</div>
               </div>
             </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
-          </a>
-
-          <a href="https://youtu.be/yUPIvt3xS30" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
-            <div class="flex items-start gap-2 min-w-0">
-              <span class="px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 2</span>
-              <div class="truncate">
-                <div class="font-semibold text-white group-hover:text-teal-200 transition-colors truncate">TÂM SỰ ĐÊM KHUYA #04 – Class II Venugopal</div>
-                <div class="text-[10px] text-slate-400 truncate">Class II Correction theo triết lý Venugopal thực chiến</div>
-              </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
-          </a>
-
-          <a href="https://youtu.be/Qlo-nEa3ZsA" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
-            <div class="flex items-start gap-2 min-w-0">
-              <span class="px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 3</span>
-              <div class="truncate">
-                <div class="font-semibold text-white group-hover:text-rose-200 transition-colors truncate">TÂM SỰ ĐÊM KHUYA #05 – Chỉnh nha lại</div>
-                <div class="text-[10px] text-slate-400 truncate">Kinh nghiệm quý giá & xử lý các ca điều trị thất bại</div>
-              </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] shrink-0"></i>
           </a>
         </div>
       </div>
@@ -392,13 +408,13 @@
 
   </div>
 
-  <!-- POPUP PLAYER LMS NATIVE (TÍCH HỢP FULLSCREEN API CHUẨN ĐỂ XOAY NGANG) -->
+  <!-- POPUP PLAYER LMS NATIVE -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 hidden">
     
-    <!-- NÚT QUAY LẠI NỔI -->
+    <!-- NÚT QUAY LẠI NỔI (LUÔN HIỂN THỊ ĐỂ THOÁT RA XEM BÀI KHÁC) -->
     <button id="btnFloatingBack" onclick="handleCustomBackAction()" class="fixed top-3 left-3 z-[999999] px-3.5 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white hover:text-teal-300 text-xs font-extrabold flex items-center gap-1.5 border border-slate-600 shadow-2xl transition duration-150">
       <i class="fa-solid fa-arrow-left"></i>
-      <span>Quay lại</span>
+      <span>Trở lại</span>
     </button>
 
     <div id="modalBox" class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh]">
@@ -414,7 +430,7 @@
       </div>
 
       <!-- Player Frame -->
-      <div id="playerContainer" class="relative w-full pb-[56.25%] bg-slate-900 overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
+      <div id="playerContainer" class="relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
         <div id="videoLoadingOverlay" class="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center gap-2 z-10 text-slate-300">
           <i class="fa-solid fa-spinner fa-spin text-teal-400 text-2xl"></i>
           <span class="text-xs font-bold">Đang tải bài giảng...</span>
@@ -427,7 +443,7 @@
         </div>
       </div>
 
-      <!-- Thanh Điều Khiển (Đã tích hợp Fullscreen API chuẩn để xoay ngang màn hình) -->
+      <!-- Thanh Điều Khiển -->
       <div id="modalControls" class="p-2 bg-slate-850 border-b border-slate-800 flex items-center justify-between shrink-0 text-xs">
         <div class="flex items-center gap-1">
           <button onclick="playPrevItem()" id="btnPrevItem" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white font-semibold text-[10px] transition disabled:opacity-30 disabled:pointer-events-none">
@@ -439,8 +455,9 @@
         </div>
 
         <div class="flex items-center gap-1.5">
-          <button onclick="triggerNativeFullscreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
-            <i class="fa-solid fa-expand"></i> Xoay ngang màn hình
+          <!-- Bật chế độ Phóng to trực tiếp -->
+          <button onclick="openNativeFullscreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
+            <i class="fa-solid fa-expand"></i> Phóng to / Xoay ngang
           </button>
           <a id="btnDownloadFile" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 text-[10px] font-semibold hover:bg-slate-700 transition flex items-center gap-1">
             <i class="fa-solid fa-cloud-arrow-down"></i> Tải file này
@@ -497,7 +514,7 @@
     const SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbx-J_8QG8CWIW-Y-kNc2eR5q888DKEDCVLkP6RxDD266_t1KwNGTxjSfoKMLy6F1CeiqQ/exec";
 
     const LESSONS_DATA = [
-      {"id":"2025-02","code":"[2025-02]","title":"Andrews 6 Keys, Mắc cài, 3Shape","items":[{"name":"01. Bản ghi B1 - Andrews 6 Keys Part I","fileId":"1Ddv1VrAglf1fboqYj5OdUZDvE-I3qGR4","type":"video","duration":3600},{"name":"02. GS Nanda chữa CII Div 2 (Tài liệu)","fileId":"1sKZQOskWIJsvYdcYboJsWTjtVXsieGNK","type":"pdf","duration":600},{"name":"03. Bản ghi B2 - Andrews 6 Keys Part II","fileId":"1JRAVvmtTaCbkzVkMigjzfOJvLoRQHrtw","type":"video","duration":3600},{"name":"04. Bản ghi B3 - Thông số mắc cài","fileId":"1-aQUVX3rOyE_utQPDwmS7dKbEnn_RUgn","type":"video","duration":3000},{"name":"05. Bending đóng khe thưa","fileId":"1GaQfM5wrJIJGw_m6tSePgmbH8O-9blOg","type":"video","duration":1800},{"name":"06. Bẻ Torque","fileId":"1FWq0al8X4Z7YD32_DZAmt3XFSo3gfnt1","type":"video","duration":1800},{"name":"07. Đường hướng dẫn dây cung","fileId":"1LAYcUI2R9o1TGcBNqzDRBI2Ias5AzFSB","type":"video","duration":1800},{"name":"08. KT bẻ torque 4 R cửa GIÁN TIẾP","fileId":"1w1HuJrmxaGbNRgRtFOgesoGdjILLH-vm","type":"video","duration":1800},{"name":"09. Torque loop","fileId":"1WIXCFvCQv1SaDxVsoZFWkLJBry1WaEDG","type":"video","duration":1800},{"name":"10. Bản ghi B4 - 3Shape Ortho Part I","fileId":"1w4pGqtgO7PrfUVtaYd8LZU8fvEPbN7dh","type":"video","duration":3600},{"name":"11. Bản ghi Buổi 5 - 3Shape Part II","fileId":"1p8Uh6tf9-goCGQo1-8cWnYH54-I0-Z3k","type":"video","duration":3600},{"name":"12. Bản ghi B6 - 3Shape Part III","fileId":"1ufm0KJtp-prvXPdE6LQhAjtfhfCV4nWN","type":"video","duration":3600},{"name":"13. Transverse Diagnosis CBCT","fileId":"1b_ehDlGChRtNH6w_eFQGNe-QvS02j3cL","type":"video","duration":1800},{"name":"14. TPA biến đổi / Sáng tạo khí cụ","fileId":"13j1UHg6IS6ImIrNGpPVfNw4rYDpBeDix","type":"video","duration":1800},{"name":"15. Hướng dẫn cắm vis","fileId":"1XdBRdNEouzrOya9nD6OEnZ3FBNA3h-l9","type":"video","duration":1800},{"name":"16. Sách & Tài liệu Mediafire HVT2","fileId":"12V0SYri_GweoZ8f1LIp8qCpo7NTyawjF","type":"doc","duration":600}]},
+      {"id":"2025-02","code":"[2025-02]","title":"Andrews 6 Keys, Mắc cài, 3Shape","items":[{"name":"01. Bản ghi B1 - Andrews 6 Keys Part I","fileId":"1Ddv1VrAglf1fboqYj5OdUZDvE-I3qGR4","type":"video","duration":3600},{"name":"02. GS Nanda chữa CII Div 2 (Tài liệu)","fileId":"1sKZQOskWIJsvYdcYboJsWTjtVXsieGNK","type":"pdf","duration":600},{"name":"03. Bản ghi B2 - Andrews 6 Keys Part II","fileId":"1JRAVvmtTaCbkzVkMigjzfOJvLoRQHrtw","type":"video","duration":3600},{"name":"04. Bản ghi B3 - Thông số mắc cài","fileId":"1-aQUVX3rOyE_utQPDwmS7dKbEnn_RUgn","type":"video","duration":3000},{"name":"05. Bending đóng khe thưa","fileId":"1GaQfM5wrJIJGw_m6tSePgmbH8O-9blOg","type":"video","duration":1800},{"name":"06. Bẻ Torque","fileId":"1FWq0al8X4Z7YD32_DZAmt3XFSo3gfnt1","type":"video","duration":1800},{"name":"07. Đường hướng dẫn dây cung","fileId":"1LAYcUI2R9o1TGcBNqzDRBI2Ias5AzFSB","type":"video","duration":1800},{"name":"08. KT bẻ torque 4 R cửa GIÁN TIẾП","fileId":"1w1HuJrmxaGbNRgRtFOgesoGdjILLH-vm","type":"video","duration":1800},{"name":"09. Torque loop","fileId":"1WIXCFvCQv1SaDxVsoZFWkLJBry1WaEDG","type":"video","duration":1800},{"name":"10. Bản ghi B4 - 3Shape Ortho Part I","fileId":"1w4pGqtgO7PrfUVtaYd8LZU8fvEPbN7dh","type":"video","duration":3600},{"name":"11. Bản ghi Buổi 5 - 3Shape Part II","fileId":"1p8Uh6tf9-goCGQo1-8cWnYH54-I0-Z3k","type":"video","duration":3600},{"name":"12. Bản ghi B6 - 3Shape Part III","fileId":"1ufm0KJtp-prvXPdE6LQhAjtfhfCV4nWN","type":"video","duration":3600},{"name":"13. Transverse Diagnosis CBCT","fileId":"1b_ehDlGChRtNH6w_eFQGNe-QvS02j3cL","type":"video","duration":1800},{"name":"14. TPA biến đổi / Sáng tạo khí cụ","fileId":"13j1UHg6IS6ImIrNGpPVfNw4rYDpBeDix","type":"video","duration":1800},{"name":"15. Hướng dẫn cắm vis","fileId":"1XdBRdNEouzrOya9nD6OEnZ3FBNA3h-l9","type":"video","duration":1800},{"name":"16. Sách & Tài liệu Mediafire HVT2","fileId":"12V0SYri_GweoZ8f1LIp8qCpo7NTyawjF","type":"doc","duration":600}]},
       {"id":"2025-03","code":"[2025-03]","title":"Ceph, Occlusogram, PIP VTO, 3D Ceph","items":[{"name":"01. Bản ghi Buổi 1 - Sassouni Plus + Ricketts Superimposition","fileId":"1JoX9HFwRcgYx6frmZ_TTFiVggI-XE0IN","type":"video","duration":3600},{"name":"02. HDSD Vistadent (Video)","fileId":"1IegauAlvJy_B0WIdRcpSS2zNzQYNoEqr","type":"video","duration":2400},{"name":"03. Bản ghi B2 - Chữa bài B1 + 2D Occlusogram","fileId":"1EQMbN3cor8_tfOdRcfm8XrNrUWkxxf_x","type":"video","duration":3600},{"name":"04. Tracing bằng giấy vẽ","fileId":"1NjHKPbDugyz_rDdj5P59hnSOtmRl2K2P","type":"video","duration":1800},{"name":"05. Bản ghi Buổi 03 - PIP-VTO","fileId":"1b5yOPq6O5awkShsMgqrCybBBGNzof75O","type":"video","duration":3600},{"name":"06. Sách: Clinical Applications of Mini-implants","fileId":"12tPaOz2R2cf8leMH14a_OkPlvVy6xTTc","type":"pdf","duration":600},{"name":"07. Bản ghi Buổi 4 - TMJ, Airways & 3D Ceph","fileId":"1uw_I8AT05mY2xx-LQt6TsvsDy7lMo98L","type":"video","duration":3600},{"name":"08. Video 1 - Airways & TMJ","fileId":"1CTseUAfvPdjcW7IJEreO8MC7Ion_00nE","type":"video","duration":1800},{"name":"09. Video 2 - Orthodontics & Airways","fileId":"1969bEpsd8Hg6hvRLGRseTMsxqVk4pgds","type":"video","duration":1800},{"name":"10. Phân tích phim Sassouni bằng Audax Ceph","fileId":"103_WP8bCs8zGzwl4hN89QQKq_C-TigqUu9lcUBi8Jm8","type":"doc","duration":600}]},
       {"id":"2025-05","code":"[2025-05]","title":"Neo gián tiếp, Lòi chân R, Hạng II góc cao","items":[{"name":"01. Bản ghi TSĐK#07 - Neo chặn gián tiếp","fileId":"1ELcutZx-tMBdC3BptaT6l1v0vd8v9moq","type":"video","duration":3600},{"name":"02. Cách dán trên lâm sàng 01","fileId":"1wIjKdecbb8nZeC5ByAK_5E7JpoNOcuAi","type":"video","duration":1800},{"name":"03. Cách dán trên lâm sàng 02","fileId":"1_uVkQGGfttoL69DkhRPPncpXt7VM4jVS","type":"video","duration":1800},{"name":"04. Bản ghi TSĐK#08 - Lòi chân răng","fileId":"1cb83mJ0VRVhAfSvfGsNhMqpdVC_YOhFa","type":"video","duration":3600},{"name":"05. Nghiên cứu về Bone Regeneration","fileId":"11sRSilOGijASjZib-v8rBvIGmPwHUKge","type":"pdf","duration":600},{"name":"06. Bản ghi TSĐK#09 - Vertical Dimension","fileId":"1b-by50-janBnThfNvhOWBVMizcmo8wdt","type":"video","duration":3600},{"name":"07. Dựng trục răng cối đổ lưỡi (Discussion)","fileId":"1tHYjV5pAZ-pIIhxj51sGQX2N725twuG0","type":"video","duration":1800},{"name":"08. Bản ghi TSĐK#10 - Active Vertical Control","fileId":"1ld8hjFmft-p-9fvDCr4REXtBRsm5lhiv","type":"video","duration":3600},{"name":"09. High Angle Gummy Smile - Case AJODO","fileId":"1JQE3OS9Tye-tLntT8QBsOdsLEF_LDdyo","type":"pdf","duration":600}]},
       {"id":"2025-06","code":"[2025-06]","title":"Biomechanics, MP nhai, KS Torque","items":[{"name":"01. Bản ghi TSĐK#11 - Sinh cơ học từ góc nhìn lâm sàng","fileId":"1Wk-WUF3oSZisCKryJFTu6xBq_cQnrXQE","type":"video","duration":3600},{"name":"02. Biomechanics of Extra-alveolar Mini-implants","fileId":"134k5QmVsc_TGqVwYnltgdOjli2Xx_3FL","type":"pdf","duration":600},{"name":"03. Bản ghi TSĐK#12 - MIP-based Orthodontics","fileId":"1NffSY5wzuVru9jW7xJWLfXzaO7ce-dmh","type":"video","duration":3600},{"name":"04. Bài báo MIP-based (J.H.Park)","fileId":"1ao2QGUeEKGSjHbJBPdCD7Fz1pnE7XDrI","type":"pdf","duration":600},{"name":"05. Bản ghi TSĐK#12A - Torque Control chỉnh nha lại","fileId":"16uvT6ZVxyjjNZoyoJFgaofhv-qKXf8yE","type":"video","duration":3600},{"name":"06. Bản ghi TSĐK#14 - Chỉnh nha nghệ thuật","fileId":"1wQJWN3TW75htJYDU7XzRkxmcegoY19hL","type":"video","duration":3600}]},
@@ -875,7 +892,7 @@
       }, 6000);
     }
 
-    // ĐỒNG HỒ ĐẾM GIỜ CHUẨN XÁC (CHỈ CHẠY KHI ĐANG ACTIVE & KHÔNG BỊ ĐẾM ẢO)
+    // ĐỒNG HỒ ĐẾM GIỜ CHUẨN XÁC
     function startRealTimeWatchTracker() {
       if (watchTimerInterval) clearInterval(watchTimerInterval);
 
@@ -1005,18 +1022,6 @@
     function playPrevItem() {
       if (currentLesson && currentSubIndex > 0) {
         playSubItemByIndex(currentSubIndex - 1);
-      }
-    }
-
-    // GỌI NATIVE FULLSCREEN API (GIÚP ĐIỆN THOẠI TỰ ĐỘNG XOAY NGANG)
-    function triggerNativeFullscreen() {
-      const container = document.getElementById('playerContainer');
-      if (container.requestFullscreen) {
-        container.requestFullscreen().catch(() => {});
-      } else if (container.webkitRequestFullscreen) {
-        container.webkitRequestFullscreen().catch(() => {});
-      } else if (container.msRequestFullscreen) {
-        container.msRequestFullscreen().catch(() => {});
       }
     }
 
