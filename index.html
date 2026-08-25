@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Kho Dữ Liệu Chỉnh Nha Dr.Thai Ortho</title>
 
-  <!-- TỐI ƯU HÓA KẾT NỐI MÁY CHỦ GOOGLE STREAMING (GIẢM ĐỘ TRỄ) -->
+  <!-- Tối ưu kết nối trước máy chủ phát video Google Drive -->
   <link rel="preconnect" href="https://drive.google.com" crossorigin>
   <link rel="preconnect" href="https://docs.google.com" crossorigin>
   <link rel="preconnect" href="https://video.googleusercontent.com" crossorigin>
@@ -34,7 +34,7 @@
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-    /* ÉP XUNG GPU TĂNG TỐC PHẦN CỨNG MÀN HÌNH */
+    /* Ép xung GPU tăng tốc phần cứng cho trình phát */
     .gpu-accelerated {
       -webkit-transform: translateZ(0);
       -moz-transform: translateZ(0);
@@ -463,7 +463,7 @@
         </button>
       </div>
 
-      <!-- Player Frame (Đã kích hoạt GPU Hardware Acceleration) -->
+      <!-- Player Frame -->
       <div id="playerContainer" class="gpu-accelerated relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
         <div id="videoLoadingOverlay" class="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center gap-2 z-10 text-slate-300">
           <i class="fa-solid fa-spinner fa-spin text-teal-400 text-2xl"></i>
@@ -618,11 +618,11 @@
 
       btnSend.disabled = true;
       btnSend.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Gửi...`;
-      statusEl.innerHTML = `<span class="text-teal-400"><i class="fa-solid fa-paper-plane"></i> Đang kiểm tra quyền & gửi mã OTP...</span>`;
+      statusEl.innerHTML = `<span class="text-teal-400"><i class="fa-solid fa-paper-plane"></i> Đang xác thực & gửi mã OTP đến ${email}...</span>`;
 
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 8000);
+        const timeoutId = setTimeout(() => controller.abort(), 25000);
 
         const res = await fetch(`${SCRIPT_API_URL}?action=send_otp&email=${encodeURIComponent(email)}`, {
           signal: controller.signal
@@ -642,9 +642,11 @@
           btnSend.innerText = "Gửi Mã";
         }
       } catch (err) {
-        statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Lỗi kết nối máy chủ. Bác sĩ thử bấm gửi lại nhé!</span>`;
-        btnSend.disabled = false;
-        btnSend.innerText = "Gửi Mã";
+        currentUserEmail = email;
+        document.getElementById('stepEmailBlock').classList.add('hidden');
+        document.getElementById('stepOtpBlock').classList.remove('hidden');
+        statusEl.innerHTML = `<span class="text-amber-400 font-semibold"><i class="fa-solid fa-circle-info"></i> Nếu đã nhận được mã OTP trong Gmail, vui lòng nhập mã bên dưới để mở khóa!</span>`;
+        startResendCountdown();
       }
     }
 
@@ -669,12 +671,13 @@
     }
 
     async function verifyEmailOtp() {
-      const otp = document.getElementById('inputUserOtp').value.trim();
+      const rawInput = document.getElementById('inputUserOtp').value;
+      const otp = rawInput.replace(/[^0-9]/g, '').trim();
       const statusEl = document.getElementById('authStatusMessage');
       const btnVerify = document.getElementById('btnVerifyOtp');
 
       if (!otp || otp.length !== 6) {
-        statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Mã OTP gồm 6 chữ số.</span>`;
+        statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đủ 6 chữ số mã OTP.</span>`;
         return;
       }
 
@@ -697,7 +700,7 @@
           statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> ${data.message || "Mã OTP không đúng."}</span>`;
         }
       } catch (err) {
-        statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Lỗi xác thực OTP.</span>`;
+        statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Lỗi xác thực OTP. Vui lòng thử lại.</span>`;
       } finally {
         btnVerify.disabled = false;
         btnVerify.innerText = "Mở Khóa";
@@ -1055,12 +1058,16 @@
 
     function triggerNativeFullscreen() {
       const container = document.getElementById('playerContainer');
+      const frame = document.getElementById('driveFrame');
+
       if (container.requestFullscreen) {
-        container.requestFullscreen().catch(() => {});
+        container.requestFullscreen().then(() => { if(frame) frame.focus(); }).catch(() => {});
       } else if (container.webkitRequestFullscreen) {
-        container.webkitRequestFullscreen().catch(() => {});
+        container.webkitRequestFullscreen();
+        if(frame) frame.focus();
       } else if (container.msRequestFullscreen) {
-        container.msRequestFullscreen().catch(() => {});
+        container.msRequestFullscreen();
+        if(frame) frame.focus();
       }
     }
 
