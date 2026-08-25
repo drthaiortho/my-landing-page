@@ -145,7 +145,6 @@
         </div>
         
         <div class="space-y-2 text-xs">
-          <!-- Top 1 -->
           <a href="https://www.youtube.com/watch?v=jPuLbqqYj_w" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
             <div class="flex items-start gap-2 min-w-0">
               <span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 1</span>
@@ -157,7 +156,6 @@
             <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
           </a>
 
-          <!-- Top 2 -->
           <a href="https://youtu.be/yUPIvt3xS30" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
             <div class="flex items-start gap-2 min-w-0">
               <span class="px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 2</span>
@@ -169,7 +167,6 @@
             <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
           </a>
 
-          <!-- Top 3 -->
           <a href="https://youtu.be/Qlo-nEa3ZsA" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
             <div class="flex items-start gap-2 min-w-0">
               <span class="px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 3</span>
@@ -181,7 +178,6 @@
             <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
           </a>
 
-          <!-- Top 4 -->
           <a href="https://www.youtube.com/watch?v=QKRo6Gci0Xk&list=PL7YzM7KyB5S6ALSSRrGzvOPdHTUGY0Blz" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
             <div class="flex items-start gap-2 min-w-0">
               <span class="px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 4</span>
@@ -193,7 +189,6 @@
             <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
           </a>
 
-          <!-- Top 5 -->
           <a href="https://www.youtube.com/watch?v=iMqc6BDiK6g&list=PL7YzM7KyB5S6EXP9eTA2cbw0Gnj-rnjFy" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
             <div class="flex items-start gap-2 min-w-0">
               <span class="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 5</span>
@@ -454,7 +449,7 @@
         </div>
       </div>
 
-      <!-- Thanh Điều Khiển (Đã khôi phục nút Phóng to / Xoay ngang chuẩn) -->
+      <!-- Thanh Điều Khiển (Đã khôi phục chuẩn nút Phóng to / Xoay ngang gốc) -->
       <div id="modalControls" class="p-2 bg-slate-850 border-b border-slate-800 flex items-center justify-between shrink-0 text-xs">
         <div class="flex items-center gap-1">
           <button onclick="playPrevItem()" id="btnPrevItem" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white font-semibold text-[10px] transition disabled:opacity-30 disabled:pointer-events-none">
@@ -1029,14 +1024,15 @@
       }
     }
 
+    // KÍCH HOẠT PHÓNG TO NATIVE CHUẨN GOOGLE DRIVE (TỰ ĐỘNG XOAY NGANG MƯỢT MÀ)
     function triggerNativeFullscreen() {
-      const container = document.getElementById('playerContainer');
-      if (container.requestFullscreen) {
-        container.requestFullscreen().catch(() => {});
-      } else if (container.webkitRequestFullscreen) {
-        container.webkitRequestFullscreen().catch(() => {});
-      } else if (container.msRequestFullscreen) {
-        container.msRequestFullscreen().catch(() => {});
+      const frame = document.getElementById('driveFrame');
+      if (frame.requestFullscreen) {
+        frame.requestFullscreen().catch(() => {});
+      } else if (frame.webkitRequestFullscreen) {
+        frame.webkitRequestFullscreen().catch(() => {});
+      } else if (frame.msRequestFullscreen) {
+        frame.msRequestFullscreen().catch(() => {});
       }
     }
 
