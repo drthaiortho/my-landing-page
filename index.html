@@ -357,7 +357,7 @@
           <span id="lessonCountBadge" class="text-[10px] px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800/80 rounded-full font-bold">14 Chuyên Đề</span>
         </div>
 
-        <!-- KHUNG XÁC THỰC BẢO MẬT OTP GMAIL -->
+        <!-- KHUNG XÁC THỰC BẢO MẬT OTP GMAIL (TỐC ĐỘ CAO) -->
         <div class="p-3 bg-slate-900/95 rounded-xl border border-slate-700/80 space-y-2">
           
           <!-- Bước 1: Nhập Email để nhận mã OTP -->
@@ -471,7 +471,7 @@
 
   </div>
 
-  <!-- POPUP PLAYER LMS NATIVE (BẬT SÁNG NGAY LẬP TỨC - 0MS) -->
+  <!-- POPUP PLAYER LMS NATIVE -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 hidden">
     
     <!-- NÚT FLOATING BACK ĐÈ TRỰC TIẾP LÊN MÀN HÌNH -->
@@ -492,7 +492,7 @@
         </button>
       </div>
 
-      <!-- Player Frame (Nền Slate-900 đồng bộ, không nháy đen) -->
+      <!-- Player Frame -->
       <div id="playerContainer" class="relative w-full pb-[56.25%] bg-slate-900 overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
         <iframe id="driveFrame" class="absolute inset-0 w-full h-full border-0 pointer-events-auto" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
         
@@ -624,7 +624,7 @@
       }
     });
 
-    // BẮT SỰ KIỆN NÚT BACK CỦA ĐIỆN THOẠI (CHỐNG THOÁT KHỎI WEB)
+    // BẮT SỰ KIỆN NÚT BACK CỦA ĐIỆN THOẠI
     window.addEventListener('popstate', (e) => {
       const modal = document.getElementById('videoModal');
       if (!modal.classList.contains('hidden')) {
@@ -636,13 +636,12 @@
       }
     });
 
-    // 1. Gửi OTP qua Gmail
+    // 1. GỬI MÃ OTP SIÊU NHANH (KHÔNG TREO GIAO DIỆN)
     async function requestEmailOtp() {
       const emailInput = document.getElementById('inputUserEmail');
       const email = (currentUserEmail || emailInput.value).trim().toLowerCase();
       const statusEl = document.getElementById('authStatusMessage');
       const btnSend = document.getElementById('btnSendOtp');
-      const btnResend = document.getElementById('btnResendOtp');
 
       if (!email || !email.includes('@')) {
         statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đúng địa chỉ Gmail.</span>`;
@@ -654,14 +653,20 @@
       statusEl.innerHTML = `<span class="text-teal-400"><i class="fa-solid fa-paper-plane"></i> Đang gửi mã OTP đến ${email}...</span>`;
 
       try {
-        const res = await fetch(`${SCRIPT_API_URL}?action=send_otp&email=${encodeURIComponent(email)}`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout
+
+        const res = await fetch(`${SCRIPT_API_URL}?action=send_otp&email=${encodeURIComponent(email)}`, {
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
         const data = await res.json();
 
         if (data.success) {
           currentUserEmail = email;
           document.getElementById('stepEmailBlock').classList.add('hidden');
           document.getElementById('stepOtpBlock').classList.remove('hidden');
-          statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã gửi mã OTP 6 số đến ${email}. Vui lòng kiểm tra hộp thư!</span>`;
+          statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã gửi mã OTP 6 số đến ${email}. Bác sĩ vui lòng kiểm tra hộp thư!</span>`;
           startResendCountdown();
         } else {
           statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> ${data.message || "Email chưa được phân quyền."}</span>`;
@@ -669,7 +674,7 @@
           btnSend.innerText = "Gửi Mã";
         }
       } catch (err) {
-        statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Lỗi kết nối máy chủ.</span>`;
+        statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> Lỗi kết nối máy chủ. Bác sĩ thử bấm gửi lại nhé!</span>`;
         btnSend.disabled = false;
         btnSend.innerText = "Gửi Mã";
       }
@@ -695,7 +700,7 @@
       }, 1000);
     }
 
-    // 2. Xác thực OTP
+    // 2. XÁC THỰC OTP
     async function verifyEmailOtp() {
       const otp = document.getElementById('inputUserOtp').value.trim();
       const statusEl = document.getElementById('authStatusMessage');
@@ -728,7 +733,7 @@
       }
     }
 
-    // 3. Đồng bộ dữ liệu ngầm
+    // 3. ĐỒNG BỘ SESSION NGẦM
     async function checkUserSessionBackground(email) {
       try {
         const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}`);
@@ -910,10 +915,8 @@
         playSubItemByIndex(0);
       }
 
-      // Mở ngay lập tức không có độ trễ hiệu ứng
       modal.classList.remove('hidden');
 
-      // Đẩy state vào History để khi bấm Back điện thoại không bị văng web
       try {
         history.pushState({ modalOpen: true }, '', '#player');
       } catch(e) {}
@@ -1055,7 +1058,6 @@
       }
     }
 
-    // Xử lý nút Back thông minh
     function handleCustomBackAction() {
       if (isFullScreenLandscape) {
         toggleCustomFullScreen();
