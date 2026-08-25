@@ -2,7 +2,8 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- Sửa viewport để hỗ trợ xoay ngang tự do trên mọi thiết bị -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kho Dữ Liệu Chỉnh Nha Dr.Thai Ortho</title>
 
   <!-- PWA & Favicon -->
@@ -23,8 +24,24 @@
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
-    :fullscreen { background-color: #000; width: 100vw; height: 100vh; }
-    :-webkit-full-screen { background-color: #000; width: 100vw; height: 100vh; }
+
+    /* CSS Chế độ toàn màn hình & Xoay ngang */
+    .fullscreen-mode {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: none !important;
+      max-height: none !important;
+      border-radius: 0 !important;
+      z-index: 9999 !important;
+      background: #000 !important;
+    }
+    .fullscreen-mode #playerContainer {
+      width: 100% !important;
+      height: 100% !important;
+      padding-bottom: 0 !important;
+    }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased p-3.5 sm:p-6 selection:bg-teal-500 selection:text-white">
@@ -93,7 +110,7 @@
         </div>
       </div>
 
-      <!-- CHUYÊN MỤC BÀI GIẢNG VÀ TÀI LIỆU NỔI BẬT (2 NÚT GỌN GÀNG) -->
+      <!-- CHUYÊN MỤC BÀI GIẢNG VÀ TÀI LIỆU NỔI BẬT -->
       <div class="space-y-2">
         <div class="flex items-center justify-between px-1">
           <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
@@ -401,32 +418,37 @@
 
   </div>
 
-  <!-- POPUP PLAYER LMS NATIVE (HỖ TRỢ FULLSCREEN & FULL HD)[cite: 1] -->
-  <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-2.5 hidden opacity-0 transition-opacity duration-200">
-    <div class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh]">
+  <!-- POPUP PLAYER LMS NATIVE (TỰ ĐỘNG XOAY NGANG LANDSCAPE MƯỢT MÀ) -->
+  <div id="videoModal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-2 sm:p-4 hidden opacity-0 transition-opacity duration-200">
+    <div id="modalBox" class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh] transition-all duration-200">
       
       <!-- Modal Header -->
-      <div class="p-2.5 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between shrink-0">
+      <div id="modalHeader" class="p-2.5 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2 min-w-0 pr-2">
           <i class="fa-solid fa-circle-play text-rose-400 text-sm shrink-0"></i>
           <span id="videoTitle" class="text-xs font-bold text-white truncate">Chuyên đề</span>
         </div>
-        <button onclick="closeSecurePlayer()" class="w-6 h-6 rounded-full bg-slate-800 hover:bg-slate-750 text-slate-400 hover:text-white flex items-center justify-center shrink-0">
-          <i class="fa-solid fa-xmark text-xs"></i>
+        <button onclick="closeSecurePlayer()" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-750 text-slate-400 hover:text-white flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
 
-      <!-- Player Frame 16:9 -->
-      <div id="playerContainer" class="relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800">
+      <!-- Player Frame 16:9 (Có thể bung Fullscreen xoay ngang) -->
+      <div id="playerContainer" class="relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
         <iframe id="driveFrame" class="absolute inset-0 w-full h-full border-0" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+        <!-- Nút thoát Fullscreen nổi khi đang xoay ngang toàn màn hình -->
+        <button id="btnExitFsFloating" onclick="toggleCustomFullScreen()" class="hidden absolute top-3 right-3 z-40 bg-slate-900/80 hover:bg-slate-900 text-white p-2 rounded-full border border-slate-600">
+          <i class="fa-solid fa-compress text-sm"></i>
+        </button>
         <div class="absolute top-0 right-0 w-20 h-16 z-30 bg-transparent cursor-default"></div>
+        <!-- Watermark di động -->
         <div id="dynamicWatermark" class="absolute z-20 pointer-events-none text-white/30 text-[11px] font-bold tracking-wider select-none transition-all duration-700 drop-shadow" style="top: 20%; left: 20%;">
           Dr.Thai Ortho • Hội viên
         </div>
       </div>
 
       <!-- Thanh Điều Khiển -->
-      <div class="p-2 bg-slate-850 border-b border-slate-800 flex items-center justify-between shrink-0 text-xs">
+      <div id="modalControls" class="p-2 bg-slate-850 border-b border-slate-800 flex items-center justify-between shrink-0 text-xs">
         <div class="flex items-center gap-1">
           <button onclick="playPrevItem()" id="btnPrevItem" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-semibold text-[10px] transition disabled:opacity-30 disabled:pointer-events-none">
             <i class="fa-solid fa-backward-step mr-1"></i> Trước
@@ -437,17 +459,18 @@
         </div>
 
         <div class="flex items-center gap-1.5">
-          <button onclick="toggleCustomFullScreen()" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700 text-[10px] font-semibold transition flex items-center gap-1">
-            <i class="fa-solid fa-expand text-teal-400"></i> Toàn màn hình
+          <!-- Nút Phóng to & Tự động xoay ngang -->
+          <button onclick="toggleCustomFullScreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
+            <i class="fa-solid fa-expand"></i> Xoay ngang toàn màn hình
           </button>
-          <a id="btnDownloadFile" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-2 py-1 rounded bg-teal-950 text-teal-300 border border-teal-800 text-[10px] font-semibold hover:bg-teal-900 transition flex items-center gap-1">
+          <a id="btnDownloadFile" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 text-[10px] font-semibold hover:bg-slate-700 transition flex items-center gap-1">
             <i class="fa-solid fa-cloud-arrow-down"></i> Tải file này
           </a>
         </div>
       </div>
 
       <!-- Tên bài đang phát & Đánh dấu đã học -->
-      <div class="px-3 py-1.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
+      <div id="modalInfoBar" class="px-3 py-1.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
         <span id="currentPlayingName" class="font-semibold text-teal-300 text-[11px] truncate max-w-[240px]">Chưa chọn file</span>
         <label class="flex items-center gap-1.5 text-[10px] text-slate-400 cursor-pointer select-none">
           <input type="checkbox" id="chkWatchedCurrent" onchange="toggleWatchedCurrent()" class="rounded bg-slate-800 border-slate-700 text-teal-500 focus:ring-0">
@@ -456,7 +479,7 @@
       </div>
 
       <!-- Sub-Playlist[cite: 1] -->
-      <div class="p-2.5 overflow-y-auto space-y-1 flex-1 bg-slate-900/90">
+      <div id="modalPlaylist" class="p-2.5 overflow-y-auto space-y-1 flex-1 bg-slate-900/90">
         <div class="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
           <span>Nội dung chi tiết trong chuyên đề:</span>
           <span id="lessonProgressText" class="text-teal-400 font-mono">0%</span>
@@ -627,6 +650,7 @@
     let currentLesson = null;
     let currentSubIndex = 0;
     let watermarkInterval;
+    let isFullScreenLandscape = false;
 
     function openLMSPlayer(lessonId) {
       const lesson = LESSONS_DATA.find(l => l.id === lessonId);
@@ -742,25 +766,56 @@
       renderLessons(currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA);
     }
 
-    // Fullscreen Mode
+    // XỬ LÝ XOAY NGANG & TOÀN MÀN HÌNH CHUẨN ĐẸP TRÊN DI ĐỘNG
     function toggleCustomFullScreen() {
-      const container = document.getElementById('playerContainer');
-      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        if (container.requestFullscreen) {
-          container.requestFullscreen();
-        } else if (container.webkitRequestFullscreen) {
-          container.webkitRequestFullscreen();
+      const modalBox = document.getElementById('modalBox');
+      const btnExitFs = document.getElementById('btnExitFsFloating');
+      const header = document.getElementById('modalHeader');
+      const controls = document.getElementById('modalControls');
+      const infoBar = document.getElementById('modalInfoBar');
+      const playlist = document.getElementById('modalPlaylist');
+
+      if (!isFullScreenLandscape) {
+        // Bật Fullscreen xoay ngang
+        isFullScreenLandscape = true;
+        modalBox.classList.add('fullscreen-mode');
+        btnExitFs.classList.remove('hidden');
+        header.classList.add('hidden');
+        controls.classList.add('hidden');
+        infoBar.classList.add('hidden');
+        playlist.classList.add('hidden');
+
+        // Khóa hướng xoay ngang nếu trình duyệt hỗ trợ
+        if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').catch(() => {});
         }
+
+        const elem = document.documentElement;
+        if (elem.requestFullscreen) elem.requestFullscreen().catch(() => {});
+        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen().catch(() => {});
       } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
+        // Tắt Fullscreen về chế độ dọc bình thường
+        isFullScreenLandscape = false;
+        modalBox.classList.remove('fullscreen-mode');
+        btnExitFs.classList.add('hidden');
+        header.classList.remove('hidden');
+        controls.classList.remove('hidden');
+        infoBar.classList.remove('hidden');
+        playlist.classList.remove('hidden');
+
+        if (screen.orientation && screen.orientation.unlock) {
+          screen.orientation.unlock();
         }
+
+        if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => {});
       }
     }
 
     function closeSecurePlayer() {
+      if (isFullScreenLandscape) {
+        toggleCustomFullScreen();
+      }
       const modal = document.getElementById('videoModal');
       const frame = document.getElementById('driveFrame');
       
@@ -771,6 +826,22 @@
         clearInterval(watermarkInterval);
       }, 200);
     }
+
+    // Tự động điều chỉnh khi người dùng xoay ngang điện thoại thủ công
+    window.addEventListener('orientationchange', () => {
+      if (window.orientation === 90 || window.orientation === -90) {
+        // Khi người dùng xoay ngang tay, tự động bung fullscreen nếu modal đang mở
+        const modal = document.getElementById('videoModal');
+        if (!modal.classList.contains('hidden') && !isFullScreenLandscape) {
+          toggleCustomFullScreen();
+        }
+      } else if (window.orientation === 0 || window.orientation === 180) {
+        // Khi xoay dọc lại
+        if (isFullScreenLandscape) {
+          toggleCustomFullScreen();
+        }
+      }
+    });
 
     // Switch Tab
     function switchTab(tab) {
