@@ -576,15 +576,12 @@
 
     let currentUserEmail = '';
     let currentAllowedList = [];
-    // Lưu số giây thực tế đã xem cho từng fileId: { fileId: seconds }
     let watchTimeTracker = JSON.parse(localStorage.getItem('drthai_watch_times_sec') || '{}');
     let resendCountdownInterval = null;
 
-    // ĐỒNG HỒ ĐẾM THỜI GIAN HỌC THỰC
     let watchTimerInterval = null;
     let isUserActiveViewing = true;
 
-    // Tự động tạm dừng tính giờ nếu chuyển tab
     document.addEventListener('visibilitychange', () => {
       isUserActiveViewing = !document.hidden;
     });
@@ -777,14 +774,12 @@
       renderLessons(LESSONS_DATA, true);
     }
 
-    // Format giây thành phút:giây (05:30)
     function formatTime(seconds) {
       const m = Math.floor(seconds / 60);
       const s = Math.floor(seconds % 60);
       return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
     }
 
-    // Live Search
     function handleSearchLesson() {
       const kw = document.getElementById('lessonSearchInput').value.trim().toLowerCase();
       const listToFilter = currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA;
@@ -804,13 +799,12 @@
       renderLessons(filtered, isLocked);
     }
 
-    // TÍNH TOÁN TIẾN ĐỘ THỜI LƯỢNG THỰC TẾ
     function getLessonProgressStats(lesson) {
       let totalStandardSec = 0;
       let totalWatchedSec = 0;
 
       lesson.items.forEach(it => {
-        const stdSec = it.duration || 1800; // Mặc định 30p nếu không gán
+        const stdSec = it.duration || 1800;
         const watchedSec = Math.min(watchTimeTracker[it.fileId] || 0, stdSec);
         totalStandardSec += stdSec;
         totalWatchedSec += watchedSec;
@@ -820,7 +814,6 @@
       return { totalStandardSec, totalWatchedSec, percent };
     }
 
-    // Render danh sách chuyên đề & thanh tiến trình thời lượng thực
     function renderLessons(list, isLocked = false) {
       const container = document.getElementById('lessonList');
       if (list.length === 0) {
@@ -846,7 +839,6 @@
               <i class="fa-solid ${isLocked ? 'fa-lock text-slate-600' : 'fa-circle-play text-slate-500 group-hover:text-rose-400'} text-sm shrink-0 ml-1"></i>
             </button>
 
-            <!-- Thanh tiến trình thời lượng xem thực tế -->
             <div class="pt-0.5 space-y-1">
               <div class="flex items-center justify-between text-[10px]">
                 <span class="text-slate-400 flex items-center gap-1">
@@ -863,7 +855,6 @@
       }).join('');
     }
 
-    // Modal Player
     let currentLesson = null;
     let currentSubIndex = 0;
     let watermarkInterval;
@@ -892,7 +883,6 @@
       modal.classList.remove('hidden');
       setTimeout(() => modal.classList.remove('opacity-0'), 10);
 
-      // Bắt đầu đo thời gian học thực tế
       startRealTimeWatchTracker();
 
       watermarkInterval = setInterval(() => {
@@ -903,7 +893,6 @@
       }, 6000);
     }
 
-    // ĐỒNG HỒ TÍNH GIỜ XEM THỰC TẾ (TỰ ĐỘNG CHẠY TỪNG GIÂY KHI XEM)
     function startRealTimeWatchTracker() {
       if (watchTimerInterval) clearInterval(watchTimerInterval);
 
@@ -914,17 +903,14 @@
         const stdDuration = item.duration || 1800;
         let curSec = watchTimeTracker[item.fileId] || 0;
 
-        // Chỉ tăng nếu chưa vượt quá 100% thời lượng chuẩn
         if (curSec < stdDuration) {
           curSec += 1;
           watchTimeTracker[item.fileId] = curSec;
 
-          // Lưu vào LocalStorage định kỳ
           if (curSec % 5 === 0) {
             localStorage.setItem('drthai_watch_times_sec', JSON.stringify(watchTimeTracker));
           }
 
-          // Cập nhật UI thời lượng trực tiếp
           updateCurrentWatchUI(item, curSec, stdDuration);
         }
       }, 1000);
@@ -943,14 +929,12 @@
         badgeEl.className = `px-2 py-0.5 rounded text-[9px] font-mono shrink-0 border ${pct >= 85 ? 'bg-emerald-950 text-emerald-300 border-emerald-700' : 'bg-slate-800 text-teal-300 border-slate-700'}`;
       }
 
-      // Cập nhật thanh tiến trình con trong Playlist
       const subBar = document.getElementById(`sub-bar-${item.fileId}`);
       const subPctText = document.getElementById(`sub-pct-${item.fileId}`);
       if (subBar) subBar.style.width = `${pct}%`;
       if (subPctText) subPctText.innerText = `${pct}%`;
     }
 
-    // Render Sub-Playlist trong Player
     function renderSubPlaylist() {
       const subListEl = document.getElementById('subItemList');
       const progressPercent = document.getElementById('lessonProgressPercent');
@@ -987,7 +971,6 @@
               </div>
             </div>
 
-            <!-- Thanh tiến trình thực tế của từng bài -->
             <div class="w-full bg-slate-950 h-1 rounded-full overflow-hidden border border-slate-800/60">
               <div id="sub-bar-${it.fileId}" class="h-full rounded-full transition-all duration-300 ${isCompleted ? 'bg-emerald-400' : 'bg-gradient-to-r from-teal-500 to-cyan-400'}" style="width: ${pct}%;"></div>
             </div>
@@ -1037,7 +1020,6 @@
       }
     }
 
-    // Fullscreen Landscape Mobile
     function toggleCustomFullScreen() {
       const modalBox = document.getElementById('modalBox');
       const btnExitFs = document.getElementById('btnExitFsFloating');
@@ -1093,13 +1075,11 @@
         frame.src = '';
         if (watermarkInterval) clearInterval(watermarkInterval);
         if (watchTimerInterval) clearInterval(watchTimerInterval);
-        // Lưu dữ liệu xem thực tế khi đóng player
         localStorage.setItem('drthai_watch_times_sec', JSON.stringify(watchTimeTracker));
         renderLessons(currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA, currentAllowedList.length === 0);
       }, 200);
     }
 
-    // Switch Tab
     function switchTab(tab) {
       const freeSec = document.getElementById('sectionFree');
       const paidSec = document.getElementById('sectionPaid');
@@ -1119,7 +1099,6 @@
       }
     }
 
-    // Đếm ngược
     const targetDate = new Date('2026-08-31T20:30:00+07:00').getTime();
     function updateCountdown() {
       const now = new Date().getTime();
@@ -1145,7 +1124,6 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // Copy Link
     function copySiteLink() {
       navigator.clipboard.writeText(window.location.href).then(() => {
         const toast = document.getElementById('toast');
