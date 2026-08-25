@@ -231,7 +231,7 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- TAB 2: KHU VỰC HỘI VIÊN (ĐÃ SỬA LỖI ĐẾM GIỜ & PLAYER)     -->
+    <!-- TAB 2: KHU VỰC HỘI VIÊN                                   -->
     <!-- ======================================================== -->
     <div id="sectionPaid" class="space-y-3.5 hidden">
 
@@ -313,16 +313,15 @@
             <i class="fa-solid fa-graduation-cap text-rose-400 text-base"></i>
             <div>
               <h3 class="text-xs font-bold text-white uppercase tracking-wide">Kho Bản Ghi Hội Viên VIP</h3>
-              <p class="text-[10px] text-slate-400">Tự động lưu tiến trình học tập thực tế</p>
+              <p class="text-[10px] text-slate-400">Lưu tiến trình học tập chuẩn xác</p>
             </div>
           </div>
           <span id="lessonCountBadge" class="text-[10px] px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800/80 rounded-full font-bold">14 Chuyên Đề</span>
         </div>
 
-        <!-- KHUNG XÁC THỰC BẢO MẬT OTP GMAIL -->
+        <!-- KHUNG XÁC THỰC OTP -->
         <div class="p-3 bg-slate-900/95 rounded-xl border border-slate-700/80 space-y-2">
           
-          <!-- Bước 1: Nhập Email -->
           <div id="stepEmailBlock" class="space-y-1.5">
             <label class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
               <i class="fa-solid fa-envelope text-teal-400"></i> Nhập Gmail Hội viên để nhận mã xác thực OTP:
@@ -335,7 +334,6 @@
             </div>
           </div>
 
-          <!-- Bước 2: Nhập OTP -->
           <div id="stepOtpBlock" class="hidden space-y-1.5 pt-1">
             <label class="text-[11px] font-semibold text-teal-300 flex items-center gap-1.5">
               <i class="fa-solid fa-key text-amber-400"></i> Nhập mã OTP 6 số vừa gửi đến Gmail của bạn:
@@ -352,7 +350,6 @@
             </div>
           </div>
 
-          <!-- Trạng thái sau khi mở khóa -->
           <div id="authSuccessBlock" class="hidden flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-teal-500/40 text-left">
             <div class="flex items-center gap-2 min-w-0">
               <div class="w-7 h-7 rounded-full bg-teal-950 text-teal-400 flex items-center justify-center text-xs font-bold border border-teal-500/60 shrink-0">
@@ -372,7 +369,6 @@
             <i class="fa-solid fa-shield-halved text-teal-400"></i> Xác thực tài khoản chính chủ an toàn.
           </div>
 
-          <!-- Khung Báo Phí Nâng Cấp -->
           <div id="upgradeBox" class="hidden p-2.5 bg-rose-950/40 border border-rose-900/60 rounded-xl space-y-1 text-xs text-rose-200 text-left">
             <div class="flex justify-between items-center">
               <span class="font-bold text-white text-[11px]"><i class="fa-solid fa-sparkles text-amber-400 mr-1"></i> Gói Nâng Cấp Full:</span>
@@ -382,17 +378,15 @@
           </div>
         </div>
 
-        <!-- Live Search -->
         <div class="relative">
           <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
           <input type="text" id="lessonSearchInput" oninput="handleSearchLesson()" placeholder="Tìm từ khóa: Torque, 3Shape, Minivis, MEAW..." class="w-full bg-slate-900 border border-slate-700/80 focus:border-rose-400 focus:outline-none rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500">
         </div>
 
-        <!-- Danh sách bài học -->
         <div id="lessonList" class="space-y-2 max-h-[26rem] overflow-y-auto pr-1"></div>
       </div>
 
-      <!-- VỊ TRÍ 4: Tải Mẫu Bệnh Án & Gửi Ca Lâm Sàng -->
+      <!-- VỊ TRÍ 4 -->
       <div class="space-y-2">
         <a href="https://docs.google.com/presentation/d/1r7_iQzKyi9VdEY1HLRFmCNTdErONZoRM/edit?usp=drive_link" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 bg-slate-800 hover:bg-slate-750 border border-blue-500/40 rounded-xl transition group shadow-sm">
           <div class="flex items-center space-x-3">
@@ -432,16 +426,16 @@
 
   </div>
 
-  <!-- POPUP PLAYER LMS NATIVE -->
+  <!-- POPUP PLAYER LMS NATIVE (ĐÃ SỬA TRIỆT ĐỂ LỖI MÀN HÌNH ĐEN THUI & ĐẾM GIỜ ẢO) -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 hidden">
     
-    <!-- NÚT QUAY LẠI NỔI LUÔN CỐ ĐỊNH Ở MÀN HÌNH (BẤM LÀ QUAY LẠI AN TOÀN) -->
+    <!-- NÚT QUAY LẠI NỔI -->
     <button id="btnFloatingBack" onclick="handleCustomBackAction()" class="fixed top-3 left-3 z-[999999] px-3.5 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white hover:text-teal-300 text-xs font-extrabold flex items-center gap-1.5 border border-slate-600 shadow-2xl transition duration-150">
       <i class="fa-solid fa-arrow-left"></i>
       <span>Quay lại</span>
     </button>
 
-    <!-- Nút thoát Fullscreen khi đang xoay ngang -->
+    <!-- Nút thu nhỏ Fullscreen -->
     <button id="btnExitFsFloating" onclick="toggleCustomFullScreen()" class="hidden fixed top-3 right-3 z-[999999] bg-slate-900/90 hover:bg-slate-900 text-white p-2.5 rounded-full border border-slate-600 shadow-2xl">
       <i class="fa-solid fa-compress text-sm"></i>
     </button>
@@ -458,11 +452,17 @@
         </button>
       </div>
 
-      <!-- Player Frame -->
-      <div id="playerContainer" class="relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
-        <iframe id="driveFrame" class="absolute inset-0 w-full h-full border-0 pointer-events-auto" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+      <!-- Player Frame (Có hiệu ứng Loading sáng sủa, không bị màn hình đen thui) -->
+      <div id="playerContainer" class="relative w-full pb-[56.25%] bg-slate-900 overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
+        <!-- Khung Loading hiển thị tức thì -->
+        <div id="videoLoadingOverlay" class="absolute inset-0 bg-slate-950 flex flex-col items-center justify-center gap-2 z-10 text-slate-300">
+          <i class="fa-solid fa-spinner fa-spin text-teal-400 text-2xl"></i>
+          <span class="text-xs font-bold">Đang tải bài giảng...</span>
+        </div>
 
-        <div id="dynamicWatermark" class="absolute z-20 pointer-events-none text-white/30 text-[11px] font-bold tracking-wider select-none transition-all duration-700 drop-shadow" style="top: 20%; left: 20%;">
+        <iframe id="driveFrame" onload="hideVideoLoader()" class="absolute inset-0 w-full h-full border-0 pointer-events-auto z-20" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+
+        <div id="dynamicWatermark" class="absolute z-30 pointer-events-none text-white/30 text-[11px] font-bold tracking-wider select-none transition-all duration-700 drop-shadow" style="top: 20%; left: 20%;">
           Dr.Thai Ortho • Hội viên
         </div>
       </div>
@@ -488,12 +488,12 @@
         </div>
       </div>
 
-      <!-- Tên bài đang phát & Nút bật tắt tính giờ xem thực -->
+      <!-- Tên bài đang phát & Đếm giờ chỉ chạy khi video phát -->
       <div id="modalInfoBar" class="px-3 py-1.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
         <div class="min-w-0 pr-2">
           <div id="currentPlayingName" class="font-semibold text-teal-300 text-[11px] truncate max-w-[200px]">Chưa chọn file</div>
           <div id="currentWatchDurationText" class="text-[9px] text-slate-400 font-mono flex items-center gap-1">
-            <i class="fa-solid fa-stopwatch text-teal-400"></i> Đang tính giờ khi xem...
+            <i class="fa-solid fa-circle-play text-amber-400"></i> Bấm Play để bắt đầu tính giờ học
           </div>
         </div>
         <div id="currentWatchBadge" class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px] font-mono shrink-0 border border-slate-700">
@@ -558,7 +558,13 @@
     let watchTimeTracker = JSON.parse(localStorage.getItem('drthai_watch_times_sec') || '{}');
     let resendCountdownInterval = null;
 
+    let watchTimerInterval = null;
+    let isUserActiveViewing = true;
     let isFullScreenLandscape = false;
+
+    document.addEventListener('visibilitychange', () => {
+      isUserActiveViewing = !document.hidden;
+    });
 
     // KHỞI TẠO TỨC THÌ
     window.addEventListener('DOMContentLoaded', () => {
@@ -579,7 +585,7 @@
       }
     });
 
-    // BẮT NÚT BACK VẬT LÝ / CỬ CHỈ VUỐT
+    // BẮT SỰ KIỆN NÚT BACK CỦA ĐIỆN THOẠI
     window.addEventListener('popstate', (e) => {
       const modal = document.getElementById('videoModal');
       if (!modal.classList.contains('hidden')) {
@@ -590,6 +596,12 @@
         }
       }
     });
+
+    // HIDE LOADER KHI IFRAME LOAD XONG
+    function hideVideoLoader() {
+      const loader = document.getElementById('videoLoadingOverlay');
+      if (loader) loader.style.display = 'none';
+    }
 
     // 1. GỬI MÃ OTP SIÊU NHANH
     async function requestEmailOtp() {
@@ -621,7 +633,7 @@
           currentUserEmail = email;
           document.getElementById('stepEmailBlock').classList.add('hidden');
           document.getElementById('stepOtpBlock').classList.remove('hidden');
-          statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã gửi mã OTP 6 số đến ${email}. Bác sĩ vui lòng kiểm tra hộp thư!</span>`;
+          statusEl.innerHTML = `<span class="text-teal-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Đã gửi mã OTP 6 số đến ${email}. Vui lòng kiểm tra hộp thư!</span>`;
           startResendCountdown();
         } else {
           statusEl.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-circle-xmark"></i> ${data.message || "Email chưa được phân quyền."}</span>`;
@@ -884,6 +896,30 @@
       }, 6000);
     }
 
+    // ĐỒNG HỒ ĐẾM GIỜ CHỈ CHẠY KHI TAB ACTIVE (KHÔNG ĐẾM ẢO)
+    function startRealTimeWatchTracker() {
+      if (watchTimerInterval) clearInterval(watchTimerInterval);
+
+      watchTimerInterval = setInterval(() => {
+        if (!currentLesson || !currentLesson.items[currentSubIndex] || !isUserActiveViewing) return;
+        
+        const item = currentLesson.items[currentSubIndex];
+        const stdDuration = item.duration || 1800;
+        let curSec = watchTimeTracker[item.fileId] || 0;
+
+        if (curSec < stdDuration) {
+          curSec += 1;
+          watchTimeTracker[item.fileId] = curSec;
+
+          if (curSec % 5 === 0) {
+            localStorage.setItem('drthai_watch_times_sec', JSON.stringify(watchTimeTracker));
+          }
+
+          updateCurrentWatchUI(item, curSec, stdDuration);
+        }
+      }, 1000);
+    }
+
     function updateCurrentWatchUI(item, curSec, stdDuration) {
       const textEl = document.getElementById('currentWatchDurationText');
       const badgeEl = document.getElementById('currentWatchBadge');
@@ -952,6 +988,10 @@
       currentSubIndex = index;
       const item = currentLesson.items[index];
 
+      // Hiện lại loader vòng quay trong lúc chờ iframe tải video mới
+      const loader = document.getElementById('videoLoadingOverlay');
+      if (loader) loader.style.display = 'flex';
+
       const frame = document.getElementById('driveFrame');
       const playingNameEl = document.getElementById('currentPlayingName');
       const downloadBtn = document.getElementById('btnDownloadFile');
@@ -962,6 +1002,7 @@
       if (item.type !== 'video') {
         downloadBtn.classList.remove('hidden');
         downloadBtn.href = `https://drive.google.com/file/d/${item.fileId}/view?usp=sharing`;
+        hideVideoLoader();
       } else {
         downloadBtn.classList.add('hidden');
       }
@@ -974,6 +1015,9 @@
       updateCurrentWatchUI(item, curSec, stdDuration);
 
       renderSubPlaylist();
+
+      // Kích hoạt đồng hồ đếm giờ học thực tế
+      startRealTimeWatchTracker();
     }
 
     function playNextItem() {
@@ -1029,6 +1073,7 @@
       modal.classList.add('hidden');
       frame.src = '';
       if (watermarkInterval) clearInterval(watermarkInterval);
+      if (watchTimerInterval) clearInterval(watchTimerInterval);
       localStorage.setItem('drthai_watch_times_sec', JSON.stringify(watchTimeTracker));
       renderLessons(currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA, currentAllowedList.length === 0);
 
