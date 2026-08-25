@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Kho Dữ Liệu Chỉnh Nha Dr.Thai Ortho</title>
 
-  <!-- Tối ưu kết nối trước máy chủ phát video Google Drive -->
+  <!-- Tối ưu kết nối trước máy chủ Google Drive -->
   <link rel="preconnect" href="https://drive.google.com" crossorigin>
   <link rel="preconnect" href="https://docs.google.com" crossorigin>
   <link rel="preconnect" href="https://video.googleusercontent.com" crossorigin>
@@ -34,18 +34,33 @@
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-    /* Ép xung GPU tăng tốc phần cứng cho trình phát */
-    .gpu-accelerated {
-      -webkit-transform: translateZ(0);
-      -moz-transform: translateZ(0);
-      -ms-transform: translateZ(0);
-      -o-transform: translateZ(0);
-      transform: translateZ(0);
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      -webkit-perspective: 1000;
-      perspective: 1000;
-      will-change: transform, opacity;
+    /* CHẾ ĐỘ PHÓNG TO / XOAY NGANG TRÀN VIỀN KHÔNG MẤT NÚT THOÁT */
+    body.is-fullscreen-player #videoModal {
+      padding: 0 !important;
+      background: #000000 !important;
+    }
+    body.is-fullscreen-player #modalBox {
+      max-width: 100vw !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-height: 100vh !important;
+      border-radius: 0 !important;
+      border: none !important;
+    }
+    body.is-fullscreen-player #playerContainer {
+      width: 100vw !important;
+      height: 100vh !important;
+      padding-bottom: 0 !important;
+      flex: 1 !important;
+    }
+    body.is-fullscreen-player #modalHeader,
+    body.is-fullscreen-player #modalControls,
+    body.is-fullscreen-player #modalInfoBar,
+    body.is-fullscreen-player #modalPlaylist {
+      display: none !important;
+    }
+    body.is-fullscreen-player #fullscreenExitBar {
+      display: flex !important;
     }
   </style>
 </head>
@@ -81,11 +96,8 @@
       </button>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- TAB 1: DÀNH CHO NGƯỜI MỚI (TÀI NGUYÊN MỞ)                -->
-    <!-- ======================================================== -->
+    <!-- TAB 1: TÀI NGUYÊN MỞ -->
     <div id="sectionFree" class="space-y-3.5">
-      
       <!-- Lộ trình 3 bước -->
       <div class="p-3.5 bg-gradient-to-br from-teal-950/60 via-slate-800 to-slate-800 border border-teal-500/30 rounded-2xl space-y-2.5">
         <div class="flex items-center justify-between">
@@ -115,7 +127,7 @@
         </div>
       </div>
 
-      <!-- Chuyên đề mở -->
+      <!-- Danh mục chuyên đề mở -->
       <div class="space-y-2">
         <div class="flex items-center justify-between px-1">
           <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
@@ -158,71 +170,44 @@
         </div>
       </div>
 
-      <!-- Top Những Bài Giảng Được Xem Nhiều Nhất -->
+      <!-- Top bài giảng xem nhiều -->
       <div id="featuredVideosAnchor" class="bg-slate-800/60 border border-slate-700/80 rounded-2xl p-3.5 space-y-2.5 shadow-md">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-            <i class="fa-solid fa-fire text-amber-400"></i> Top những bài giảng được xem nhiều nhất, được quan tâm bởi bác sĩ nhiều nhất
+            <i class="fa-solid fa-fire text-amber-400"></i> Top những bài giảng được xem nhiều nhất
           </h3>
           <a href="https://www.youtube.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-400 hover:underline">YouTube &rarr;</a>
         </div>
         
         <div class="space-y-2 text-xs">
-          <!-- Top 1 -->
           <a href="https://www.youtube.com/watch?v=jPuLbqqYj_w" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
             <div class="flex items-start gap-2 min-w-0">
               <span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 1</span>
               <div class="truncate">
                 <div class="font-semibold text-white group-hover:text-amber-200 transition-colors truncate">Webinar: Điều trị cười hở lợi thực chiến</div>
-                <div class="text-[10px] text-slate-400 truncate">Chẩn đoán, chọn khí cụ & cơ chế kéo lùi/đánh lún hiệu quả</div>
+                <div class="text-[10px] text-slate-400 truncate">Chẩn đoán, chọn khí cụ & cơ chế kéo lùi/đánh lún</div>
               </div>
             </div>
             <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
           </a>
 
-          <!-- Top 2 -->
           <a href="https://youtu.be/yUPIvt3xS30" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
             <div class="flex items-start gap-2 min-w-0">
               <span class="px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 2</span>
               <div class="truncate">
                 <div class="font-semibold text-white group-hover:text-teal-200 transition-colors truncate">TÂM SỰ ĐÊM KHUYA #04 – Class II Venugopal</div>
-                <div class="text-[10px] text-slate-400 truncate">Class II Correction theo triết lý Venugopal thực chiến</div>
+                <div class="text-[10px] text-slate-400 truncate">Class II Correction theo triết lý Venugopal</div>
               </div>
             </div>
             <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
           </a>
 
-          <!-- Top 3 -->
           <a href="https://youtu.be/Qlo-nEa3ZsA" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
             <div class="flex items-start gap-2 min-w-0">
               <span class="px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 3</span>
               <div class="truncate">
                 <div class="font-semibold text-white group-hover:text-rose-200 transition-colors truncate">TÂM SỰ ĐÊM KHUYA #05 – Chỉnh nha lại</div>
-                <div class="text-[10px] text-slate-400 truncate">Kinh nghiệm quý giá & xử lý các ca điều trị thất bại</div>
-              </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
-          </a>
-
-          <!-- Top 4 -->
-          <a href="https://www.youtube.com/watch?v=QKRo6Gci0Xk&list=PL7YzM7KyB5S6ALSSRrGzvOPdHTUGY0Blz" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
-            <div class="flex items-start gap-2 min-w-0">
-              <span class="px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 4</span>
-              <div class="truncate">
-                <div class="font-semibold text-white group-hover:text-purple-200 transition-colors truncate">Tâm sự đêm khuya góc chỉnh nha số 01</div>
-                <div class="text-[10px] text-slate-400 truncate">Bí quyết & kinh nghiệm lâm sàng cho người mới</div>
-              </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
-          </a>
-
-          <!-- Top 5 -->
-          <a href="https://www.youtube.com/watch?v=iMqc6BDiK6g&list=PL7YzM7KyB5S6EXP9eTA2cbw0Gnj-rnjFy" target="_blank" rel="noopener noreferrer" class="p-2.5 bg-slate-800 hover:bg-slate-750 border border-slate-700 rounded-xl flex items-start justify-between gap-2 transition group">
-            <div class="flex items-start gap-2 min-w-0">
-              <span class="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-extrabold text-[9px] mt-0.5 shrink-0">Top 5</span>
-              <div class="truncate">
-                <div class="font-semibold text-white group-hover:text-blue-200 transition-colors truncate">Các sai lầm thường gặp trong nắn chỉnh răng</div>
-                <div class="text-[10px] text-slate-400 truncate">Nhận diện sớm bẫy lực & mất kiểm soát neo chặn</div>
+                <div class="text-[10px] text-slate-400 truncate">Kinh nghiệm xử lý các ca điều trị thất bại</div>
               </div>
             </div>
             <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[10px] mt-1 shrink-0"></i>
@@ -238,19 +223,17 @@
           </div>
           <div>
             <div class="font-bold text-rose-200 group-hover:text-rose-100 text-xs sm:text-sm">Đăng Ký Hội Viên VIP Chính Thức</div>
-            <div class="text-[10px] text-slate-400">Mở toàn bộ 14 chuyên đề & nhóm chuyên môn kín</div>
+            <div class="text-[10px] text-slate-400">Mở toàn bộ 14 chuyên đề & nhóm kín</div>
           </div>
         </div>
         <i class="fa-solid fa-arrow-right text-rose-400 text-xs group-hover:translate-x-1 transition-transform"></i>
       </a>
     </div>
 
-    <!-- ======================================================== -->
-    <!-- TAB 2: KHU VỰC HỘI VIÊN                                   -->
-    <!-- ======================================================== -->
+    <!-- TAB 2: KHU VỰC HỘI VIÊN -->
     <div id="sectionPaid" class="space-y-3.5 hidden">
 
-      <!-- VỊ TRÍ 1: KỲ HỌP ĐỌC BÁO SỐ 02 -->
+      <!-- VỊ TRÍ 1: KỲ HỌP ĐỌC BÁO -->
       <div class="bg-gradient-to-b from-slate-850 to-slate-800/90 border border-slate-700 rounded-2xl p-3.5 space-y-2.5 shadow-md">
         <div class="flex items-center justify-between">
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
@@ -264,7 +247,6 @@
           <p class="text-[10px] text-slate-300 italic mt-0.5">"Mandibular molar uprighting using miniscrews: a systematic review"</p>
         </div>
 
-        <!-- Countdown -->
         <div class="grid grid-cols-4 gap-1.5 text-center">
           <div class="bg-slate-900 rounded-lg p-1 border border-slate-700">
             <span id="cd-days" class="font-bold text-xs text-white block">00</span>
@@ -312,7 +294,7 @@
         <div class="p-3 bg-slate-900/90 border-t border-slate-700/80 text-xs space-y-2">
           <a href="https://www.facebook.com/groups/drthaiortho.hv" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow">
             <i class="fa-brands fa-facebook text-sm"></i>
-            <span>Vào Nhóm Facebook Hội Viên Chính Thức</span>
+            <span>Vào Nhóm Facebook Hội Viên</span>
           </a>
           <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-cyan-700 hover:bg-cyan-600 text-white font-bold text-xs transition shadow">
             <i class="fa-solid fa-comments text-sm"></i>
@@ -334,12 +316,11 @@
           <span id="lessonCountBadge" class="text-[10px] px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800/80 rounded-full font-bold">14 Chuyên Đề</span>
         </div>
 
-        <!-- KHUNG XÁC THỰC OTP -->
+        <!-- Khung xác thực OTP -->
         <div class="p-3 bg-slate-900/95 rounded-xl border border-slate-700/80 space-y-2">
-          
           <div id="stepEmailBlock" class="space-y-1.5">
             <label class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
-              <i class="fa-solid fa-envelope text-teal-400"></i> Nhập Gmail Hội viên để nhận mã xác thực OTP:
+              <i class="fa-solid fa-envelope text-teal-400"></i> Nhập Gmail Hội viên để nhận mã OTP:
             </label>
             <div class="flex gap-1.5">
               <input type="email" id="inputUserEmail" placeholder="bacsi@gmail.com" class="w-full bg-slate-950 border border-slate-700 focus:border-teal-400 focus:outline-none rounded-lg px-2.5 py-2 text-xs text-white placeholder-slate-500">
@@ -445,7 +426,20 @@
   <!-- POPUP PLAYER LMS NATIVE -->
   <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 hidden">
     
-    <!-- NÚT TRỞ LẠI AN TOÀN -->
+    <!-- THANH ĐIỀU HƯỚNG NỔI TRÊN MÀN HÌNH XOAY NGANG -->
+    <div id="fullscreenExitBar" class="fixed top-2.5 left-2.5 right-2.5 z-[9999999] justify-between items-center hidden pointer-events-auto">
+      <button onclick="exitViewportFullscreen()" class="px-3.5 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white hover:text-teal-300 text-xs font-extrabold flex items-center gap-1.5 border border-slate-600 shadow-2xl transition duration-150 backdrop-blur-sm">
+        <i class="fa-solid fa-compress text-amber-400"></i>
+        <span>Thu nhỏ màn hình</span>
+      </button>
+
+      <button onclick="handleCustomBackAction()" class="px-3 py-1.5 rounded-full bg-rose-950/90 hover:bg-rose-900 text-rose-200 text-xs font-bold flex items-center gap-1.5 border border-rose-700 shadow-2xl transition duration-150 backdrop-blur-sm">
+        <i class="fa-solid fa-xmark"></i>
+        <span>Đóng bài học</span>
+      </button>
+    </div>
+
+    <!-- Nút trở lại an toàn khi ở chế độ dọc -->
     <button id="btnFloatingBack" onclick="handleCustomBackAction()" class="fixed top-3 left-3 z-[999999] px-3.5 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white hover:text-teal-300 text-xs font-extrabold flex items-center gap-1.5 border border-slate-600 shadow-2xl transition duration-150">
       <i class="fa-solid fa-arrow-left"></i>
       <span>Trở lại / Thoát</span>
@@ -489,7 +483,7 @@
         </div>
 
         <div class="flex items-center gap-1.5">
-          <button onclick="triggerNativeFullscreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
+          <button onclick="toggleViewportFullscreen()" class="px-2.5 py-1 rounded bg-teal-950 hover:bg-teal-900 text-teal-300 border border-teal-700 text-[10px] font-semibold transition flex items-center gap-1 shadow-sm">
             <i class="fa-solid fa-expand"></i> Phóng to / Xoay ngang
           </button>
           <a id="btnDownloadFile" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700 text-[10px] font-semibold hover:bg-slate-700 transition flex items-center gap-1">
@@ -498,7 +492,7 @@
         </div>
       </div>
 
-      <!-- Tên bài đang phát & Đếm giờ chuẩn -->
+      <!-- Tên bài đang phát & Đếm giờ -->
       <div id="modalInfoBar" class="px-3 py-1.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
         <div class="min-w-0 pr-2">
           <div id="currentPlayingName" class="font-semibold text-teal-300 text-[11px] truncate max-w-[200px]">Chưa chọn file</div>
@@ -596,7 +590,11 @@
     window.addEventListener('popstate', (e) => {
       const modal = document.getElementById('videoModal');
       if (!modal.classList.contains('hidden')) {
-        closeSecurePlayer(false);
+        if (document.body.classList.contains('is-fullscreen-player')) {
+          exitViewportFullscreen();
+        } else {
+          closeSecurePlayer(false);
+        }
       }
     });
 
@@ -1056,26 +1054,42 @@
       }
     }
 
-    function triggerNativeFullscreen() {
-      const container = document.getElementById('playerContainer');
-      const frame = document.getElementById('driveFrame');
-
-      if (container.requestFullscreen) {
-        container.requestFullscreen().then(() => { if(frame) frame.focus(); }).catch(() => {});
-      } else if (container.webkitRequestFullscreen) {
-        container.webkitRequestFullscreen();
-        if(frame) frame.focus();
-      } else if (container.msRequestFullscreen) {
-        container.msRequestFullscreen();
-        if(frame) frame.focus();
+    // CHẾ ĐỘ PHÓNG TO XOAY NGANG THÔNG MINH (VIEWPORT CSS + ORIENTATION API)
+    function toggleViewportFullscreen() {
+      if (document.body.classList.contains('is-fullscreen-player')) {
+        exitViewportFullscreen();
+      } else {
+        enterViewportFullscreen();
       }
     }
 
+    function enterViewportFullscreen() {
+      document.body.classList.add('is-fullscreen-player');
+      try {
+        if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').catch(() => {});
+        }
+      } catch(e) {}
+    }
+
+    function exitViewportFullscreen() {
+      document.body.classList.remove('is-fullscreen-player');
+      try {
+        if (screen.orientation && screen.orientation.unlock) {
+          screen.orientation.unlock();
+        }
+      } catch(e) {}
+    }
+
     function handleCustomBackAction() {
+      if (document.body.classList.contains('is-fullscreen-player')) {
+        exitViewportFullscreen();
+      }
       closeSecurePlayer(true);
     }
 
     function closeSecurePlayer(triggerHistory = true) {
+      exitViewportFullscreen();
       const modal = document.getElementById('videoModal');
       const frame = document.getElementById('driveFrame');
       
