@@ -25,7 +25,7 @@
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-    /* Chế độ xoay ngang toàn màn hình sáng rõ nét */
+    /* Chế độ Fullscreen xoay ngang chuẩn */
     .fs-landscape-fix {
       position: fixed !important;
       inset: 0 !important;
@@ -471,34 +471,36 @@
 
   </div>
 
-  <!-- POPUP PLAYER LMS NATIVE (KHÔNG BỊ MỜ MÀN HÌNH XOAY NGANG) -->
-  <div id="videoModal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-2 sm:p-4 hidden opacity-0 transition-opacity duration-200">
-    <div id="modalBox" class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh] transition-all duration-200">
+  <!-- POPUP PLAYER LMS NATIVE (BẬT SÁNG NGAY LẬP TỨC - 0MS) -->
+  <div id="videoModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 hidden">
+    
+    <!-- NÚT FLOATING BACK ĐÈ TRỰC TIẾP LÊN MÀN HÌNH -->
+    <button id="btnFloatingBack" onclick="handleCustomBackAction()" class="fixed top-3 left-3 z-[999999] px-3 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white hover:text-teal-300 text-xs font-extrabold flex items-center gap-1.5 border border-slate-600 shadow-2xl transition duration-150">
+      <i class="fa-solid fa-arrow-left"></i>
+      <span>Quay lại</span>
+    </button>
+
+    <div id="modalBox" class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[94vh]">
       
       <!-- Modal Header -->
-      <div id="modalHeader" class="p-2.5 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between shrink-0">
+      <div id="modalHeader" class="p-2.5 bg-slate-850 border-b border-slate-700/80 flex items-center justify-between shrink-0 pl-24">
         <div class="flex items-center gap-2 min-w-0 pr-2">
-          <button onclick="closeSecurePlayer()" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-teal-300 text-[11px] font-bold flex items-center gap-1 shrink-0 transition border border-slate-700">
-            <i class="fa-solid fa-arrow-left"></i>
-            <span>Quay lại</span>
-          </button>
           <span id="videoTitle" class="text-xs font-bold text-white truncate">Chuyên đề</span>
         </div>
-        <button onclick="closeSecurePlayer()" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-750 text-slate-400 hover:text-white flex items-center justify-center shrink-0">
+        <button onclick="handleCustomBackAction()" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-750 text-slate-400 hover:text-white flex items-center justify-center shrink-0">
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
 
-      <!-- Player Frame (Đã loại bỏ thẻ đè cảm ứng, chạm là tắt bóng mờ) -->
-      <div id="playerContainer" class="relative w-full pb-[56.25%] bg-black overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
+      <!-- Player Frame (Nền Slate-900 đồng bộ, không nháy đen) -->
+      <div id="playerContainer" class="relative w-full pb-[56.25%] bg-slate-900 overflow-hidden select-none shrink-0 border-b border-slate-800 flex-1">
         <iframe id="driveFrame" class="absolute inset-0 w-full h-full border-0 pointer-events-auto" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
         
-        <!-- Nút thoát Fullscreen nổi khi xoay ngang -->
-        <button id="btnExitFsFloating" onclick="toggleCustomFullScreen()" class="hidden absolute top-3 right-3 z-50 bg-slate-900/80 hover:bg-slate-900 text-white p-2.5 rounded-full border border-slate-600 shadow-xl">
+        <!-- Nút thu nhỏ Fullscreen góc phải -->
+        <button id="btnExitFsFloating" onclick="toggleCustomFullScreen()" class="hidden fixed top-3 right-3 z-[999999] bg-slate-900/90 hover:bg-slate-900 text-white p-2.5 rounded-full border border-slate-600 shadow-2xl">
           <i class="fa-solid fa-compress text-sm"></i>
         </button>
 
-        <!-- Watermark không chặn click -->
         <div id="dynamicWatermark" class="absolute z-20 pointer-events-none text-white/30 text-[11px] font-bold tracking-wider select-none transition-all duration-700 drop-shadow" style="top: 20%; left: 20%;">
           Dr.Thai Ortho • Hội viên
         </div>
@@ -556,7 +558,7 @@
         <div id="subItemList" class="space-y-1"></div>
 
         <div class="pt-2 pb-1">
-          <button onclick="closeSecurePlayer()" class="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 text-slate-300 hover:text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-sm">
+          <button onclick="handleCustomBackAction()" class="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 text-slate-300 hover:text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-sm">
             <i class="fa-solid fa-house text-teal-400"></i>
             <span>Trở Về Trang Chính</span>
           </button>
@@ -573,7 +575,6 @@
   <script>
     const SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbx-J_8QG8CWIW-Y-kNc2eR5q888DKEDCVLkP6RxDD266_t1KwNGTxjSfoKMLy6F1CeiqQ/exec";
 
-    // DATABASE 14 CHUYÊN ĐỀ
     const LESSONS_DATA = [
       {"id":"2025-02","code":"[2025-02]","title":"Andrews 6 Keys, Mắc cài, 3Shape","items":[{"name":"01. Bản ghi B1 - Andrews 6 Keys Part I","fileId":"1Ddv1VrAglf1fboqYj5OdUZDvE-I3qGR4","type":"video","duration":3600},{"name":"02. GS Nanda chữa CII Div 2 (Tài liệu)","fileId":"1sKZQOskWIJsvYdcYboJsWTjtVXsieGNK","type":"pdf","duration":600},{"name":"03. Bản ghi B2 - Andrews 6 Keys Part II","fileId":"1JRAVvmtTaCbkzVkMigjzfOJvLoRQHrtw","type":"video","duration":3600},{"name":"04. Bản ghi B3 - Thông số mắc cài","fileId":"1-aQUVX3rOyE_utQPDwmS7dKbEnn_RUgn","type":"video","duration":3000},{"name":"05. Bending đóng khe thưa","fileId":"1GaQfM5wrJIJGw_m6tSePgmbH8O-9blOg","type":"video","duration":1800},{"name":"06. Bẻ Torque","fileId":"1FWq0al8X4Z7YD32_DZAmt3XFSo3gfnt1","type":"video","duration":1800},{"name":"07. Đường hướng dẫn dây cung","fileId":"1LAYcUI2R9o1TGcBNqzDRBI2Ias5AzFSB","type":"video","duration":1800},{"name":"08. KT bẻ torque 4 R cửa GIÁN TIẾP","fileId":"1w1HuJrmxaGbNRgRtFOgesoGdjILLH-vm","type":"video","duration":1800},{"name":"09. Torque loop","fileId":"1WIXCFvCQv1SaDxVsoZFWkLJBry1WaEDG","type":"video","duration":1800},{"name":"10. Bản ghi B4 - 3Shape Ortho Part I","fileId":"1w4pGqtgO7PrfUVtaYd8LZU8fvEPbN7dh","type":"video","duration":3600},{"name":"11. Bản ghi Buổi 5 - 3Shape Part II","fileId":"1p8Uh6tf9-goCGQo1-8cWnYH54-I0-Z3k","type":"video","duration":3600},{"name":"12. Bản ghi B6 - 3Shape Part III","fileId":"1ufm0KJtp-prvXPdE6LQhAjtfhfCV4nWN","type":"video","duration":3600},{"name":"13. Transverse Diagnosis CBCT","fileId":"1b_ehDlGChRtNH6w_eFQGNe-QvS02j3cL","type":"video","duration":1800},{"name":"14. TPA biến đổi / Sáng tạo khí cụ","fileId":"13j1UHg6IS6ImIrNGpPVfNw4rYDpBeDix","type":"video","duration":1800},{"name":"15. Hướng dẫn cắm vis","fileId":"1XdBRdNEouzrOya9nD6OEnZ3FBNA3h-l9","type":"video","duration":1800},{"name":"16. Sách & Tài liệu Mediafire HVT2","fileId":"12V0SYri_GweoZ8f1LIp8qCpo7NTyawjF","type":"doc","duration":600}]},
       {"id":"2025-03","code":"[2025-03]","title":"Ceph, Occlusogram, PIP VTO, 3D Ceph","items":[{"name":"01. Bản ghi Buổi 1 - Sassouni Plus + Ricketts Superimposition","fileId":"1JoX9HFwRcgYx6frmZ_TTFiVggI-XE0IN","type":"video","duration":3600},{"name":"02. HDSD Vistadent (Video)","fileId":"1IegauAlvJy_B0WIdRcpSS2zNzQYNoEqr","type":"video","duration":2400},{"name":"03. Bản ghi B2 - Chữa bài B1 + 2D Occlusogram","fileId":"1EQMbN3cor8_tfOdRcfm8XrNrUWkxxf_x","type":"video","duration":3600},{"name":"04. Tracing bằng giấy vẽ","fileId":"1NjHKPbDugyz_rDdj5P59hnSOtmRl2K2P","type":"video","duration":1800},{"name":"05. Bản ghi Buổi 03 - PIP-VTO","fileId":"1b5yOPq6O5awkShsMgqrCybBBGNzof75O","type":"video","duration":3600},{"name":"06. Sách: Clinical Applications of Mini-implants","fileId":"12tPaOz2R2cf8leMH14a_OkPlvVy6xTTc","type":"pdf","duration":600},{"name":"07. Bản ghi Buổi 4 - TMJ, Airways & 3D Ceph","fileId":"1uw_I8AT05mY2xx-LQt6TsvsDy7lMo98L","type":"video","duration":3600},{"name":"08. Video 1 - Airways & TMJ","fileId":"1CTseUAfvPdjcW7IJEreO8MC7Ion_00nE","type":"video","duration":1800},{"name":"09. Video 2 - Orthodontics & Airways","fileId":"1969bEpsd8Hg6hvRLGRseTMsxqVk4pgds","type":"video","duration":1800},{"name":"10. Phân tích phim Sassouni bằng Audax Ceph","fileId":"103_WP8bCs8zGzwl4hN89QQKq_C-TigqUu9lcUBi8Jm8","type":"doc","duration":600}]},
@@ -598,12 +599,13 @@
 
     let watchTimerInterval = null;
     let isUserActiveViewing = true;
+    let isFullScreenLandscape = false;
 
     document.addEventListener('visibilitychange', () => {
       isUserActiveViewing = !document.hidden;
     });
 
-    // KHỞI TẠO TỨC THÌ (INSTANT CACHE - 0 GIÂY)
+    // KHỞI TẠO TỨC THÌ (0 GIÂY)
     window.addEventListener('DOMContentLoaded', () => {
       const savedEmail = localStorage.getItem('drthai_authenticated_email');
       const cachedData = localStorage.getItem('drthai_user_cached_data');
@@ -619,6 +621,18 @@
         }
       } else {
         renderLessons(LESSONS_DATA, true);
+      }
+    });
+
+    // BẮT SỰ KIỆN NÚT BACK CỦA ĐIỆN THOẠI (CHỐNG THOÁT KHỎI WEB)
+    window.addEventListener('popstate', (e) => {
+      const modal = document.getElementById('videoModal');
+      if (!modal.classList.contains('hidden')) {
+        if (isFullScreenLandscape) {
+          toggleCustomFullScreen();
+        } else {
+          closeSecurePlayer(false);
+        }
       }
     });
 
@@ -875,7 +889,6 @@
     let currentLesson = null;
     let currentSubIndex = 0;
     let watermarkInterval;
-    let isFullScreenLandscape = false;
 
     function openLMSPlayer(lessonId) {
       const lesson = LESSONS_DATA.find(l => l.id === lessonId);
@@ -897,8 +910,13 @@
         playSubItemByIndex(0);
       }
 
+      // Mở ngay lập tức không có độ trễ hiệu ứng
       modal.classList.remove('hidden');
-      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+
+      // Đẩy state vào History để khi bấm Back điện thoại không bị văng web
+      try {
+        history.pushState({ modalOpen: true }, '', '#player');
+      } catch(e) {}
 
       startRealTimeWatchTracker();
 
@@ -1037,6 +1055,15 @@
       }
     }
 
+    // Xử lý nút Back thông minh
+    function handleCustomBackAction() {
+      if (isFullScreenLandscape) {
+        toggleCustomFullScreen();
+      } else {
+        closeSecurePlayer(true);
+      }
+    }
+
     function toggleCustomFullScreen() {
       const modalBox = document.getElementById('modalBox');
       const btnExitFs = document.getElementById('btnExitFsFloating');
@@ -1079,22 +1106,25 @@
       }
     }
 
-    function closeSecurePlayer() {
+    function closeSecurePlayer(triggerHistory = true) {
       if (isFullScreenLandscape) {
         toggleCustomFullScreen();
       }
       const modal = document.getElementById('videoModal');
       const frame = document.getElementById('driveFrame');
       
-      modal.classList.add('opacity-0');
-      setTimeout(() => {
-        modal.classList.add('hidden');
-        frame.src = '';
-        if (watermarkInterval) clearInterval(watermarkInterval);
-        if (watchTimerInterval) clearInterval(watchTimerInterval);
-        localStorage.setItem('drthai_watch_times_sec', JSON.stringify(watchTimeTracker));
-        renderLessons(currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA, currentAllowedList.length === 0);
-      }, 200);
+      modal.classList.add('hidden');
+      frame.src = '';
+      if (watermarkInterval) clearInterval(watermarkInterval);
+      if (watchTimerInterval) clearInterval(watchTimerInterval);
+      localStorage.setItem('drthai_watch_times_sec', JSON.stringify(watchTimeTracker));
+      renderLessons(currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA, currentAllowedList.length === 0);
+
+      if (triggerHistory && window.location.hash === '#player') {
+        try {
+          history.back();
+        } catch(e) {}
+      }
     }
 
     function switchTab(tab) {
