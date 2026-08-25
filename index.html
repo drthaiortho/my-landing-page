@@ -579,6 +579,7 @@
     let currentSessionToken = '';
     let resendCountdownInterval = null;
     let heartbeatInterval = null;
+    let isCheckingSession = false;
 
     window.addEventListener('DOMContentLoaded', () => {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -590,11 +591,12 @@
         document.getElementById('iosInAppNotice').classList.remove('hidden');
       }
 
-      // Kiểm tra cờ thông báo bị đăng xuất trước đó nếu có
-      if (localStorage.getItem('drthai_show_revoked_modal') === 'true') {
-        localStorage.removeItem('drthai_show_revoked_modal');
-        document.getElementById('sessionRevokedModal').classList.remove('hidden');
-      }
+      // Bắt sự kiện người dùng quay lại màn hình hoặc chạm vào web để kiểm tra tức thì
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') triggerFastCheck();
+      });
+      window.addEventListener('focus', triggerFastCheck);
+      window.addEventListener('touchstart', triggerFastCheck, { passive: true });
 
       const savedEmail = localStorage.getItem('drthai_authenticated_email');
       const savedToken = localStorage.getItem('drthai_session_token');
@@ -607,7 +609,6 @@
           currentSessionToken = savedToken;
           applyUnlockedData(parsed, savedEmail);
           
-          // Kiểm tra phiên ngay lập tức khi load lại trang
           checkSessionImmediately(savedEmail, savedToken);
           startSessionHeartbeat(savedEmail, savedToken);
         } catch(e) {
@@ -618,20 +619,31 @@
       }
     });
 
+    function triggerFastCheck() {
+      if (currentUserEmail && currentSessionToken) {
+        checkSessionImmediately(currentUserEmail, currentSessionToken);
+      }
+    }
+
     async function checkSessionImmediately(email, token) {
+      if (isCheckingSession) return;
+      isCheckingSession = true;
       try {
-        const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}&sessionToken=${encodeURIComponent(token)}`);
+        const noCacheUrl = `${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}&sessionToken=${encodeURIComponent(token)}&_nocache=${Date.now()}`;
+        const res = await fetch(noCacheUrl);
         const data = await res.json();
 
         if (data && data.sessionRevoked) {
           triggerSessionRevokedAction();
         }
-      } catch(e) {}
+      } catch(e) {
+      } finally {
+        isCheckingSession = false;
+      }
     }
 
     function triggerSessionRevokedAction() {
       if (heartbeatInterval) clearInterval(heartbeatInterval);
-      localStorage.setItem('drthai_show_revoked_modal', 'true');
       logoutOtpSession(false);
       document.getElementById('sessionRevokedModal').classList.remove('hidden');
     }
@@ -659,7 +671,7 @@
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 25000);
 
-        const res = await fetch(`${SCRIPT_API_URL}?action=send_otp&email=${encodeURIComponent(email)}`, {
+        const res = await fetch(`${SCRIPT_API_URL}?action=send_otp&email=${encodeURIComponent(email)}&_nocache=${Date.now()}`, {
           signal: controller.signal
         });
         clearTimeout(timeoutId);
@@ -720,7 +732,7 @@
       btnVerify.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mở khóa...`;
 
       try {
-        const res = await fetch(`${SCRIPT_API_URL}?action=verify_otp&email=${encodeURIComponent(currentUserEmail)}&otp=${encodeURIComponent(otp)}`);
+        const res = await fetch(`${SCRIPT_API_URL}?action=verify_otp&email=${encodeURIComponent(currentUserEmail)}&otp=${encodeURIComponent(otp)}&_nocache=${Date.now()}`);
         const data = await res.json();
 
         if (data.success) {
@@ -742,19 +754,21 @@
       }
     }
 
+    // QUÉT TỨC THÌ 2.5 GIÂY/LẦN CÓ CHỐNG CACHE
     function startSessionHeartbeat(email, token) {
       if (heartbeatInterval) clearInterval(heartbeatInterval);
       
       heartbeatInterval = setInterval(async () => {
         try {
-          const res = await fetch(`${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}&sessionToken=${encodeURIComponent(token)}`);
+          const noCacheUrl = `${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}&sessionToken=${encodeURIComponent(token)}&_nocache=${Date.now()}`;
+          const res = await fetch(noCacheUrl);
           const data = await res.json();
 
           if (data && data.sessionRevoked) {
             triggerSessionRevokedAction();
           }
         } catch(e) {}
-      }, 5000); // Quét mỗi 5 giây
+      }, 2500);
     }
 
     function applyUnlockedData(data, email) {
@@ -907,7 +921,7 @@
       container.innerHTML = list.map((item) => {
         return `
           <div class="card-elevated p-3.5 sm:p-4 rounded-2xl border-2 border-slate-200/90 hover:border-teal-600 transition duration-150 space-y-1">
-            <button onclick="${isLocked ? "alert('Tài khoản này chưa xác thực mã OTP hoặc chưa được cấp quyền. Vui lòng nhận mã OTP để mở khóa!')" : `openLessonModal('${item.id}')`}" class="w-full flex items-center justify-between text-left group">
+            <button onclick="${isLocked ? "alert('Tài khoản này chưa xác thực mã OTP hoặc chưa được cấp quyền. Vui lòng nhận mã OTP để mở khóa!')" : `handleOpenLessonCheck('${item.id}')`}" class="w-full flex items-center justify-between text-left group">
               <div class="flex items-center gap-2.5 min-w-0 pr-2">
                 <span class="px-2.5 py-1 rounded-lg bg-rose-600 text-white font-mono text-xs shrink-0 font-extrabold shadow-xs">${item.code}</span>
                 <div class="truncate">
@@ -922,6 +936,22 @@
           </div>
         `;
       }).join('');
+    }
+
+    // KIỂM TRA PHIÊN TỨC THÌ TRƯỚC KHI MỞ BÀI GIẢNG
+    async function handleOpenLessonCheck(lessonId) {
+      if (currentUserEmail && currentSessionToken) {
+        try {
+          const noCacheUrl = `${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(currentUserEmail)}&sessionToken=${encodeURIComponent(currentSessionToken)}&_nocache=${Date.now()}`;
+          const res = await fetch(noCacheUrl);
+          const data = await res.json();
+          if (data && data.sessionRevoked) {
+            triggerSessionRevokedAction();
+            return;
+          }
+        } catch(e) {}
+      }
+      openLessonModal(lessonId);
     }
 
     function openLessonModal(lessonId) {
