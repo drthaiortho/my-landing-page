@@ -62,7 +62,44 @@
 </head>
 <body class="bg-[#eef2f6] text-slate-800 min-h-screen font-sans antialiased p-3.5 sm:p-6 selection:bg-teal-700 selection:text-white">
 
-  <!-- POPUP THANH TOÁN MÃ QR VIETQR -->
+  <!-- STEP 1: POPUP NHẬP HỌ TÊN & SĐT TRƯỚC KHI HIỆN QR -->
+  <div id="userInfoModal" class="hidden fixed inset-0 bg-slate-950/85 z-[9999998] p-3.5 sm:p-4 flex items-center justify-center backdrop-blur-sm overflow-y-auto">
+    <div class="bg-white border-2 border-teal-600 rounded-3xl p-4 sm:p-5 max-w-sm w-full space-y-3.5 shadow-2xl relative my-auto">
+      <button onclick="closeUserInfoModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center font-bold">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <div class="text-center pt-1 pr-6">
+        <span class="px-2.5 py-0.5 rounded-full bg-teal-100 text-teal-800 text-[10px] font-black uppercase tracking-wider border border-teal-200">
+          Thông Tin Học Viên Mới
+        </span>
+        <h3 id="infoModalPackageTitle" class="text-base font-black text-slate-900 mt-1">ĐĂNG KÝ GÓI HỌC</h3>
+        <p id="infoModalPackagePrice" class="text-xs font-bold text-teal-700 mt-0.5">0đ</p>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">HỌ VÀ TÊN BÁC SĨ: <span class="text-rose-600">*</span></label>
+          <input type="text" id="buyerName" placeholder="Ví dụ: Nguyễn Văn A" class="w-full bg-slate-50 border-2 border-slate-300 focus:border-teal-600 focus:outline-none rounded-xl px-3 py-2 text-slate-900 font-bold">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">SỐ ĐIỆN THOẠI (ZALO): <span class="text-rose-600">*</span></label>
+          <input type="tel" id="buyerPhone" placeholder="Ví dụ: 0912345678" class="w-full bg-slate-50 border-2 border-slate-300 focus:border-teal-600 focus:outline-none rounded-xl px-3 py-2 text-slate-900 font-mono font-bold">
+        </div>
+        <div>
+          <label class="font-bold text-slate-700 block mb-1">GMAIL ĐĂNG NHẬP HỌC LIỆU: <span class="text-rose-600">*</span></label>
+          <input type="email" id="buyerEmail" placeholder="Ví dụ: bacsi@gmail.com" class="w-full bg-slate-50 border-2 border-slate-300 focus:border-teal-600 focus:outline-none rounded-xl px-3 py-2 text-slate-900 font-mono font-medium">
+        </div>
+        <div id="buyerFormError" class="text-rose-600 font-bold text-[11px] hidden"></div>
+      </div>
+
+      <button onclick="submitBuyerInfoAndShowQR()" class="w-full py-3 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs sm:text-sm transition shadow-md flex items-center justify-center gap-2">
+        <span>Tiếp Tục Lấy Mã QR Chuyển Khoản</span> <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 2: POPUP THANH TOÁN MÃ QR VIETQR -->
   <div id="paymentModal" class="hidden fixed inset-0 bg-slate-950/85 z-[9999999] p-3.5 sm:p-4 flex items-center justify-center backdrop-blur-sm overflow-y-auto">
     <div class="bg-white border-2 border-rose-400 rounded-3xl p-4 sm:p-5 max-w-sm w-full space-y-3.5 shadow-2xl relative my-auto">
       <button onclick="closePaymentModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center font-bold">
@@ -287,7 +324,7 @@
               <div class="text-sm font-black text-teal-700">500.000đ <span class="text-[10px] text-slate-500 font-medium">/ 1 tháng</span></div>
               <div class="text-[10px] text-slate-500">Xem độc lập trong 3 năm</div>
             </div>
-            <button onclick="openNewUserPayment(500000, 'Mua lẻ 1 tháng')" class="px-3.5 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs transition shadow-xs shrink-0">
+            <button onclick="promptUserBuyerInfo(500000, 'Mua lẻ 1 tháng')" class="px-3.5 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs transition shadow-xs shrink-0">
               Chọn Gói
             </button>
           </div>
@@ -301,7 +338,7 @@
               <div class="text-sm font-black text-amber-700">3.200.000đ <span class="text-xs text-slate-400 line-through">4.000.000đ</span></div>
               <div class="text-[10px] text-slate-500">Bao gồm tất cả nội dung năm 2025</div>
             </div>
-            <button onclick="openNewUserPayment(3200000, 'Combo 2025')" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-black text-xs transition shadow-xs shrink-0">
+            <button onclick="promptUserBuyerInfo(3200000, 'Combo 2025')" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-black text-xs transition shadow-xs shrink-0">
               Chọn Gói
             </button>
           </div>
@@ -315,7 +352,7 @@
               <div class="text-sm font-black text-rose-600">4.900.000đ <span class="text-xs text-slate-400 line-through">7.000.000đ</span></div>
               <div class="text-[10px] text-slate-600 font-bold">Toàn bộ 2025 + T1,2,3,4,7,8 năm 2026</div>
             </div>
-            <button onclick="openNewUserPayment(4900000, 'Full Combo 14 Chuyen De')" class="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-xs transition shadow-sm shrink-0">
+            <button onclick="promptUserBuyerInfo(4900000, 'Full Combo 14 Chuyen De')" class="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-xs transition shadow-sm shrink-0">
               Chọn Gói
             </button>
           </div>
@@ -669,6 +706,8 @@
     let currentAllowedList = [];
     let currentSessionToken = '';
     let currentUpgradeFeeRaw = 0;
+    let selectedPackageAmount = 0;
+    let selectedPackageName = '';
     let resendCountdownInterval = null;
     let heartbeatInterval = null;
     let isCheckingSession = false;
@@ -743,13 +782,52 @@
       document.getElementById('sessionRevokedModal').classList.add('hidden');
     }
 
-    function openNewUserPayment(amount, packageName) {
-      document.getElementById('modalPackageBadge').innerText = "Đăng Ký Gói Mới";
-      document.getElementById('modalPackageTitle').innerText = packageName.toUpperCase();
-      document.getElementById('modalUpgradeAmount').innerText = amount.toLocaleString('vi-VN') + "đ";
+    function promptUserBuyerInfo(amount, packageName) {
+      selectedPackageAmount = amount;
+      selectedPackageName = packageName;
 
-      const content = `DK ${packageName}`;
-      const qrUrl = `https://img.vietqr.io/image/MB-4247666888-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(content)}&accountName=HKD%20DR.THAI%20ORTHO`;
+      document.getElementById('infoModalPackageTitle').innerText = packageName.toUpperCase();
+      document.getElementById('infoModalPackagePrice').innerText = amount.toLocaleString('vi-VN') + "đ";
+      document.getElementById('buyerName').value = '';
+      document.getElementById('buyerPhone').value = '';
+      document.getElementById('buyerEmail').value = '';
+      document.getElementById('buyerFormError').classList.add('hidden');
+
+      document.getElementById('userInfoModal').classList.remove('hidden');
+    }
+
+    function closeUserInfoModal() {
+      document.getElementById('userInfoModal').classList.add('hidden');
+    }
+
+    // TỰ ĐỘNG GỬI NGẨM THÔNG TIN VÀO SHEET TỔNG RỒI HIỆN QR
+    async function submitBuyerInfoAndShowQR() {
+      const name = document.getElementById('buyerName').value.trim();
+      const phone = document.getElementById('buyerPhone').value.trim();
+      const email = document.getElementById('buyerEmail').value.trim();
+      const errEl = document.getElementById('buyerFormError');
+
+      if (!name || !phone || !email || !email.includes('@')) {
+        errEl.innerText = "Vui lòng nhập đầy đủ Họ tên, SĐT và Gmail hợp lệ!";
+        errEl.classList.remove('hidden');
+        return;
+      }
+
+      errEl.classList.add('hidden');
+      closeUserInfoModal();
+
+      // Gửi ngầm thông tin xuống Google Sheet tổng
+      try {
+        const registerUrl = `${SCRIPT_API_URL}?action=register_buyer&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&packageName=${encodeURIComponent(selectedPackageName)}`;
+        fetch(registerUrl).catch(e => {});
+      } catch(err) {}
+
+      document.getElementById('modalPackageBadge').innerText = "Đăng Ký Gói Mới";
+      document.getElementById('modalPackageTitle').innerText = selectedPackageName.toUpperCase();
+      document.getElementById('modalUpgradeAmount').innerText = selectedPackageAmount.toLocaleString('vi-VN') + "đ";
+
+      const content = `DK ${name} - ${phone} - ${selectedPackageName}`;
+      const qrUrl = `https://img.vietqr.io/image/MB-4247666888-compact2.png?amount=${selectedPackageAmount}&addInfo=${encodeURIComponent(content)}&accountName=HKD%20DR.THAI%20ORTHO`;
       document.getElementById('qrPaymentImg').src = qrUrl;
 
       document.getElementById('paymentModal').classList.remove('hidden');
@@ -806,7 +884,7 @@
         }
       } catch (err) {
         resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
-        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Không thể kết nối tới Google Sheet kiểm tra lúc này. Vui lòng thử lại!`;
+        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Không thể kết nối tới Sheet Kỳ 02 lúc này. Vui lòng thử lại!`;
       } finally {
         btn.disabled = false;
         btn.innerText = "Kiểm Tra";
