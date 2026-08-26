@@ -815,9 +815,11 @@
       errEl.classList.add('hidden');
       closeUserInfoModal();
 
+      // GỬI NGẨM XUỐNG SHEET TỔNG BẰNG KỸ THUẬT IMAGE BEACON (ĐẢM BẢO KHÔNG BỊ CHẶN CORS)
       try {
-        const registerUrl = `${SCRIPT_API_URL}?action=register_buyer&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&packageName=${encodeURIComponent(selectedPackageName)}`;
-        fetch(registerUrl).catch(e => {});
+        const registerUrl = `${SCRIPT_API_URL}?action=register_buyer&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&packageName=${encodeURIComponent(selectedPackageName)}&_t=${Date.now()}`;
+        const img = new Image();
+        img.src = registerUrl;
       } catch(err) {}
 
       document.getElementById('modalPackageBadge').innerText = "Đăng Ký Gói Mới";
