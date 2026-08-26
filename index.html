@@ -800,7 +800,7 @@
       document.getElementById('userInfoModal').classList.add('hidden');
     }
 
-    // TỰ ĐỘNG GỬI NGẨM THÔNG TIN VÀO SHEET TỔNG RỒI HIỆN QR
+    // TỰ ĐỘNG GỬI NGẨM THÔNG TIN XUỐNG APPS SCRIPT KHI BẤM LẤY QR
     async function submitBuyerInfoAndShowQR() {
       const name = document.getElementById('buyerName').value.trim();
       const phone = document.getElementById('buyerPhone').value.trim();
@@ -816,7 +816,7 @@
       errEl.classList.add('hidden');
       closeUserInfoModal();
 
-      // Gửi ngầm thông tin xuống Google Sheet tổng
+      // Đẩy dữ liệu ngầm xuống Google Sheet tổng
       try {
         const registerUrl = `${SCRIPT_API_URL}?action=register_buyer&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&packageName=${encodeURIComponent(selectedPackageName)}`;
         fetch(registerUrl).catch(e => {});
