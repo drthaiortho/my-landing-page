@@ -44,6 +44,21 @@
       #captureReceiptCard { position: absolute; left: 0; top: 0; width: 100%; border: none !important; box-shadow: none !important; }
     }
   </style>
+
+  <!-- KỸ THUẬT AUTO-ESCAPE ZALO CHO ANDROID -->
+  <script>
+    (function() {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isZalo = (ua.indexOf("Zalo") > -1) || (ua.indexOf("ZaloTheme") > -1);
+      var isFB = (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Messenger") > -1);
+      var isAndroid = /android/i.test(ua);
+
+      if ((isZalo || isFB) && isAndroid) {
+        var currentUrl = window.location.href.replace(/https?:\/\//, "");
+        window.location.href = "intent://" + currentUrl + "#Intent;scheme=https;package=com.android.chrome;end";
+      }
+    })();
+  </script>
 </head>
 <body class="bg-[#eef2f6] text-slate-800 min-h-screen font-sans antialiased p-3.5 sm:p-6 selection:bg-teal-700 selection:text-white">
 
@@ -147,11 +162,60 @@
     </div>
   </div>
 
+  <!-- MODAL BỊ ĐĂNG XUẤT -->
+  <div id="sessionRevokedModal" class="hidden fixed inset-0 bg-slate-950/85 z-[9999999] p-4 flex items-center justify-center backdrop-blur-sm">
+    <div class="bg-white border-2 border-rose-500 rounded-3xl p-5 max-w-sm w-full text-center space-y-4 shadow-2xl">
+      <div class="w-16 h-16 mx-auto rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-3xl border-2 border-rose-300">
+        <i class="fa-solid fa-mobile-screen-button"></i>
+      </div>
+      <div class="space-y-1.5">
+        <h3 class="text-base sm:text-lg font-black text-rose-700 uppercase tracking-tight">TÀI KHOẢN ĐÃ BỊ ĐĂNG XUẤT</h3>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+          Tài khoản của Bác sĩ vừa được kích hoạt đăng nhập trên <b>một thiết bị khác</b>. Mỗi thời điểm hệ thống chỉ duy trì 1 thiết bị xem học liệu.
+        </p>
+      </div>
+      <button onclick="dismissSessionRevokedModal()" class="w-full py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-sm transition shadow-md">
+        Đã hiểu và Đóng
+      </button>
+    </div>
+  </div>
+
+  <!-- OVERLAY IOS -->
+  <div id="iosInAppNotice" class="hidden fixed inset-0 bg-slate-900/90 z-[999999] p-6 flex flex-col justify-between text-center backdrop-blur-md text-white">
+    <div class="flex justify-end pr-2 pt-1">
+      <div class="text-amber-400 text-right space-y-1">
+        <i class="fa-solid fa-arrow-up text-3xl"></i>
+        <div class="text-xs font-bold uppercase tracking-wider">Bấm vào đây</div>
+      </div>
+    </div>
+    <div class="space-y-4 max-w-sm mx-auto">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-2xl border border-teal-500/40">
+        <i class="fa-brands fa-safari"></i>
+      </div>
+      <div class="space-y-1.5">
+        <h3 class="text-base font-extrabold text-white uppercase">Mở bằng Safari / Trình duyệt ngoài</h3>
+        <p class="text-xs text-slate-300 leading-relaxed">Bác sĩ đang mở trang qua trình duyệt phụ của <b>Zalo</b> nên không tự kết nối được với ứng dụng Google Drive.</p>
+      </div>
+    </div>
+    <div>
+      <button onclick="document.getElementById('iosInAppNotice').classList.add('hidden')" class="w-full py-2.5 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold hover:text-white border border-slate-700">
+        Tôi hiểu rồi, tiếp tục xem ở đây
+      </button>
+    </div>
+  </div>
+
   <div class="max-w-md mx-auto space-y-4">
+
+    <!-- 1. Header Thương Hiệu -->
     <div class="text-center pt-1 relative">
+      <button onclick="copySiteLink()" class="absolute top-0 right-0 p-2.5 rounded-full bg-white hover:bg-slate-100 text-slate-600 hover:text-teal-700 border border-slate-300 transition shadow-sm" title="Sao chép link chia sẻ">
+        <i class="fa-solid fa-share-nodes text-sm"></i>
+      </button>
+
       <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-2 rounded-full bg-white p-1 shadow-md overflow-hidden flex items-center justify-center border-2 border-teal-600">
         <img src="./Logo.png" alt="Dr. Thai Ortho" class="w-full h-full object-contain rounded-full">
       </div>
+      
       <h1 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight uppercase leading-tight">
         KHO DỮ LIỆU CHỈNH NHA<br>
         <span class="text-teal-700 whitespace-nowrap">DR.THAI ORTHO</span>
@@ -159,7 +223,7 @@
       <p class="text-slate-600 font-semibold text-xs sm:text-sm mt-0.5">Cùng nhau học kiến thức chỉnh nha lâm sàng thực chiến</p>
     </div>
 
-    <!-- Nút Chuyển Tab -->
+    <!-- 2. Nút Chuyển Tab -->
     <div class="grid grid-cols-2 p-1.5 bg-slate-300/80 rounded-2xl border border-slate-300 gap-1.5 shadow-inner">
       <button id="tabBtnFree" onclick="switchTab('free')" class="py-2.5 px-3 rounded-xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition bg-teal-700 text-white shadow-md">
         <i class="fa-solid fa-gift"></i>
@@ -171,8 +235,79 @@
       </button>
     </div>
 
-    <!-- TAB 1 -->
+    <!-- TAB 1: TÀI NGUYÊN MỞ -->
     <div id="sectionFree" class="space-y-4">
+      <div class="card-elevated p-4 rounded-2xl border-2 border-teal-500/40 bg-gradient-to-br from-teal-50/80 via-white to-white space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2 text-teal-950 font-extrabold text-sm sm:text-base">
+            <i class="fa-solid fa-compass text-teal-700 text-lg"></i>
+            <span>Lộ Trình Bắt Đầu Cho Bác Sĩ Mới</span>
+          </div>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-teal-600 text-white font-mono font-bold shadow-xs">3 Bước</span>
+        </div>
+        
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <a href="https://docs.google.com/presentation/d/1r7_iQzKyi9VdEY1HLRFmCNTdErONZoRM/edit?usp=drive_link" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-teal-600 transition group shadow-xs">
+            <i class="fa-solid fa-file-powerpoint text-amber-500 text-2xl mb-1 block group-hover:scale-110 transition-transform"></i>
+            <span class="font-extrabold text-slate-900 text-xs sm:text-sm block">1. Template</span>
+            <span class="text-[11px] text-slate-500">Bệnh án chuẩn</span>
+          </a>
+          <a href="https://www.youtube.com/playlist?list=PL7YzM7KyB5S5gJYlMcjABbS4fs0LvSkHl" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-teal-600 transition group shadow-xs">
+            <i class="fa-solid fa-circle-play text-red-500 text-2xl mb-1 block group-hover:scale-110 transition-transform"></i>
+            <span class="font-extrabold text-slate-900 text-xs sm:text-sm block">2. Bài Giảng</span>
+            <span class="text-[11px] text-slate-500">Danh sách phát</span>
+          </a>
+          <a href="https://drthaiortho.notion.site/DATA-DR-THAI-ORTHO-T-NG-H-P-FULL-3bcc10f0177780d79e42d21c38c3238a" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl bg-white border border-slate-200 hover:border-teal-600 transition group shadow-xs">
+            <i class="fa-solid fa-book-bookmark text-teal-700 text-2xl mb-1 block group-hover:scale-110 transition-transform"></i>
+            <span class="font-extrabold text-slate-900 text-xs sm:text-sm block">3. Notion</span>
+            <span class="text-[11px] text-slate-500">Dữ liệu tổng hợp</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between px-1">
+          <span class="text-xs sm:text-sm font-bold text-slate-600 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-layer-group text-teal-700"></i> Danh mục chuyên đề mở
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 gap-2.5">
+          <a href="https://www.youtube.com/playlist?list=PL7YzM7KyB5S6ALSSRrGzvOPdHTUGY0Blz" target="_blank" rel="noopener noreferrer" class="card-elevated p-3.5 rounded-2xl border-2 border-amber-300 hover:border-amber-500 flex items-center justify-between transition group bg-gradient-to-r from-amber-50/60 via-white to-white">
+            <div class="flex items-center space-x-3.5 min-w-0">
+              <div class="w-11 h-11 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg shadow-sm shrink-0">
+                <i class="fa-solid fa-microphone-lines"></i>
+              </div>
+              <div class="truncate">
+                <div class="font-extrabold text-slate-900 text-sm sm:text-base group-hover:text-amber-700 transition-colors truncate flex items-center gap-1.5">
+                  <span>Sinh Hoạt Chuyên Sâu</span>
+                  <i class="fa-brands fa-youtube text-red-500 text-base"></i>
+                </div>
+                <div class="text-xs sm:text-sm text-slate-600 truncate mt-0.5 font-medium">Chuỗi Tâm sự đêm khuya & Webinar thường thức trọn bộ</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-chevron-right text-slate-400 text-sm group-hover:text-amber-700 group-hover:translate-x-0.5 transition shrink-0 ml-2"></i>
+          </a>
+
+          <a href="https://www.youtube.com/playlist?list=PL7YzM7KyB5S6GpVMKkkUsZIKYhSer50Wf" target="_blank" rel="noopener noreferrer" class="card-elevated p-3.5 rounded-2xl border-2 border-teal-300 hover:border-teal-600 flex items-center justify-between transition group bg-gradient-to-r from-teal-50/60 via-white to-white">
+            <div class="flex items-center space-x-3.5 min-w-0">
+              <div class="w-11 h-11 rounded-xl bg-teal-700 text-white flex items-center justify-center text-lg shadow-sm shrink-0">
+                <i class="fa-solid fa-folder-tree"></i>
+              </div>
+              <div class="truncate">
+                <div class="font-extrabold text-slate-900 text-sm sm:text-base group-hover:text-teal-700 transition-colors truncate flex items-center gap-1.5">
+                  <span>Case Study Lâm Sàng</span>
+                  <i class="fa-brands fa-youtube text-red-500 text-base"></i>
+                </div>
+                <div class="text-xs sm:text-sm text-slate-600 truncate mt-0.5 font-medium">Phân tích tiến trình ca lâm sàng thực tế & thảo luận</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-chevron-right text-slate-400 text-sm group-hover:text-teal-700 group-hover:translate-x-0.5 transition shrink-0 ml-2"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- BẢNG CHỌN GÓI CHO KHÁCH MỚI -->
       <div class="card-elevated border-2 border-rose-400 rounded-3xl p-4 space-y-3.5 bg-gradient-to-b from-rose-50/40 via-white to-white">
         <div class="text-center space-y-1">
           <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-black uppercase tracking-wider border border-rose-200">
@@ -187,6 +322,7 @@
             <div>
               <div class="text-xs font-black text-slate-900 uppercase">1. Mua lẻ từng tháng</div>
               <div class="text-sm font-black text-teal-700">500.000đ <span class="text-[10px] text-slate-500 font-medium">/ 1 tháng</span></div>
+              <div class="text-[10px] text-slate-500">Xem độc lập trong 3 năm</div>
             </div>
             <button onclick="promptUserBuyerInfo(500000, 'Mua lẻ 1 tháng')" class="px-3.5 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs transition shadow-xs shrink-0">
               Chọn Gói
@@ -200,6 +336,7 @@
                 <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[9px] font-black">Tiết kiệm 20%</span>
               </div>
               <div class="text-sm font-black text-amber-700">3.200.000đ <span class="text-xs text-slate-400 line-through">4.000.000đ</span></div>
+              <div class="text-[10px] text-slate-500">Bao gồm tất cả nội dung năm 2025</div>
             </div>
             <button onclick="promptUserBuyerInfo(3200000, 'Combo 2025')" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-black text-xs transition shadow-xs shrink-0">
               Chọn Gói
@@ -210,9 +347,10 @@
             <div>
               <div class="flex items-center gap-1.5">
                 <span class="text-xs font-black text-rose-700 uppercase">3. Full Combo 14 Chuyên Đề</span>
-                <span class="px-2 py-0.5 rounded bg-rose-600 text-white text-[9px] font-black">Ưu đãi (~30%)</span>
+                <span class="px-2 py-0.5 rounded bg-rose-600 text-white text-[9px] font-black">Ưu đãi cao nhất (~30%)</span>
               </div>
               <div class="text-sm font-black text-rose-600">4.900.000đ <span class="text-xs text-slate-400 line-through">7.000.000đ</span></div>
+              <div class="text-[10px] text-slate-600 font-bold">Toàn bộ 2025 + T1,2,3,4,7,8 năm 2026</div>
             </div>
             <button onclick="promptUserBuyerInfo(4900000, 'Full Combo 14 Chuyen De')" class="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-xs transition shadow-sm shrink-0">
               Chọn Gói
@@ -222,32 +360,439 @@
       </div>
     </div>
 
-    <!-- TAB 2 -->
+    <!-- TAB 2: KHU VỰC HỘI VIÊN -->
     <div id="sectionPaid" class="space-y-4 hidden">
-      <div class="card-elevated border-2 border-rose-300 rounded-2xl p-4 space-y-3.5 bg-white">
-        <h3 class="text-sm sm:text-base font-black text-slate-900 uppercase">Kho Bản Ghi Hội Viên VIP</h3>
-        <div class="space-y-2">
-          <input type="email" id="inputUserEmail" placeholder="bacsi@gmail.com" class="w-full bg-white border-2 border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 font-medium">
-          <button onclick="requestEmailOtp()" id="btnSendOtp" class="w-full py-2.5 rounded-xl bg-teal-700 text-white font-black text-xs">Gửi Mã OTP</button>
+
+      <!-- WIDGET 1: KIỂM TRA DUYỆT KỲ 02 -->
+      <div class="card-elevated border-2 border-teal-500/60 rounded-2xl p-4 space-y-3 bg-gradient-to-br from-teal-50/50 via-white to-white">
+        <div class="flex items-center justify-between">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-teal-700 text-white shadow-xs">
+            <i class="fa-solid fa-clipboard-check"></i> Tra cứu danh sách Kỳ 02
+          </span>
+          <span class="text-xs text-slate-500 font-bold">Zoom 31/08/2026</span>
         </div>
+        <div>
+          <h3 class="text-xs sm:text-sm font-black text-slate-900">Kiểm tra Email tham gia Kỳ 02</h3>
+          <p class="text-[11px] text-slate-600 font-medium">Nhập email của Bác sĩ để kiểm tra trạng thái duyệt:</p>
+        </div>
+        <div class="flex gap-2">
+          <input type="email" id="inputCheckKy02" placeholder="Nhập email của bạn..." class="w-full bg-white border-2 border-slate-300 focus:border-teal-600 focus:outline-none rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-900 font-medium shadow-xs">
+          <button onclick="checkKy02Status()" id="btnCheckKy02" class="px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs shrink-0 transition shadow-md">
+            Kiểm Tra
+          </button>
+        </div>
+        <div id="resultKy02Box" class="hidden p-2.5 rounded-xl text-xs font-medium"></div>
+      </div>
+
+      <!-- WIDGET 2: ĐẾM NGƯỢC KỲ HỌP -->
+      <div class="card-elevated border-2 border-amber-300/80 rounded-2xl p-4 space-y-3 bg-gradient-to-b from-amber-50/40 via-white to-white">
+        <div class="flex items-center justify-between">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500 text-white shadow-xs">
+            <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Quyền lợi Hội viên
+          </span>
+          <span class="text-xs text-slate-600 font-bold">Zoom Daymai</span>
+        </div>
+        
+        <div>
+          <h2 class="text-sm sm:text-base font-black text-slate-900 uppercase tracking-wide">KỲ HỌP ĐỌC BÁO SỐ 02</h2>
+          <p class="text-xs sm:text-sm text-slate-600 italic mt-0.5 leading-relaxed font-medium">"Mandibular molar uprighting using miniscrews: a systematic review"</p>
+        </div>
+
+        <div class="grid grid-cols-4 gap-1.5 text-center">
+          <div class="bg-slate-100 rounded-xl p-2 border border-slate-200">
+            <span id="cd-days" class="font-black text-sm sm:text-base text-slate-900 block">00</span>
+            <span class="text-[10px] text-slate-500 uppercase font-bold">Ngày</span>
+          </div>
+          <div class="bg-slate-100 rounded-xl p-2 border border-slate-200">
+            <span id="cd-hours" class="font-black text-sm sm:text-base text-slate-900 block">00</span>
+            <span class="text-[10px] text-slate-500 uppercase font-bold">Giờ</span>
+          </div>
+          <div class="bg-slate-100 rounded-xl p-2 border border-slate-200">
+            <span id="cd-minutes" class="font-black text-sm sm:text-base text-slate-900 block">00</span>
+            <span class="text-[10px] text-slate-500 uppercase font-bold">Phút</span>
+          </div>
+          <div class="bg-slate-100 rounded-xl p-2 border border-slate-200">
+            <span id="cd-seconds" class="font-black text-sm sm:text-base text-teal-700 block">00</span>
+            <span class="text-[10px] text-slate-500 uppercase font-bold">Giây</span>
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center justify-between border-t border-slate-200 text-xs sm:text-sm">
+          <span class="text-slate-800 font-bold"><i class="fa-regular fa-calendar-check text-teal-700 mr-1 text-sm"></i> 20h30 • 31/08/2026</span>
+          <a href="https://daymai.vn/student/course/enrol/33142447" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-teal-900 font-black flex items-center gap-1">
+            Phòng Zoom &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- WIDGET 3: THẺ XỔ XUỐNG BẢN GHI (CHỈ HỘI VIÊN CHÍNH THỨC) -->
+      <details id="vipFolderDropdown" class="group card-elevated border-2 border-teal-600 rounded-2xl overflow-hidden transition hidden">
+        <summary class="flex items-center justify-between p-3.5 cursor-pointer select-none bg-gradient-to-r from-teal-50 via-white to-white">
+          <div class="flex items-center space-x-3.5 min-w-0 pr-2">
+            <div class="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center text-lg shadow-sm shrink-0">
+              <i class="fa-solid fa-folder-tree"></i>
+            </div>
+            <div class="truncate">
+              <div class="font-black text-teal-950 text-xs sm:text-sm uppercase tracking-wide truncate">Bản ghi các Kỳ Họp Đọc Sách Báo</div>
+              <div class="text-[11px] text-teal-800 font-medium truncate">✓ Đã xác thực • Nhấn để xem đường dẫn</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-down text-teal-700 text-sm group-open:rotate-180 transition-transform shrink-0"></i>
+        </summary>
+        <div class="p-3.5 bg-slate-50 border-t border-teal-100 space-y-2">
+          <a href="https://drive.google.com/drive/folders/1pyel5r5CemQ2dgparFZjyXgii9oTKY1kQB7KK7IWwhU" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 px-3 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs sm:text-sm transition shadow-md">
+            <i class="fa-brands fa-google-drive text-base"></i>
+            <span>Mở Thư Mục Tổng Hợp Bản Ghi Google Drive</span>
+          </a>
+        </div>
+      </details>
+
+      <details class="group card-elevated border-2 border-blue-300/80 rounded-2xl overflow-hidden transition">
+        <summary class="flex items-center justify-between p-3.5 cursor-pointer select-none bg-gradient-to-r from-blue-50/50 to-white">
+          <div class="flex items-center space-x-3.5">
+            <div class="w-11 h-11 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg shadow-sm">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5 font-black text-slate-900 text-sm sm:text-base">
+                <span>Cộng Đồng Hội Viên Chính Thức</span>
+                <i class="fa-solid fa-lock text-xs text-amber-500"></i>
+              </div>
+              <div class="text-xs sm:text-sm text-slate-500 mt-0.5 font-medium">Nhóm Zalo kín & Group Facebook chuyên môn</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-down text-slate-400 text-sm group-open:rotate-180 transition-transform"></i>
+        </summary>
+        <div class="p-3.5 bg-slate-50 border-t border-slate-200 space-y-2.5">
+          <a href="https://www.facebook.com/groups/drthaiortho.hv" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm transition shadow-sm">
+            <i class="fa-brands fa-facebook text-lg"></i>
+            <span>Vào Nhóm Facebook Hội Viên</span>
+          </a>
+          <a href="https://zalo.me/g/xcz4qz9kshljyyqqt7dh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-cyan-700 hover:bg-cyan-800 text-white font-bold text-xs sm:text-sm transition shadow-sm">
+            <i class="fa-solid fa-comments text-lg"></i>
+            <span>Vào Nhóm Zalo Thảo Luận Lâm Sàng</span>
+          </a>
+        </div>
+      </details>
+
+      <div class="card-elevated border-2 border-rose-300 rounded-2xl p-4 space-y-3.5 bg-white">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-xl bg-rose-600 text-white flex items-center justify-center text-lg shadow-sm">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+              <h3 class="text-sm sm:text-base font-black text-slate-900 uppercase tracking-wide">Kho Bản Ghi Hội Viên VIP</h3>
+              <p class="text-xs text-slate-500 font-medium">Độc lập phiên đăng nhập • An toàn bảo mật</p>
+            </div>
+          </div>
+          <span id="lessonCountBadge" class="text-xs px-3 py-1 bg-rose-100 text-rose-800 border border-rose-300 rounded-full font-black shadow-xs">14 Chuyên Đề</span>
+        </div>
+
+        <!-- Khung OTP -->
+        <div class="p-3.5 bg-slate-100/90 rounded-2xl border border-slate-200 space-y-2.5 shadow-inner">
+          <div id="stepEmailBlock" class="space-y-2">
+            <label class="text-xs sm:text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
+              <i class="fa-solid fa-envelope text-teal-700"></i> Nhập Gmail Hội viên để nhận mã OTP:
+            </label>
+            <div class="flex gap-2">
+              <input type="email" id="inputUserEmail" placeholder="bacsi@gmail.com" class="w-full bg-white border-2 border-slate-300 focus:border-teal-600 focus:outline-none rounded-xl px-3 py-2 text-sm text-slate-900 placeholder-slate-400 font-medium shadow-xs">
+              <button onclick="requestEmailOtp()" id="btnSendOtp" class="px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs sm:text-sm shrink-0 transition flex items-center gap-1.5 shadow-md">
+                <span>Gửi Mã</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="stepOtpBlock" class="hidden space-y-2 pt-1">
+            <label class="text-xs sm:text-sm font-extrabold text-teal-950 flex items-center gap-1.5">
+              <i class="fa-solid fa-key text-amber-500"></i> Nhập mã OTP 6 số vừa gửi đến Gmail của bạn:
+            </label>
+            <div class="flex gap-2">
+              <input type="text" id="inputUserOtp" maxlength="6" placeholder="123456" class="w-full bg-white border-2 border-teal-600 focus:border-teal-700 focus:outline-none rounded-xl px-3 py-2 text-base text-slate-900 text-center tracking-widest font-mono font-black placeholder-slate-400 shadow-xs">
+              <button onclick="verifyEmailOtp()" id="btnVerifyOtp" class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-xs sm:text-sm shrink-0 transition shadow-md">
+                Mở Khóa
+              </button>
+            </div>
+            <div class="flex justify-between items-center text-xs text-slate-600 pt-0.5">
+              <button onclick="resetOtpStep()" class="text-slate-500 hover:underline font-semibold">Đổi Email khác</button>
+              <button onclick="requestEmailOtp()" id="btnResendOtp" class="text-teal-700 hover:underline font-black">Gửi lại mã OTP</button>
+            </div>
+          </div>
+
+          <div id="authSuccessBlock" class="hidden flex items-center justify-between p-2.5 rounded-xl bg-teal-100 border border-teal-300 text-left">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-8 h-8 rounded-full bg-teal-700 text-white flex items-center justify-center text-sm font-bold shrink-0">
+                <i class="fa-solid fa-user-check"></i>
+              </div>
+              <div class="truncate">
+                <div class="text-xs sm:text-sm font-black text-teal-950 truncate">Hội Viên Đã Xác Thực</div>
+                <div id="authenticatedEmailText" class="text-xs text-teal-800 truncate font-mono font-bold">email@gmail.com</div>
+              </div>
+            </div>
+            <button onclick="logoutOtpSession()" class="px-3 py-1 rounded-lg bg-white hover:bg-rose-50 text-slate-700 hover:text-rose-700 text-xs font-bold border border-slate-300 shrink-0 transition shadow-xs">
+              Đăng xuất
+            </button>
+          </div>
+
+          <div id="authStatusMessage" class="text-xs text-slate-600 flex items-center gap-1.5 font-medium">
+            <i class="fa-solid fa-shield-halved text-teal-700"></i> Mỗi thời điểm chỉ duy nhất 1 thiết bị hoạt động.
+          </div>
+
+          <!-- BẢNG SO SÁNH GIÁ NÂNG CẤP FULL -->
+          <div id="upgradeBox" class="hidden p-3.5 bg-gradient-to-br from-rose-50 via-white to-amber-50 border-2 border-rose-400 rounded-2xl space-y-2.5 text-left shadow-sm">
+            <div class="flex items-center justify-between border-b border-rose-200 pb-2 text-xs sm:text-sm">
+              <span class="font-black text-slate-800 flex items-center gap-1.5">
+                <i class="fa-solid fa-folder-open text-teal-700"></i> <span id="upgradeStatusText">Đã sở hữu: 6/14 Folder</span>
+              </span>
+              <span id="upgradeMissingBadge" class="px-2.5 py-0.5 rounded-md bg-amber-500 text-white font-black text-xs shadow-xs">
+                Còn thiếu: 8 Folder
+              </span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 items-center bg-white p-3 rounded-xl border border-rose-200 shadow-xs">
+              <div>
+                <div class="text-[11px] text-slate-500 font-bold uppercase">Mua lẻ từng kỳ:</div>
+                <div id="retailPriceText" class="text-xs sm:text-sm text-slate-400 line-through font-bold">4.000.000đ</div>
+              </div>
+              <div class="text-right">
+                <div class="text-[11px] text-rose-600 font-black uppercase flex items-center justify-end gap-1">
+                  <i class="fa-solid fa-sparkles text-amber-500"></i> Ưu đãi Combo Full:
+                </div>
+                <div id="upgradeFeeTag" class="text-base sm:text-lg font-black text-rose-600">2.000.000đ</div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 pt-0.5">
+              <span id="savedAmountBadge" class="px-3 py-1 rounded-lg bg-emerald-600 text-white text-xs sm:text-sm font-black shadow-xs flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check"></i> Tiết kiệm: 2.000.000đ (50%)
+              </span>
+              <button onclick="openUpgradePaymentModal()" class="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-xs sm:text-sm transition flex items-center gap-1 shadow-md shrink-0">
+                <span>Nâng cấp ngay</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ô TÌM KIẾM -->
+        <div class="space-y-2 pt-0.5">
+          <div class="search-glow-contrast p-1 rounded-2xl bg-white border-2 border-teal-600 transition-all">
+            <div class="bg-slate-50 rounded-[12px] p-2 flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-xl bg-teal-700 text-white flex items-center justify-center shrink-0 shadow-xs">
+                <i class="fa-solid fa-magnifying-glass text-sm"></i>
+              </div>
+              <input type="text" id="lessonSearchInput" oninput="handleSearchLesson()" placeholder="Tìm nhanh: Torque, 3Shape, Minivis, MEAW..." class="w-full bg-transparent text-sm sm:text-base text-slate-900 placeholder-slate-400 focus:outline-none font-bold">
+              <button onclick="clearSearchInput()" id="btnClearSearch" class="hidden text-slate-400 hover:text-slate-700 p-1 rounded-full text-xs">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs">
+            <span class="text-slate-600 font-black uppercase tracking-wider shrink-0 flex items-center gap-1 text-[11px]">
+              <i class="fa-solid fa-bolt text-amber-500"></i> Gợi ý:
+            </span>
+            <button onclick="quickFilterTag('Torque')" class="px-3 py-1.5 rounded-xl bg-white hover:bg-teal-50 hover:text-teal-800 border-2 border-slate-300 shrink-0 text-slate-800 font-extrabold transition shadow-xs">Torque</button>
+            <button onclick="quickFilterTag('3Shape')" class="px-3 py-1.5 rounded-xl bg-white hover:bg-teal-50 hover:text-teal-800 border-2 border-slate-300 shrink-0 text-slate-800 font-extrabold transition shadow-xs">3Shape</button>
+            <button onclick="quickFilterTag('Vis')" class="px-3 py-1.5 rounded-xl bg-white hover:bg-teal-50 hover:text-teal-800 border-2 border-slate-300 shrink-0 text-slate-800 font-extrabold transition shadow-xs">Cắm vis</button>
+            <button onclick="quickFilterTag('MEAW')" class="px-3 py-1.5 rounded-xl bg-white hover:bg-teal-50 hover:text-teal-800 border-2 border-slate-300 shrink-0 text-slate-800 font-extrabold transition shadow-xs">MEAW</button>
+            <button onclick="quickFilterTag('Class III')" class="px-3 py-1.5 rounded-xl bg-white hover:bg-teal-50 hover:text-teal-800 border-2 border-slate-300 shrink-0 text-slate-800 font-extrabold transition shadow-xs">Class III</button>
+            <button onclick="quickFilterTag('Deepbite')" class="px-3 py-1.5 rounded-xl bg-white hover:bg-teal-50 hover:text-teal-800 border-2 border-slate-300 shrink-0 text-slate-800 font-extrabold transition shadow-xs">Deepbite</button>
+            <button onclick="quickFilterTag('Di xa')" class="px-3 py-1.5 rounded-xl bg-white hover:bg-teal-50 hover:text-teal-800 border-2 border-slate-300 shrink-0 text-slate-800 font-extrabold transition shadow-xs">Di xa</button>
+          </div>
+        </div>
+
+        <div id="lessonList" class="space-y-2.5 max-h-[26rem] overflow-y-auto pr-1"></div>
+      </div>
+
+      <!-- VỊ TRÍ 4 -->
+      <div class="space-y-2.5">
+        <a href="https://docs.google.com/presentation/d/1r7_iQzKyi9VdEY1HLRFmCNTdErONZoRM/edit?usp=drive_link" target="_blank" rel="noopener noreferrer" class="card-elevated flex items-center justify-between p-4 border border-blue-300 rounded-2xl transition group">
+          <div class="flex items-center space-x-3.5">
+            <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg shadow-sm">
+              <i class="fa-solid fa-file-powerpoint text-amber-300"></i>
+            </div>
+            <div>
+              <div class="font-extrabold text-slate-900 text-sm sm:text-base group-hover:text-blue-700">Tải Mẫu Bệnh Án Lâm Sàng (Slides)</div>
+              <div class="text-xs text-slate-500 mt-0.5 font-medium">Template Google Slides chuẩn hoá dữ liệu</div>
+            </div>
+          </div>
+          <i class="fa-solid fa-download text-slate-400 text-sm group-hover:text-blue-700"></i>
+        </a>
+
+        <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="card-elevated flex items-center justify-between p-4 border border-slate-300 rounded-2xl transition group">
+          <div class="flex items-center space-x-3.5">
+            <div class="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center text-base shadow-sm">
+              <i class="fa-solid fa-file-circle-question"></i>
+            </div>
+            <div class="font-extrabold text-slate-900 text-xs sm:text-sm">Gửi Ca Lâm Sàng / Đặt Câu Hỏi Cho Kỳ Họp</div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-slate-400 text-xs group-hover:text-teal-700"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Chân trang -->
+    <div class="pt-4 pb-2 border-t border-slate-300 space-y-1 text-center text-xs sm:text-sm">
+      <div class="flex items-center justify-center gap-2 font-bold">
+        <a href="https://zalo.me/0349622964" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:underline">Zalo: 0349622964</a> •
+        <a href="https://www.youtube.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="text-red-600 hover:underline">YouTube</a> •
+        <a href="https://www.tiktok.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="text-slate-700 hover:underline">TikTok</a>
+      </div>
+      <div class="text-xs text-slate-500 font-medium">&copy; 2026 Dr.Thai Ortho • All rights reserved.</div>
+    </div>
+
+  </div>
+
+  <!-- POPUP BẢN GHI -->
+  <div id="lessonModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-3.5 sm:p-4 hidden">
+    <div class="bg-white border-2 border-slate-300 w-full max-w-md rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]">
+      <div class="p-4 bg-slate-100 border-b border-slate-200 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2.5 min-w-0 pr-2">
+          <div class="w-9 h-9 rounded-xl bg-teal-700 text-white flex items-center justify-center text-base shadow-sm shrink-0">
+            <i class="fa-solid fa-folder-open"></i>
+          </div>
+          <div class="truncate">
+            <div id="modalLessonCode" class="text-xs font-mono font-black text-rose-600">CHUYÊN ĐỀ</div>
+            <div id="modalLessonTitle" class="text-sm sm:text-base font-black text-slate-900 truncate mt-0.5">Danh sách bài học</div>
+          </div>
+        </div>
+        <button onclick="closeLessonModal()" class="w-8 h-8 rounded-full bg-white hover:bg-slate-200 text-slate-600 hover:text-slate-900 flex items-center justify-center shrink-0 border border-slate-300 shadow-xs">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <div class="px-4 py-2.5 bg-teal-50 border-b border-teal-200 text-xs sm:text-sm text-teal-950 font-medium flex items-center gap-2 shrink-0">
+        <i class="fa-brands fa-google-drive text-teal-700 text-lg shrink-0"></i>
+        <span>Bấm vào bài học để mở trực tiếp bằng <b>App Google Drive</b> (tự xoay ngang & tua bài siêu mượt).</span>
+      </div>
+
+      <div id="modalSubItemList" class="p-3.5 overflow-y-auto space-y-2.5 flex-1 bg-slate-50"></div>
+
+      <div class="p-3.5 bg-slate-100 border-t border-slate-200 shrink-0">
+        <button onclick="closeLessonModal()" class="w-full py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-extrabold text-xs sm:text-sm transition border border-slate-300 shadow-sm">
+          Đóng cửa sổ
+        </button>
       </div>
     </div>
   </div>
 
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-teal-700 text-white font-black px-4 py-2 rounded-full text-xs sm:text-sm shadow-2xl transition duration-300 opacity-0 pointer-events-none z-50">
+    <i class="fa-solid fa-check mr-1"></i> <span id="toastMsg">Đã sao chép!</span>
+  </div>
+
+  <!-- SCRIPT API & LMS CONTROLLER -->
   <script>
     const SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbx-J_8QG8CWIW-Y-kNc2eR5q888DKEDCVLkP6RxDD266_t1KwNGTxjSfoKMLy6F1CeiqQ/exec";
+
+    const LESSONS_DATA = [
+      {"id":"2025-02","code":"[2025-02]","title":"Andrews 6 Keys, Mắc cài, 3Shape","items":[{"name":"01. Bản ghi B1 - Andrews 6 Keys Part I","fileId":"1Ddv1VrAglf1fboqYj5OdUZDvE-I3qGR4","type":"video"},{"name":"02. GS Nanda chữa CII Div 2 (Tài liệu)","fileId":"1sKZQOskWIJsvYdcYboJsWTjtVXsieGNK","type":"pdf"},{"name":"03. Bản ghi B2 - Andrews 6 Keys Part II","fileId":"1JRAVvmtTaCbkzVkMigjzfOJvLoRQHrtw","type":"video"},{"name":"04. Bản ghi B3 - Thông số mắc cài","fileId":"1-aQUVX3rOyE_utQPDwmS7dKbEnn_RUgn","type":"video"},{"name":"05. Bending đóng khe thưa","fileId":"1GaQfM5wrJIJGw_m6tSePgmbH8O-9blOg","type":"video"},{"name":"06. Bẻ Torque","fileId":"1FWq0al8X4Z7YD32_DZAmt3XFSo3gfnt1","type":"video"},{"name":"07. Đường hướng dẫn dây cung","fileId":"1LAYcUI2R9o1TGcBNqzDRBI2Ias5AzFSB","type":"video"},{"name":"08. KT bẻ torque 4 R cửa GIÁN TIẾП","fileId":"1w1HuJrmxaGbNRgRtFOgesoGdjILLH-vm","type":"video"},{"name":"09. Torque loop","fileId":"1WIXCFvCQv1SaDxVsoZFWkLJBry1WaEDG","type":"video"},{"name":"10. Bản ghi B4 - 3Shape Ortho Part I","fileId":"1w4pGqtgO7PrfUVtaYd8LZU8fvEPbN7dh","type":"video"},{"name":"11. Bản ghi Buổi 5 - 3Shape Part II","fileId":"1p8Uh6tf9-goCGQo1-8cWnYH54-I0-Z3k","type":"video"},{"name":"12. Bản ghi B6 - 3Shape Part III","fileId":"1ufm0KJtp-prvXPdE6LQhAjtfhfCV4nWN","type":"video"},{"name":"13. Transverse Diagnosis CBCT","fileId":"1b_ehDlGChRtNH6w_eFQGNe-QvS02j3cL","type":"video"},{"name":"14. TPA biến đổi / Sáng tạo khí cụ","fileId":"13j1UHg6IS6ImIrNGpPVfNw4rYDpBeDix","type":"video"},{"name":"15. Hướng dẫn cắm vis","fileId":"1XdBRdNEouzrOya9nD6OEnZ3FBNA3h-l9","type":"video"},{"name":"16. Sách & Tài liệu Mediafire HVT2","fileId":"12V0SYri_GweoZ8f1LIp8qCpo7NTyawjF","type":"doc"}]},
+      {"id":"2025-03","code":"[2025-03]","title":"Ceph, Occlusogram, PIP VTO, 3D Ceph","items":[{"name":"01. Bản ghi Buổi 1 - Sassouni Plus + Ricketts Superimposition","fileId":"1JoX9HFwRcgYx6frmZ_TTFiVggI-XE0IN","type":"video"},{"name":"02. HDSD Vistadent (Video)","fileId":"1IegauAlvJy_B0WIdRcpSS2zNzQYNoEqr","type":"video"},{"name":"03. Bản ghi B2 - Chữa bài B1 + 2D Occlusogram","fileId":"1EQMbN3cor8_tfOdRcfm8XrNrUWkxxf_x","type":"video"},{"name":"04. Tracing bằng giấy vẽ","fileId":"1NjHKPbDugyz_rDdj5P59hnSOtmRl2K2P","type":"video"},{"name":"05. Bản ghi Buổi 03 - PIP-VTO","fileId":"1b5yOPq6O5awkShsMgqrCybBBGNzof75O","type":"video"},{"name":"06. Sách: Clinical Applications of Mini-implants","fileId":"12tPaOz2R2cf8leMH14a_OkPlvVy6xTTc","type":"pdf"},{"name":"07. Bản ghi Buổi 4 - TMJ, Airways & 3D Ceph","fileId":"1uw_I8AT05mY2xx-LQt6TsvsDy7lMo98L","type":"video"},{"name":"08. Video 1 - Airways & TMJ","fileId":"1CTseUAfvPdjcW7IJEreO8MC7Ion_00nE","type":"video"},{"name":"09. Video 2 - Orthodontics & Airways","fileId":"1969bEpsd8Hg6hvRLGRseTMsxqVk4pgds","type":"video"},{"name":"10. Phân tích phim Sassouni bằng Audax Ceph","fileId":"103_WP8bCs8zGzwl4hN89QQKq_C-TigqUu9lcUBi8Jm8","type":"doc"}]},
+      {"id":"2025-05","code":"[2025-05]","title":"Neo gián tiếp, Lòi chân R, Hạng II góc cao","items":[{"name":"01. Bản ghi TSĐK#07 - Neo chặn gián tiếp","fileId":"1ELcutZx-tMBdC3BptaT6l1v0vd8v9moq","type":"video"},{"name":"02. Cách dán trên lâm sàng 01","fileId":"1wIjKdecbb8nZeC5ByAK_5E7JpoNOcuAi","type":"video"},{"name":"03. Cách dán trên lâm sàng 02","fileId":"1_uVkQGGfttoL69DkhRPPncpXt7VM4jVS","type":"video"},{"name":"04. Bản ghi TSĐK#08 - Lòi chân răng","fileId":"1cb83mJ0VRVhAfSvfGsNhMqpdVC_YOhFa","type":"video"},{"name":"05. Nghiên cứu về Bone Regeneration","fileId":"11sRSilOGijASjZib-v8rBvIGmPwHUKge","type":"pdf"},{"name":"06. Bản ghi TSĐK#09 - Vertical Dimension","fileId":"1b-by50-janBnThfNvhOWBVMizcmo8wdt","type":"video"},{"name":"07. Dựng trục răng cối đổ lưỡi (Discussion)","fileId":"1tHYjV5pAZ-pIIhxj51sGQX2N725twuG0","type":"video"},{"name":"08. Bản ghi TSĐK#10 - Active Vertical Control","fileId":"1ld8hjFmft-p-9fvDCr4REXtBRsm5lhiv","type":"video"},{"name":"09. High Angle Gummy Smile - Case AJODO","fileId":"1JQE3OS9Tye-tLntT8QBsOdsLEF_LDdyo","type":"pdf"}]},
+      {"id":"2025-06","code":"[2025-06]","title":"Biomechanics, MP nhai, KS Torque","items":[{"name":"01. Bản ghi TSĐK#11 - Sinh cơ học từ góc nhìn lâm sàng","fileId":"1Wk-WUF3oSZisCKryJFTu6xBq_cQnrXQE","type":"video"},{"name":"02. Biomechanics of Extra-alveolar Mini-implants","fileId":"134k5QmVsc_TGqVwYnltgdOjli2Xx_3FL","type":"pdf"},{"name":"03. Bản ghi TSĐK#12 - MIP-based Orthodontics","fileId":"1NffSY5wzuVru9jW7xJWLfXzaO7ce-dmh","type":"video"},{"name":"04. Bài báo MIP-based (J.H.Park)","fileId":"1ao2QGUeEKGSjHbJBPdCD7Fz1pnE7XDrI","type":"pdf"},{"name":"05. Bản ghi TSĐK#12A - Torque Control chỉnh nha lại","fileId":"16uvT6ZVxyjjNZoyoJFgaofhv-qKXf8yE","type":"video"},{"name":"06. Bản ghi TSĐK#14 - Chỉnh nha nghệ thuật","fileId":"1wQJWN3TW75htJYDU7XzRkxmcegoY19hL","type":"video"}]},
+      {"id":"2025-07","code":"[2025-07]","title":"Class III, Đóng khoảng, Nhổ lệch","items":[{"name":"01. Bản ghi TSĐK#15 - Pseudo CIII (Hạng III giả)","fileId":"1whNANmd9AV51RQhTMj6tL-lnJuTXN8TA","type":"video"},{"name":"02. Bản ghi TSĐK#16 - True Class III","fileId":"1EvxJokb9X9VIVXUOrVSabzimb1lMPwsS","type":"video"},{"name":"03. Bản ghi TSĐK#17 - Trục trặc đóng khoảng","fileId":"1eVjXYTA5KerRkf8FJu11uAC1QS590PQ6","type":"video"},{"name":"04. Reverse MEAW (Lý thuyết)","fileId":"15l5YLv4T1gG8rgXKe9s8l5zvBO1zgNB3","type":"video"},{"name":"05. Bẻ Reverse MEAW (Thực hành)","fileId":"1nOanoqqqHdcWPqhs5fbEZZlBrI2P10TP","type":"video"},{"name":"06. Bản ghi TSĐK#18 - Nhổ răng lệch bên","fileId":"15khyP289GYQzhL5zO3PL8WW1aF3V4pU3","type":"video"},{"name":"07. AJODO - Asymmetric Extraction","fileId":"1ds3Ii1DLPgZJvM414onHl9Z4KTTlpmbE","type":"pdf"}]},
+      {"id":"2025-09","code":"[2025-09]","title":"Điều trị sớm Class III","items":[{"name":"01. Bản ghi Recording - HVT9/2025 (TSĐK#19)","fileId":"1dyUI7HlGfkeSAQiP_4cVy6HU7sDzIWKU","type":"video"},{"name":"02. Tài liệu Mediafire HVT9-2025","fileId":"1C5UNKvbILh7o9b8qqY8HfTvNcsg6DXRj","type":"doc"}]},
+      {"id":"2025-11","code":"[2025-11]","title":"Di xa R3 biến chứng","items":[{"name":"01. Bản ghi Recording - HVT11/2025 (TSĐK#20)","fileId":"1M6CM4_C66Kiow8Np3zVoXM_vta1YYsUf","type":"video"},{"name":"02. Tài liệu Mediafire HVT11-2025","fileId":"1XLwfJr_1IIYHjnBoccRnwI_ylxwRLFV-","type":"doc"}]},
+      {"id":"2025-12","code":"[2025-12]","title":"Đóng khoảng Protocol tổng hợp","items":[{"name":"01. Bản ghi Recording - HVT12/2025 (TSĐK#21)","fileId":"1_qEjNeGTbFIN4TJNtuSSkTr7dlW8eXKw","type":"video"},{"name":"02. Tài liệu Mediafire HVT12-2025","fileId":"1ymvR-UNcP5XMbp1_MgR9umJqBFMkwpv-","type":"doc"}]},
+      {"id":"2026-01","code":"[2026-01]","title":"Nhổ răng hay không?","items":[{"name":"01. Bản ghi Recording - HVT1/2026 (TSĐK#22)","fileId":"1ojQgOTP5AmB7Ky2qxtvnLExCIgk5acRW","type":"video"},{"name":"02. Tài liệu Mediafire HVT1-2026","fileId":"1cKp2vCTghyk32dIMlNWO3_rwBgLKNgu7","type":"doc"}]},
+      {"id":"2026-02","code":"[2026-02]","title":"Di xa","items":[{"name":"01. Bản ghi Recording - HVT2/2026 (TSĐK#23)","fileId":"1j-4C7LiEDWeLVCf20e0O95ktMBGbz5Rq","type":"video"},{"name":"02. Tài liệu Mediafire HVT2-2026","fileId":"1Bd18r4STJTeHuKsC34xxSjwIQMOKcQu6","type":"doc"}]},
+      {"id":"2026-03","code":"[2026-03]","title":"Neo chặn lâm sàng","items":[{"name":"01. Bản ghi Recording HVT3/2026 (TSĐK#24)","fileId":"1nGmziwuovrXyuAZzsYb13kOs7V92IAW6","type":"video"},{"name":"02. Tài liệu Mediafire HVT3-2026","fileId":"1M40VsMVpbM7sEbi6bk9tfm2762dHe3Yi","type":"doc"}]},
+      {"id":"2026-04","code":"[2026-04]","title":"Deepbite - Khớp cắn sâu","items":[{"name":"01. Bản ghi Recording HVT4/2026 (TSĐK#25)","fileId":"1O3P-_MS0Fsl1al98hyIHeN3BJMwN7TwO","type":"video"},{"name":"02. Hướng dẫn làm Turbo","fileId":"1I08oqSb7-FqJXhkOg6wn_LlA4y526Df6","type":"doc"},{"name":"03. Tài liệu Mediafire HVT4-2026","fileId":"1eQxVnbP9XnfTM32wq6hDm6eUj6giJVgn","type":"doc"}]},
+      {"id":"2026-07","code":"[2026-07]","title":"Class II High Angle Openbite","items":[{"name":"01. Bản ghi Recording HVT7-2026","fileId":"1Ck0nBou1K4GFZBh6wQhqSBJNxYNYnUNx","type":"video"},{"name":"02. Tài liệu Mediafire HVT7-2026","fileId":"1hwN_Kkm6Z0oZNJntxkT0PBdrq2-8FxiA","type":"doc"}]},
+      {"id":"2026-08","code":"[2026-08]","title":"Class II Division 2","items":[{"name":"01. Bản ghi Recording HVT8-2026","fileId":"1XkTDyUZhI6LTte1DPAEHnP2Q100z93je","type":"video"},{"name":"02. Tài liệu Mediafire HVT8-2026","fileId":"1OZIUHPaNcPqth_n2ZI5y69V2_4flCw0S","type":"doc"}]}
+    ];
+
+    let currentUserEmail = '';
+    let currentAllowedList = [];
+    let currentSessionToken = '';
+    let currentUpgradeFeeRaw = 0;
     let selectedPackageAmount = 0;
     let selectedPackageName = '';
+    let resendCountdownInterval = null;
+    let heartbeatInterval = null;
+    let isCheckingSession = false;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isZalo = (ua.indexOf("Zalo") > -1) || (ua.indexOf("ZaloTheme") > -1);
+      var isFB = (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Messenger") > -1);
+      var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+
+      if ((isZalo || isFB) && isIOS) {
+        document.getElementById('iosInAppNotice').classList.remove('hidden');
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') triggerFastCheck();
+      });
+      window.addEventListener('focus', triggerFastCheck);
+      window.addEventListener('touchstart', triggerFastCheck, { passive: true });
+
+      const savedEmail = localStorage.getItem('drthai_authenticated_email');
+      const savedToken = localStorage.getItem('drthai_session_token');
+      const cachedData = localStorage.getItem('drthai_user_cached_data');
+
+      if (savedEmail && savedToken && cachedData) {
+        try {
+          const parsed = JSON.parse(cachedData);
+          currentUserEmail = savedEmail;
+          currentSessionToken = savedToken;
+          applyUnlockedData(parsed, savedEmail);
+          
+          checkSessionImmediately(savedEmail, savedToken);
+          startSessionHeartbeat(savedEmail, savedToken);
+        } catch(e) {
+          renderLessons(LESSONS_DATA, true);
+        }
+      } else {
+        renderLessons(LESSONS_DATA, true);
+      }
+    });
+
+    function triggerFastCheck() {
+      if (currentUserEmail && currentSessionToken) {
+        checkSessionImmediately(currentUserEmail, currentSessionToken);
+      }
+    }
+
+    async function checkSessionImmediately(email, token) {
+      if (isCheckingSession) return;
+      isCheckingSession = true;
+      try {
+        const noCacheUrl = `${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}&sessionToken=${encodeURIComponent(token)}&_nocache=${Date.now()}`;
+        const res = await fetch(noCacheUrl);
+        const data = await res.json();
+
+        if (data && data.sessionRevoked) {
+          triggerSessionRevokedAction();
+        }
+      } catch(e) {
+      } finally {
+        isCheckingSession = false;
+      }
+    }
+
+    function triggerSessionRevokedAction() {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+      logoutOtpSession(false);
+      document.getElementById('sessionRevokedModal').classList.remove('hidden');
+    }
+
+    function dismissSessionRevokedModal() {
+      document.getElementById('sessionRevokedModal').classList.add('hidden');
+    }
 
     function promptUserBuyerInfo(amount, packageName) {
       selectedPackageAmount = amount;
       selectedPackageName = packageName;
+
       document.getElementById('infoModalPackageTitle').innerText = packageName.toUpperCase();
       document.getElementById('infoModalPackagePrice').innerText = amount.toLocaleString('vi-VN') + "đ";
       document.getElementById('buyerName').value = '';
       document.getElementById('buyerPhone').value = '';
       document.getElementById('buyerEmail').value = '';
       document.getElementById('buyerFormError').classList.add('hidden');
+
       document.getElementById('userInfoModal').classList.remove('hidden');
     }
 
@@ -270,7 +815,6 @@
       errEl.classList.add('hidden');
       closeUserInfoModal();
 
-      // Gửi ngầm xuống Google Sheet tổng
       try {
         const registerUrl = `${SCRIPT_API_URL}?action=register_buyer&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&packageName=${encodeURIComponent(selectedPackageName)}`;
         fetch(registerUrl).catch(e => {});
@@ -287,18 +831,475 @@
       document.getElementById('paymentModal').classList.remove('hidden');
     }
 
+    function openUpgradePaymentModal() {
+      const amount = currentUpgradeFeeRaw || 500000;
+      const email = currentUserEmail || "bacsi";
+      const shortUser = email.split('@')[0].toUpperCase();
+      const content = `NC ${shortUser}`;
+
+      document.getElementById('modalPackageBadge').innerText = "Nâng Cấp Combo Full";
+      document.getElementById('modalPackageTitle').innerText = "BÙ LÊN FULL COMBO";
+      document.getElementById('modalUpgradeAmount').innerText = amount.toLocaleString('vi-VN') + "đ";
+
+      const qrUrl = `https://img.vietqr.io/image/MB-4247666888-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(content)}&accountName=HKD%20DR.THAI%20ORTHO`;
+      document.getElementById('qrPaymentImg').src = qrUrl;
+
+      document.getElementById('paymentModal').classList.remove('hidden');
+    }
+
     function closePaymentModal() {
       document.getElementById('paymentModal').classList.add('hidden');
     }
 
-    function switchTab(tab) {
-      if (tab === 'free') {
-        document.getElementById('sectionFree').classList.remove('hidden');
-        document.getElementById('sectionPaid').classList.add('hidden');
-      } else {
-        document.getElementById('sectionFree').classList.add('hidden');
-        document.getElementById('sectionPaid').classList.remove('hidden');
+    async function checkKy02Status() {
+      const emailInput = document.getElementById('inputCheckKy02');
+      const email = emailInput.value.trim().toLowerCase();
+      const resultBox = document.getElementById('resultKy02Box');
+      const btn = document.getElementById('btnCheckKy02');
+
+      if (!email || !email.includes('@')) {
+        resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đúng định dạng Gmail.`;
+        return;
       }
+
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
+      resultBox.classList.remove('hidden');
+      resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 block";
+      resultBox.innerHTML = `<i class="fa-solid fa-rotate fa-spin"></i> Đang tra cứu danh sách Kỳ 02...`;
+
+      try {
+        const res = await fetch(`${SCRIPT_API_URL}?action=check_ky02&email=${encodeURIComponent(email)}&_nocache=${Date.now()}`);
+        const data = await res.json();
+
+        if (data.success && data.approved) {
+          resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 block";
+          resultBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> ${data.message}`;
+        } else {
+          resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 block";
+          resultBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1"></i> ${data.message}`;
+        }
+      } catch (err) {
+        resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Không thể kết nối tới Sheet Kỳ 02 lúc này. Vui lòng thử lại!`;
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Kiểm Tra";
+      }
+    }
+
+    async function requestEmailOtp() {
+      const emailInput = document.getElementById('inputUserEmail');
+      const email = (currentUserEmail || emailInput.value).trim().toLowerCase();
+      const statusEl = document.getElementById('authStatusMessage');
+      const btnSend = document.getElementById('btnSendOtp');
+
+      if (!email || !email.includes('@')) {
+        statusEl.innerHTML = `<span class="text-rose-700 font-bold"><i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đúng địa chỉ Gmail.</span>`;
+        return;
+      }
+
+      btnSend.disabled = true;
+      btnSend.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Gửi...`;
+      statusEl.innerHTML = `<span class="text-teal-800 font-bold"><i class="fa-solid fa-paper-plane"></i> Đang xác thực & gửi mã OTP đến ${email}...</span>`;
+
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 25000);
+
+        const res = await fetch(`${SCRIPT_API_URL}?action=send_otp&email=${encodeURIComponent(email)}&_nocache=${Date.now()}`, {
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        const data = await res.json();
+
+        if (data.success) {
+          currentUserEmail = email;
+          document.getElementById('stepEmailBlock').classList.add('hidden');
+          document.getElementById('stepOtpBlock').classList.remove('hidden');
+          statusEl.innerHTML = `<span class="text-teal-800 font-bold"><i class="fa-solid fa-circle-check"></i> Đã gửi mã OTP 6 số đến ${email}. Bác sĩ vui lòng kiểm tra hộp thư!</span>`;
+          startResendCountdown();
+        } else {
+          statusEl.innerHTML = `<span class="text-rose-700 font-bold"><i class="fa-solid fa-circle-xmark"></i> ${data.message || "Email chưa được phân quyền."}</span>`;
+          btnSend.disabled = false;
+          btnSend.innerText = "Gửi Mã";
+        }
+      } catch (err) {
+        currentUserEmail = email;
+        document.getElementById('stepEmailBlock').classList.add('hidden');
+        document.getElementById('stepOtpBlock').classList.remove('hidden');
+        statusEl.innerHTML = `<span class="text-amber-800 font-bold"><i class="fa-solid fa-circle-info"></i> Nếu đã nhận được mã OTP trong Gmail, vui lòng nhập mã bên dưới để mở khóa!</span>`;
+        startResendCountdown();
+      }
+    }
+
+    function startResendCountdown() {
+      let seconds = 60;
+      const btnResend = document.getElementById('btnResendOtp');
+      btnResend.disabled = true;
+      btnResend.classList.add('opacity-50', 'cursor-not-allowed');
+
+      if (resendCountdownInterval) clearInterval(resendCountdownInterval);
+      resendCountdownInterval = setInterval(() => {
+        seconds--;
+        if (seconds > 0) {
+          btnResend.innerText = `Gửi lại mã (${seconds}s)`;
+        } else {
+          clearInterval(resendCountdownInterval);
+          btnResend.disabled = false;
+          btnResend.innerText = "Gửi lại mã OTP";
+          btnResend.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+      }, 1000);
+    }
+
+    async function verifyEmailOtp() {
+      const rawInput = document.getElementById('inputUserOtp').value;
+      const otp = rawInput.replace(/[^0-9]/g, '').trim();
+      const statusEl = document.getElementById('authStatusMessage');
+      const btnVerify = document.getElementById('btnVerifyOtp');
+
+      if (!otp || otp.length !== 6) {
+        statusEl.innerHTML = `<span class="text-rose-700 font-bold"><i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đủ 6 chữ số mã OTP.</span>`;
+        return;
+      }
+
+      btnVerify.disabled = true;
+      btnVerify.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mở khóa...`;
+
+      try {
+        const res = await fetch(`${SCRIPT_API_URL}?action=verify_otp&email=${encodeURIComponent(currentUserEmail)}&otp=${encodeURIComponent(otp)}&_nocache=${Date.now()}`);
+        const data = await res.json();
+
+        if (data.success) {
+          currentSessionToken = data.sessionToken;
+          localStorage.setItem('drthai_authenticated_email', currentUserEmail);
+          localStorage.setItem('drthai_session_token', data.sessionToken);
+          localStorage.setItem('drthai_user_cached_data', JSON.stringify(data));
+
+          applyUnlockedData(data, currentUserEmail);
+          startSessionHeartbeat(currentUserEmail, data.sessionToken);
+        } else {
+          statusEl.innerHTML = `<span class="text-rose-700 font-bold"><i class="fa-solid fa-circle-xmark"></i> ${data.message || "Mã OTP không đúng."}</span>`;
+        }
+      } catch (err) {
+        statusEl.innerHTML = `<span class="text-rose-700 font-bold"><i class="fa-solid fa-circle-xmark"></i> Lỗi xác thực OTP. Vui lòng thử lại.</span>`;
+      } finally {
+        btnVerify.disabled = false;
+        btnVerify.innerText = "Mở Khóa";
+      }
+    }
+
+    function startSessionHeartbeat(email, token) {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+      
+      heartbeatInterval = setInterval(async () => {
+        try {
+          const noCacheUrl = `${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(email)}&sessionToken=${encodeURIComponent(token)}&_nocache=${Date.now()}`;
+          const res = await fetch(noCacheUrl);
+          const data = await res.json();
+
+          if (data && data.sessionRevoked) {
+            triggerSessionRevokedAction();
+          }
+        } catch(e) {}
+      }, 2500);
+    }
+
+    function applyUnlockedData(data, email) {
+      document.getElementById('stepEmailBlock').classList.add('hidden');
+      document.getElementById('stepOtpBlock').classList.add('hidden');
+      document.getElementById('authSuccessBlock').classList.remove('hidden');
+      document.getElementById('authenticatedEmailText').innerText = email;
+      document.getElementById('authStatusMessage').innerHTML = `<span class="text-teal-800 font-bold"><i class="fa-solid fa-circle-check"></i> Đã mở khóa bảo mật thành công!</span>`;
+
+      document.getElementById('vipFolderDropdown').classList.remove('hidden');
+
+      const accessedFolders = data.folders || [];
+      const countEl = document.getElementById('lessonCountBadge');
+      
+      const upgradeBox = document.getElementById('upgradeBox');
+      const upgradeStatusText = document.getElementById('upgradeStatusText');
+      const upgradeMissingBadge = document.getElementById('upgradeMissingBadge');
+      const retailPriceText = document.getElementById('retailPriceText');
+      const upgradeFeeTag = document.getElementById('upgradeFeeTag');
+      const savedAmountBadge = document.getElementById('savedAmountBadge');
+
+      if (accessedFolders.length > 0) {
+        const accessedIds = accessedFolders.map(f => f.folderId);
+        currentAllowedList = LESSONS_DATA.filter(item => {
+          return accessedFolders.some(f => f.folderName.includes(item.code) || accessedIds.includes(item.folderId));
+        });
+
+        if (currentAllowedList.length === 0) {
+          currentAllowedList = LESSONS_DATA.slice(0, accessedFolders.length);
+        }
+
+        countEl.innerText = `${currentAllowedList.length}/14 Đã mở`;
+        renderLessons(currentAllowedList, false);
+
+        const totalMonths = 14;
+        const purchased = currentAllowedList.length;
+        const missing = Math.max(0, totalMonths - purchased);
+        const retailTotal = missing * 500000;
+        const paidAmount = purchased * 500000;
+        let upgradeFee = 0;
+
+        if (purchased >= 14) {
+          upgradeFee = 0;
+        } else if (purchased < 5) {
+          upgradeFee = Math.max(0, 4900000 - paidAmount);
+        } else if (purchased >= 5 && purchased <= 7) {
+          upgradeFee = 2000000;
+        } else if (purchased >= 8 && purchased <= 10) {
+          upgradeFee = 1500000;
+        } else if (purchased >= 11 && purchased <= 12) {
+          upgradeFee = 1000000;
+        } else if (purchased === 13) {
+          upgradeFee = 500000;
+        }
+
+        currentUpgradeFeeRaw = upgradeFee;
+        const savedAmount = Math.max(0, retailTotal - upgradeFee);
+        const savedPercent = retailTotal > 0 ? Math.round((savedAmount / retailTotal) * 100) : 0;
+
+        if (missing > 0) {
+          upgradeBox.classList.remove('hidden');
+          upgradeStatusText.innerText = `Đã sở hữu: ${purchased}/${totalMonths} Folder`;
+          upgradeMissingBadge.innerText = `Còn thiếu: ${missing} Folder`;
+          retailPriceText.innerText = `${retailTotal.toLocaleString('vi-VN')}đ (${missing} kỳ × 500k)`;
+          upgradeFeeTag.innerText = `${upgradeFee.toLocaleString('vi-VN')}đ`;
+          savedAmountBadge.innerHTML = `<i class="fa-solid fa-circle-check"></i> Tiết kiệm: ${savedAmount.toLocaleString('vi-VN')}đ (${savedPercent}%)`;
+        } else {
+          upgradeBox.classList.add('hidden');
+        }
+      }
+    }
+
+    function copyText(text, msg) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        document.getElementById('toastMsg').innerText = msg;
+        toast.classList.remove('opacity-0');
+        toast.classList.add('opacity-100');
+        setTimeout(() => {
+          toast.classList.remove('opacity-100');
+          toast.classList.add('opacity-0');
+        }, 2200);
+      });
+    }
+
+    function resetOtpStep() {
+      document.getElementById('stepOtpBlock').classList.add('hidden');
+      document.getElementById('stepEmailBlock').classList.remove('hidden');
+      document.getElementById('inputUserOtp').value = '';
+      const btnSend = document.getElementById('btnSendOtp');
+      btnSend.disabled = false;
+      btnSend.innerText = "Gửi Mã";
+      if (resendCountdownInterval) clearInterval(resendCountdownInterval);
+    }
+
+    function logoutOtpSession(clearAuthEmail = true) {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+      if (clearAuthEmail) {
+        localStorage.removeItem('drthai_authenticated_email');
+        currentUserEmail = '';
+        document.getElementById('inputUserEmail').value = '';
+      }
+      localStorage.removeItem('drthai_session_token');
+      localStorage.removeItem('drthai_user_cached_data');
+      currentSessionToken = '';
+      currentAllowedList = [];
+      document.getElementById('authSuccessBlock').classList.add('hidden');
+      document.getElementById('stepOtpBlock').classList.add('hidden');
+      document.getElementById('stepEmailBlock').classList.remove('hidden');
+      document.getElementById('upgradeBox').classList.add('hidden');
+      document.getElementById('vipFolderDropdown').classList.add('hidden');
+      document.getElementById('authStatusMessage').innerHTML = `<i class="fa-solid fa-shield-halved text-teal-700"></i> Mỗi thời điểm chỉ duy nhất 1 thiết bị hoạt động.`;
+      document.getElementById('lessonCountBadge').innerText = `14 Chuyên đề`;
+      const btnSend = document.getElementById('btnSendOtp');
+      btnSend.disabled = false;
+      btnSend.innerText = "Gửi Mã";
+      if (resendCountdownInterval) clearInterval(resendCountdownInterval);
+      renderLessons(LESSONS_DATA, true);
+    }
+
+    function quickFilterTag(keyword) {
+      const input = document.getElementById('lessonSearchInput');
+      input.value = keyword;
+      handleSearchLesson();
+    }
+
+    function clearSearchInput() {
+      const input = document.getElementById('lessonSearchInput');
+      input.value = '';
+      handleSearchLesson();
+    }
+
+    function handleSearchLesson() {
+      const input = document.getElementById('lessonSearchInput');
+      const kw = input.value.trim().toLowerCase();
+      const clearBtn = document.getElementById('btnClearSearch');
+      const listToFilter = currentAllowedList.length > 0 ? currentAllowedList : LESSONS_DATA;
+      const isLocked = currentAllowedList.length === 0;
+
+      if (kw) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+        renderLessons(listToFilter, isLocked);
+        return;
+      }
+
+      const filtered = listToFilter.filter(lesson => {
+        const matchTitle = lesson.title.toLowerCase().includes(kw) || lesson.code.toLowerCase().includes(kw);
+        const matchSub = lesson.items.some(it => it.name.toLowerCase().includes(kw));
+        return matchTitle || matchSub;
+      });
+
+      renderLessons(filtered, isLocked);
+    }
+
+    function renderLessons(list, isLocked = false) {
+      const container = document.getElementById('lessonList');
+      if (list.length === 0) {
+        container.innerHTML = `<div class="card-elevated p-4 text-center text-sm font-bold text-slate-600 rounded-2xl border border-slate-300">
+          <i class="fa-solid fa-folder-open text-slate-400 text-2xl mb-1 block"></i>
+          Không tìm thấy bài giảng chứa từ khóa này.
+        </div>`;
+        return;
+      }
+
+      container.innerHTML = list.map((item) => {
+        return `
+          <div class="card-elevated p-3.5 sm:p-4 rounded-2xl border-2 border-slate-200/90 hover:border-teal-600 transition duration-150 space-y-1">
+            <button onclick="${isLocked ? "alert('Tài khoản này chưa xác thực mã OTP hoặc chưa được cấp quyền. Vui lòng nhận mã OTP để mở khóa!')" : `handleOpenLessonCheck('${item.id}')`}" class="w-full flex items-center justify-between text-left group">
+              <div class="flex items-center gap-2.5 min-w-0 pr-2">
+                <span class="px-2.5 py-1 rounded-lg bg-rose-600 text-white font-mono text-xs shrink-0 font-extrabold shadow-xs">${item.code}</span>
+                <div class="truncate">
+                  <div class="text-sm sm:text-base text-slate-900 group-hover:text-teal-800 font-extrabold truncate">${item.title}</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0 text-slate-500 group-hover:text-teal-700">
+                <span class="text-xs font-bold">${item.items.length} tệp</span>
+                <i class="fa-solid ${isLocked ? 'fa-lock text-slate-400' : 'fa-chevron-right text-xs group-hover:translate-x-0.5 transition-transform'}"></i>
+              </div>
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function handleOpenLessonCheck(lessonId) {
+      if (currentUserEmail && currentSessionToken) {
+        try {
+          const noCacheUrl = `${SCRIPT_API_URL}?action=check_session&email=${encodeURIComponent(currentUserEmail)}&sessionToken=${encodeURIComponent(currentSessionToken)}&_nocache=${Date.now()}`;
+          const res = await fetch(noCacheUrl);
+          const data = await res.json();
+          if (data && data.sessionRevoked) {
+            triggerSessionRevokedAction();
+            return;
+          }
+        } catch(e) {}
+      }
+      openLessonModal(lessonId);
+    }
+
+    function openLessonModal(lessonId) {
+      const lesson = LESSONS_DATA.find(l => l.id === lessonId);
+      if (!lesson) return;
+
+      document.getElementById('modalLessonCode').innerText = lesson.code;
+      document.getElementById('modalLessonTitle').innerText = lesson.title;
+
+      const subListEl = document.getElementById('modalSubItemList');
+      subListEl.innerHTML = lesson.items.map((it) => {
+        let icon = 'fa-solid fa-play text-rose-600';
+        let badge = 'bg-rose-100 text-rose-800 border-rose-300';
+
+        if (it.type === 'pdf') { 
+          icon = 'fa-solid fa-file-pdf text-red-600'; 
+          badge = 'bg-red-100 text-red-800 border-red-300'; 
+        } else if (it.type === 'doc') { 
+          icon = 'fa-solid fa-file-word text-blue-600'; 
+          badge = 'bg-blue-100 text-blue-800 border-blue-200'; 
+        }
+
+        const driveDeepLink = `https://drive.google.com/file/d/${it.fileId}/view?usp=sharing`;
+
+        return `
+          <a href="${driveDeepLink}" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-2xl bg-white hover:bg-teal-50 border-2 border-slate-200 hover:border-teal-600 flex items-center justify-between gap-3 transition group shadow-sm">
+            <div class="flex items-center gap-3 min-w-0 pr-1">
+              <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center shrink-0 border border-slate-200">
+                <i class="${icon} text-base"></i>
+              </div>
+              <div class="truncate">
+                <div class="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-teal-900 truncate">${it.name}</div>
+                <div class="text-[11px] sm:text-xs text-slate-600 flex items-center gap-1.5 mt-0.5 font-medium">
+                  <span class="px-2 py-0.2 rounded border font-mono font-black uppercase text-[10px] ${badge}">${it.type}</span>
+                  <span>• Mở bằng App Drive &rarr;</span>
+                </div>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-400 group-hover:text-teal-700 text-xs shrink-0"></i>
+          </a>
+        `;
+      }).join('');
+
+      document.getElementById('lessonModal').classList.remove('hidden');
+    }
+
+    function closeLessonModal() {
+      document.getElementById('lessonModal').classList.add('hidden');
+    }
+
+    function switchTab(tab) {
+      const freeSec = document.getElementById('sectionFree');
+      const paidSec = document.getElementById('sectionPaid');
+      const btnFree = document.getElementById('tabBtnFree');
+      const btnPaid = document.getElementById('tabBtnPaid');
+
+      if (tab === 'free') {
+        freeSec.classList.remove('hidden');
+        paidSec.classList.add('hidden');
+        btnFree.className = 'py-2.5 px-3 rounded-xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition bg-teal-700 text-white shadow-md';
+        btnPaid.className = 'py-2.5 px-3 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition text-slate-700 hover:text-rose-700';
+      } else {
+        freeSec.classList.add('hidden');
+        paidSec.classList.remove('hidden');
+        btnPaid.className = 'py-2.5 px-3 rounded-xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition bg-rose-600 text-white shadow-md';
+        btnFree.className = 'py-2.5 px-3 rounded-lg font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition text-slate-700 hover:text-teal-700';
+      }
+    }
+
+    const targetDate = new Date('2026-08-31T20:30:00+07:00').getTime();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+        document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
+      } else {
+        document.getElementById('cd-days').innerText = '00';
+        document.getElementById('cd-hours').innerText = '00';
+        document.getElementById('cd-minutes').innerText = '00';
+        document.getElementById('cd-seconds').innerText = '00';
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function copySiteLink() {
+      copyText(window.location.href, 'Đã sao chép link trang!');
     }
   </script>
 </body>
