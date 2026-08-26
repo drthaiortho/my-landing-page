@@ -815,7 +815,7 @@
       errEl.classList.add('hidden');
       closeUserInfoModal();
 
-      // GỬI NGẨM XUỐNG SHEET TỔNG BẰNG KỸ THUẬT IMAGE BEACON (ĐẢM BẢO KHÔNG BỊ CHẶN CORS)
+      // GỬI NGẨM XUỐNG SHEET TỔNG BẰNG IMAGE BEACON
       try {
         const registerUrl = `${SCRIPT_API_URL}?action=register_buyer&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&packageName=${encodeURIComponent(selectedPackageName)}&_t=${Date.now()}`;
         const img = new Image();
