@@ -37,6 +37,12 @@
     .search-glow-contrast {
       box-shadow: 0 4px 16px -2px rgba(13, 148, 136, 0.25), 0 2px 6px -1px rgba(0, 0, 0, 0.06);
     }
+
+    @media print {
+      body * { visibility: hidden; }
+      #captureReceiptCard, #captureReceiptCard * { visibility: visible; }
+      #captureReceiptCard { position: absolute; left: 0; top: 0; width: 100%; border: none !important; box-shadow: none !important; }
+    }
   </style>
 
   <!-- KỸ THUẬT AUTO-ESCAPE ZALO CHO ANDROID -->
@@ -56,16 +62,13 @@
 </head>
 <body class="bg-[#eef2f6] text-slate-800 min-h-screen font-sans antialiased p-3.5 sm:p-6 selection:bg-teal-700 selection:text-white">
 
-  <!-- POPUP THANH TOÁN MÃ QR VIETQR (DÙNG CHUNG CHO KHÁCH MỚI & NÂNG CẤP) -->
+  <!-- POPUP THANH TOÁN MÃ QR VIETQR -->
   <div id="paymentModal" class="hidden fixed inset-0 bg-slate-950/85 z-[9999999] p-3.5 sm:p-4 flex items-center justify-center backdrop-blur-sm overflow-y-auto">
     <div class="bg-white border-2 border-rose-400 rounded-3xl p-4 sm:p-5 max-w-sm w-full space-y-3.5 shadow-2xl relative my-auto">
-      
-      <!-- Nút Đóng -->
       <button onclick="closePaymentModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center font-bold">
         <i class="fa-solid fa-xmark text-sm"></i>
       </button>
 
-      <!-- Tiêu đề -->
       <div class="text-center pt-1 pr-6">
         <span id="modalPackageBadge" class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-black uppercase tracking-wider border border-rose-200">
           Thanh Toán Gói Học
@@ -73,7 +76,6 @@
         <h3 id="modalPackageTitle" class="text-base sm:text-lg font-black text-slate-900 mt-1">THANH TOÁN KÍCH HOẠT</h3>
       </div>
 
-      <!-- Khung Mã QR VietQR Tự Động Theo Tài Khoản MB -->
       <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-center space-y-2">
         <div class="w-44 h-44 mx-auto bg-white p-1 rounded-xl shadow-xs border border-slate-200 flex items-center justify-center">
           <img id="qrPaymentImg" src="" alt="Mã QR Chuyển Khoản" class="w-full h-full object-contain rounded-lg">
@@ -81,7 +83,6 @@
         <p class="text-[11px] text-slate-600 font-medium">Mở App Ngân hàng &rarr; Quét mã QR <br><span class="text-teal-700 font-bold">(Số tiền & Nội dung đã được tự động điền sẵn)</span></p>
       </div>
 
-      <!-- Chi tiết tài khoản nhận -->
       <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 text-xs">
         <div class="flex justify-between items-center pb-1.5 border-b border-slate-200">
           <span class="text-slate-500 font-medium">Số tiền thanh toán:</span>
@@ -106,7 +107,6 @@
         </div>
       </div>
 
-      <!-- Hướng dẫn & Gửi bill Zalo -->
       <div class="space-y-2.5">
         <div class="p-2.5 bg-amber-50 rounded-xl border border-amber-200 text-[11px] text-amber-900 leading-relaxed space-y-1">
           <div class="font-bold flex items-center gap-1">
@@ -122,11 +122,10 @@
           <span>Gửi Bill Qua Zalo Kích Hoạt</span>
         </a>
       </div>
-
     </div>
   </div>
 
-  <!-- MODAL BỊ ĐĂNG XUẤT THIẾT BỊ KHÁC -->
+  <!-- MODAL BỊ ĐĂNG XUẤT -->
   <div id="sessionRevokedModal" class="hidden fixed inset-0 bg-slate-950/85 z-[9999999] p-4 flex items-center justify-center backdrop-blur-sm">
     <div class="bg-white border-2 border-rose-500 rounded-3xl p-5 max-w-sm w-full text-center space-y-4 shadow-2xl">
       <div class="w-16 h-16 mx-auto rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-3xl border-2 border-rose-300">
@@ -144,7 +143,7 @@
     </div>
   </div>
 
-  <!-- OVERLAY SAFARI / CHROME TRÊN IPHONE -->
+  <!-- OVERLAY IOS -->
   <div id="iosInAppNotice" class="hidden fixed inset-0 bg-slate-900/90 z-[999999] p-6 flex flex-col justify-between text-center backdrop-blur-md text-white">
     <div class="flex justify-end pr-2 pt-1">
       <div class="text-amber-400 text-right space-y-1">
@@ -158,19 +157,7 @@
       </div>
       <div class="space-y-1.5">
         <h3 class="text-base font-extrabold text-white uppercase">Mở bằng Safari / Trình duyệt ngoài</h3>
-        <p class="text-xs text-slate-300 leading-relaxed">
-          Bác sĩ đang mở trang qua trình duyệt phụ của <b>Zalo</b> nên không tự kết nối được với ứng dụng Google Drive.
-        </p>
-      </div>
-      <div class="p-3 bg-slate-800 border border-slate-700 rounded-xl text-left space-y-2 text-xs text-slate-200">
-        <div class="flex items-center gap-2">
-          <span class="w-5 h-5 rounded-full bg-teal-400 text-slate-950 font-bold flex items-center justify-center text-[11px] shrink-0">1</span>
-          <span>Bấm biểu tượng <b>dấu 3 chấm (...)</b> ở góc trên bên phải.</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="w-5 h-5 rounded-full bg-teal-400 text-slate-950 font-bold flex items-center justify-center text-[11px] shrink-0">2</span>
-          <span>Chọn <b>"Mở bằng trình duyệt"</b> (Safari hoặc Chrome).</span>
-        </div>
+        <p class="text-xs text-slate-300 leading-relaxed">Bác sĩ đang mở trang qua trình duyệt phụ của <b>Zalo</b> nên không tự kết nối được với ứng dụng Google Drive.</p>
       </div>
     </div>
     <div>
@@ -283,62 +270,17 @@
         </div>
       </div>
 
-      <div class="card-elevated border border-slate-300/80 rounded-2xl p-4 space-y-3">
-        <div class="flex items-center justify-between">
-          <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-            <i class="fa-solid fa-fire text-amber-500 text-base"></i> Top bài giảng được xem nhiều nhất
-          </h3>
-          <a href="https://www.youtube.com/@drthai-ortho" target="_blank" rel="noopener noreferrer" class="text-xs sm:text-sm text-teal-700 hover:underline font-extrabold">YouTube &rarr;</a>
-        </div>
-        
-        <div class="space-y-2.5">
-          <a href="https://www.youtube.com/watch?v=jPuLbqqYj_w" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-50 hover:bg-teal-50/60 border border-slate-200 rounded-xl flex items-start justify-between gap-2.5 transition group shadow-xs">
-            <div class="flex items-start gap-2.5 min-w-0">
-              <span class="px-2 py-0.5 rounded bg-amber-500 text-white font-extrabold text-[10px] sm:text-xs mt-0.5 shrink-0 shadow-xs">Top 1</span>
-              <div class="truncate">
-                <div class="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-teal-700 transition-colors truncate">Webinar: Điều trị cười hở lợi thực chiến</div>
-                <div class="text-xs text-slate-500 truncate mt-0.5">Chẩn đoán, chọn khí cụ & cơ chế kéo lùi/đánh lún</div>
-              </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-slate-400 text-xs mt-1 shrink-0"></i>
-          </a>
-
-          <a href="https://youtu.be/yUPIvt3xS30" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-50 hover:bg-teal-50/60 border border-slate-200 rounded-xl flex items-start justify-between gap-2.5 transition group shadow-xs">
-            <div class="flex items-start gap-2.5 min-w-0">
-              <span class="px-2 py-0.5 rounded bg-teal-700 text-white font-extrabold text-[10px] sm:text-xs mt-0.5 shrink-0 shadow-xs">Top 2</span>
-              <div class="truncate">
-                <div class="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-teal-700 transition-colors truncate">TÂM SỰ ĐÊM KHUYA #04 – Class II Venugopal</div>
-                <div class="text-xs text-slate-500 truncate mt-0.5">Class II Correction theo triết lý Venugopal</div>
-              </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-slate-400 text-xs mt-1 shrink-0"></i>
-          </a>
-
-          <a href="https://youtu.be/Qlo-nEa3ZsA" target="_blank" rel="noopener noreferrer" class="p-3 bg-slate-50 hover:bg-rose-50/60 border border-slate-200 rounded-xl flex items-start justify-between gap-2.5 transition group shadow-xs">
-            <div class="flex items-start gap-2.5 min-w-0">
-              <span class="px-2 py-0.5 rounded bg-rose-600 text-white font-extrabold text-[10px] sm:text-xs mt-0.5 shrink-0 shadow-xs">Top 3</span>
-              <div class="truncate">
-                <div class="font-bold text-slate-900 text-xs sm:text-sm group-hover:text-rose-700 transition-colors truncate">TÂM SỰ ĐÊM KHUYA #05 – Chỉnh nha lại</div>
-                <div class="text-xs text-slate-500 truncate mt-0.5">Kinh nghiệm xử lý các ca điều trị thất bại</div>
-              </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square text-slate-400 text-xs mt-1 shrink-0"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- BẢNG CHỌN GÓI CHO KHÁCH MỚI (THAY THẾ NÚT CŨ) -->
+      <!-- BẢNG CHỌN GÓI CHO KHÁCH MỚI -->
       <div class="card-elevated border-2 border-rose-400 rounded-3xl p-4 space-y-3.5 bg-gradient-to-b from-rose-50/40 via-white to-white">
         <div class="text-center space-y-1">
           <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-black uppercase tracking-wider border border-rose-200">
             Dành Cho Bác Sĩ Mới
           </span>
           <h3 class="text-base sm:text-lg font-black text-slate-900">ĐĂNG KÝ HỘI VIÊN VIP CHÍNH THỨC</h3>
-          <p class="text-xs text-slate-600 font-medium">Chọn gói phù hợp để nhận ngay quyền lợi truy cập lên đến 03 năm</p>
+          <p class="text-xs text-slate-600 font-medium">Chọn gói phù hợp để nhận ngay quyền lợi truy cập 3 năm</p>
         </div>
 
         <div class="grid grid-cols-1 gap-2.5">
-          <!-- Gói 1: Mua lẻ -->
           <div class="p-3 rounded-2xl bg-white border-2 border-slate-200 hover:border-teal-600 transition flex items-center justify-between gap-2 shadow-xs">
             <div>
               <div class="text-xs font-black text-slate-900 uppercase">1. Mua lẻ từng tháng</div>
@@ -350,7 +292,6 @@
             </button>
           </div>
 
-          <!-- Gói 2: Combo 2025 -->
           <div class="p-3 rounded-2xl bg-white border-2 border-amber-300 hover:border-amber-500 transition flex items-center justify-between gap-2 shadow-xs">
             <div>
               <div class="flex items-center gap-1.5">
@@ -365,7 +306,6 @@
             </button>
           </div>
 
-          <!-- Gói 3: Full Combo -->
           <div class="p-3 rounded-2xl bg-gradient-to-r from-rose-50 to-amber-50 border-2 border-rose-400 hover:border-rose-600 transition flex items-center justify-between gap-2 shadow-sm">
             <div>
               <div class="flex items-center gap-1.5">
@@ -448,7 +388,7 @@
         </div>
       </div>
 
-      <!-- WIDGET 3: THẺ XỔ XUỐNG BẢN GHI CÁC KỲ HỌP ĐỌC SÁCH BÁO (CHỈ HỘI VIÊN CHÍNH THỨC MỚI MỞ) -->
+      <!-- WIDGET 3: THẺ XỔ XUỐNG BẢN GHI (CHỈ HỘI VIÊN CHÍNH THỨC) -->
       <details id="vipFolderDropdown" class="group card-elevated border-2 border-teal-600 rounded-2xl overflow-hidden transition hidden">
         <summary class="flex items-center justify-between p-3.5 cursor-pointer select-none bg-gradient-to-r from-teal-50 via-white to-white">
           <div class="flex items-center space-x-3.5 min-w-0 pr-2">
@@ -670,7 +610,6 @@
   <!-- POPUP BẢN GHI -->
   <div id="lessonModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-3.5 sm:p-4 hidden">
     <div class="bg-white border-2 border-slate-300 w-full max-w-md rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]">
-      
       <div class="p-4 bg-slate-100 border-b border-slate-200 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2.5 min-w-0 pr-2">
           <div class="w-9 h-9 rounded-xl bg-teal-700 text-white flex items-center justify-center text-base shadow-sm shrink-0">
@@ -698,12 +637,11 @@
           Đóng cửa sổ
         </button>
       </div>
-
     </div>
   </div>
 
   <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-teal-700 text-white font-black px-4 py-2 rounded-full text-xs sm:text-sm shadow-2xl transition duration-300 opacity-0 pointer-events-none z-50">
-    <i class="fa-solid fa-check mr-1"></i> <span id="toastMsg">Đã sao chép link trang!</span>
+    <i class="fa-solid fa-check mr-1"></i> <span id="toastMsg">Đã sao chép!</span>
   </div>
 
   <!-- SCRIPT API & LMS CONTROLLER -->
@@ -805,7 +743,6 @@
       document.getElementById('sessionRevokedModal').classList.add('hidden');
     }
 
-    // GỌI QR THANH TOÁN CHO KHÁCH MỚI
     function openNewUserPayment(amount, packageName) {
       document.getElementById('modalPackageBadge').innerText = "Đăng Ký Gói Mới";
       document.getElementById('modalPackageTitle').innerText = packageName.toUpperCase();
@@ -818,7 +755,6 @@
       document.getElementById('paymentModal').classList.remove('hidden');
     }
 
-    // GỌI QR NÂNG CẤP CHO HỘI VIÊN CŨ
     function openUpgradePaymentModal() {
       const amount = currentUpgradeFeeRaw || 500000;
       const email = currentUserEmail || "bacsi";
@@ -839,7 +775,6 @@
       document.getElementById('paymentModal').classList.add('hidden');
     }
 
-    // KIỂM TRA EMAIL DUYỆT KỲ 02
     async function checkKy02Status() {
       const emailInput = document.getElementById('inputCheckKy02');
       const email = emailInput.value.trim().toLowerCase();
@@ -1003,7 +938,6 @@
       document.getElementById('authenticatedEmailText').innerText = email;
       document.getElementById('authStatusMessage').innerHTML = `<span class="text-teal-800 font-bold"><i class="fa-solid fa-circle-check"></i> Đã mở khóa bảo mật thành công!</span>`;
 
-      // HIỂN THỊ THẺ XỔ XUỐNG KHI ĐÃ LÀ HỘI VIÊN CHÍNH THỨC
       document.getElementById('vipFolderDropdown').classList.remove('hidden');
 
       const accessedFolders = data.folders || [];
