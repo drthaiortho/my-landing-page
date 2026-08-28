@@ -677,7 +677,8 @@
 
   <!-- SCRIPT API & LMS CONTROLLER -->
   <script>
-    const SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbx-J_8QG8CWIW-Y-kNc2eR5q888DKEDCVLkP6RxDD266_t1KwNGTxjSfoKMLy6F1CeiqQ/exec";
+    const SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbx0bPlupA2_lWC_7-fICh_lJ-gvmXfRY9LF2OA8K2qbsSDCDBpuV6zo4RD9H3ZNkVhO/exec";
+    const SCRIPT_KY02_URL = "https://script.google.com/macros/s/AKfycbx0bPlupA2_lWC_7-fICh_lJ-gvmXfRY9LF2OA8K2qbsSDCDBpuV6zo4RD9H3ZNkVhO/exe";
 
     const LESSONS_DATA = [
       {"id":"2025-02","code":"[2025-02]","title":"Andrews 6 Keys, Mắc cài, 3Shape","items":[{"name":"01. Bản ghi B1 - Andrews 6 Keys Part I","fileId":"1Ddv1VrAglf1fboqYj5OdUZDvE-I3qGR4","type":"video"},{"name":"02. GS Nanda chữa CII Div 2 (Tài liệu)","fileId":"1sKZQOskWIJsvYdcYboJsWTjtVXsieGNK","type":"pdf"},{"name":"03. Bản ghi B2 - Andrews 6 Keys Part II","fileId":"1JRAVvmtTaCbkzVkMigjzfOJvLoRQHrtw","type":"video"},{"name":"04. Bản ghi B3 - Thông số mắc cài","fileId":"1-aQUVX3rOyE_utQPDwmS7dKbEnn_RUgn","type":"video"},{"name":"05. Bending đóng khe thưa","fileId":"1GaQfM5wrJIJGw_m6tSePgmbH8O-9blOg","type":"video"},{"name":"06. Bẻ Torque","fileId":"1FWq0al8X4Z7YD32_DZAmt3XFSo3gfnt1","type":"video"},{"name":"07. Đường hướng dẫn dây cung","fileId":"1LAYcUI2R9o1TGcBNqzDRBI2Ias5AzFSB","type":"video"},{"name":"08. KT bẻ torque 4 R cửa GIÁN TIẾП","fileId":"1w1HuJrmxaGbNRgRtFOgesoGdjILLH-vm","type":"video"},{"name":"09. Torque loop","fileId":"1WIXCFvCQv1SaDxVsoZFWkLJBry1WaEDG","type":"video"},{"name":"10. Bản ghi B4 - 3Shape Ortho Part I","fileId":"1w4pGqtgO7PrfUVtaYd8LZU8fvEPbN7dh","type":"video"},{"name":"11. Bản ghi Buổi 5 - 3Shape Part II","fileId":"1p8Uh6tf9-goCGQo1-8cWnYH54-I0-Z3k","type":"video"},{"name":"12. Bản ghi B6 - 3Shape Part III","fileId":"1ufm0KJtp-prvXPdE6LQhAjtfhfCV4nWN","type":"video"},{"name":"13. Transverse Diagnosis CBCT","fileId":"1b_ehDlGChRtNH6w_eFQGNe-QvS02j3cL","type":"video"},{"name":"14. TPA biến đổi / Sáng tạo khí cụ","fileId":"13j1UHg6IS6ImIrNGpPVfNw4rYDpBeDix","type":"video"},{"name":"15. Hướng dẫn cắm vis","fileId":"1XdBRdNEouzrOya9nD6OEnZ3FBNA3h-l9","type":"video"},{"name":"16. Sách & Tài liệu Mediafire HVT2","fileId":"12V0SYri_GweoZ8f1LIp8qCpo7NTyawjF","type":"doc"}]},
@@ -848,43 +849,43 @@
     }
 
     async function checkKy02Status() {
-      const emailInput = document.getElementById('inputCheckKy02');
-      const email = emailInput.value.trim().toLowerCase();
-      const resultBox = document.getElementById('resultKy02Box');
-      const btn = document.getElementById('btnCheckKy02');
+  const emailInput = document.getElementById('inputCheckKy02');
+  const email = emailInput.value.trim().toLowerCase();
+  const resultBox = document.getElementById('resultKy02Box');
+  const btn = document.getElementById('btnCheckKy02');
 
-      if (!email || !email.includes('@')) {
-        resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
-        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đúng định dạng Gmail.`;
-        return;
-      }
+  if (!email || !email.includes('@')) {
+    resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+    resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đúng định dạng Gmail.`;
+    return;
+  }
 
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
-      resultBox.classList.remove('hidden');
-      resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 block";
-      resultBox.innerHTML = `<i class="fa-solid fa-rotate fa-spin"></i> Đang tra cứu danh sách Kỳ 02...`;
+  btn.disabled = true;
+  btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
+  resultBox.classList.remove('hidden');
+  resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 block";
+  resultBox.innerHTML = `<i class="fa-solid fa-rotate fa-spin"></i> Đang tra cứu danh sách Kỳ 02...`;
 
-      try {
-        const res = await fetch(`${SCRIPT_API_URL}?action=check_ky02&email=${encodeURIComponent(email)}&_nocache=${Date.now()}`);
-        const data = await res.json();
+  try {
+    // Gọi trực tiếp đến Apps Script của Sheet Kỳ 02
+    const res = await fetch(`${https://script.google.com/macros/s/AKfycbx0bPlupA2_lWC_7-fICh_lJ-gvmXfRY9LF2OA8K2qbsSDCDBpuV6zo4RD9H3ZNkVhO/exec}?action=check_ky02&email=${encodeURIComponent(email)}&_nocache=${Date.now()}`);
+    const data = await res.json();
 
-        if (data.success && data.approved) {
-          resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 block";
-          resultBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> ${data.message}`;
-        } else {
-          resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 block";
-          resultBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1"></i> ${data.message}`;
-        }
-      } catch (err) {
-        resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
-        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Không thể kết nối tới Sheet Kỳ 02 lúc này. Vui lòng thử lại!`;
-      } finally {
-        btn.disabled = false;
-        btn.innerText = "Kiểm Tra";
-      }
+    if (data.success && data.approved) {
+      resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 block";
+      resultBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> ${data.message}`;
+    } else {
+      resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 block";
+      resultBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1"></i> ${data.message}`;
     }
-
+  } catch (err) {
+    resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+    resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Không thể kết nối tới Sheet Kỳ 02 lúc này. Vui lòng thử lại!`;
+  } finally {
+    btn.disabled = false;
+    btn.innerText = "Kiểm Tra";
+  }
+}
     async function requestEmailOtp() {
       const emailInput = document.getElementById('inputUserEmail');
       const email = (currentUserEmail || emailInput.value).trim().toLowerCase();
