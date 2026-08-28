@@ -357,6 +357,38 @@
     <!-- TAB 2: KHU VỰC HỘI VIÊN -->
     <div id="sectionPaid" class="space-y-4 hidden">
 
+      <!-- WIDGET QUÀ TẶNG BÀI BÁO LÂM SÀNG ĐỘC QUYỀN (SIMPLE TUBE FINISHING) -->
+      <div class="card-elevated border-2 border-emerald-500 rounded-3xl p-4 space-y-3.5 bg-gradient-to-br from-emerald-50/70 via-white to-teal-50/40 shadow-md">
+        <div class="flex items-center justify-between">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-emerald-600 text-white shadow-xs uppercase tracking-wider">
+            <i class="fa-solid fa-gift text-amber-300"></i> Quà Tặng Độc Quyền
+          </span>
+          <span class="text-[11px] px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold border border-emerald-200">
+            PDF Full Text
+          </span>
+        </div>
+
+        <div class="flex items-start gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-700 text-white flex items-center justify-center text-xl shadow-sm shrink-0">
+            <i class="fa-solid fa-file-pdf"></i>
+          </div>
+          <div class="min-w-0 flex-1">
+            <h3 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">
+              Replacing Brackets with Simple Tubes for the Finishing Stage of Orthodontic Treatment
+            </h3>
+            <p class="text-[11px] text-slate-600 font-medium mt-1 leading-relaxed">
+              Tài liệu chuyên sâu từ <i>Seminars in Orthodontics</i> về kỹ thuật dán uốn cong <b>DbB (Deflection-Based Bonding)</b>, tối ưu settling khớp cắn và bảo tồn chân răng.
+            </p>
+          </div>
+        </div>
+
+        <a href="https://drive.google.com/file/d/1_TUsVs4VceNhFwmHB4E_bPDZlLx9rKiT/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-md">
+          <i class="fa-solid fa-download"></i>
+          <span>Mở / Tải Về Toàn Văn Bài Báo (PDF)</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-80"></i>
+        </a>
+      </div>
+
       <!-- WIDGET 1: KIỂM TRA DUYỆT KỲ 02 -->
       <div class="card-elevated border-2 border-teal-500/60 rounded-2xl p-4 space-y-3 bg-gradient-to-br from-teal-50/50 via-white to-white">
         <div class="flex items-center justify-between">
@@ -813,7 +845,6 @@
       errEl.classList.add('hidden');
       closeUserInfoModal();
 
-      // GỬI NGẨM XUỐNG SHEET TỔNG BẰNG IMAGE BEACON
       try {
         const registerUrl = `${SCRIPT_API_URL}?action=register_buyer&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&email=${encodeURIComponent(email)}&packageName=${encodeURIComponent(selectedPackageName)}&_t=${Date.now()}`;
         const img = new Image();
