@@ -849,43 +849,43 @@
     }
 
     async function checkKy02Status() {
-  const emailInput = document.getElementById('inputCheckKy02');
-  const email = emailInput.value.trim().toLowerCase();
-  const resultBox = document.getElementById('resultKy02Box');
-  const btn = document.getElementById('btnCheckKy02');
+      const emailInput = document.getElementById('inputCheckKy02');
+      const email = emailInput.value.trim().toLowerCase();
+      const resultBox = document.getElementById('resultKy02Box');
+      const btn = document.getElementById('btnCheckKy02');
 
-  if (!email || !email.includes('@')) {
-    resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
-    resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đúng định dạng Gmail.`;
-    return;
-  }
+      if (!email || !email.includes('@')) {
+        resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đúng định dạng Gmail.`;
+        return;
+      }
 
-  btn.disabled = true;
-  btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
-  resultBox.classList.remove('hidden');
-  resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 block";
-  resultBox.innerHTML = `<i class="fa-solid fa-rotate fa-spin"></i> Đang tra cứu danh sách Kỳ 02...`;
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
+      resultBox.classList.remove('hidden');
+      resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 block";
+      resultBox.innerHTML = `<i class="fa-solid fa-rotate fa-spin"></i> Đang tra cứu danh sách Kỳ 02...`;
 
-  try {
-    // Gọi trực tiếp đến Apps Script của Sheet Kỳ 02
-    const res = await fetch(`${https://script.google.com/macros/s/AKfycbx0bPlupA2_lWC_7-fICh_lJ-gvmXfRY9LF2OA8K2qbsSDCDBpuV6zo4RD9H3ZNkVhO/exec}?action=check_ky02&email=${encodeURIComponent(email)}&_nocache=${Date.now()}`);
-    const data = await res.json();
+      try {
+        const res = await fetch(`${SCRIPT_KY02_URL}?action=check_ky02&email=${encodeURIComponent(email)}&_nocache=${Date.now()}`);
+        const data = await res.json();
 
-    if (data.success && data.approved) {
-      resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 block";
-      resultBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> ${data.message}`;
-    } else {
-      resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 block";
-      resultBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1"></i> ${data.message}`;
+        if (data.success && data.approved) {
+          resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 block";
+          resultBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> ${data.message}`;
+        } else {
+          resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 block";
+          resultBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1"></i> ${data.message}`;
+        }
+      } catch (err) {
+        resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Không thể kết nối tới Sheet Kỳ 02 lúc này. Vui lòng thử lại!`;
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Kiểm Tra";
+      }
     }
-  } catch (err) {
-    resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
-    resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Không thể kết nối tới Sheet Kỳ 02 lúc này. Vui lòng thử lại!`;
-  } finally {
-    btn.disabled = false;
-    btn.innerText = "Kiểm Tra";
-  }
-}
+
     async function requestEmailOtp() {
       const emailInput = document.getElementById('inputUserEmail');
       const email = (currentUserEmail || emailInput.value).trim().toLowerCase();
@@ -1266,7 +1266,7 @@
         freeSec.classList.add('hidden');
         paidSec.classList.remove('hidden');
         btnPaid.className = 'py-2.5 px-3 rounded-xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 transition bg-rose-600 text-white shadow-md';
-        btnFree.className = 'py-2.5 px-3 rounded-lg font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition text-slate-700 hover:text-teal-700';
+        btnFree.className = 'py-2.5 px-3 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition text-slate-700 hover:text-teal-700';
       }
     }
 
