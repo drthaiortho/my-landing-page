@@ -357,90 +357,7 @@
     <!-- TAB 2: KHU VỰC HỘI VIÊN -->
     <div id="sectionPaid" class="space-y-4 hidden">
 
-      <!-- WIDGET 1: KIỂM TRA DUYỆT KỲ 02 -->
-      <div class="card-elevated border-2 border-teal-500/60 rounded-2xl p-4 space-y-3 bg-gradient-to-br from-teal-50/50 via-white to-white">
-        <div class="flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-teal-700 text-white shadow-xs">
-            <i class="fa-solid fa-clipboard-check"></i> Tra cứu danh sách Kỳ 02
-          </span>
-          <span class="text-xs text-slate-500 font-bold">Zoom 31/08/2026</span>
-        </div>
-        <div>
-          <h3 class="text-xs sm:text-sm font-black text-slate-900">Kiểm tra Email tham gia Kỳ 02</h3>
-          <p class="text-[11px] text-slate-600 font-medium">Nhập email của Bác sĩ để kiểm tra trạng thái duyệt:</p>
-        </div>
-        <div class="flex gap-2">
-          <input type="email" id="inputCheckKy02" placeholder="Nhập email của bạn..." class="w-full bg-white border-2 border-slate-300 focus:border-teal-600 focus:outline-none rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-900 font-medium shadow-xs">
-          <button onclick="checkKy02Status()" id="btnCheckKy02" class="px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs shrink-0 transition shadow-md">
-            Kiểm Tra
-          </button>
-        </div>
-        <div id="resultKy02Box" class="hidden p-2.5 rounded-xl text-xs font-medium"></div>
-      </div>
-
-      <!-- WIDGET 2: ĐẾM NGƯỢC KỲ HỌP -->
-      <div class="card-elevated border-2 border-amber-300/80 rounded-2xl p-4 space-y-3 bg-gradient-to-b from-amber-50/40 via-white to-white">
-        <div class="flex items-center justify-between">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500 text-white shadow-xs">
-            <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Quyền lợi Hội viên
-          </span>
-          <span class="text-xs text-slate-600 font-bold">Zoom Daymai</span>
-        </div>
-        
-        <div>
-          <h2 class="text-sm sm:text-base font-black text-slate-900 uppercase tracking-wide">KỲ HỌP ĐỌC BÁO SỐ 02</h2>
-          <p class="text-xs sm:text-sm text-slate-600 italic mt-0.5 leading-relaxed font-medium">"Mandibular molar uprighting using miniscrews: a systematic review"</p>
-        </div>
-
-        <div class="grid grid-cols-4 gap-1.5 text-center">
-          <div class="bg-slate-100 rounded-xl p-2 border border-slate-200">
-            <span id="cd-days" class="font-black text-sm sm:text-base text-slate-900 block">00</span>
-            <span class="text-[10px] text-slate-500 uppercase font-bold">Ngày</span>
-          </div>
-          <div class="bg-slate-100 rounded-xl p-2 border border-slate-200">
-            <span id="cd-hours" class="font-black text-sm sm:text-base text-slate-900 block">00</span>
-            <span class="text-[10px] text-slate-500 uppercase font-bold">Giờ</span>
-          </div>
-          <div class="bg-slate-100 rounded-xl p-2 border border-slate-200">
-            <span id="cd-minutes" class="font-black text-sm sm:text-base text-slate-900 block">00</span>
-            <span class="text-[10px] text-slate-500 uppercase font-bold">Phút</span>
-          </div>
-          <div class="bg-slate-100 rounded-xl p-2 border border-slate-200">
-            <span id="cd-seconds" class="font-black text-sm sm:text-base text-teal-700 block">00</span>
-            <span class="text-[10px] text-slate-500 uppercase font-bold">Giây</span>
-          </div>
-        </div>
-
-        <div class="pt-2 flex items-center justify-between border-t border-slate-200 text-xs sm:text-sm">
-          <span class="text-slate-800 font-bold"><i class="fa-regular fa-calendar-check text-teal-700 mr-1 text-sm"></i> 20h30 • 31/08/2026</span>
-          <a href="https://daymai.vn/student/course/enrol/33142447" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-teal-900 font-black flex items-center gap-1">
-            Phòng Zoom &rarr;
-          </a>
-        </div>
-      </div>
-
-      <!-- WIDGET 3: THẺ XỔ XUỐNG BẢN GHI (CHỈ HỘI VIÊN CHÍNH THỨC) -->
-      <details id="vipFolderDropdown" class="group card-elevated border-2 border-teal-600 rounded-2xl overflow-hidden transition hidden">
-        <summary class="flex items-center justify-between p-3.5 cursor-pointer select-none bg-gradient-to-r from-teal-50 via-white to-white">
-          <div class="flex items-center space-x-3.5 min-w-0 pr-2">
-            <div class="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center text-lg shadow-sm shrink-0">
-              <i class="fa-solid fa-folder-tree"></i>
-            </div>
-            <div class="truncate">
-              <div class="font-black text-teal-950 text-xs sm:text-sm uppercase tracking-wide truncate">Bản ghi các Kỳ Họp Đọc Sách Báo</div>
-              <div class="text-[11px] text-teal-800 font-medium truncate">✓ Đã xác thực • Nhấn để xem đường dẫn</div>
-            </div>
-          </div>
-          <i class="fa-solid fa-chevron-down text-teal-700 text-sm group-open:rotate-180 transition-transform shrink-0"></i>
-        </summary>
-        <div class="p-3.5 bg-slate-50 border-t border-teal-100 space-y-2">
-          <a href="https://drive.google.com/drive/folders/19cn22DLmOEvTrxamfMsCCzs618JMJs_D" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-3 px-3 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs sm:text-sm transition shadow-md">
-            <i class="fa-brands fa-google-drive text-base"></i>
-            <span>Mở Thư Mục Tổng Hợp Bản Ghi Google Drive</span>
-          </a>
-        </div>
-      </details>
-
+      <!-- KHỐI CỘNG ĐỒNG HỘI VIÊN -->
       <details class="group card-elevated border-2 border-blue-300/80 rounded-2xl overflow-hidden transition">
         <summary class="flex items-center justify-between p-3.5 cursor-pointer select-none bg-gradient-to-r from-blue-50/50 to-white">
           <div class="flex items-center space-x-3.5">
@@ -469,6 +386,7 @@
         </div>
       </details>
 
+      <!-- KHU VỰC BẢN GHI VIP VÀ XÁC THỰC OTP -->
       <div class="card-elevated border-2 border-rose-300 rounded-2xl p-4 space-y-3.5 bg-white">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2.5">
@@ -483,7 +401,7 @@
           <span id="lessonCountBadge" class="text-xs px-3 py-1 bg-rose-100 text-rose-800 border border-rose-300 rounded-full font-black shadow-xs">14 Chuyên Đề</span>
         </div>
 
-        <!-- Khung OTP -->
+        <!-- Khung OTP & Quyền lợi đã xác thực -->
         <div class="p-3.5 bg-slate-100/90 rounded-2xl border border-slate-200 space-y-2.5 shadow-inner">
           <div id="stepEmailBlock" class="space-y-2">
             <label class="text-xs sm:text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
@@ -513,6 +431,7 @@
             </div>
           </div>
 
+          <!-- KHỐI HIỆN RA KHI XÁC THỰC THÀNH CÔNG -->
           <div id="authSuccessBlock" class="hidden flex items-center justify-between p-2.5 rounded-xl bg-teal-100 border border-teal-300 text-left">
             <div class="flex items-center gap-2.5 min-w-0">
               <div class="w-8 h-8 rounded-full bg-teal-700 text-white flex items-center justify-center text-sm font-bold shrink-0">
@@ -527,6 +446,29 @@
               Đăng xuất
             </button>
           </div>
+
+          <!-- THẺ XỔ XUỐNG BẢN GHI ĐỌC SÁCH BÁO (HIỆN TRONG HỘP XÁC THỰC HỘI VIÊN) -->
+          <details id="vipFolderDropdown" class="group bg-white border-2 border-teal-600 rounded-2xl overflow-hidden transition shadow-sm hidden">
+            <summary class="flex items-center justify-between p-3.5 cursor-pointer select-none bg-gradient-to-r from-teal-50 via-white to-white">
+              <div class="flex items-center space-x-3.5 min-w-0 pr-2">
+                <div class="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center text-lg shadow-sm shrink-0">
+                  <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div class="truncate">
+                  <div class="font-black text-teal-950 text-xs sm:text-sm uppercase tracking-wide truncate">Kho Bản Ghi Đọc Báo Đã Diễn Ra</div>
+                  <div class="text-[11px] text-teal-800 font-medium truncate">✓ Quyền lợi Hội viên • Nhấn xem link Drive</div>
+                </div>
+              </div>
+              <i class="fa-solid fa-chevron-down text-teal-700 text-sm group-open:rotate-180 transition-transform shrink-0"></i>
+            </summary>
+            <div class="p-3 bg-slate-50 border-t border-teal-100 space-y-2">
+              <p class="text-[11px] text-slate-600 font-medium leading-relaxed">Toàn bộ slide trình chiếu, bài báo full-text và video bản ghi các kỳ họp đọc sách báo đều được lưu trữ tại đây:</p>
+              <a href="https://drive.google.com/drive/folders/19cn22DLmOEvTrxamfMsCCzs618JMJs_D" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-black text-xs sm:text-sm transition shadow-md">
+                <i class="fa-brands fa-google-drive text-base"></i>
+                <span>Mở Folder Bản Ghi Trên Google Drive</span>
+              </a>
+            </div>
+          </details>
 
           <div id="authStatusMessage" class="text-xs text-slate-600 flex items-center gap-1.5 font-medium">
             <i class="fa-solid fa-shield-halved text-teal-700"></i> Mỗi thời điểm chỉ duy nhất 1 thiết bị hoạt động.
@@ -598,7 +540,7 @@
         <div id="lessonList" class="space-y-2.5 max-h-[26rem] overflow-y-auto pr-1"></div>
       </div>
 
-      <!-- VỊ TRÍ 4 -->
+      <!-- VỊ TRÍ 4: TIỆN ÍCH KHÁC -->
       <div class="space-y-2.5">
         <a href="https://docs.google.com/presentation/d/1r7_iQzKyi9VdEY1HLRFmCNTdErONZoRM/edit?usp=drive_link" target="_blank" rel="noopener noreferrer" class="card-elevated flex items-center justify-between p-4 border border-blue-300 rounded-2xl transition group">
           <div class="flex items-center space-x-3.5">
@@ -618,7 +560,7 @@
             <div class="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center text-base shadow-sm">
               <i class="fa-solid fa-file-circle-question"></i>
             </div>
-            <div class="font-extrabold text-slate-900 text-xs sm:text-sm">Gửi Ca Lâm Sàng / Đặt Câu Hỏi Cho Kỳ Họp</div>
+            <div class="font-extrabold text-slate-900 text-xs sm:text-sm">Gửi Ca Lâm Sàng / Đặt Câu Hỏi Trao Đổi</div>
           </div>
           <i class="fa-solid fa-chevron-right text-slate-400 text-xs group-hover:text-teal-700"></i>
         </a>
@@ -678,7 +620,6 @@
   <!-- SCRIPT API & LMS CONTROLLER -->
   <script>
     const SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbx-J_8QG8CWIW-Y-kNc2eR5q888DKEDCVLkP6RxDD266_t1KwNGTxjSfoKMLy6F1CeiqQ/exec";
-    const SCRIPT_KY02_URL = "https://script.google.com/macros/s/AKfycbx0bPlupA2_lWC_7-fICh_lJ-gvmXfRY9LF2OA8K2qbsSDCDBpuV6zo4RD9H3ZNkVhO/exec";
 
     const LESSONS_DATA = [
       {"id":"2025-02","code":"[2025-02]","title":"Andrews 6 Keys, Mắc cài, 3Shape","items":[{"name":"01. Bản ghi B1 - Andrews 6 Keys Part I","fileId":"1Ddv1VrAglf1fboqYj5OdUZDvE-I3qGR4","type":"video"},{"name":"02. GS Nanda chữa CII Div 2 (Tài liệu)","fileId":"1sKZQOskWIJsvYdcYboJsWTjtVXsieGNK","type":"pdf"},{"name":"03. Bản ghi B2 - Andrews 6 Keys Part II","fileId":"1JRAVvmtTaCbkzVkMigjzfOJvLoRQHrtw","type":"video"},{"name":"04. Bản ghi B3 - Thông số mắc cài","fileId":"1-aQUVX3rOyE_utQPDwmS7dKbEnn_RUgn","type":"video"},{"name":"05. Bending đóng khe thưa","fileId":"1GaQfM5wrJIJGw_m6tSePgmbH8O-9blOg","type":"video"},{"name":"06. Bẻ Torque","fileId":"1FWq0al8X4Z7YD32_DZAmt3XFSo3gfnt1","type":"video"},{"name":"07. Đường hướng dẫn dây cung","fileId":"1LAYcUI2R9o1TGcBNqzDRBI2Ias5AzFSB","type":"video"},{"name":"08. KT bẻ torque 4 R cửa GIÁN TIẾП","fileId":"1w1HuJrmxaGbNRgRtFOgesoGdjILLH-vm","type":"video"},{"name":"09. Torque loop","fileId":"1WIXCFvCQv1SaDxVsoZFWkLJBry1WaEDG","type":"video"},{"name":"10. Bản ghi B4 - 3Shape Ortho Part I","fileId":"1w4pGqtgO7PrfUVtaYd8LZU8fvEPbN7dh","type":"video"},{"name":"11. Bản ghi Buổi 5 - 3Shape Part II","fileId":"1p8Uh6tf9-goCGQo1-8cWnYH54-I0-Z3k","type":"video"},{"name":"12. Bản ghi B6 - 3Shape Part III","fileId":"1ufm0KJtp-prvXPdE6LQhAjtfhfCV4nWN","type":"video"},{"name":"13. Transverse Diagnosis CBCT","fileId":"1b_ehDlGChRtNH6w_eFQGNe-QvS02j3cL","type":"video"},{"name":"14. TPA biến đổi / Sáng tạo khí cụ","fileId":"13j1UHg6IS6ImIrNGpPVfNw4rYDpBeDix","type":"video"},{"name":"15. Hướng dẫn cắm vis","fileId":"1XdBRdNEouzrOya9nD6OEnZ3FBNA3h-l9","type":"video"},{"name":"16. Sách & Tài liệu Mediafire HVT2","fileId":"12V0SYri_GweoZ8f1LIp8qCpo7NTyawjF","type":"doc"}]},
@@ -845,44 +786,6 @@
 
     function closePaymentModal() {
       document.getElementById('paymentModal').classList.add('hidden');
-    }
-
-    async function checkKy02Status() {
-      const emailInput = document.getElementById('inputCheckKy02');
-      const email = emailInput.value.trim().toLowerCase();
-      const resultBox = document.getElementById('resultKy02Box');
-      const btn = document.getElementById('btnCheckKy02');
-
-      if (!email || !email.includes('@')) {
-        resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
-        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Vui lòng nhập đúng định dạng Gmail.`;
-        return;
-      }
-
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
-      resultBox.classList.remove('hidden');
-      resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200 block";
-      resultBox.innerHTML = `<i class="fa-solid fa-rotate fa-spin"></i> Đang tra cứu danh sách Kỳ 02...`;
-
-      try {
-        const res = await fetch(`${SCRIPT_KY02_URL}?action=check_ky02&email=${encodeURIComponent(email)}&_nocache=${Date.now()}`);
-        const data = await res.json();
-
-        if (data.success && data.approved) {
-          resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 block";
-          resultBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> ${data.message}`;
-        } else {
-          resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300 block";
-          resultBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1"></i> ${data.message}`;
-        }
-      } catch (err) {
-        resultBox.className = "p-2.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
-        resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Không thể kết nối tới Sheet Kỳ 02 lúc này. Vui lòng thử lại!`;
-      } finally {
-        btn.disabled = false;
-        btn.innerText = "Kiểm Tra";
-      }
     }
 
     async function requestEmailOtp() {
@@ -1268,31 +1171,6 @@
         btnFree.className = 'py-2.5 px-3 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 transition text-slate-700 hover:text-teal-700';
       }
     }
-
-    const targetDate = new Date('2026-08-31T20:30:00+07:00').getTime();
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
-
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
-        document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
-        document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
-        document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
-      } else {
-        document.getElementById('cd-days').innerText = '00';
-        document.getElementById('cd-hours').innerText = '00';
-        document.getElementById('cd-minutes').innerText = '00';
-        document.getElementById('cd-seconds').innerText = '00';
-      }
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
 
     function copySiteLink() {
       copyText(window.location.href, 'Đã sao chép link trang!');
